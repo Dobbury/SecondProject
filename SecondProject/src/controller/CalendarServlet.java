@@ -1,5 +1,8 @@
 package controller;
 
-public class CalendarServlet {
+import Impl.CalendarImpl;
+import dao.CalendarDao;
 
+public class CalendarServlet {
+	CalendarImpl dao = CalendarDao.getInstance();
 }

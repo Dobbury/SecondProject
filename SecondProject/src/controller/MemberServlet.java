@@ -1,5 +1,8 @@
 package controller;
 
-public class MemberServlet {
+import Impl.MemberImpl;
+import dao.MemberDao;
 
+public class MemberServlet {
+	MemberImpl dao = MemberDao.getInstance();
 }
