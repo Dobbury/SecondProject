@@ -7,7 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 asdasd
 hiihoh
+=======
+
+Ho 연결
+
+
+>>>>>>> f521d1dcf1ae1726993842c2a014671ec6c5035c
 </body>
 </html>
