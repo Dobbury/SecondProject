@@ -1,5 +1,7 @@
 package dto;
 
-public class PdsDto {
+import java.io.Serializable;
+
+public class PdsDto implements Serializable{
 
 }
