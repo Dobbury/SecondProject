@@ -1,5 +1,9 @@
+<%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,6 +53,8 @@
 </head>
 
 <body>
+
+
 
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
@@ -140,7 +146,7 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
@@ -149,5 +155,38 @@
     // Animations initialization
     new WOW().init();
   </script> -->
+  
+  <!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	아이디와 비밀번호를 확인하세요.
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-primary" id="failLogin">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	
+	$(function(){
+		$("#failLogin").click(function(){
+			location.href="Main.jsp";
+		})	
+	});
+	
+		
+	
+
+</script>
 </body>
 </html>

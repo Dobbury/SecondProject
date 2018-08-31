@@ -44,6 +44,26 @@
           background: #1C2331!important;
       }
   }
+  
+  .signup-box {
+    width: 345px;
+    margin: 0 auto;
+  
+  }
+  .signup-box p {
+  	margin: 5px 0 5px 0;
+  	
+  }
+  .signup-box input[type=text] {
+    width: 330px;
+    height: 32px;
+    padding-right: 25px;
+    line-height: 29px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+    border: 1px solid #999;
+  }
 
   </style>
 </head>
@@ -77,8 +97,34 @@
 <main style="padding-top:80px;">
 	<div class="container">
 		
-		<h1>여기서 작업하시면 돼요</h1>
-      	<div>안녕하세요</div>
+		
+		<div class="signup-box">
+			<form action="">
+			<div>
+				<p>아이디</p>
+				<input type="text" name="id">
+			</div>
+			
+			<div>
+				<p>비밀번호</p>
+				<input type="text" name="pw">
+			</div>
+			<div>
+				<p>이름</p>
+				<input type="text" name="nick">
+			</div>
+			<div>
+				<p>닉네임</p>
+				<input type="text" name="name">
+			</div>			
+			
+			<div class="text-center" style="margin-top:20px;">
+				<input type="submit" value="회원가입">
+				<input type="button" value="돌아가기">
+			</div>
+			
+		</form>
+		</div>
 
 
     </div>

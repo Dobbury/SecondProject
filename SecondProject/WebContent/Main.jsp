@@ -55,6 +55,7 @@
 	.section{
 		text-align:center;
 		overflow:hidden;
+		padding-top: 330px;
 	}
 
 	/* header */
@@ -82,25 +83,7 @@
 	}
 	
 
-	/* Section 0
-	* --------------------------------------- */
-	#section0{
-		padding: 60px 0;
-	}
 	
-	/* Section 1
-	* --------------------------------------- */
-	#section1{
-		padding: 60px 0;
-	}
-	/* Section 2
-	* --------------------------------------- */
-	#section2{
-		padding: 60px 0;
-	}
-
-
-
 	/* Overwriting fullPage.js tooltip color
 	* --------------------------------------- */
 	.fp-tooltip{
@@ -126,9 +109,8 @@
 		  <li class="left"><a href="#">로고</a></li>
 		  <li class="rigth">
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  Launch demo modal
+  로그인
 </button>
-
 			</li>
 		</ul>
 	</div>
@@ -137,20 +119,26 @@
 
 <div id="fullpage">
 
-	<div class="section " id="section0">
+	<div class="section" id="section0">
 		<h1>섹션1</h1>
-		
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+  시작하기
+</button>
 	</div>
 	
 	<div class="section" id="section1">
 	<h1>섹션2</h1>
-		
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+  시작하기
+</button>
 	</div>
 	
 
 	<div class="section moveDown" id="section2">
 	<h1>섹션3</h1>
-		
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+  시작하기
+</button>
 	</div>
 	
 </div>
@@ -166,13 +154,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="MemberServlet?command=login" method="post">
       <div class="modal-body">
-        ...
+      	아이디 : <input type="text" name="id"><br><br>
+      	비밀번호 : <input type="password" name="pw"> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="index.jsp" class="btn btn-primary">Save changes</a>
+		<input type="submit" class="btn btn-primary" value="로그인">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">회원가입</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
