@@ -57,7 +57,7 @@ public class MemberDao implements MemberImpl {
 
 	@Override
 	public memberDto getMemInfo(String id) {
-		String sql=" SELECT ID, PWD, NAME, NICK "
+		String sql=" SELECT ID, PWD, NICK, NAME "
 				+ " FROM MEM "
 				+ " WHERE ID=? ";
 		
@@ -85,8 +85,8 @@ public class MemberDao implements MemberImpl {
 				
 				dto.setId(rs.getString("ID"));
 				dto.setPwd(rs.getString("PWD"));
-				dto.setName(rs.getString("NAME"));
-				dto.setNick(rs.getString("NAME"));
+				dto.setNick(rs.getString("NICK"));
+				dto.setName(rs.getString("Name"));
 				
 			}
 		} catch (SQLException e) {
@@ -97,6 +97,8 @@ public class MemberDao implements MemberImpl {
 		
 		return dto;
 	}
+	
+	
 	
 
 }

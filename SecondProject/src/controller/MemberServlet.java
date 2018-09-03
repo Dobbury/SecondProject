@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,19 +31,25 @@ public class MemberServlet extends HttpServlet{
 		resp.setContentType("text/html; charset=utf-8");
 		req.setCharacterEncoding("utf-8");
 
-		/*String ucode = String.valueOf((int)((Member)request.getSession().getAttribute("loginUser")).getU_code());*/
-		String id=String.valueOf((String)req.getSession().getAttribute("loginUser"))/*세션이름찾아서바꾸기.getId();*/;
+		String command = req.getParameter("command");
 		
-		
-		
-		memberDto dto = dao.getMemInfo(id);
-		
-		String page="";
-		page="Mypage.jsp";
-		req.setAttribute("memberDto", dto);
-		
-		RequestDispatcher view = req.getRequestDispatcher(page);
-	      view.forward(req, resp);
+		if(command.equals("update")) {
+			String id = req.getParameter("id");
+			String pwd = req.getParameter("pwd");
+			String name = req.getParameter("name");
+			String nick = req.getParameter("nick");
+
+			memberDto dto = new memberDto();
+			dto.setId(id);
+			dto.setPwd(pwd);
+			dto.setName(name);
+			dto.setNick(nick);
+			System.out.println(dto.toString());
+			boolean isS = dao.editMember(dto);
+			PrintWriter pw = resp.getWriter();
+			
+			pw.print(isS);
+		}
 	}
 	
 	
