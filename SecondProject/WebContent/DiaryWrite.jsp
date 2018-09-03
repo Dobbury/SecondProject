@@ -73,6 +73,7 @@ html, body, header, .view {
 
 
 </style>
+<script type="text/javascript" src="./smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -708,10 +709,7 @@ html, body, header, .view {
 		 
 		</script>
 	<script type="text/javascript">
-	//스마트 에디터 스크립트
 		var oEditors = [];
-
-		var sLang = "ko_KR"; // 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
 
 		// 추가 글꼴 목록
 		//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
@@ -728,8 +726,7 @@ html, body, header, .view {
 				//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
 				fOnBeforeUnload : function() {
 					//alert("완료!");
-				},
-				I18N_LOCALE : sLang
+				}
 			}, //boolean
 			fOnAppLoad : function() {
 				//예제 코드
