@@ -12,6 +12,7 @@ public class memberDto implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public memberDto(String id, String pwd, String nick, String name) {
 		super();
 		this.id = id;
@@ -58,4 +59,16 @@ public class memberDto implements Serializable {
 	}
 	
 	
+
+
+   
+   public memberDto(String id, String nick, String name) {
+      super();
+      this.id = id;
+      this.nick = nick;
+      this.name = name;
+   }
+   
 }
+
+
