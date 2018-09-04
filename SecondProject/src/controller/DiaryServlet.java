@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import Impl.DiaryImpl;
+import Impl.PinImpl;
 import dao.DiaryDao;
+import dao.PinDao;
 import dto.DiaryDto;
+import net.sf.json.JSONArray;
 
 public class DiaryServlet extends HttpServlet{
 
@@ -38,9 +45,14 @@ public class DiaryServlet extends HttpServlet{
 			String content = req.getParameter("content");
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
-			//String id = req.getParemeter("id");
-			String id = "gd";
+			String id = req.getParameter("id");
+			String PinArr = req.getParameter("PinArr");
 			
+			
+			List<Map<String,Object>> resultMap = new ArrayList<Map<String,Object>>();
+		    //json-lib.jar 꺼임
+			resultMap = JSONArray.fromObject(PinArr);
+		    
 			DiaryDto dto = new DiaryDto();
 			
 			dto.setContent(content);
@@ -49,6 +61,11 @@ public class DiaryServlet extends HttpServlet{
 			dto.setTday(tday);
 			
 			boolean b = dao.addDiary(dto);
+			
+			if(b) {
+				PinImpl Pindao = PinDao.getInstance();
+				
+			}
 			
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);

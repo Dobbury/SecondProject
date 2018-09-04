@@ -1,3 +1,4 @@
+<%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,6 +82,9 @@ html, body, header, .view {
 <script>
 	// In the following example, markers appear when the user clicks on the map.
 	// Each marker is labeled with a single alphabetical character.
+	<% 
+	memberDto dto = (memberDto)session.getAttribute("user");
+	%>
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
 	var basic_lat = 1;
@@ -92,8 +96,8 @@ html, body, header, .view {
 	var modal_Marker_lng=null;
 	var modal_Marker= [];
 	var address = '';
-	var tday = "20180910"; <%-- <%=request.getParameter("asdasd") %> --%>
-	
+	var tday =  '<%=request.getParameter("tday") %>';
+	var id = '<%=dto.getId() %>';
 	
 	function initialize() {
 		modal_Marker_lat=null;
@@ -465,6 +469,7 @@ html, body, header, .view {
 		var PinArr = new Array();
 		$(function() {
 			$("#diarySavebtn").click(function () {
+				
 				$.ajax({
 					url:"DiaryServlet",
 					type:"GET",
@@ -473,7 +478,8 @@ html, body, header, .view {
 						'content': oEditors.getById["ir1"].getIR(),
 						'title': $("#title").val(),
 						'tday': tday,
-						'id':"gd"
+						'id':id,
+						'PinArr':JSON.stringify(PinArr)
 					},
 					datatype:"json",
 					success:function(data){
@@ -496,7 +502,7 @@ html, body, header, .view {
 					'pcomment' : $("#pincomment").val(),
 					'grade' : grade,
 					'pin_name' : $("#addpinname").val(),
-					'id' : "textid"
+					'id' : id
 				});
 				
 				if(pin_kind == "hotel"){

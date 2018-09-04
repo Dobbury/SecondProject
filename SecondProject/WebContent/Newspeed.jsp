@@ -6,7 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 
 <%
 //	pds 리스트 받아오기
@@ -79,6 +78,7 @@ List<DiaryDto> diarylist = diaryDao.getDiaryList();
   }
 
   </style>
+  
 </head>
 
 <body>
@@ -99,7 +99,7 @@ List<DiaryDto> diarylist = diaryDao.getDiaryList();
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">마이페이지</a></li>
+          <li><a href="Mypage.jsp">마이페이지</a></li>
         </ul>
 
     </div>
@@ -144,7 +144,7 @@ List<DiaryDto> diarylist = diaryDao.getDiaryList();
 		</div>
 	
 	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;">글쓰기</button>
+		<button style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
    </div>
 </main>
@@ -204,12 +204,20 @@ List<DiaryDto> diarylist = diaryDao.getDiaryList();
 
 
   <!-- SCRIPTS -->
+  <script type="text/javascript">
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
+  
+  </script>
+  
   <!-- JQuery -->
-   
-  <script type="text/javascript" src="Design/js/popper.min.js"></script>
-  <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
-  <!-- Initializations --><!-- 
+
+	<script type="text/javascript" src="Design/js/popper.min.js"></script>
+	<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Design/js/mdb.min.js"></script>
+	<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+	<!-- Initializations --><!-- 
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
