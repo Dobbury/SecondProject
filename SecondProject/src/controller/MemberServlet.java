@@ -94,6 +94,23 @@ public class MemberServlet extends HttpServlet {
 			dispatch("Signup.jsp", req, resp);
 			
 		}
+		else if(command.equals("update")) {
+	         String id = req.getParameter("id");
+	         String pwd = req.getParameter("pwd");
+	         String name = req.getParameter("name");
+	         String nick = req.getParameter("nick");
+
+	         memberDto dto = new memberDto();
+	         dto.setId(id);
+	         dto.setPw(pwd);
+	         dto.setName(name);
+	         dto.setNick(nick);
+	         System.out.println(dto.toString());
+	         boolean isS = dao.editMember(dto);
+	         PrintWriter pw = resp.getWriter();
+	         
+	         pw.print(isS);
+	      }
 		
 	}
 

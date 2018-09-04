@@ -13,6 +13,11 @@ public interface MemberImpl {
 	
 	// 아이디 중복확인
 	public List<String> idcheck();
+
 	// 회원가입
 	public int dosignup(String id, String pw, String name, String nick);
+
+	public boolean editMember(memberDto dto);
+
+	public memberDto getMemInfo(String id);
 }
