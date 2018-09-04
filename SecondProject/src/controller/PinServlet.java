@@ -47,7 +47,7 @@ public class PinServlet extends HttpServlet {
 				String location = req.getParameter("location");
 				
 				PinDto dto = new PinDto(lat,lng,pin_name,place_kind,location);
-				
+				System.out.println(dto.toString());
 				dao.Insert(dto);
 		   }else if(command.equals("PinSearch")) {
 			   String place_kind = req.getParameter("place_kind");
