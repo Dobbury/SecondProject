@@ -12,13 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import Impl.DiaryImpl;
 import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
-import net.sf.json.JSONArray;
+import dto.pinCommentDto;
 
 public class DiaryServlet extends HttpServlet{
 
@@ -42,34 +46,61 @@ public class DiaryServlet extends HttpServlet{
 		String command = req.getParameter("command");
 		
 		if(command.equals("insert")) {
+			System.out.println("1단계");
 			String content = req.getParameter("content");
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
 			String id = req.getParameter("id");
-			String PinArr = req.getParameter("PinArr");
-			
-			
-			List<Map<String,Object>> resultMap = new ArrayList<Map<String,Object>>();
-		    //json-lib.jar 꺼임
-			resultMap = JSONArray.fromObject(PinArr);
-		    
+			System.out.println("2단계");
 			DiaryDto dto = new DiaryDto();
 			
 			dto.setContent(content);
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setTday(tday);
-			
+			System.out.println("3단계");
 			boolean b = dao.addDiary(dto);
+			System.out.println("4단계");
 			
 			if(b) {
-				PinImpl Pindao = PinDao.getInstance();
 				
-				
-			}
+			String PinObj = req.getParameter("PinObj");
 			
-			PrintWriter pw = resp.getWriter();
-			pw.print(b);
+			System.out.println(PinObj);
+			JSONParser jsonParser = new JSONParser();
+
+			try {
+				JSONObject jsonObj = (JSONObject) jsonParser.parse(PinObj);
+				
+				JSONArray pinArr = (JSONArray) jsonObj.get("PinObj");
+				
+				for (int i = 0; i < pinArr.size(); i++) {
+					JSONObject obj = (JSONObject) pinArr.get(i);
+					PinImpl pinDao = PinDao.getInstance();
+
+					pinCommentDto pinCDto = new pinCommentDto();
+					
+					pinCDto.setGrade(Double.parseDouble(obj.get("grade").toString()));
+					pinCDto.setId(obj.get("id").toString());
+					pinCDto.setPcomment(obj.get("pcomment").toString());
+					pinCDto.setPinname(obj.get("pin_name").toString());
+
+					boolean pinb =pinDao.PinCommentInsert(pinCDto);
+					
+					if(!pinb) {
+						b=pinb;
+						break;
+					}
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
+		PrintWriter pw = resp.getWriter();
+		pw.print(b);
+
 		}else if(command.equals("diaryDetail")) {
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         

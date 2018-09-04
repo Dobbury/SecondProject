@@ -24,8 +24,33 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public boolean addDiary(DiaryDto dto) {
 		
+		String sql = "INSERT INTO DIARY(LIKED,CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
 		
-		return false;
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, dto.getLiked());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getTday());
+			psmt.setString(5, dto.getId());
+			
+			count = psmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt,conn,null);
+		}
+
+		return count >0 ? true : false ;
 	}
 	
 	public List<DiaryDto> getDiaryList(){
