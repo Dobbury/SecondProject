@@ -43,5 +43,16 @@
 		<url-pattern>/MemberServlet</url-pattern>
 	</servlet-mapping>
 
+    <servlet>
+  	<servlet-name>CalendarServlet</servlet-name>
+  	<servlet-class>controller.CalendarServlet</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+  	<servlet-name>CalendarServlet</servlet-name>
+  	<url-pattern>/CalendarServlet</url-pattern>
+  </servlet-mapping>
+  	
+
 </web-app>
+
