@@ -43,7 +43,8 @@ public class MemberServlet extends HttpServlet {
 			memberDto dto = dao.doLogin(id, pw);
 
 			if (dto != null) {
-				req.setAttribute("memDto", dto);
+				//req.setAttribute("memDto", dto);
+				req.getSession().setAttribute("user", dto);
 				dispatch("Newspeed.jsp", req, resp);
 			}else {
 				PrintWriter out = resp.getWriter();

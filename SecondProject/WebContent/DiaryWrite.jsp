@@ -81,6 +81,7 @@ html, body, header, .view {
 <script>
 	// In the following example, markers appear when the user clicks on the map.
 	// Each marker is labeled with a single alphabetical character.
+	
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
 	var basic_lat = 1;
@@ -92,7 +93,7 @@ html, body, header, .view {
 	var modal_Marker_lng=null;
 	var modal_Marker= [];
 	var address = '';
-	var tday = "20180910"; <%-- <%=request.getParameter("asdasd") %> --%>
+	var tday =  <%=request.getParameter("tday") %> 
 	
 	
 	function initialize() {

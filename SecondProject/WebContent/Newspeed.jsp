@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 
 
 
@@ -70,6 +69,7 @@
   }
 
   </style>
+  
 </head>
 
 <body>
@@ -90,7 +90,7 @@
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">마이페이지</a></li>
+          <li><a href="Mypage.jsp">마이페이지</a></li>
         </ul>
 
     </div>
@@ -209,11 +209,12 @@
   </script>
   
   <!-- JQuery -->
-   
-  <script type="text/javascript" src="Design/js/popper.min.js"></script>
-  <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
-  <!-- Initializations --><!-- 
+
+	<script type="text/javascript" src="Design/js/popper.min.js"></script>
+	<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Design/js/mdb.min.js"></script>
+	<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+	<!-- Initializations --><!-- 
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
