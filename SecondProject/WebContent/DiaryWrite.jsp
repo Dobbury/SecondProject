@@ -214,8 +214,8 @@ html, body, header, .view {
 
         <!-- Right -->
         <ul class="navbar-menu">
-          <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">마이페이지</a></li>
+          <li><a href="Newspeed.jsp">뉴스피드</a></li>
+          <li><a href="Mypage.jsp">마이페이지</a></li>
         </ul>
 
     </div>
@@ -259,13 +259,13 @@ html, body, header, .view {
 		</tr>
 		<tr>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 찾기</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
 			</td>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 찾기</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
 			</td>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 찾기</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
 			</td>
 		</tr>
 	</table>
@@ -359,7 +359,7 @@ html, body, header, .view {
       </div>
       <div class="modal-body" style="height: 400px">
       	<p>장소 이름</p>
-      	<form id="pin_info_form">
+      	<form id="add_Pin_Form">
 	        <div>
 	        	<input type="text" class="text text-default" id="addpinname" readonly="readonly" style="width: 100%">
 			</div>
@@ -390,6 +390,51 @@ html, body, header, .view {
       	
 	     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
    		 <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<!-- Pin_Info Modal -->
+<div class="modal fade" id="Pin_Info_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Pin 정보</h4>
+      </div>
+      <div class="modal-body" style="height: 400px">
+      	<p>장소 이름</p>
+      	<form id="pin_info_form">
+	        <div>
+	        	<input type="text" class="text text-default" id="pin_info_name" readonly="readonly" style="width: 100%">
+			</div>
+			<br>
+			<p>별점</p>
+			<div class="starRev">
+	  			<span class="starR1" id="s1">1</span>
+	  			<span class="starR2" id="s2">2</span>
+	 			<span class="starR1" id="s3">3</span>
+				<span class="starR2" id="s4">4</span>
+				<span class="starR1" id="s5">5</span>
+				<span class="starR2" id="s6">6</span>
+			 	<span class="starR1" id="s7">7</span>
+				<span class="starR2" id="s8">8</span>
+				<span class="starR1" id="s9">9</span>
+				<span class="starR2" id="s10">10</span>
+				<h3 id="pin_info_grade">&nbsp;&nbsp;0</h3>
+			</div>
+			<br>
+			<p>Comment</p>
+			<div>
+			<textarea style="width: 100%; height: 150px" id="add_pincomment"></textarea>
+			</div>
+		</form>
+	  </div>
+	 
+      <div class="modal-footer">
+      	
+	     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinUpdateBtn">Pin Update</button>
       </div>
     </div>
   </div>
@@ -470,8 +515,13 @@ html, body, header, .view {
 		var PinArr = new Array();
 		$(function() {
 			$("#diarySavebtn").click(function () {
-				 var obj = new Object();
-				 obj.PinObj =  PinArr;
+				if($("#title").val() == ""){
+					alert("제목을 입력해 주세요");
+					return;
+				}
+				
+				var obj = new Object();
+				obj.PinObj =  PinArr;
 				$.ajax({
 					url:"DiaryServlet",
 					type:"GET",
@@ -485,7 +535,8 @@ html, body, header, .view {
 					},
 					datatype:"json",
 					success:function(data){
-						alert(data);
+						alert("일지 기록 성공!");
+						location.href="Newspeed.jsp";
 						
 					},
 					error:function(){
@@ -516,10 +567,14 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					alert(hotellist[0].lat);
+					
 					basic_Marker.push(location);
 					initialize();
-					$("#hotelPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
+					$("#hotelPinArr").append("<div style='display:inline-block;'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
+												+$("#addpinname").val()
+												+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+												+"</div><input type='button' class='delete_pin_info' value='x' ></div>");
+					$("#hotelSel").html("");
 					
 				}else if(pin_kind == "resto"){
 					for(i = 0 ; i < restolist.length ; i++){
@@ -530,11 +585,14 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					alert(restolist[0].lat);
+					
 					basic_Marker.push(location);
 					initialize();
-					$("#restoPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
-					
+					$("#restoPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
+							+$("#addpinname").val()
+							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
+					$("#restoSel").html("");
 				}else if(pin_kind == "tour"){
 					for(i = 0 ; i < tourlist.length ; i++){
 						if($("#addpinname").val() == tourlist[i].pin_name){
@@ -544,10 +602,14 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					alert(tourlist[0].lat);
+					
 					basic_Marker.push(location);
 					initialize();
-					$("#tourPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
+					$("#tourPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
+							+$("#addpinname").val()
+							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
+					$("#tourSel").html("");
 				}
 				
 			});
@@ -588,7 +650,7 @@ html, body, header, .view {
 					datatype : "json",
 					success : function(data) {
 						hotellist = JSON.parse(data);
-						alert(hotellist[0].pin_name);
+						
 						var o = "";
 						for (i = 0; i < hotellist.length; i++) {
 							o += '<option value="'+ hotellist[i].pin_name + '">'+ hotellist[i].pin_name+ '</option>';
@@ -615,7 +677,7 @@ html, body, header, .view {
 					datatype : "json",
 					success : function(data) {
 						restolist = JSON.parse(data);
-						alert(restolist[0].pin_name);
+						
 						var o = "";
 						for (i = 0; i < restolist.length; i++) {
 							o += '<option value="'+ restolist[i].pin_name + '">' + restolist[i].pin_name + '</option>';
@@ -642,7 +704,7 @@ html, body, header, .view {
 					datatype : "json",
 					success : function(data) {
 						tourlist = JSON.parse(data);
-						alert(tourlist[0].pin_name);
+						
 						var o = "";
 						for (i = 0; i < tourlist.length; i++) {
 							o += '<option value="'+ tourlist[i].pin_name + '">' + tourlist[i].pin_name + '</option>';
@@ -669,7 +731,7 @@ html, body, header, .view {
 
 			$("#pinSaveBtn").click(function() {
 				//(별점)모달 창 초기화 코드
-				$('#pin_info_form')[0].reset();
+				$('#add_Pin_Form')[0].reset();
 				$('.starRev span').parent().children('span').removeClass('on');
 				grade = 0;
 				$("#grade").html("&nbsp;&nbsp;" + grade);
@@ -706,7 +768,7 @@ html, body, header, .view {
 					});
 
 		});
-
+		
 		//별점
 		$('.starRev span').click(function() {
 			grade = $(this).text();
@@ -714,6 +776,62 @@ html, body, header, .view {
 			$(this).parent().children('span').removeClass('on');
 			$(this).addClass('on').prevAll('span').addClass('on');
 			return false;
+		});
+		
+		$('.starRev span').click(function() {
+			grade = $(this).text();
+			$("#pin_info_grade").html("&nbsp;&nbsp;" + $(this).text());
+			$(this).parent().children('span').removeClass('on');
+			$(this).addClass('on').prevAll('span').addClass('on');
+			return false;
+		});
+		
+		//////////////////////////////////////////////////////////////////
+		var updateP;
+		var sel;
+		$(document).on("click",".pin_info",function(){
+			
+			updateP=this;
+			for(i = 0 ; i <PinArr.length ; i++){
+				if(PinArr[i].pin_name == $(this).children('.pin_info_val').val()){
+					sel=i;
+					break;
+				}
+			}
+			$("#pin_info_name").val(PinArr[sel].pin_name);
+			$("#Pin_Info_Modal").modal("show");
+			
+			$(".starRev #s"+PinArr[sel].grade).parent().children('span').removeClass('on');
+			$(".starRev #s"+PinArr[sel].grade).addClass('on').prevAll('span').addClass('on');
+			$("#pin_info_grade").html("&nbsp;&nbsp;" + PinArr[sel].grade);
+			$("#add_pincomment").val(PinArr[sel].pcomment);
+		});
+		
+		$("#pinUpdateBtn").click(function () {
+			$(updateP).html($("#pin_info_name").val()
+					+"<input class='pin_info_val' type='hidden' value='"+$("#pin_info_name").val()+"'>"
+					+"<input type='button' val='x'>");
+			PinArr[sel].grade=grade;
+			PinArr[sel].pcomment=$("#add_pincomment").val();
+			
+			//(별점)모달 창 초기화 코드
+			$('#pin_info_form')[0].reset();
+			$('.starRev span').parent().children('span').removeClass('on');
+			grade = 0;
+			$("#pin_info_grade").html("&nbsp;&nbsp;" + grade);
+			$("#grade").html("&nbsp;&nbsp;" + grade);
+		});
+		////////////////////////////////////////////////////////////////////////
+		$(document).on("click",".delete_pin_info",function () {
+			$(this).parent().remove();
+			
+			for(i = 0 ; i <PinArr.length ; i++){
+				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
+					PinArr.splice(i,1);	//i번째에서 1개 제거
+					break;
+				}
+			}
+			
 		});
 	</script>
 	<script type="text/javascript">

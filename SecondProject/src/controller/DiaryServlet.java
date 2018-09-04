@@ -56,9 +56,15 @@ public class DiaryServlet extends HttpServlet{
 
 			System.out.println("2단계");
 
-
-			DiaryDto dto = new DiaryDto();
+			//첫번째 이미지 경로 가져오기
+			if(content.contains("<img src")) {
+				String tmp[] = content.split("img");
+				String firstImageURL[] = tmp[1].split("\"");
+				System.out.println(firstImageURL[1]);
+				
+			}
 			
+			DiaryDto dto = new DiaryDto();
 			dto.setContent(content);
 			dto.setId(id);
 			dto.setTitle(title);
