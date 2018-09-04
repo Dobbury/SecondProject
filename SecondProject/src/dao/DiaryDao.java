@@ -134,7 +134,8 @@ public class DiaryDao implements DiaryImpl {
 	public List<DiarycommentDto> Commantview(int seq) {
 		String sql = " SELECT ID,DCOMMENT "
 				+ " FROM DIARYCOMMENT "
-				+ " WHERE DSEQ = ? ";
+				+ " WHERE DSEQ = ? "
+				+ " ORDER BY SEQ ASC ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;

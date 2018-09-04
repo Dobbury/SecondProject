@@ -9,7 +9,7 @@
 <head>
 
 <%
-	DiaryDto dtolist = (DiaryDto)request.getAttribute("DiaryDto");
+	DiaryDto Diarydto = (DiaryDto)request.getAttribute("DiaryDto");
 	List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
 	
 	
@@ -189,7 +189,7 @@ html, body, header, .view {
 						<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
 						<form action="DiaryServlet">
 							<input type="hidden" name="command" value="commentwrite">
-							<input type="hidden" name="seq" value="<%=dtolist.getSeq() %>">
+							<input type="hidden" name="seq" value="<%=Diarydto.getSeq() %>">
 							<input type="hidden" name="loginid" value="<%=loginid %>">
 							<textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
 							<input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
