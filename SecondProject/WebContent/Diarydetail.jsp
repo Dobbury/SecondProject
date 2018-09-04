@@ -1,8 +1,22 @@
+<%@page import="java.util.List"%>
+<%@page import="dto.DiarycommentDto"%>
+<%@page import="dto.memberDto"%>
+<%@page import="dto.DiaryDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<%
+	DiaryDto dtolist = (DiaryDto)request.getAttribute("DiaryDto");
+	List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
+	
+	
+	memberDto dto = (memberDto) session.getAttribute("user");
+	
+	String loginid = dto.getId();
+%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
@@ -156,20 +170,27 @@ html, body, header, .view {
 			<div class="diary-commant">
 				<div class="diary-commant"style="padding: 30px; text-align: center; background: rgb(238, 241, 246) !important;">
 				
-				
+				<%
+					for(int i=0; i<commentview.size(); i++ ){
+				%>
 				<div class="commant-view" style="margin-bottom: 20px;">
-					<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700;margin-bottom: 8px;">호랑둥이</div>
-					<div class="commant-content"style="width: 88%;text-align: left; margin-left: 68px; color:#555">댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분댓글내용부분</div>
+					<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700;margin-bottom: 8px;"><%=commentview.get(i).getId() %></div>
+					<div class="commant-content"style="width: 88%;text-align: left; margin-left: 68px; color:#555"><%=commentview.get(i).getDcomment() %></div>
 					<hr style="width: 88%;">
 					
 				</div>
 				
+				<%
+					}
+				%>
 				
 				
 					<div class="commant-write">
-						<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;">호랑둥이</div>
-						<form action="PdsServlet">
+						<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
+						<form action="DiaryServlet">
 							<input type="hidden" name="command" value="commentwrite">
+							<input type="hidden" name="seq" value="<%=dtolist.getSeq() %>">
+							<input type="hidden" name="loginid" value="<%=loginid %>">
 							<textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
 							<input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 

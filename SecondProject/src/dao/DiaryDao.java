@@ -11,6 +11,7 @@ import Impl.DiaryImpl;
 import db.DBClose;
 import db.DBConnection;
 import dto.DiaryDto;
+import dto.DiarycommentDto;
 
 
 public class DiaryDao implements DiaryImpl {
@@ -127,5 +128,45 @@ public class DiaryDao implements DiaryImpl {
 
 		return count; 
 		}
+	
+	// ´ñ±Û¸®½ºÆ®
+	@Override
+	public List<DiarycommentDto> Commantview(int seq) {
+		String sql = " SELECT ID,DCOMMENT "
+				+ " FROM DIARYCOMMENT "
+				+ " WHERE DSEQ = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<DiarycommentDto> list = new ArrayList<>();
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			
+			psmt.setInt(1, seq);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new DiarycommentDto(rs.getString(1),rs.getString(2)));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+		
+		
+		
+	}
+	
 	
 }

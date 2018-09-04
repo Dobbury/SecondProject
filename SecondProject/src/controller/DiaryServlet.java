@@ -18,6 +18,7 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
+import dto.DiarycommentDto;
 import net.sf.json.JSONArray;
 
 public class DiaryServlet extends HttpServlet{
@@ -74,28 +75,36 @@ public class DiaryServlet extends HttpServlet{
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         
 	         DiaryDto dto = dao.getDiaryDto(seq);
-	         
 	         req.setAttribute("DiaryDto", dto);
+	         
+	         List<DiarycommentDto> list = dao.Commantview(seq);
+	         req.setAttribute("DiarycommentDto", list);
+	         
 	         dispatch("Diarydetail.jsp", req, resp);
+	         
 	      }
 		
 		// 댓글쓰기		
 		else if(command.equals("commentwrite")) {
 				
-				String dcomment = req.getParameter("dcomment");
-				// 게시글에대한 임의 시퀀스
-				int seq = 2;
-				// 게시글에대한 임의 id
-				String id = "123";
 				
-				int write = dao.CommantWrite(seq, id, dcomment);				
+				int seq = Integer.parseInt(req.getParameter("seq"));
+				String loginid = req.getParameter("loginid");
+				String dcomment = req.getParameter("dcomment");
+				
+				
+				int write = dao.CommantWrite(seq, loginid, dcomment);				
 				if(write == 1) {
 					System.out.println("댓글입력완료");
 				}else {
 					System.out.println("댓글입력실패");
 				}
 				
-				resp.sendRedirect("Diarydetail.jsp");
+				DiaryDto dto = dao.getDiaryDto(seq);
+				List<DiarycommentDto> list = dao.Commantview(seq);
+		        req.setAttribute("DiarycommentDto", list);
+				req.setAttribute("DiaryDto", dto);
+		        dispatch("Diarydetail.jsp", req, resp);
 				
 				
 			}
