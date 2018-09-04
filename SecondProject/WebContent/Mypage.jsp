@@ -12,7 +12,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+ <!-- 제이쿼리 -->
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script> 
@@ -22,15 +23,6 @@ $(document).ready(function() {
 			}); 
 	}); 
 	</script>
-<script> 
-$(document).ready(function() { 
-   $('a[data-toggle="tab"]').on('hidden.bs.tab', 
-         function(e){// alert("이벤트 실행됨"); 
-         }); 
-   }); 
-   </script>
-
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
@@ -64,10 +56,29 @@ html, body, header, .view {
 .navbar-menu li {
 	width: 100px;
 	height: 30px;
-	border: 1px solid blue;
+	border: 1px solid black;
 	list-style: none;
 	display: inline-block;
 }
+
+    .diary{
+    	width: 300px;
+    	height: 300px;
+    	border:1px solid blue;
+    	display: inline-block;
+    	margin: 10px;
+    	text-align: center;
+    	vertical-align: top;
+    }
+    .Dimage{
+    	width: 280px;
+    	height: 220px;
+    	border:1px solid blue;
+    	background-color: gray;
+    	margin-top: 10px;
+    	margin-left: 10px;
+    	
+    }
 
 @media ( min-width : 800px) and (max-width: 850px) {
 	.navbar:not (.top-nav-collapse ) {
@@ -92,7 +103,7 @@ html, body, header, .view {
 
 		<!-- Right -->
 		<ul class="navbar-menu">
-			<li><a href="#">뉴스피드</a></li>
+			<li><a href="Newspeed.jsp">뉴스피드</a></li>
 			<li><a href="#">마이페이지</a></li>
 		</ul>
 
@@ -115,10 +126,43 @@ html, body, header, .view {
 		<div id="myTabContent" class="tab-content">
 			<div role="tabpanel" class="tab-pane fade active in" id="home"
 				aria-labelledby="home-tab">
-				<p>내가 쓴글~~</p>
-				<table>
-					<tr></tr>
-				</table>
+	<main style="padding-top:80px;">			
+   <div class="container">
+      
+
+		<div style="width:100%;/* background-color: yellow */;text-align: center;  padding: 20px 0 20px 0;">
+			<div class="diary">
+				<div class="Dimage">
+				</div>
+				<a href="">제목</a><br>
+				<span style="text-align: right;">조회수</span>
+				<span style="text-align: left">날짜</span>
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			
+		</div>
+	
+	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+		<button style="float: right;"></button>
+	</div>
+   </div>
+   </main>
+
 				
 			</div>
 			<div role="tabpanel" class="tab-pane fade" id="profile"
@@ -247,16 +291,7 @@ html, body, header, .view {
 	<script type="text/javascript" src="Design/js/mdb.min.js"></script>
 	<!-- Initializations -->
 	<!-- 
-=======
-   <!-- SCRIPTS -->
-   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-   <script type="text/javascript" src="Design/js/popper.min.js"></script>
-   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="Design/js/mdb.min.js"></script>
-   <!-- Initializations -->
-   <!-- 
->>>>>>> bb863d88e0ad2d5c17e299549346adf149c8bb1c
+
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();

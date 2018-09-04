@@ -104,8 +104,8 @@ html, body, header, .view {
 
 		<!-- Right -->
 		<ul class="navbar-menu">
-			<li><a href="#">뉴스피드</a></li>
-			<li><a href="#">마이페이지</a></li>
+			<li><a href="Nespeed.jsp">뉴스피드</a></li>
+			<li><a href="Mypage.jsp">마이페이지</a></li>
 		</ul>
 
 	</div>
