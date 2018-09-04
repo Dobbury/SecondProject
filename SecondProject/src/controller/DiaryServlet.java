@@ -22,7 +22,10 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
+
 import dto.pinCommentDto;
+
+import dto.DiarycommentDto;
 
 public class DiaryServlet extends HttpServlet{
 
@@ -105,10 +108,39 @@ public class DiaryServlet extends HttpServlet{
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         
 	         DiaryDto dto = dao.getDiaryDto(seq);
-	         
 	         req.setAttribute("DiaryDto", dto);
+	         
+	         List<DiarycommentDto> list = dao.Commantview(seq);
+	         req.setAttribute("DiarycommentDto", list);
+	         
 	         dispatch("Diarydetail.jsp", req, resp);
+	         
 	      }
+		
+		// ��۾���		
+		else if(command.equals("commentwrite")) {
+				
+				
+				int seq = Integer.parseInt(req.getParameter("seq"));
+				String loginid = req.getParameter("loginid");
+				String dcomment = req.getParameter("dcomment");
+				
+				
+				int write = dao.CommantWrite(seq, loginid, dcomment);				
+				if(write == 1) {
+					System.out.println("����Է¿Ϸ�");
+				}else {
+					System.out.println("����Է½���");
+				}
+				
+				DiaryDto dto = dao.getDiaryDto(seq);
+				List<DiarycommentDto> list = dao.Commantview(seq);
+		        req.setAttribute("DiarycommentDto", list);
+				req.setAttribute("DiaryDto", dto);
+		        dispatch("Diarydetail.jsp", req, resp);
+				
+				
+			}
 	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
