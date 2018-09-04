@@ -73,54 +73,54 @@ html, body, header, .view {
 
 
 </style>
-<script type="text/javascript" src="./smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="./smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
-	<script>
-		// In the following example, markers appear when the user clicks on the map.
-	      // Each marker is labeled with a single alphabetical character.
-	      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	      var labelIndex = 0;
-	      var basic_lat = 1;
-	      var basic_lng = 1;
-	      
-	     
-	      var modal_lat= 5.980408;
-	      var modal_lng = 116.0734568;
-	      var modal_Marker_lat=null;
-	      var modal_Marker_lng=null;
-	      var modal_Marker= [];
-	      var address = '';
-	      function initialize() {
-	    	modal_Marker_lat=null;
-		   	modal_Marker_lng=null;
-	        var map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 12,
-	          center: {lat:basic_lat, lng:basic_lng}
-	        });
-	        var modal_map = new google.maps.Map(document.getElementById('modal_map'), {
-		          zoom: 12,
-		          center: {lat:modal_lat, lng:modal_lng}
-		        });
-	        // This event listener calls addMarker() when the map is clicked.
-	        google.maps.event.addListener(modal_map, 'click', function(event) {
-	        	//Marker 초기화 부분 modal은 마커 1개만 필요하기 떄문에 누를떄마다 선 초기화
-	        	if(modal_Marker.length!=0){
-	        		modal_Marker[0].setMap(null);
-		        	modal_Marker=[];	
-	        	}
+<script>
+	// In the following example, markers appear when the user clicks on the map.
+	// Each marker is labeled with a single alphabetical character.
+	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var labelIndex = 0;
+	var basic_lat = 1;
+	var basic_lng = 1;
+	var basic_Marker=[];
+	var modal_lat= 5.980408;
+	var modal_lng = 116.0734568;
+	var modal_Marker_lat=null;
+	var modal_Marker_lng=null;
+	var modal_Marker= [];
+	var address = '';
+	var tday = "20180910"; <%-- <%=request.getParameter("asdasd") %> --%>
+	
+	
+	function initialize() {
+		modal_Marker_lat=null;
+		modal_Marker_lng=null;
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 12,
+			center: {lat:basic_lat, lng:basic_lng}
+		});
+		var modal_map = new google.maps.Map(document.getElementById('modal_map'), {
+			zoom: 12,
+			center: {lat:modal_lat, lng:modal_lng}
+		});
+		// This event listener calls addMarker() when the map is clicked.
+		google.maps.event.addListener(modal_map, 'click', function(event) {
+			//Marker 초기화 부분 modal은 마커 1개만 필요하기 떄문에 누를떄마다 선 초기화
+			if(modal_Marker.length!=0){
+				modal_Marker[0].setMap(null);
+				modal_Marker=[];	
+			}
 	        	
-	        	modal_Marker_lat=event.latLng.lat();
-	        	modal_Marker_lng=event.latLng.lng();
+			modal_Marker_lat=event.latLng.lat();
+			modal_Marker_lng=event.latLng.lng();
 	        	
-	        	addMarker(event.latLng, modal_map);
-	        });
+			add_Modal_Marker(event.latLng, modal_map);
+		});
 			
-	        
-	        //자동완성
-	        
+		//자동완성    
         var input = document.getElementById('search');
 
         var autocomplete = new google.maps.places.Autocomplete(input);
@@ -136,55 +136,62 @@ html, body, header, .view {
 
 
         autocomplete.addListener('place_changed', function() {
+			var place = autocomplete.getPlace();
+			if (!place.geometry) {
+				// User entered the name of a Place that was not suggested and
+            	// pressed the Enter key, or the Place Details request failed.
+				window.alert("No details available for input: '" + place.name + "'");
+				return;
+			}
+			// If the place has a geometry, then present it on a map.
+			if (place.geometry.viewport) {
+				modal_map.fitBounds(place.geometry.viewport);
+			} else {
+				modal_map.setCenter(place.geometry.location);
+				modal_map.setZoom(17);  // Why 17? Because it looks good.
+			}
+			if (place.address_components) {
+				address = [
+					(place.address_components[0] && place.address_components[0].short_name || ''),
+					(place.address_components[1] && place.address_components[1].short_name || ''),
+					(place.address_components[2] && place.address_components[2].short_name || '')
+				].join(' ');
+			}
+          
+		});
    
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-        	  modal_map.fitBounds(place.geometry.viewport);
-          } else {
-        	  modal_map.setCenter(place.geometry.location);
-        	  modal_map.setZoom(17);  // Why 17? Because it looks good.
-          }
-		
-          
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-          
-        });
-        ////////////////////
-	        // Add a marker at the center of the map.
-	        //addMarker(kota, map);
-	      }
+        // Adds a marker to the map.
+		function add_Modal_Marker(location, modal_map) {
+			// Add the marker at the clicked location, and add the next-available label
+			// from the array of alphabetical characters.
+			var marker = new google.maps.Marker({
+				position: location,
+				label: labels[labelIndex++ % labels.length],
+				map: modal_map,
+				title:"뿌리뿌리"
+			});
+			modal_Marker.push(marker);
+		}
 	      
-	      
-	      
-	      // Adds a marker to the map.
-	      function addMarker(location, modal_map) {
-	        // Add the marker at the clicked location, and add the next-available label
+		// Adds a marker to the map.
+		function addMarker(location,map) {
+			// Add the marker at the clicked location, and add the next-available label
 	        // from the array of alphabetical characters.
 	        var marker = new google.maps.Marker({
-	          position: location,
-	          label: labels[labelIndex++ % labels.length],
-	          map: modal_map,
-	          title:"뿌리뿌리"
-	        });
-	        modal_Marker.push(marker);
-	      }
-
-	      google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
+				position: location,
+				label: labels[labelIndex++ % labels.length],
+				map: map,
+				title:"뿌리뿌리"
+			});
+			//modal_Marker.push(marker);
+		}
+		
+		for(i = 0 ; i < basic_Marker.length ; i++){
+			addMarker(basic_Marker[i],map);
+		}
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 
 <body>
@@ -268,30 +275,35 @@ html, body, header, .view {
     		<tr style="height: 30px">
     			<th>맛집: </th>
     			<td>
-    				<p>하핫맛집</p>
+    				<p id="restoPinArr"></p>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>숙소: </th>
     			<td>
-    				<p>도뿌리호텔</p>
+    				<p id="hotelPinArr"></p>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>관광지: </th>
     			<td>
-    				<p>도뿌리공원</p>
+    				<p id="tourPinArr"></p>
     			</td>
     		</tr>
     		<tr>
     			<td colspan="2">
+			    	<input type="text" class="text text-default" style="width: 1098px" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title">
+			    </td>
+    		<tr>
+    		<tr>
+    			<td colspan="2">
 			    	<!-- 크기 다시 맞춰야함 그리고 스마트 에디터로 만들어야함 -->
-    				<textarea style="height: 600px; width: 1100px" name="ir1" id="ir1" ></textarea>		
+    				<textarea style="height: 600px; width: 1096px" name="ir1" id="ir1" ></textarea>		
     			</td>
     		<tr>
     		<tr style="height: 30px" align="center">
     			<td colspan="2">
-    				<input type="button" value="완료" id="#">
+    				<input type="button" value="완료" id="diarySavebtn">
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -385,9 +397,8 @@ html, body, header, .view {
 <!-- --------------------------------------------------------------------------------- -->
 
 
-  <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
+<!--Footer-->
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
  
     <hr class="my-4">
 
@@ -441,273 +452,262 @@ html, body, header, .view {
   <!-- JQuery -->
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
-  <script type="text/javascript">
-		var result= new Array();
-		var selectPlace_id="";
-		var place_kind="";
-		var grade=0;
-		$(function(){
-			/* 
-			$("#search").autocomplete({
-				 
-				source : function ( request, response ) {
-					$("#search").autocompleter=null;
-					//alert(searchVal);
-					var url = "AjaxRequest.jsp?getUrl=";
-					var subURL ="https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input="+request.term+"&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI";
-					url+=encodeURIComponent(subURL);
-					$.ajax({
-						url:url,
-						type:"GET",
-						datatype:"json",
-						success:function( json ){
-							//alert("success");
-							
-							var data = JSON.parse(json);
-							result= new Array();
-							for(i = 0 ; i < data.predictions.length ; i++){
-								
-								var sf = data.predictions[i].structured_formatting;
-								var obj = {
-										place_id : data.predictions[i].place_id,
-										main_name : sf.main_text,
-										pull_name : data.predictions[i].description
-								};
-								result.push(obj);
-							}
-							
-							response(
-								$.map(result,function(item){
-									return {
-									
-										label: item.main_name,
-										value: item.place_id
-									}
-								})
-							);
-						},
-						error:function(x,o,e){
-							alert("ajax error");
-							alert(x.status + ":" +o+":"+e);	
-							
+  <script type="text/javascript" src="Design/js/mdb.min.js"></script>
+<script type="text/javascript">
+		var result = new Array();
+		var selectPlace_id = "";
+		var place_kind = "";
+		var grade = 0;
+		var pin_kind = "";
+		var hotellist = [];
+		var restolist = [];
+		var tourlist = [];
+		var PinArr = new Array();
+		$(function() {
+			$("#diarySavebtn").click(function () {
+				$.ajax({
+					url:"DiaryServlet",
+					type:"GET",
+					data:{
+						'command':"insert",
+						'content': oEditors.getById["ir1"].getIR(),
+						'title': $("#title").val(),
+						'tday': tday,
+						'id':"gd"
+					},
+					datatype:"json",
+					success:function(data){
+						alert(data);
+						
+					},
+					error:function(){
+						alert("ajax error");
+					}
+					
+				});
+				
+			});
+				
+			
+			
+			$("#pinSaveBtn").click(function() {
+				
+				PinArr.push({
+					'pcomment' : $("#pincomment").val(),
+					'grade' : grade,
+					'pin_name' : $("#addpinname").val(),
+					'id' : "textid"
+				});
+				
+				if(pin_kind == "hotel"){
+					for(i = 0 ; i < hotellist.length ; i++){
+						if($("#addpinname").val() == hotellist[i].pin_name){
+							basic_lat = Number(hotellist[i].lat);
+							basic_lng = Number(hotellist[i].lng);
+							break;
 						}
-					});
-				},
-				minLength: 2,
-				select: function(event,ui){
-					selectPlace_id=ui.item.value;
-					ui.item.value=ui.item.label;
+					}
+					var location=new google.maps.LatLng(basic_lat,basic_lng);
+					alert(hotellist[0].lat);
+					basic_Marker.push(location);
+					initialize();
+					$("#hotelPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
+					
+				}else if(pin_kind == "resto"){
+					for(i = 0 ; i < restolist.length ; i++){
+						if($("#addpinname").val() == restolist[i].pin_name){
+							basic_lat = Number(restolist[i].lat);
+							basic_lng = Number(restolist[i].lng);
+							break;
+						}
+					}
+					var location=new google.maps.LatLng(basic_lat,basic_lng);
+					alert(restolist[0].lat);
+					basic_Marker.push(location);
+					initialize();
+					$("#restoPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
+					
+				}else if(pin_kind == "tour"){
+					for(i = 0 ; i < tourlist.length ; i++){
+						if($("#addpinname").val() == tourlist[i].pin_name){
+							basic_lat = Number(tourlist[i].lat);
+							basic_lng = Number(tourlist[i].lng);
+							break;
+						}
+					}
+					var location=new google.maps.LatLng(basic_lat,basic_lng);
+					alert(tourlist[0].lat);
+					basic_Marker.push(location);
+					initialize();
+					$("#tourPinArr").append("<a href='#'>"+$("#addpinname").val()+"</a> / ");
 				}
 				
 			});
 			
-		})
-			 
-		 //////////////////////////////////
-		function placeSearch() {
-			
-			var url = "AjaxRequest.jsp?getUrl=";
-			var subURL ="https://maps.googleapis.com/maps/api/place/details/json?placeid="+selectPlace_id+"&fields=geometry&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI";
-			url+=encodeURIComponent(subURL);
-			$.ajax({
-				url:url,
-				type:"GET",
-				datatype:"json",
-				success:function( json ){
-					//alert("success");
-					
-					var data = JSON.parse(json);
-					alert(data.result.geometry.location.lat);
-					alert(data.result.geometry.location.lng);
-					
-					modal_lat=data.result.geometry.location.lat;
-					modal_lng=data.result.geometry.location.lng;
-					initialize();
-					
-				},
-				error:function(x,o,e){
-					alert("ajax error");
-					alert(x.status + ":" +o+":"+e);	
-				}
+			//select의 새롭게 추가된 option에 이벤트 걸어줌
+			$(document).on("dblclick", "#hotelSel option", function() {
+				pin_kind="hotel";
+				$("#add_Pin_Modal").modal("show");
+				$("#addpinname").val($(this).val());
+
 			});
-		} 
-			*/ 
-		//자동완성 기능이 모달 뒤에 나오는것을 앞으로 나오게 해주는 코드
-		/* 
-		$("#placeModal").on("shown.bs.modal", function() { 
-			$("#search").autocomplete("option", "appendTo", "#placeModal"); 
-		});
-		 */
-		 	//select의 새롭게 추가된 option에 이벤트 걸어줌
-		    $(document).on("dblclick","option",function(){
-		        
-		    	$("#add_Pin_Modal").modal("show");
-		        $("#addpinname").val($(this).val());
-		        
-		    });
-		  
-		 
-			$("#hotelMyDBSearch").click(function () {
-				if($("#hotelMyDB_input").val() == ""){
+			$(document).on("dblclick", "#restoSel option", function() {
+				pin_kind="resto";
+				$("#add_Pin_Modal").modal("show");
+				$("#addpinname").val($(this).val());
+
+			});
+			$(document).on("dblclick", "#tourSel option", function() {
+				pin_kind="tour";
+				$("#add_Pin_Modal").modal("show");
+				$("#addpinname").val($(this).val());
+
+			});
+
+			$("#hotelMyDBSearch").click(function() {
+				if ($("#hotelMyDB_input").val() == "") {
 					alert("검색할 숙소명을 입력해 주세요");
 					return;
 				}
-				
 				$.ajax({
-					url: "PinServlet",
-					type: "GET",
-					data:{
-						command: "PinSearch",
-						pin_name: $("#hotelMyDB_input").val(),
-						place_kind: "hotel"
+					url : "PinServlet",
+					type : "GET",
+					data : {
+						command : "PinSearch",
+						pin_name : $("#hotelMyDB_input").val(),
+						place_kind : "hotel"
 					},
-					datatype: "json",
-					success:function( data ){
-						var list = JSON.parse(data);
-						alert(list[0].pin_name);
-						var o="";
-						for(i = 0 ; i<list.length ; i++){
-							o += '<option value="'+ list[i].pin_name + '">' + list[i].pin_name + '</option>';
-							
+					datatype : "json",
+					success : function(data) {
+						hotellist = JSON.parse(data);
+						alert(hotellist[0].pin_name);
+						var o = "";
+						for (i = 0; i < hotellist.length; i++) {
+							o += '<option value="'+ hotellist[i].pin_name + '">'+ hotellist[i].pin_name+ '</option>';
 						}
 						$("#hotelSel").append(o);
 					},
-					error:function(){
-						
+					error : function() {
 					}
-					
 				});
-			}); 
-			$("#restoMyDBSearch").click(function () {
-				if($("#restoMyDB_input").val() == ""){
+			});
+			$("#restoMyDBSearch").click(function() {
+				if ($("#restoMyDB_input").val() == "") {
 					alert("검색할 식당명을 입력해 주세요");
 					return;
 				}
-				
 				$.ajax({
-					url: "PinServlet",
-					type: "GET",
-					data:{
-						command: "PinSearch",
-						pin_name: $("#restoMyDB_input").val(),
-						place_kind: "resto"
+					url : "PinServlet",
+					type : "GET",
+					data : {
+						command : "PinSearch",
+						pin_name : $("#restoMyDB_input").val(),
+						place_kind : "resto"
 					},
-					datatype:"json",
-					success:function(data){
-						var list = JSON.parse(data);
-						alert(list[0].pin_name);
-						var o="";
-						for(i = 0 ; i<list.length ; i++){
-							o += '<option value="'+ list[i].pin_name + '">' + list[i].pin_name + '</option>';
-							
+					datatype : "json",
+					success : function(data) {
+						restolist = JSON.parse(data);
+						alert(restolist[0].pin_name);
+						var o = "";
+						for (i = 0; i < restolist.length; i++) {
+							o += '<option value="'+ restolist[i].pin_name + '">' + restolist[i].pin_name + '</option>';
 						}
 						$("#restoSel").append(o);
 					},
-					error:function(){
-						
+					error : function() {
 					}
-					
 				});
 			});
-			$("#tourMyDBSearch").click(function () {
-				if($("#tourMyDB_input").val() == ""){
+			$("#tourMyDBSearch").click(function() {
+				if ($("#tourMyDB_input").val() == "") {
 					alert("검색할 관광지명을 입력해 주세요");
 					return;
 				}
-				
 				$.ajax({
-					url: "PinServlet",
-					type: "GET",
-					data:{
-						command: "PinSearch",
-						pin_name: $("#tourMyDB_input").val(),
-						place_kind: "tour"
+					url : "PinServlet",
+					type : "GET",
+					data : {
+						command : "PinSearch",
+						pin_name : $("#tourMyDB_input").val(),
+						place_kind : "tour"
 					},
-					datatype:"json",
-					success:function(data){
-						var list = JSON.parse(data);
-						alert(list[0].pin_name);
-						var o="";
-						for(i = 0 ; i<list.length ; i++){
-							o += '<option value="'+ list[i].pin_name + '">' + list[i].pin_name + '</option>';
-							
+					datatype : "json",
+					success : function(data) {
+						tourlist = JSON.parse(data);
+						alert(tourlist[0].pin_name);
+						var o = "";
+						for (i = 0; i < tourlist.length; i++) {
+							o += '<option value="'+ tourlist[i].pin_name + '">' + tourlist[i].pin_name + '</option>';
 						}
 						$("#tourSel").append(o);
 					},
-					error:function(){
-						
+					error : function() {
 					}
-					
 				});
 			});
-			
-			$("#hotelMapSearch").click(function () {
+
+			$("#hotelMapSearch").click(function() {
 				initialize();
-				place_kind="hotel";
+				place_kind = "hotel";
 			});
-			$("#restoMapSearch").click(function () {
+			$("#restoMapSearch").click(function() {
 				initialize();
-				place_kind="resto";
+				place_kind = "resto";
 			});
-			$("#tourMapSearch").click(function () {
+			$("#tourMapSearch").click(function() {
 				initialize();
-				place_kind="tour";
+				place_kind = "tour";
 			});
-			
-			$("#pinSaveBtn").click(function () {
+
+			$("#pinSaveBtn").click(function() {
 				//(별점)모달 창 초기화 코드
-				 $('#pin_info_form')[0].reset();
-				 $('.starRev span').parent().children('span').removeClass('on');
-				 grade=0;
-				 $("#grade").html("&nbsp;&nbsp;"+grade);
+				$('#pin_info_form')[0].reset();
+				$('.starRev span').parent().children('span').removeClass('on');
+				grade = 0;
+				$("#grade").html("&nbsp;&nbsp;" + grade);
 			});
-			
-			$("#placeSaveBtn").click(function () {
-				if(modal_Marker_lat==null || modal_Marker_lng==null || $("#place_name").val() == ""){
-					alert("마커가 없거나 저장할 장소의 이름을 기입하지 않으셨습니다.");
-					return;
-				}
-				$.ajax({
-					url:"PinServlet",
-					data:{
-						"command" : "insert",
-						"place_kind" : place_kind,
-						"lat" : modal_Marker_lat,
-						"lng" : modal_Marker_lng,
-						"pin_name" : $("#pin_name").val(),
-						"location" : address 
-					},
-					type:"GET",
-					success:function(){
-						alert("추가 성공!");
-						$('#Modal_form')[0].reset();
-						$('#placeModal').modal('hide');
-						 
-				
-					},
-					error:function(x,o,e){
-						alert("ajax error");
-						alert(x.status + ":" +o+":"+e);	
-					}
-				});
-			});
-			
-			
+
+			$("#placeSaveBtn").click(
+					function() {
+						if (modal_Marker_lat == null || modal_Marker_lng == null || $("#place_name").val() == "") {
+							alert("마커가 없거나 저장할 장소의 이름을 기입하지 않으셨습니다.");
+							return;
+						}
+						$.ajax({
+							url : "PinServlet",
+							data : {
+								"command" : "insert",
+								"place_kind" : place_kind,
+								"lat" : modal_Marker_lat,
+								"lng" : modal_Marker_lng,
+								"pin_name" : $("#pin_name").val(),
+								"location" : address
+							},
+							type : "GET",
+							success : function() {
+								alert("추가 성공!");
+								$('#Modal_form')[0].reset();
+								$('#placeModal').modal('hide');
+
+							},
+							error : function(x, o, e) {
+								alert("ajax error");
+								alert(x.status + ":" + o + ":" + e);
+							}
+						});
+					});
+
 		});
-		
-		
+
 		//별점
 		$('.starRev span').click(function() {
-			grade=$(this).text();
-			$("#grade").html("&nbsp;&nbsp;"+$(this).text());
-			$(this).parent().children('span').removeClass('on');	
-			$(this).addClass('on').prevAll('span').addClass('on');	
+			grade = $(this).text();
+			$("#grade").html("&nbsp;&nbsp;" + $(this).text());
+			$(this).parent().children('span').removeClass('on');
+			$(this).addClass('on').prevAll('span').addClass('on');
 			return false;
 		});
-		
-		 
-		</script>
+	</script>
 	<script type="text/javascript">
 		var oEditors = [];
 
@@ -717,7 +717,7 @@ html, body, header, .view {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder : "ir1",
-			sSkinURI : "SmartEditor2Skin.html",
+			sSkinURI : "smarteditor/SmartEditor2Skin.html",
 			htParams : {
 				bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)

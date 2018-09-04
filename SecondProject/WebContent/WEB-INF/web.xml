@@ -19,4 +19,15 @@
   	<servlet-name>PinServlet</servlet-name>
   	<url-pattern>/PinServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>DiaryServlet</servlet-name>
+  	<servlet-class>controller.DiaryServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>DiaryServlet</servlet-name>
+  	<url-pattern>/DiaryServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
