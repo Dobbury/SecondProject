@@ -141,7 +141,7 @@
 		</div>
 	
 	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;">글쓰기</button>
+		<button style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
    </div>
 </main>
@@ -201,6 +201,13 @@
 
 
   <!-- SCRIPTS -->
+  <script type="text/javascript">
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
+  
+  </script>
+  
   <!-- JQuery -->
    
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
