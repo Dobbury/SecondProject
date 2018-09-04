@@ -2,11 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%
-   memberDto dto = (memberDto)request.getAttribute("memberDto");
+   memberDto dto = (memberDto)session.getAttribute("user");
    
    
    //테스트 코드
-   dto = new memberDto("aa","aa","aa","aa");
    //boolean isS=(boolean)request.getAttribute("isS");
    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
