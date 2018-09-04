@@ -1,10 +1,19 @@
+<%@page import="dto.DiaryDto"%>
+<%@page import="dao.DiaryDao"%>
+<%@page import="Impl.DiaryImpl"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 
+<%
+//	pds 리스트 받아오기
+DiaryImpl diaryDao = DiaryDao.getInstance();
 
+List<DiaryDto> diarylist = diaryDao.getDiaryList();
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -112,32 +121,26 @@
 <main style="padding-top:80px;">
    <div class="container">
       
-
-		<div style="width:100%;background-color: yellow;text-align: center;  padding: 20px 0 20px 0;">
-			<div class="diary">
-				<div class="Dimage">
+		
+		
+			<div style="width:100%;background-color: yellow;text-align: center;  padding: 20px 0 20px 0;">
+			<% 
+			if(diarylist.size()<10){
+			for(int i = 0; i < diarylist.size();i++){
+			%>
+				<div class="diary">
+					<a href="DiaryServlet?command=diaryDetail&seq=<%=diarylist.get(i).getSeq()%>">
+						<div class="Dimage">
+						</div>
+						<%=diarylist.get(i).getTitle() %><br>
+					</a>
+					<span style="text-align: right;">조회수</span>
+					<span style="text-align: left"><%=diarylist.get(i).getTday().substring(0,10) %></span>	
 				</div>
-				<a href="">제목</a><br>
-				<span style="text-align: right;">조회수</span>
-				<span style="text-align: left">날짜</span>
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			
+			<%
+			}
+		}
+		%>			
 		</div>
 	
 	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
