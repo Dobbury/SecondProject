@@ -22,10 +22,9 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
-
 import dto.pinCommentDto;
-
 import dto.DiarycommentDto;
+
 
 public class DiaryServlet extends HttpServlet{
 
@@ -54,7 +53,10 @@ public class DiaryServlet extends HttpServlet{
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
 			String id = req.getParameter("id");
+
 			System.out.println("2단계");
+
+
 			DiaryDto dto = new DiaryDto();
 			
 			dto.setContent(content);
