@@ -11,15 +11,15 @@
   </welcome-file-list>
   
   <servlet>
-  	<servlet-name>PinServlet</servlet-name>
-  	<servlet-class>controller.PinServlet</servlet-class>
+     <servlet-name>PinServlet</servlet-name>
+     <servlet-class>controller.PinServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-  	<servlet-name>PinServlet</servlet-name>
-  	<url-pattern>/PinServlet</url-pattern>
+     <servlet-name>PinServlet</servlet-name>
+     <url-pattern>/PinServlet</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
   	<servlet-name>DiaryServlet</servlet-name>
   	<servlet-class>controller.DiaryServlet</servlet-class>
@@ -29,5 +29,18 @@
   	<servlet-name>DiaryServlet</servlet-name>
   	<url-pattern>/DiaryServlet</url-pattern>
   </servlet-mapping>
+
+  
+  
+<servlet>
+<servlet-name>MemberServlet</servlet-name>
+<servlet-class>controller.MemberServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>MemberServlet</servlet-name>
+<url-pattern>/MemberServlet</url-pattern>
+</servlet-mapping>
+
   
 </web-app>

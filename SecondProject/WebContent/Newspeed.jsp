@@ -1,5 +1,11 @@
+<%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,11 +37,29 @@
     margin-bottom: 0;
     }
     .navbar-menu li {
-    	width: 100px;
-    	height: 30px;
+       width: 100px;
+       height: 30px;
+       border:1px solid blue;
+       list-style: none;
+       display: inline-block;
+       
+    }
+    .diary{
+    	width: 300px;
+    	height: 300px;
     	border:1px solid blue;
-    	list-style: none;
     	display: inline-block;
+    	margin: 10px;
+    	text-align: center;
+    	vertical-align: top;
+    }
+    .Dimage{
+    	width: 280px;
+    	height: 220px;
+    	border:1px solid blue;
+    	background-color: gray;
+    	margin-top: 10px;
+    	margin-left: 10px;
     	
     }
 
@@ -50,6 +74,8 @@
 
 <body>
 
+
+
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
@@ -59,7 +85,7 @@
         <strong>MDB</strong>
       </a>
 
-		
+      
 
         <!-- Right -->
         <ul class="navbar-menu">
@@ -74,14 +100,50 @@
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
-<main style="padding-top:80px;">
-	<div class="container">
+          <div style="width:100%;height: 100%;padding-top: 280px; background-color:green">
+          <h1 style="text-align: center;">어서오세요 방갑습니다</h1>
+          <div style="margin-top: 60px; text-align: center;">
+			<input type="text" style="width:500px;height:30px;">
+			<input type="button" value="검색">
+		  </div>
+		</div>
 		
-		<h1>여기서 작업하시면 돼요</h1>
-      	<div>안녕하세요</div>
+  
+<main style="padding-top:80px;">
+   <div class="container">
+      
 
-
-    </div>
+		<div style="width:100%;background-color: yellow;text-align: center;  padding: 20px 0 20px 0;">
+			<div class="diary">
+				<div class="Dimage">
+				</div>
+				<a href="">제목</a><br>
+				<span style="text-align: right;">조회수</span>
+				<span style="text-align: left">날짜</span>
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			<div class="diary">
+			</div>
+			
+		</div>
+	
+	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+		<button style="float: right;">글쓰기</button>
+	</div>
+   </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
 
@@ -140,7 +202,7 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
@@ -149,5 +211,8 @@
     // Animations initialization
     new WOW().init();
   </script> -->
+
+
+
 </body>
 </html>
