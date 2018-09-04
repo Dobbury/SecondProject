@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import Impl.MemberImpl;
 import dao.MemberDao;
 import dto.memberDto;
+
+
 
 
 
@@ -119,6 +123,7 @@ public class MemberServlet extends HttpServlet {
       RequestDispatcher dispatch = req.getRequestDispatcher(urls);
       dispatch.forward(req, resp);
    }
+
 }
 
 

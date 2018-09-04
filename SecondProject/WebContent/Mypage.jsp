@@ -5,9 +5,9 @@
 	memberDto dto = (memberDto)request.getAttribute("memberDto");
 	
 	
-	//테스트 코드
+	/* //테스트 코드
 	dto = new memberDto("aa","aa","aa","aa");
-	//boolean isS=(boolean)request.getAttribute("isS");
+	//boolean isS=(boolean)request.getAttribute("isS"); */
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

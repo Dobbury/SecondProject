@@ -3,20 +3,25 @@ package dto;
 import java.io.Serializable;
 
 public class memberDto implements Serializable {
+
 	private String id;
-	private String pwd;
+	private String pw;
 	private String nick;
 	private String name;
 	
-	public memberDto() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public memberDto(String id, String pwd, String nick, String name) {
+	public memberDto(){}
+	
+	public memberDto(String id,String pw ,String nick, String name) {
 		super();
 		this.id = id;
-		this.pwd = pwd;
+		this.pw = pw;
+		this.nick = nick;
+		this.name = name;
+	}
+	
+	public memberDto(String id, String nick, String name) {
+		super();
+		this.id = id;
 		this.nick = nick;
 		this.name = name;
 	}
@@ -27,14 +32,6 @@ public class memberDto implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
 	}
 
 	public String getNick() {
@@ -53,22 +50,16 @@ public class memberDto implements Serializable {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "memberDto [id=" + id + ", pwd=" + pwd + ", nick=" + nick + ", name=" + name + "]";
+
+	public String getPw() {
+		return pw;
 	}
-	
-	
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
 
 
-   
-   public memberDto(String id, String nick, String name) {
-      super();
-      this.id = id;
-      this.nick = nick;
-      this.name = name;
-   }
-   
 }
 
 

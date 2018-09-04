@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import Impl.MemberImpl;
 import db.DBClose;
@@ -21,10 +23,11 @@ public class MemberDao implements MemberImpl {
 		return dao;
 	}
 	
+
 	@Override
 	public boolean editMember(memberDto dto) {
 		String sql=" UPDATE MEM "
-				+ " SET PWD=?, NICK=?"
+				+ " SET PW=?, NICK=?"
 				+ " WHERE ID=? ";
 		
 		Connection conn=null;
@@ -39,7 +42,7 @@ public class MemberDao implements MemberImpl {
 			psmt=conn.prepareStatement(sql);
 			System.out.println("2/6 edit member success");
 			
-			psmt.setString(1, dto.getPwd());
+			psmt.setString(1, dto.getPw());
 			psmt.setString(2, dto.getNick());
 			psmt.setString(3, dto.getId());
 			
@@ -58,7 +61,7 @@ public class MemberDao implements MemberImpl {
 
 	@Override
 	public memberDto getMemInfo(String id) {
-		String sql=" SELECT ID, PWD, NICK, NAME "
+		String sql=" SELECT ID, PW, NICK, NAME "
 				+ " FROM MEM "
 				+ " WHERE ID=? ";
 		
@@ -85,9 +88,9 @@ public class MemberDao implements MemberImpl {
 				dto=new memberDto();
 				
 				dto.setId(rs.getString("ID"));
-				dto.setPwd(rs.getString("PWD"));
+				dto.setPw(rs.getString("PW"));
 				dto.setNick(rs.getString("NICK"));
-				dto.setName(rs.getString("Name"));
+				dto.setName(rs.getString("NAME"));
 				
 			}
 		} catch (SQLException e) {
@@ -202,5 +205,6 @@ public class MemberDao implements MemberImpl {
       }
 
    
+
 }
 
