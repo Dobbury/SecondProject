@@ -18,7 +18,6 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
-import net.sf.json.JSONArray;
 
 public class DiaryServlet extends HttpServlet{
 
@@ -51,7 +50,6 @@ public class DiaryServlet extends HttpServlet{
 			
 			List<Map<String,Object>> resultMap = new ArrayList<Map<String,Object>>();
 		    //json-lib.jar 꺼임
-			resultMap = JSONArray.fromObject(PinArr);
 		    
 			DiaryDto dto = new DiaryDto();
 			
