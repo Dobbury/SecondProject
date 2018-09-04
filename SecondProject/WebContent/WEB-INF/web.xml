@@ -9,45 +9,39 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  <servlet>
-     <servlet-name>PinServlet</servlet-name>
-     <servlet-class>controller.PinServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-     <servlet-name>PinServlet</servlet-name>
-     <url-pattern>/PinServlet</url-pattern>
-  </servlet-mapping>
-<<<<<<< HEAD
 
-  <servlet>
-  	<servlet-name>DiaryServlet</servlet-name>
-  	<servlet-class>controller.DiaryServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>DiaryServlet</servlet-name>
-  	<url-pattern>/DiaryServlet</url-pattern>
-  </servlet-mapping>
+	<servlet>
+		<servlet-name>PinServlet</servlet-name>
+		<servlet-class>controller.PinServlet</servlet-class>
+	</servlet>
 
-=======
-  
->>>>>>> 448fcd57d91b5b6e4df52ead43f78b77e3c35594
-  
-  
-<servlet>
-<servlet-name>MemberServlet</servlet-name>
-<servlet-class>controller.MemberServlet</servlet-class>
-</servlet>
+	<servlet-mapping>
+		<servlet-name>PinServlet</servlet-name>
+		<url-pattern>/PinServlet</url-pattern>
+	</servlet-mapping>
 
-<servlet-mapping>
-<servlet-name>MemberServlet</servlet-name>
-<url-pattern>/MemberServlet</url-pattern>
-</servlet-mapping>
-<<<<<<< HEAD
 
-=======
->>>>>>> 448fcd57d91b5b6e4df52ead43f78b77e3c35594
+	<servlet>
+		<servlet-name>DiaryServlet</servlet-name>
+		<servlet-class>controller.DiaryServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DiaryServlet</servlet-name>
+		<url-pattern>/DiaryServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>controller.MemberServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/MemberServlet</url-pattern>
+	</servlet-mapping>
+
   
 </web-app>
