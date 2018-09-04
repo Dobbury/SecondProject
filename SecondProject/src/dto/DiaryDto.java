@@ -24,6 +24,9 @@ public class DiaryDto implements Serializable {
 		this.id = id;
 		this.seq = seq;
 	}
+	
+	
+	
 	public int getLiked() {
 		return liked;
 	}
