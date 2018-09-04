@@ -69,6 +69,7 @@ public class DiaryServlet extends HttpServlet{
 				
 			String PinObj = req.getParameter("PinObj");
 			
+
 			System.out.println(PinObj);
 			JSONParser jsonParser = new JSONParser();
 
@@ -149,5 +150,7 @@ public class DiaryServlet extends HttpServlet{
 	      RequestDispatcher dispatch = req.getRequestDispatcher(urls);
 	      dispatch.forward(req, resp);
 	   }
+	
+
 	
 }
