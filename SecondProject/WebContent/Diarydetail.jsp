@@ -169,10 +169,9 @@ html, body, header, .view {
 					<div class="commant-write">
 						<div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;">호랑둥이</div>
 						<form action="PdsServlet">
-							<textarea rows="2" cols="20" name="commant"
-								style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
-							<input type="submit" value="댓글달기"
-								style="vertical-align: text-bottom; height: 70px;">
+							<input type="hidden" name="command" value="commentwrite">
+							<textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
+							<input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
 						</form>
 					</div>

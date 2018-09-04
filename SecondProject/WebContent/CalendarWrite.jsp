@@ -33,7 +33,6 @@
     .view {
       height: 100%;
     }
-
     .navbar-menu{
     margin-bottom: 0;
     }
@@ -45,13 +44,11 @@
     	display: inline-block;
     	
     }
-
     @media (min-width: 800px) and (max-width: 850px) {
       .navbar:not(.top-nav-collapse) {
           background: #1C2331!important;
       }
   }
-
   </style>
 </head>
 
@@ -199,7 +196,6 @@
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일 구하기 (1~7)
 		System.out.println("확인용 날짜 : " + year+"년 "+ month+" 월");
 		 
-
 		
 		//로그인한 사람의 id
 		memberDto dto = (memberDto)request.getAttribute("dto");   //뉴스피드 --서블릿 -- 캘린더write
