@@ -225,7 +225,7 @@ html, body, header, .view {
 					alert(data);
 				},
 				error: function(){
-					
+					alert("에러남");
 				}
 			});
 			
