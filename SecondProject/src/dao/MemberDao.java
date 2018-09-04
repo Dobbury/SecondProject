@@ -24,7 +24,7 @@ public class MemberDao implements MemberImpl {
 	
 
 	@Override
-	public boolean editMember(memberDto dto) {
+	public int editMember(memberDto dto) {
 		String sql=" UPDATE MEM "
 				+ " SET PW=?, NICK=?"
 				+ " WHERE ID=? ";
@@ -55,7 +55,7 @@ public class MemberDao implements MemberImpl {
 		}
 		System.out.println("4/6 edit member success");
 		
-		return count>0?true:false;
+		return count;
 	}
 
 	@Override
@@ -98,6 +98,7 @@ public class MemberDao implements MemberImpl {
 			DBClose.close(psmt, conn, rs);
 		}
 		
+		System.out.println("END getMemInfo success");
 		return dto;
 	}
 	
@@ -133,6 +134,7 @@ public class MemberDao implements MemberImpl {
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
+		
 
 		return dto;
 	}

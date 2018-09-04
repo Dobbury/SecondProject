@@ -19,7 +19,7 @@ public interface MemberImpl {
 	public int dosignup(String id, String pw, String name, String nick);
 
 
-	public boolean editMember(memberDto dto);
+	public int editMember(memberDto dto);
 
 	public memberDto getMemInfo(String id);
 

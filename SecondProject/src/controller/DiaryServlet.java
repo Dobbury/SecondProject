@@ -53,19 +53,19 @@ public class DiaryServlet extends HttpServlet{
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
 		}else if(command.equals("diaryDetail")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			DiaryDto dto = dao.getDiaryDto(seq);
-			
-			req.setAttribute("DiaryDto", dto);
-			dispatch("Diarydetail.jsp", req, resp);
-		}
-	}
-	
-	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	         int seq = Integer.parseInt(req.getParameter("seq"));
+	         
+	         DiaryDto dto = dao.getDiaryDto(seq);
+	         
+	         req.setAttribute("DiaryDto", dto);
+	         dispatch("Diarydetail.jsp", req, resp);
+	      }
+	   }
+	   
+	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
+	         throws ServletException, IOException {
 
-		RequestDispatcher dispatch = req.getRequestDispatcher(urls);
-		dispatch.forward(req, resp);
-	}
+	      RequestDispatcher dispatch = req.getRequestDispatcher(urls);
+	      dispatch.forward(req, resp);
+	   }
 }

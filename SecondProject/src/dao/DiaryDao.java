@@ -70,10 +70,10 @@ public class DiaryDao implements DiaryImpl {
 		
 		try {
 			conn = DBConnection.makeConnection();
-			System.out.println("1/6 getMemInfo suceess");
+			System.out.println("1/6 getDiaryDto suceess");
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getMemInfo suceess");
+			System.out.println("2/6 getDiaryDto suceess");
 			
 			psmt.setInt(1, seq);
 

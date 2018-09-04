@@ -152,8 +152,6 @@ html, body, header, .view {
 			</div>
 			<div class="diary">
 			</div>
-			<div class="diary">
-			</div>
 			
 		</div>
 	

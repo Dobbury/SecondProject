@@ -105,10 +105,14 @@ public class MemberServlet extends HttpServlet {
 	         dto.setName(name);
 	         dto.setNick(nick);
 	         System.out.println(dto.toString());
-	         boolean isS = dao.editMember(dto);
+	         int isS = dao.editMember(dto);
 	         PrintWriter pw = resp.getWriter();
 	         
-	         pw.print(isS);
+	         if(isS>0) {
+	        	 pw.print("수정성공");
+	         }else {
+	        	 pw.print("수정실패");
+	         }
 	      }
 		
 	}
