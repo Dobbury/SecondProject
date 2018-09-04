@@ -9,28 +9,52 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  <servlet>
-     <servlet-name>PinServlet</servlet-name>
-     <servlet-class>controller.PinServlet</servlet-class>
+
+	<servlet>
+		<servlet-name>PinServlet</servlet-name>
+		<servlet-class>controller.PinServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PinServlet</servlet-name>
+		<url-pattern>/PinServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>DiaryServlet</servlet-name>
+		<servlet-class>controller.DiaryServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DiaryServlet</servlet-name>
+		<url-pattern>/DiaryServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>controller.MemberServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/MemberServlet</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
+  	<servlet-name>CalendarServlet</servlet-name>
+  	<servlet-class>controller.CalendarServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-     <servlet-name>PinServlet</servlet-name>
-     <url-pattern>/PinServlet</url-pattern>
-  </servlet-mapping>
-  
-
-
-  <servlet>
-  <servlet-name>MemberServlet</servlet-name>
-  <servlet-class>controller.MemberServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  <servlet-name>MemberServlet</servlet-name>
-  <url-pattern>/MemberServlet</url-pattern>
+  	<servlet-name>CalendarServlet</servlet-name>
+  	<url-pattern>/CalendarServlet</url-pattern>
   </servlet-mapping>
 
+  	
 
 </web-app>
+
+

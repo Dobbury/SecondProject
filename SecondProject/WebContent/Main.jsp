@@ -25,29 +25,7 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-	<style>
 
-	body{
-		color: #333;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-	}
-
-
-	/* Style for our header texts
-	* --------------------------------------- */
-	h1{
-		font-size: 5em;
-		font-family: arial,helvetica;
-		margin:0;
-		padding:0;
-	}
-	h2{
-		font-size: 2em;
-		margin: 0 0 18px 0;
-		font-family: arial,helvetica;
-	}
-=======
    <style>
 
    body{
@@ -69,63 +47,7 @@
       margin: 0 0 18px 0;
       font-family: arial,helvetica;
    }
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
 
-
-
-
-<<<<<<< HEAD
-	/* Common styles
-	* --------------------------------------- */
-	.section{
-		text-align:center;
-		overflow:hidden;
-		padding-top: 330px;
-	}
-
-	/* header */
-	.header{
-		position: fixed;
-		top: 0;
-		width: 100%;
-		height: 60px;
-		background-color: #333;
-		z-index: 10;
-	}
-	.header ul{
-		width: 80%;
-    	height: 100%;
-    	padding: 18px 40px;
-    	margin: 0 auto;
-    	background-color: #fff;
-    	box-sizing: border-box;
-	}
-	.header ul .left{
-		float: left;
-	}
-	.header ul .rigth{
-		float: right;
-	}
-	
-
-	
-	/* Overwriting fullPage.js tooltip color
-	* --------------------------------------- */
-	.fp-tooltip{
-		color: #AAA;
-	}
-	#fp-nav span, .fp-slidesNav span{
-		border-color: #AAA;
-	}
-	#fp-nav li .active span, .fp-slidesNav .active span{
-		background: #AAA;
-	}
-
-	</style>
-
-
-	
-=======
    /* Common styles
    * --------------------------------------- */
    .section{
@@ -175,24 +97,11 @@
    </style>
 
 
-   
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
-
 </head>
 <body>
 
 <div class="header">
-<<<<<<< HEAD
-		<ul>
-		  <li class="left"><a href="#">로고</a></li>
-		  <li class="rigth">
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  로그인
-</button>
-			</li>
-		</ul>
-	</div>
-=======
+
       <ul>
         <li class="left"><a href="#">로고</a></li>
         <li class="rigth">
@@ -202,36 +111,11 @@
          </li>
       </ul>
    </div>
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
 
 
 
 <div id="fullpage">
 
-<<<<<<< HEAD
-	<div class="section" id="section0">
-		<h1>섹션1</h1>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
-	</div>
-	
-	<div class="section" id="section1">
-	<h1>섹션2</h1>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
-	</div>
-	
-
-	<div class="section moveDown" id="section2">
-	<h1>섹션3</h1>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
-	</div>
-	
-=======
    <div class="section" id="section0">
       <h1>섹션1</h1>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
@@ -254,7 +138,6 @@
 </button>
    </div>
    
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
 </div>
 
 
@@ -270,21 +153,13 @@
       </div>
       <form action="MemberServlet?command=login" method="post">
       <div class="modal-body">
-<<<<<<< HEAD
-      	아이디 : <input type="text" name="id"><br><br>
-      	비밀번호 : <input type="password" name="pw"> 
-      </div>
-      <div class="modal-footer">
-		<input type="submit" class="btn btn-primary" value="로그인">
-        <button type="button" class="btn btn-secondary" id="signup" data-dismiss="modal">회원가입</button>
-=======
+
          아이디 : <input type="text" name="id"><br><br>
          비밀번호 : <input type="password" name="pw"> 
       </div>
       <div class="modal-footer">
       <input type="submit" class="btn btn-primary" value="로그인">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="signup">회원가입</button>
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
       </div>
       </form>
     </div>
@@ -295,46 +170,6 @@
 <!-- 풀페이지 관련 스크립트 -->
 
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<<<<<<< HEAD
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script> -->
-	<script type="text/javascript" src="fullPage/jquery.fullPage.js"></script>
-	<script type="text/javascript" src="fullPage/examples/examples.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				'verticalCentered': false,
-				'css3': true,
-				'sectionsColor': ['#F0F2F4', '#fff', '#fff', '#fff'],
-				'navigation': true,
-				'navigationPosition': 'right',
-				'navigationTooltips': ['fullPage.js', 'Powerful', 'Amazing', 'Simple'],
-
-				'afterLoad': function(anchorLink, index){
-					if(index == 2){
-						$('#iphone3, #iphone2, #iphone4').addClass('active');
-					}
-				},
-
-				'onLeave': function(index, nextIndex, direction){
-					if (index == 3 && direction == 'down'){
-						$('.section').eq(index -1).removeClass('moveDown').addClass('moveUp');
-					}
-					else if(index == 3 && direction == 'up'){
-						$('.section').eq(index -1).removeClass('moveUp').addClass('moveDown');
-					}
-
-					$('#staticImg').toggleClass('active', (index == 2 && direction == 'down' ) || (index == 4 && direction == 'up'));
-					$('#staticImg').toggleClass('moveDown', nextIndex == 4);
-					$('#staticImg').toggleClass('moveUp', index == 4 && direction == 'up');
-				}
-			});
-			$('#signup').click(function(){
-				location.href="MemberServlet?command=signPage";
-			});
-		});
-	</script>
-=======
    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script> -->
    <script type="text/javascript" src="fullPage/jquery.fullPage.js"></script>
    <script type="text/javascript" src="fullPage/examples/examples.js"></script>
@@ -373,7 +208,6 @@
          });
       });
    </script>
->>>>>>> 6abdaafb95cd2d10858579ac70252080db460647
 
 </body>
 </html>

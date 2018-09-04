@@ -9,6 +9,7 @@
 	dto = new memberDto("aa","aa","aa","aa");
 	//boolean isS=(boolean)request.getAttribute("isS"); */
 	%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,12 +23,22 @@ $(document).ready(function() {
 			}); 
 	}); 
 	</script>
+<script> 
+$(document).ready(function() { 
+   $('a[data-toggle="tab"]').on('hidden.bs.tab', 
+         function(e){// alert("이벤트 실행됨"); 
+         }); 
+   }); 
+   </script>
+
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 <meta name="viewport"
+
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>site</title>
 <!-- Font Awesome -->
@@ -89,12 +100,6 @@ html, body, header, .view {
 	</div>
 	</nav>
 
-
-
-	<!-- ----------------------------------------html----------------------------------------- -->
-	<!--여기서 하시면 됩니다-->
-
-
 	<main style="padding-top:80px;">
 	<div class="container">
 
@@ -155,7 +160,6 @@ html, body, header, .view {
 					</tr>
 				</table>
 			</div>
-			</form>
 		</div>
 		
 	</div>
@@ -244,6 +248,16 @@ html, body, header, .view {
 	<script type="text/javascript" src="Design/js/mdb.min.js"></script>
 	<!-- Initializations -->
 	<!-- 
+=======
+   <!-- SCRIPTS -->
+   <!-- JQuery -->
+   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   <script type="text/javascript" src="Design/js/popper.min.js"></script>
+   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="Design/js/mdb.min.js"></script>
+   <!-- Initializations -->
+   <!-- 
+>>>>>>> bb863d88e0ad2d5c17e299549346adf149c8bb1c
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
