@@ -1,4 +1,5 @@
 <%@page import="dto.memberDto"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -97,7 +98,7 @@ html, body, header, .view {
 	var modal_Marker= [];
 	var address = '';
 	var tday =  '<%=request.getParameter("tday") %>';
-	var id = '<%=dto.getId() %>';
+	var id = '<%=dto.getId()%>';
 	
 	function initialize() {
 		modal_Marker_lat=null;
@@ -469,7 +470,8 @@ html, body, header, .view {
 		var PinArr = new Array();
 		$(function() {
 			$("#diarySavebtn").click(function () {
-				
+				 var obj = new Object();
+				 obj.PinObj =  PinArr;
 				$.ajax({
 					url:"DiaryServlet",
 					type:"GET",
@@ -479,7 +481,7 @@ html, body, header, .view {
 						'title': $("#title").val(),
 						'tday': tday,
 						'id':id,
-						'PinArr':JSON.stringify(PinArr)
+						'PinObj':JSON.stringify(obj)
 					},
 					datatype:"json",
 					success:function(data){

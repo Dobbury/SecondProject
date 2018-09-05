@@ -25,8 +25,33 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public boolean addDiary(DiaryDto dto) {
 		
+		String sql = "INSERT INTO DIARY(LIKED,CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
 		
-		return false;
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, dto.getLiked());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getTday());
+			psmt.setString(5, dto.getId());
+			
+			count = psmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt,conn,null);
+		}
+
+		return count >0 ? true : false ;
 	}
 	
 	public List<DiaryDto> getDiaryList(){
@@ -94,10 +119,9 @@ public class DiaryDao implements DiaryImpl {
 	
 	
 
-	// ¥Ò±€ æ≤±‚ ¿ŒΩ‰∆Æ
 	public int CommantWrite(int seq, String id, String dcomment) {
-		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT) " 
-				+	 " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?)";
+		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) " 
+				+	 " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
 		
 		Connection conn = null; 
 		PreparedStatement psmt = null; 
@@ -129,10 +153,9 @@ public class DiaryDao implements DiaryImpl {
 		return count; 
 		}
 	
-	// ¥Ò±€∏ÆΩ∫∆Æ
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
-		String sql = " SELECT ID,DCOMMENT "
+		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY "
 				+ " FROM DIARYCOMMENT "
 				+ " WHERE DSEQ = ? "
 				+ " ORDER BY SEQ ASC ";
@@ -155,7 +178,7 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new DiarycommentDto(rs.getString(1),rs.getString(2)));
+				list.add(new DiarycommentDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)));
 
 			}
 		} catch (SQLException e) {
@@ -167,6 +190,28 @@ public class DiaryDao implements DiaryImpl {
 		
 		
 		
+	}
+	// ¥Ò±€ªË¡¶
+	@Override
+	public int CommentDelete(int seq) {
+
+		String sql = " DELETE DIARYCOMMENT "
+				+	" WHERE SEQ = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 	
