@@ -146,6 +146,7 @@ List<DiaryDto> diarylist = diaryDao.getDiaryList();
 	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
+
    </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->

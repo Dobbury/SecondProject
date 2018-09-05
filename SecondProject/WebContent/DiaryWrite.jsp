@@ -808,7 +808,7 @@ html, body, header, .view {
 		});
 		
 		$("#pinUpdateBtn").click(function () {
-			$(updateP).html($("#pin_info_name").val()
+			$(updateP).parent().html($("#pin_info_name").val()
 					+"<input class='pin_info_val' type='hidden' value='"+$("#pin_info_name").val()+"'>"
 					+"<input type='button' val='x'>");
 			PinArr[sel].grade=grade;
