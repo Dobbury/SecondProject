@@ -1,8 +1,7 @@
 <%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
-   pageEncoding="UTF-8"%>
-   <%
+	pageEncoding="UTF-8"%>
+<%
    memberDto dto  = (memberDto)session.getAttribute("user");
    
    
@@ -12,22 +11,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
- <!-- 제이쿼리 -->
-   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- 제이쿼리 -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script> 
-$(document).ready(function() { 
-	$('a[data-toggle="tab"]').on('hidden.bs.tab', 
-			function(e){// alert("이벤트 실행됨"); 
-			}); 
-	}); 
-	</script>
+ 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<!-- <script> -->
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Design/js/popper.min.js"></script>
+<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Design/js/mdb.min.js"></script>
 <head>
 <meta name="viewport"
-
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -61,29 +61,100 @@ html, body, header, .view {
 	display: inline-block;
 }
 
-    .diary{
-    	width: 300px;
-    	height: 300px;
-    	border:1px solid blue;
-    	display: inline-block;
-    	margin: 10px;
-    	text-align: center;
-    	vertical-align: top;
-    }
-    .Dimage{
-    	width: 280px;
-    	height: 220px;
-    	border:1px solid blue;
-    	background-color: gray;
-    	margin-top: 10px;
-    	margin-left: 10px;
-    	
-    }
+.diary {
+	width: 300px;
+	height: 300px;
+	border: 1px solid blue;
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.Dimage {
+	width: 280px;
+	height: 220px;
+	border: 1px solid blue;
+	background-color: gray;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.tab {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+/* Float the list items side by side */
+.tab li {
+	float: left;
+}
+/* Style the links inside the list items */
+.tab li a {
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+	font-size: 17px;
+	transition: 0.3s;
+}
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	background-color: rgb(0, 154, 200);
+	padding: 6px 12px;
+	color: #fff;
+}
+
+ul.tab li.current {
+	background-color: rgb(0, 154, 200);
+	color: #222;
+}
+
+.tabcontent.current {
+	display: block;
+}
+.diary {
+	width: 300px;
+	height: 300px;
+	border: 1px solid blue;
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+	vertical-align: top;
+}
+
+
+
 
 @media ( min-width : 800px) and (max-width: 850px) {
-	.navbar:not (.top-nav-collapse ) {
-		background: #1C2331 !important;
-	}
+	.navbar
+	:not
+	 
+	(
+	.top-nav-collapse
+	 
+	)
+	{
+	background
+	:
+	 
+	#1C2331
+	 
+	!
+	important
+	;
+	
+	
+}
 }
 </style>
 </head>
@@ -110,102 +181,87 @@ html, body, header, .view {
 	</div>
 	</nav>
 
-	<main style="padding-top:80px;">
-	<div class="container">
-
+		<div id="container">
 		<h2>mypage sample</h2>
-		<ul id="myTab" class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a data-target="#home"
-				id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-				aria-expanded="true">내가 쓴 글</a></li>
-			<li role="presentation" class=""><a data-target="#profile"
-				role="tab" id="profile-tab" data-toggle="tab"
-				aria-controls="profile" aria-expanded="false">
-				&nbsp;&nbsp;&nbsp;회원 정보 수정</a></li>
-		</ul>
-		<div id="myTabContent" class="tab-content">
-			<div role="tabpanel" class="tab-pane fade active in" id="home"
-				aria-labelledby="home-tab">
-	<main style="padding-top:80px;">			
-   <div class="container">
-      
 
-		<div style="width:100%;/* background-color: yellow */;text-align: center;  padding: 20px 0 20px 0;">
-			<div class="diary">
-				<div class="Dimage">
+		<ul class="tab">
+			<li class="current" data-tab="tab1"><a href="#">내가 쓴 글 보기</a></li>
+			<li data-tab="tab2"><a href="#">회원정보수정</a></li>
+		</ul>
+
+		<div id="tab1" class="tabcontent current">
+			<h3>내가 쓴 글 보기</h3>
+			<main style="padding-top:80px;">
+			<div
+				style="width: 100%; text-align: center; padding: 20px 0 20px 0;">
+				<div class="diary">
+					<div class="Dimage"></div>
+					<a href="">제목</a><br> <span style="text-align: right;">조회수</span>
+					<span style="text-align: left">날짜</span>
 				</div>
-				<a href="">제목</a><br>
-				<span style="text-align: right;">조회수</span>
-				<span style="text-align: left">날짜</span>
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
-			</div>
-			<div class="diary">
+				<div class="diary"></div>
+				<div class="diary"></div>
+				<div class="diary"></div>
+				<div class="diary"></div>
+				<div class="diary"></div>
+				<div class="diary"></div>
+				<div class="diary"></div>
+
 			</div>
 			
-		</div>
-	
-	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;"></button>
-	</div>
-   </div>
-   </main>
 
-				
+			<div
+				style="display: table; clear: both; width: 100%; padding: 20px 0 20px 0;">
+				<button style="float: right;"></button>
 			</div>
-			<div role="tabpanel" class="tab-pane fade" id="profile"
-				aria-labelledby="profile-tab">
-				<p>회원정보 수정하는 칸</p>
-				<table>
-					<tr>
-						<td>ID</td>
-						<td>
-							<input type="text" id="id" readonly="readonly" value="<%=dto.getId()%>" name="id">
-						</td>
-					</tr>
-					<tr>
-						<td>PW</td>
-						<td>
-							<input type="text" id="pwd" name="pwd">
-						</td>				
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td>
-							<input type="text" id="name" readonly="readonly" value="<%=dto.getName()%>" name="name">
-						</td>
-					</tr>
-					<tr>
-						<td>닉네임</td>
-						<td>
-							<input type="text" id="nickname" name="nickname">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" id="edit" value="수정완료">
-						</td>
-						<td>
-							<input type="button" name="back" value="취소"  data-target="#home" data-toggle="tab">
-						</td>
-					</tr>
-				</table>
-			</div>
+			</main>
 		</div>
-		
+
+		<div id="tab2" class="tabcontent">
+			<h3>회원정보 수정</h3>
+			<p>회원정보 수정하는 칸</p>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td><input type="text" id="id" readonly="readonly"
+						value=" <%=dto.getId()%> " name="id"></td>
+				</tr>
+				<tr>
+					<td>PW</td>
+					<td><input type="text" id="pwd" name="pwd"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" id="name" readonly="readonly"
+						value=" <%=dto.getName()%>" name="name"></td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td><input type="text" id="nickname" name="nickname">
+					</td>
+				</tr>
+				<tr>
+					<td><input type="button" id="edit" value="수정완료"></td>
+					<td><input type="button" name="back" value="취소"
+						onclick="Mypage.jsp"></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	</main>
-	
+
+
+
+	<script>
+		$(function() {
+			$('ul.tab li').click(function() {
+				var activeTab = $(this).attr('data-tab');
+				$('ul.tab li').removeClass('current');
+				$('.tabcontent').removeClass('current');
+				$(this).addClass('current');
+				$('#' + activeTab).addClass('current');
+			})
+		});
+	</script>
 	<script type="text/javascript">
 	$(function () {
 		$("#edit").click(function () {
@@ -221,25 +277,17 @@ html, body, header, .view {
 				},
 				success:function(data){
 					alert(data);
+					location.href="Mypage.jsp";
 				},
 				error: function(){
 					alert("에러남");
+					location.href="Mypage.jsp";
 				}
 			});
 			
 		});
 	});
 	</script>
-<%-- 	<script type="text/javascript">
-	function memEdit(){
-        $("#memberedit").attr("action", '<%=request.getContextPath()%>/updateMemberServlet');
-              $("#memberedit").submit();
-     }
-	
-
-	
-
-	</script> --%>
 
 	<!-- --------------------------------------------------------------------------------- -->
 
@@ -281,12 +329,7 @@ html, body, header, .view {
 
 
 
-	<!-- SCRIPTS -->
-	<!-- JQuery -->
-	<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="Design/js/popper.min.js"></script>
-	<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="Design/js/mdb.min.js"></script>
+
 	<!-- Initializations -->
 	<!-- 
 

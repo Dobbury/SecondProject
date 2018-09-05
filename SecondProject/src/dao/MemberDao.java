@@ -45,7 +45,11 @@ public class MemberDao implements MemberImpl {
 			psmt.setString(2, dto.getNick());
 			psmt.setString(3, dto.getId());
 			
-			psmt.executeQuery();
+			count=psmt.executeUpdate();
+			
+			
+			
+			
 			System.out.println("3/6 edit member success");
 			
 		} catch (SQLException e) {
