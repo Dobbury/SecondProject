@@ -142,6 +142,13 @@
 	
 	<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<!-- SCRIPTS -->
+  	<script type="text/javascript">
+  	function gocal() {  		
+  		location.href= "CalendarWrite.jsp";	
+	}
+  
+  </script>
 	</div>
    </div>
 </main>
@@ -200,13 +207,7 @@
 
 
 
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
-  
-  </script>
+
   
   <!-- JQuery -->
 
