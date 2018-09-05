@@ -1,3 +1,4 @@
+<%@page import="dto.JournalDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.DiarycommentDto"%>
 <%@page import="dto.memberDto"%>
@@ -15,11 +16,14 @@
 	memberDto dto = (memberDto) session.getAttribute("user");
 	
 	String loginid = dto.getId();
-   DiaryDto diaryDto = (DiaryDto)request.getAttribute("DiaryDto");
+	JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+   List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
  
-  
+  for(int i=0;i<diarylist.size();i++){
+	  diarylist.get(i).toString();
+  }
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -122,17 +126,25 @@ html, body, header, .view {
          </div>
       </div>
 
+	
       <div class="diary-m">
+      <%
+               for(int i=0; i<diarylist.size(); i++ ){
+            %>
          <div class="diary-cont">
-            <p class="diary-title"><%=diaryDto.getTitle() %></p>
-            <span class="diary-date"><%=diaryDto.getTday() %></span>
+            <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
+            <span class="diary-date"><%=diarylist.get(i).getTday() %></span>
 
             <div class="diary-content">
-	              <%=diaryDto.getContent() %>
+	             <%=diarylist.get(i).getContent() %>
             </div>
 
          </div>
+         <%
+               }
+      %>
       </div>
+      
 
       <div class="diary-b">
 
@@ -155,7 +167,7 @@ html, body, header, .view {
                </p>
                <form action="DiaryServlet">
                <input type="hidden" name="command" value="deletecomment">
-                <input type="hidden" name="seq" value="<%=diaryDto.getSeq() %>">
+                <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                <input type="hidden" name="commentseq" value="<%=commentview.get(i).getSeq() %>">
                <input type="submit" style="float: right; cursor: pointer;" value="x">
                </form>
@@ -175,7 +187,7 @@ html, body, header, .view {
                   <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet">
                      <input type="hidden" name="command" value="commentwrite">
-                     <input type="hidden" name="seq" value="<%=diaryDto.getSeq() %>">
+                     <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                      <input type="hidden" name="loginid" value="<%=loginid %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
