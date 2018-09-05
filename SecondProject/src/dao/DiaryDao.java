@@ -157,6 +157,7 @@ public class DiaryDao implements DiaryImpl {
 		return list;
 	}
 
+
 	public int CommantWrite(int seq, String id, String dcomment) {
 		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT) " + " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?)";
 
