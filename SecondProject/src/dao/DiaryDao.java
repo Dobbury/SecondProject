@@ -30,7 +30,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public boolean addDiary(DiaryDto dto) {
 
-		String sql = "INSERT INTO DIARY(LIKED,CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
+		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,SEQ_DIARY.NEXTVAL)";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -40,11 +40,10 @@ public class DiaryDao implements DiaryImpl {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setInt(1, dto.getLiked());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getTitle());
-			psmt.setString(4, dto.getTday());
-			psmt.setString(5, dto.getId());
+			psmt.setString(1, dto.getContent());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getTday());
+			psmt.setString(4, dto.getId());
 
 			count = psmt.executeUpdate();
 
@@ -60,7 +59,8 @@ public class DiaryDao implements DiaryImpl {
 
 	public List<JournalDto> getJournalList() {
 
-		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE  FROM JOURNAL ";
+
+		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -92,8 +92,9 @@ public class DiaryDao implements DiaryImpl {
 
 	public JournalDto getJournalDto(int seq) {
 
-		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE  "
-				+ " FROM JOURNAL WHERE SEQ = ? ";
+
+		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+				+ "FROM JOURNAL WHERE SEQ = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -142,14 +143,16 @@ public class DiaryDao implements DiaryImpl {
 			psmt.setString(1, startdate);
 			psmt.setString(2, enddate);
 			psmt.setString(3, id);
-
+			
+			System.out.println("3/6 getMemInfo suceess");
 			rs = psmt.executeQuery();
-
+			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-				list.add(new DiaryDto(rs.getInt(6), rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2),
+				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2),
 						rs.getInt(1)));
 
 			}
+			System.out.println("5/6 getMemInfo suceess");
 		} catch (SQLException e) {
 			System.out.println("get information failed");
 		} finally {

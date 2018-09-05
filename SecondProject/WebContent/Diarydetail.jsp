@@ -125,7 +125,12 @@ html, body, header, .view {
             <!-- <img alt="" src="img/lt04014209.png"> -->
          </div>
       </div>
-
+	
+	<div class="journal-title" >
+	<h1>
+		<%=journalDto.getTitle() %>
+		</h1>
+	</div>
 	
       <div class="diary-m">
       <%

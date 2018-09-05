@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class DiaryDto implements Serializable {
 	
-	private int liked;
 	private String content;
 	private String title;
 	private String tday;
@@ -15,9 +14,8 @@ public class DiaryDto implements Serializable {
 		super();
 	}
 	
-	public DiaryDto(int liked, String content, String title, String tday, String id, int seq) {
+	public DiaryDto(String content, String title, String tday, String id, int seq) {
 		super();
-		this.liked = liked;
 		this.content = content;
 		this.title = title;
 		this.tday = tday;
@@ -25,14 +23,6 @@ public class DiaryDto implements Serializable {
 		this.seq = seq;
 	}
 	
-	
-	
-	public int getLiked() {
-		return liked;
-	}
-	public void setLiked(int liked) {
-		this.liked = liked;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -65,7 +55,7 @@ public class DiaryDto implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "DiaryDto [liked=" + liked + ", content=" + content + ", title=" + title + ", tday=" + tday + ", id="
+		return "DiaryDto [content=" + content + ", title=" + title + ", tday=" + tday + ", id="
 				+ id + ", seq=" + seq + "]";
 	}
 	

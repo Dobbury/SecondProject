@@ -14,6 +14,7 @@ DiaryImpl diaryDao = DiaryDao.getInstance();
 
 List<JournalDto> journallist = diaryDao.getJournalList();
 
+
 /* int page = Integer.parseInt(request.getParameter("page")); */
 %>
 
@@ -26,7 +27,7 @@ List<JournalDto> journallist = diaryDao.getJournalList();
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
 
-  
+ 
   
 </head>
 
