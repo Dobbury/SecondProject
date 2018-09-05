@@ -24,6 +24,7 @@ import dao.PinDao;
 import dto.DiaryDto;
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
+import dto.JournalDto;
 
 
 public class DiaryServlet extends HttpServlet{
@@ -110,9 +111,12 @@ public class DiaryServlet extends HttpServlet{
 		}else if(command.equals("diaryDetail")) {
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         
-	         DiaryDto dto = dao.getDiaryDto(seq);
-	         req.setAttribute("DiaryDto", dto);
+	         JournalDto dto = dao.getJournalDto(seq);
+	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate(), dto.getEndDate(), dto.getId());
 	         
+	         
+	         req.setAttribute("JournalDto", dto);
+	         req.setAttribute("DiaryList", Diarylist);
 	         List<DiarycommentDto> list = dao.Commantview(seq);
 	         req.setAttribute("DiarycommentDto", list);
 	         
@@ -136,10 +140,12 @@ public class DiaryServlet extends HttpServlet{
 					System.out.println("����Է½���");
 				}
 				
-				DiaryDto dto = dao.getDiaryDto(seq);
+				JournalDto dto = dao.getJournalDto(seq);
+		        List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate(), dto.getEndDate(), dto.getId());
+		        req.setAttribute("JournalDto", dto);
+		        req.setAttribute("DiaryList", Diarylist);
 				List<DiarycommentDto> list = dao.Commantview(seq);
 		        req.setAttribute("DiarycommentDto", list);
-				req.setAttribute("DiaryDto", dto);
 		        dispatch("Diarydetail.jsp", req, resp);
 				
 				
