@@ -14,6 +14,7 @@ DiaryImpl diaryDao = DiaryDao.getInstance();
 
 List<JournalDto> journallist = diaryDao.getJournalList();
 
+
 /* int page = Integer.parseInt(request.getParameter("page")); */
 %>
 
