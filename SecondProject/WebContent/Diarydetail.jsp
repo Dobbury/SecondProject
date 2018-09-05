@@ -9,9 +9,12 @@
 <head>
 
 <%
-   DiaryDto dtolist = (DiaryDto)request.getAttribute("DiaryDto");
+
+   DiaryDto diaryDto = (DiaryDto)request.getAttribute("DiaryDto");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
+ 
+
    
    memberDto dto = (memberDto) session.getAttribute("user");
    
@@ -110,11 +113,10 @@ html, body, header, .view {
       class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
    <div class="container">
 
+
       <!-- logo -->
       <a class="navbar-brand" href="#" target="_blank"> <strong>MDB</strong>
       </a>
-
-
 
       <!-- Right -->
       <ul class="navbar-menu">
@@ -124,7 +126,6 @@ html, body, header, .view {
 
    </div>
    </nav>
-
 
 
    <!-- ----------------------------------------html----------------------------------------- -->
@@ -147,16 +148,12 @@ html, body, header, .view {
 
       <div class="diary-m">
          <div class="diary-cont">
-            <p class="diary-title">즐거운 제주도여행ㅋ</p>
-            <span class="diary-date">2018-11-08</span>
+            <p class="diary-title"><%=diaryDto.getTitle() %></p>
+            <span class="diary-date"><%=diaryDto.getTday() %></span>
 
             <div class="diary-content">
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
-               여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br> 여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+	              <%=diaryDto.getContent() %>
+
             </div>
 
          </div>
@@ -174,8 +171,10 @@ html, body, header, .view {
                for(int i=0; i<commentview.size(); i++ ){
             %>
             <div class="commant-view" style="margin-bottom: 20px;">
-               <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700;margin-bottom: 8px;"><%-- <%=commentview.get(i).getId() %> --%></div>
-               <div class="commant-content"style="width: 88%;text-align: left; margin-left: 68px; color:#555"><%-- <%=commentview.get(i).getDcomment() %> --%></div>
+
+               <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700;margin-bottom: 8px;"><%=commentview.get(i).getId()%></div>
+               <div class="commant-content"style="width: 88%;text-align: left; margin-left: 68px; color:#555"><%=commentview.get(i).getDcomment() %></div>
+
                <hr style="width: 88%;">
                
             </div>
@@ -189,7 +188,8 @@ html, body, header, .view {
                   <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet">
                      <input type="hidden" name="command" value="commentwrite">
-                     <input type="hidden" name="seq" value="<%=dtolist.getSeq() %>">
+                     <input type="hidden" name="seq" value="<%=diaryDto.getSeq() %>">
+
                      <input type="hidden" name="loginid" value="<%=loginid %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">

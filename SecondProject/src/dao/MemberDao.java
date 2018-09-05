@@ -133,7 +133,6 @@ public class MemberDao implements MemberImpl {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);

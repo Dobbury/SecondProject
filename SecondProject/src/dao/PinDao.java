@@ -11,6 +11,7 @@ import Impl.PinImpl;
 import db.DBClose;
 import db.DBConnection;
 import dto.PinDto;
+import dto.pinCommentDto;
 
 public class PinDao implements PinImpl {
 	private static PinDao dao = new PinDao();
@@ -91,5 +92,37 @@ public class PinDao implements PinImpl {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public boolean PinCommentInsert(pinCommentDto dto) {
+		
+		String sql = "INSERT INTO PINCOMMENT(GRADE,PCOMMENT,ID,PINNAME,SEQ) VALUES(?,?,?,?,SEQ_PINC.NEXTVAL)";
+		
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setDouble(1, dto.getGrade());
+			psmt.setString(2, dto.getPcomment());
+			psmt.setString(3, dto.getId());
+			psmt.setString(4, dto.getPinname());
+			
+			count = psmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt,conn,null);
+		}
+
+		return count >0 ? true : false ;
+		
 	}
 }

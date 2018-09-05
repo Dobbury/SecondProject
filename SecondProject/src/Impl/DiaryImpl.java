@@ -6,6 +6,7 @@ import dto.DiaryDto;
 import dto.DiarycommentDto;
 
 
+
 public interface DiaryImpl {
 
 	
@@ -15,10 +16,9 @@ public interface DiaryImpl {
 	
 	public DiaryDto getDiaryDto(int seq);
 
+
+	public int CommantWrite(int seq,String id, String dcomment);
+	
 	public List<DiarycommentDto> Commantview(int seq);
-	
-	public int CommantWrite(int seq, String id, String dcomment);
-	
-	
-	 
+
 }
