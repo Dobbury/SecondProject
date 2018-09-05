@@ -1,13 +1,15 @@
+<%@page import="dto.DiaryDto"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dto.memberDto"%>
 <%@page import="Impl.CalendarImpl"%>
 <%@page import="dao.CalendarDao"%>
-<%@page import="dto.CalendarDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
 <html>
 <head>
 
@@ -130,25 +132,26 @@
 		}
 		 
 		// 다이어리 타이틀 뿌리기
-		public String dTitle(int year, int month, int day, List<CalendarDto> list){
+		public String dTitle(int year, int month, int day, List<DiaryDto> list){
+			
 			String s = "";
 			
-			for(int i=0;i<list.size();i++){
-				
-				String lyear = list.get(i).getToday().substring(0,4);
-				String lmonth = list.get(i).getToday().substring(4,6);
-				String lday = list.get(i).getToday().substring(6,8);
-				
-				if(lyear.equals(year+"") && lmonth.equals(month+"") && lday.equals(day+"")){
-					s += dot3(list.get(i).getTitle());
-					return s;
-				}
-			}
+			String tday= calllist(year,month, day-1 , true);
 			
+			
+			for(int i=0;i<list.size();i++){			
+			// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
+			String today = list.get(i).getTday().replace("-", "");
+			today = today.substring(0,8);
+			if(today.equals(tday)){
+				
+				s += "<br>"+dot3(list.get(i).getTitle());
+				
+			}
+		    }
 			return s;
-		}
-		
-	
+		}	
+
 		%>
 		 
 		 
@@ -202,7 +205,7 @@
 
 		
 		//로그인한 사람의 id
-		memberDto dto = (memberDto)request.getAttribute("dto");   //뉴스피드 --서블릿 -- 캘린더write
+		memberDto dto = (memberDto)request.getSession().getAttribute("user");   //뉴스피드 --서블릿 -- 캘린더write
 		System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
 		 
 		 
@@ -213,7 +216,7 @@
 		String tday = calllist(year	,month,1,b);		
 		System.out.println("tday는 : " + tday);
 				
-		List<CalendarDto> list = cdao.getCalList(dto.getId() , tday+"");
+		List<DiaryDto> list = cdao.getCalList(dto.getId());
 		System.out.println("List<CalendarDto> list 는 : " + list);  
 		%>
 		 
@@ -273,9 +276,10 @@
 		                %>
 		                    <td><!-- 날짜 뿌리기 -->
 		                        <%=calllist(year, month, i ,false) %>		                    
-		                        &nbsp;                
-		                   		<!-- 다이어리 타이틀 뿌리기-->
+		                        <br>               
+		                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
 		                   		<%=dTitle(year, month, i, list) %>
+		                   				                   		
 		                    </td>
 		                    
 		                <%
