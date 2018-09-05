@@ -1,3 +1,4 @@
+<%@page import="dto.JournalDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.DiarycommentDto"%>
 <%@page import="dto.memberDto"%>
@@ -9,14 +10,20 @@
 <head>
 
 <%
-   DiaryDto diaryDto = (DiaryDto)request.getAttribute("DiaryDto");
+	
+	
+	
+	memberDto dto = (memberDto) session.getAttribute("user");
+	
+	String loginid = dto.getId();
+	JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+   List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
  
-   
-   memberDto dto = (memberDto) session.getAttribute("user");
-   
-   String loginid = dto.getId();
+  for(int i=0;i<diarylist.size();i++){
+	  diarylist.get(i).toString();
+  }
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,15 +32,6 @@
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>site</title>
-<!-- Font Awesome -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Bootstrap core CSS -->
-<link href="Design/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="Design/css/mdb.min.css" rel="stylesheet">
-<!-- Your custom styles (optional) -->
-<link href="Design/css/style.min.css" rel="stylesheet">
 
 
 <style type="text/css">
@@ -106,25 +104,7 @@ html, body, header, .view {
 
 <body>
 
-   <!-- Navbar -->
-   <nav
-      class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-   <div class="container">
-
-      <!-- logo -->
-      <a class="navbar-brand" href="#" target="_blank"> <strong>MDB</strong>
-      </a>
-
-
-
-      <!-- Right -->
-      <ul class="navbar-menu">
-         <li><a href="#">뉴스피드</a></li>
-         <li><a href="#">마이페이지</a></li>
-      </ul>
-
-   </div>
-   </nav>
+ <jsp:include page="header.jsp"></jsp:include> 
 
 
 
@@ -145,18 +125,31 @@ html, body, header, .view {
             <!-- <img alt="" src="img/lt04014209.png"> -->
          </div>
       </div>
-
+	
+	<div class="journal-title" >
+	<h1>
+		<%=journalDto.getTitle() %>
+		</h1>
+	</div>
+	
       <div class="diary-m">
+      <%
+               for(int i=0; i<diarylist.size(); i++ ){
+            %>
          <div class="diary-cont">
-            <p class="diary-title"><%=diaryDto.getTitle() %></p>
-            <span class="diary-date"><%=diaryDto.getTday() %></span>
+            <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
+            <span class="diary-date"><%=diarylist.get(i).getTday() %></span>
 
             <div class="diary-content">
-	              <%=diaryDto.getContent() %>
+	             <%=diarylist.get(i).getContent() %>
             </div>
 
          </div>
+         <%
+               }
+      %>
       </div>
+      
 
       <div class="diary-b">
 
@@ -170,8 +163,22 @@ html, body, header, .view {
                for(int i=0; i<commentview.size(); i++ ){
             %>
             <div class="commant-view" style="margin-bottom: 20px;">
-               <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700;margin-bottom: 8px;"><%=commentview.get(i).getId() %></div>
-               <div class="commant-content"style="width: 88%;text-align: left; margin-left: 68px; color:#555"><%=commentview.get(i).getDcomment() %></div>
+               <div class="commant-id"style="text-align: left;padding-left: 68px;padding-right: 68px;font-weight: 700;margin-bottom: 8px;display: table;width: 100%;">
+               <p style="float: left;">
+               <%=commentview.get(i).getId() %>
+               </p>
+               <p style="float: left;margin-left: 10px;font-weight: 300;font-size: 12px;margin-top: 5px;">
+               <%=commentview.get(i).getDday().substring(0,16) %>
+               </p>
+               <form action="DiaryServlet">
+               <input type="hidden" name="command" value="deletecomment">
+                <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
+               <input type="hidden" name="commentseq" value="<%=commentview.get(i).getSeq() %>">
+               <input type="submit" style="float: right; cursor: pointer;" value="x">
+               </form>
+               <%-- <span style="float: right; cursor: pointer;"  onclick="deletefuc(' <%=commentview.get(i).getSeq() %>')">x</span> --%>
+               </div>
+               <div class="commant-content"style="width: 88%;word-break: break-all;text-align: left; margin-left: 68px; color:#555"><%=commentview.get(i).getDcomment() %></div>
                <hr style="width: 88%;">
                
             </div>
@@ -185,7 +192,7 @@ html, body, header, .view {
                   <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet">
                      <input type="hidden" name="command" value="commentwrite">
-                     <input type="hidden" name="seq" value="<%=diaryDto.getSeq() %>">
+                     <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                      <input type="hidden" name="loginid" value="<%=loginid %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
@@ -205,57 +212,51 @@ html, body, header, .view {
 
    </div>
    </main>
+
+   
+<!-- Modal -->
+<div class="modal fade" id="commantdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <form action="DiaryServlet?command=commentdelet" method="post">
+      <div class="modal-body" style="text-align: center;">
+		<p>댓글을 삭제하시겠습니까?</p>
+		<input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
+        <input type="button" class="btn btn-red" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
+      </div>
+     
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+   
+   /* 댓글삭제 */
+   function deletefuc(seq) {
+	   
+	   alert('삭제되었습니다.');
+	   location.href='DiaryServlet?command=deletecomment&seq='+seq
+			   
+		//$("#commantdelete").modal();
+	   
+	}
+   
+   function deletefucsend() {
+	   location.href='DiaryServlet?command=deletecomment&seq='+seq
+			  
+}
+   
+   </script>
+   
    <!-- --------------------------------------------------------------------------------- -->
 
 
-   <!--Footer-->
-   <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-
-   <hr class="my-4">
-
-   <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank"> <i
-         class="fa fa-facebook mr-3"></i>
-      </a> <a href="https://twitter.com/MDBootstrap" target="_blank"> <i
-         class="fa fa-twitter mr-3"></i>
-      </a> <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-         <i class="fa fa-youtube mr-3"></i>
-      </a> <a href="https://plus.google.com/u/0/b/107863090883699620484"
-         target="_blank"> <i class="fa fa-google-plus mr-3"></i>
-      </a> <a href="https://dribbble.com/mdbootstrap" target="_blank"> <i
-         class="fa fa-dribbble mr-3"></i>
-      </a> <a href="https://pinterest.com/mdbootstrap" target="_blank"> <i
-         class="fa fa-pinterest mr-3"></i>
-      </a> <a href="https://github.com/mdbootstrap/bootstrap-material-design"
-         target="_blank"> <i class="fa fa-github mr-3"></i>
-      </a> <a href="http://codepen.io/mdbootstrap/" target="_blank"> <i
-         class="fa fa-codepen mr-3"></i>
-      </a>
-   </div>
-
-   <!--Copyright-->
-   <div class="footer-copyright py-3">
-      © 2018 Copyright: <a
-         href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">
-         MDBootstrap.com </a>
-   </div>
-   <!--/.Copyright--> </footer>
-   <!--/.Footer-->
+<jsp:include page="footer.jsp"></jsp:include> 
 
 
 
-   <!-- SCRIPTS -->
-   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-   <script type="text/javascript" src="Design/js/popper.min.js"></script>
-   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="Design/js/mdb.min.js"></script>
-   <!-- Initializations -->
-   <!-- 
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
-  </script> -->
+
 </body>
 </html>

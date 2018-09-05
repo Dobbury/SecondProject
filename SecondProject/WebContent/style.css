@@ -1,0 +1,44 @@
+    html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
+
+    .navbar-menu{
+    margin-bottom: 0;
+    }
+    .navbar-menu li {
+       width: 100px;
+       height: 30px;
+       border:1px solid blue;
+       list-style: none;
+       display: inline-block;
+       
+    }
+    .diary{
+    	width: 300px;
+    	height: 300px;
+    	border:1px solid blue;
+    	display: inline-block;
+    	margin: 10px;
+    	text-align: center;
+    	vertical-align: top;
+    }
+    .Dimage{
+    	width: 280px;
+    	height: 220px;
+    	border:1px solid blue;
+    	background-color: gray;
+    	margin-top: 10px;
+    	margin-left: 10px;
+    	
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+          background: #1C2331!important;
+      }
+  }
+
+ 
