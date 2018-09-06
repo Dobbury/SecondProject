@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public class DiaryDto implements Serializable {
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 	private String content;
 	private String title;
 	private String tday;
@@ -24,8 +27,11 @@ public class DiaryDto implements Serializable {
 		this.seq = seq;
 	}
 	
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 	public String getContent() {
 		return content;
 	}
@@ -59,8 +65,13 @@ public class DiaryDto implements Serializable {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "DiaryDto [content=" + content + ", title=" + title + ", tday=" + tday + ", id=" + id + ", seq=" + seq
 				+ "]";
+=======
+		return "DiaryDto [content=" + content + ", title=" + title + ", tday=" + tday + ", id="
+				+ id + ", seq=" + seq + "]";
+>>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 	}
 
 	

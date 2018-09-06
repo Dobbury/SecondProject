@@ -25,6 +25,7 @@ import dto.DiaryDto;
 <<<<<<< HEAD
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
+import dto.JournalDto;
 
 
 =======
@@ -53,24 +54,32 @@ public class DiaryServlet extends HttpServlet{
 		String command = req.getParameter("command");
 		
 		if(command.equals("insert")) {
-			System.out.println("1단계");
+			System.out.println("1�떒怨�");
 			String content = req.getParameter("content");
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
 			String id = req.getParameter("id");
 
+
 			System.out.println("2단계");
 
+			//첫번째 이미지 경로 가져오기
+			if(content.contains("<img src")) {
+				String tmp[] = content.split("img");
+				String firstImageURL[] = tmp[1].split("\"");
+				System.out.println(firstImageURL[1]);
+				
+			}
 
-			DiaryDto dto = new DiaryDto();
 			
+			DiaryDto dto = new DiaryDto();
 			dto.setContent(content);
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setTday(tday);
-			System.out.println("3단계");
+			System.out.println("3�떒怨�");
 			boolean b = dao.addDiary(dto);
-			System.out.println("4단계");
+			System.out.println("4�떒怨�");
 			
 			if(b) {
 				
@@ -115,9 +124,13 @@ public class DiaryServlet extends HttpServlet{
 		}else if(command.equals("diaryDetail")) {
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         
-	         DiaryDto dto = dao.getDiaryDto(seq);
-	         req.setAttribute("DiaryDto", dto);
+	         JournalDto dto = dao.getJournalDto(seq);
+
+	        
+	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
 	         
+	         req.setAttribute("JournalDto", dto);
+	         req.setAttribute("DiaryList", Diarylist);
 	         List<DiarycommentDto> list = dao.Commantview(seq);
 	         req.setAttribute("DiarycommentDto", list);
 	         
@@ -125,8 +138,8 @@ public class DiaryServlet extends HttpServlet{
 	         
 	      }
 		
-		// ��۾���		
-		else if(command.equals("commentwrite")) {
+	
+		else if(command.equals("commentwrite")) { 
 				
 				
 				int seq = Integer.parseInt(req.getParameter("seq"));
@@ -136,19 +149,24 @@ public class DiaryServlet extends HttpServlet{
 				
 				int write = dao.CommantWrite(seq, loginid, dcomment);				
 				if(write == 1) {
-					System.out.println("����Է¿Ϸ�");
+					System.out.println("占쏙옙占쏙옙韜쩔狗占�");
 				}else {
-					System.out.println("����Է½���");
+					System.out.println("占쏙옙占쏙옙韜쩍占쏙옙占�");
 				}
 				
-				DiaryDto dto = dao.getDiaryDto(seq);
+				JournalDto dto = dao.getJournalDto(seq);
+
+				
+		        List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
+		        req.setAttribute("JournalDto", dto);
+		        req.setAttribute("DiaryList", Diarylist);
 				List<DiarycommentDto> list = dao.Commantview(seq);
 		        req.setAttribute("DiarycommentDto", list);
-				req.setAttribute("DiaryDto", dto);
 		        dispatch("Diarydetail.jsp", req, resp);
 				
 				
 			}
+<<<<<<< HEAD
 		else if(command.equals("myDiaryDetail")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			String id= req.getParameter("id");
@@ -162,6 +180,30 @@ public class DiaryServlet extends HttpServlet{
 	         dispatch("Diarydetail.jsp", req, resp);
 		}
 
+=======
+		else if(command.equals("deletecomment")) {
+			
+			int commentseq = Integer.parseInt(req.getParameter("commentseq"));
+			int count = dao.CommentDelete(commentseq);
+			if(count == 1) {
+				System.out.println("삭제완료");
+			}else {
+				System.out.println("삭제실패");
+			}
+			
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			JournalDto dto = dao.getJournalDto(seq);
+			List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
+	        req.setAttribute("JournalDto", dto);
+	        req.setAttribute("DiaryList", Diarylist);
+			List<DiarycommentDto> list = dao.Commantview(seq);
+	        req.setAttribute("DiarycommentDto", list);
+			req.setAttribute("DiaryDto", dto);
+	        dispatch("Diarydetail.jsp", req, resp);
+			
+			
+		}
+>>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
