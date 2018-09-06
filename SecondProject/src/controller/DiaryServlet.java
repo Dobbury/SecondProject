@@ -31,7 +31,6 @@ import dto.JournalDto;
 =======
 import net.sf.json.JSONArray;
  
->>>>>>> f49661eb70c94e103cdec42ee047e22351323b23
 public class DiaryServlet extends HttpServlet{
 
 	@Override
@@ -166,7 +165,7 @@ public class DiaryServlet extends HttpServlet{
 				
 				
 			}
-<<<<<<< HEAD
+
 		else if(command.equals("myDiaryDetail")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			String id= req.getParameter("id");
@@ -180,7 +179,7 @@ public class DiaryServlet extends HttpServlet{
 	         dispatch("Diarydetail.jsp", req, resp);
 		}
 
-=======
+
 		else if(command.equals("deletecomment")) {
 			
 			int commentseq = Integer.parseInt(req.getParameter("commentseq"));
@@ -203,7 +202,7 @@ public class DiaryServlet extends HttpServlet{
 			
 			
 		}
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)

@@ -29,37 +29,25 @@ public class DiaryDao implements DiaryImpl {
 
 	@Override
 	public boolean addDiary(DiaryDto dto) {
-<<<<<<< HEAD
-		
-		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
-		
-		Connection conn =null;
-=======
+
 
 		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,SEQ_DIARY.NEXTVAL)";
 
 		Connection conn = null;
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 		PreparedStatement psmt = null;
 		int count = 0;
 
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-<<<<<<< HEAD
-			
-=======
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 
 			psmt.setString(1, dto.getContent());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getTday());
 			psmt.setString(4, dto.getId());
-<<<<<<< HEAD
-			
-=======
 
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 			count = psmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -71,20 +59,13 @@ public class DiaryDao implements DiaryImpl {
 
 		return count > 0 ? true : false;
 	}
-<<<<<<< HEAD
-	
-	public List<DiaryDto> getDiaryList(){
-		
-		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY ";
-		
-=======
+
 
 	public List<JournalDto> getJournalList() {
 
 
 		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ";
 
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -101,12 +82,10 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-<<<<<<< HEAD
-				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1)));
-=======
+
 				list.add(new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
 						rs.getInt(6), rs.getString(7), rs.getString(8)));
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 
 			}
 		} catch (SQLException e) {
@@ -142,12 +121,9 @@ public class DiaryDao implements DiaryImpl {
 			System.out.println("1/6 getDiaryDto suceess");
 
 			psmt = conn.prepareStatement(sql);
-<<<<<<< HEAD
 			System.out.println("2/6 getDiaryDto suceess");
 			
-=======
-			System.out.println("2/6 getMemInfo suceess");
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 			psmt.setInt(1, seq);
 			
 			rs = psmt.executeQuery();
@@ -188,12 +164,9 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-<<<<<<< HEAD
-				dto = new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1));
-=======
+
 				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2),
 						rs.getInt(1)));
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 
 			}
 			System.out.println("5/6 getMemInfo suceess");
@@ -259,13 +232,10 @@ public class DiaryDao implements DiaryImpl {
 			System.out.println("1/6 Commantview suceess");
 
 			psmt = conn.prepareStatement(sql);
-<<<<<<< HEAD
+
 			System.out.println("2/6 Commantview suceess");
 			
-=======
-			System.out.println("2/6 getMemInfo suceess");
 
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
 			psmt.setInt(1, seq);
 
 			rs = psmt.executeQuery();
@@ -281,7 +251,7 @@ public class DiaryDao implements DiaryImpl {
 			DBClose.close(psmt, conn, rs);
 		}
 		return list;
-<<<<<<< HEAD
+
 			
 	}
 	
@@ -317,10 +287,10 @@ public class DiaryDao implements DiaryImpl {
 		}
 		System.out.println("getMyDiaryDto end");
 		return dto;
-=======
+
 
 	}
-	// ´ñ±Û»èÁ¦
+	// ï¿½ï¿½Û»ï¿½ï¿½ï¿½
 	@Override
 	public int CommentDelete(int seq) {
 
@@ -341,7 +311,7 @@ public class DiaryDao implements DiaryImpl {
 			e.printStackTrace();
 		}
 		return count;
->>>>>>> 6befd792eeaec0f189fa5ed291f5166935bde9ec
+
 	}
 	
 
