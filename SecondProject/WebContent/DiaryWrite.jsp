@@ -280,19 +280,19 @@ html, body, header, .view {
     		<tr style="height: 30px">
     			<th>맛집: </th>
     			<td>
-    				<p id="restoPinArr"></p>
+    				<span id="restoPinArr"></span>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>숙소: </th>
     			<td>
-    				<p id="hotelPinArr"></p>
+    				<span id="hotelPinArr"></span>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>관광지: </th>
     			<td>
-    				<p id="tourPinArr"></p>
+    				<span id="tourPinArr"></span>
     			</td>
     		</tr>
     		<tr>
@@ -520,6 +520,8 @@ html, body, header, .view {
 					return;
 				}
 				
+				oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+				var cont = document.getElementById("ir1").value;
 				var obj = new Object();
 				obj.PinObj =  PinArr;
 				$.ajax({
@@ -527,7 +529,7 @@ html, body, header, .view {
 					type:"GET",
 					data:{
 						'command':"insert",
-						'content': oEditors.getById["ir1"].getIR(),
+						'content': cont,
 						'title': $("#title").val(),
 						'tday': tday,
 						'id':id,
@@ -536,7 +538,7 @@ html, body, header, .view {
 					datatype:"json",
 					success:function(data){
 						alert("일지 기록 성공!");
-						location.href="Newspeed.jsp";
+						location.href="CalendarWrite.jsp";
 						
 					},
 					error:function(){
@@ -570,10 +572,11 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#hotelPinArr").append("<div style='display:inline-block;'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
-												+$("#addpinname").val()
-												+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-												+"</div><input type='button' class='delete_pin_info' value='x' ></div>");
+					$("#hotelPinArr").append("<div style='display:inline-block'>"
+							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
+							+$("#addpinname").val()
+							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
 					$("#hotelSel").html("");
 					
 				}else if(pin_kind == "resto"){
@@ -588,9 +591,10 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#restoPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
-							+$("#addpinname").val()
+					$("#restoPinArr").append("<div style='display:inline-block'>"
 							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
+							+$("#addpinname").val()
 							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
 					$("#restoSel").html("");
 				}else if(pin_kind == "tour"){
@@ -605,9 +609,10 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#tourPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
-							+$("#addpinname").val()
+					$("#tourPinArr").append("<div style='display:inline-block'>"
 							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
+							+$("#addpinname").val()
 							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
 					$("#tourSel").html("");
 				}

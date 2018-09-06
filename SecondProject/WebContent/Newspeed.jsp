@@ -121,15 +121,6 @@ List<JournalDto> journallist = diaryDao.getJournalList();
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
-
-   
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
-  
-  </script>
   
 
 </body>
