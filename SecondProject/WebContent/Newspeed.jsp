@@ -27,7 +27,35 @@ List<JournalDto> journallist = diaryDao.getJournalList();
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
 
+ <style type="text/css">
  
+ .scene {display: block; position: relative; width: 100%; 
+	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
+ .searchbg {
+width:100%;height: 100%;padding-top: 280px;background-image: url('img/main_bg06.png');background-size: 100% 100%;
+background-position: center center ;
+transition: all 40s;
+	
+ }
+ .searchbg:hover{
+ 	background-size: 150% 150%;
+ }
+ .searchbtn{
+ 	height: 40px;
+    margin-left: -4px;
+    background-color: #aaa;
+    display: inline-block;
+    width: 45px;
+    vertical-align: top;
+    font-size: 12px;
+    padding-top: 6px;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+ 	}
+ 	.searchbtn:hover{
+ 		background-color: #999;
+ 	}
+ </style>
   
 </head>
 
@@ -40,11 +68,12 @@ List<JournalDto> journallist = diaryDao.getJournalList();
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
-          <div style="width:100%;height: 100%;padding-top: 280px; background-color:green">
-          <h1 style="text-align: center;">어서오세요 방갑습니다</h1>
+          <div class="scene searchbg" >
+          <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-			<input type="text" style="width:500px;height:30px;">
-			<input type="button" value="검색">
+			<input type="text" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+    border: 1px solid #aaa;">
+			<a class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i></a>
 		  </div>
 		</div>
 		
@@ -55,7 +84,8 @@ List<JournalDto> journallist = diaryDao.getJournalList();
 		
 		
 			<div style="width:100%;background-color: yellow;text-align: center;  padding: 20px 0 20px 0;">
-			<% 
+	
+			 <% 
 			
 			for(int i = 0; i < journallist.size();i++){
 			%>
@@ -71,7 +101,11 @@ List<JournalDto> journallist = diaryDao.getJournalList();
 			<%
 			}
 			
-			%><%-- 
+			%>
+			
+			
+			
+			<%-- 
 			<div class="inner">
 				<!-- paging -->
 				<div class="paging">

@@ -138,7 +138,7 @@ html, body, header, .view {
             %>
          <div class="diary-cont">
             <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
-            <span class="diary-date"><%=diarylist.get(i).getTday() %></span>
+            <span class="diary-date"><%=diarylist.get(i).getTday().substring(0,16) %></span>
 
             <div class="diary-content">
 	             <%=diarylist.get(i).getContent() %>

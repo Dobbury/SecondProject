@@ -148,8 +148,8 @@
     color: #fff;
     
 	}
-	.scene {display: block; position: relative; width: 100%; 
-	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;} */
+	/* .scene {display: block; position: relative; width: 100%; 
+	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}  */
    
 	
    </style>
@@ -233,7 +233,7 @@
    <script type="text/javascript" src="fullPage/jquery.fullPage.js"></script>
    <script type="text/javascript" src="fullPage/examples/examples.js"></script>
 
-   <!--  <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function() {
          $('#fullpage').fullpage({
             'verticalCentered': false,
@@ -266,7 +266,7 @@
             location.href="MemberServlet?command=signPage";
          });
       });
-   </script> -->
+   </script> 
 
 </body>
 </html>
