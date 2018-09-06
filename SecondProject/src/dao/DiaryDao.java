@@ -57,10 +57,42 @@ public class DiaryDao implements DiaryImpl {
 		return count > 0 ? true : false;
 	}
 
-	public List<JournalDto> getJournalList() {
+	public int getCountJournal() {
 
+		String sql = " SELECT COUNT(*) FROM JOURNAL ";
 
-		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int jcount = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				jcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return jcount;
+	}
+
+	public List<JournalDto> getJournalList(int page) {
+
+		String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE "
+				+ " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE "
+				+ " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+				+ " FROM JOURNAL ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -75,11 +107,14 @@ public class DiaryDao implements DiaryImpl {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("2/6 getMemInfo suceess");
 
+			psmt.setInt(1, page * 9);
+			psmt.setInt(2, page * 9 - 8);
+
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-						rs.getInt(6), rs.getString(7), rs.getString(8)));
+				list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+						rs.getInt(7), rs.getString(8), rs.getString(9)));
 
 			}
 		} catch (SQLException e) {
@@ -91,7 +126,6 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	public JournalDto getJournalDto(int seq) {
-
 
 		String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
 				+ "FROM JOURNAL WHERE SEQ = ? ";
@@ -109,11 +143,12 @@ public class DiaryDao implements DiaryImpl {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("2/6 getMemInfo suceess");
 			psmt.setInt(1, seq);
-			
+
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				dto = new JournalDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
+				dto = new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+						rs.getInt(6), rs.getString(7), rs.getString(8));
 			}
 		} catch (SQLException e) {
 			System.out.println("get information failed");
@@ -143,13 +178,13 @@ public class DiaryDao implements DiaryImpl {
 			psmt.setString(1, startdate);
 			psmt.setString(2, enddate);
 			psmt.setString(3, id);
-			
+
 			System.out.println("3/6 getMemInfo suceess");
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2),
-						rs.getInt(1)));
+				list.add(
+						new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1)));
 
 			}
 			System.out.println("5/6 getMemInfo suceess");
@@ -161,48 +196,43 @@ public class DiaryDao implements DiaryImpl {
 		return list;
 	}
 
-
 	public int CommantWrite(int seq, String id, String dcomment) {
-		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) " 
-				+	 " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
-		
-		Connection conn = null; 
-		PreparedStatement psmt = null; 
+		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
 
-		int count = 0; 
+		Connection conn = null;
+		PreparedStatement psmt = null;
 
-		try { 
-		conn = DBConnection.makeConnection();
-		psmt = conn.prepareStatement(sql);
-		System.out.println("1/6");
-		
-		
-		psmt.setInt(1, seq);
-		System.out.println("aa");
-		psmt.setString(2, id.trim());
-		System.out.println("bb");
-		psmt.setString(3, dcomment.trim());
-		System.out.println("cc");
-		count = psmt.executeUpdate(); 
-		System.out.println("2/6");
-		} catch (SQLException e) { 
-		// TODO Auto-generated catch block 
-		e.printStackTrace(); 
-		} finally { 
-		DBClose.close(psmt, conn, null); 
-		System.out.println("3/6");
-		} 
+		int count = 0;
 
-		return count; 
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			System.out.println("1/6");
+
+			psmt.setInt(1, seq);
+			System.out.println("aa");
+			psmt.setString(2, id.trim());
+			System.out.println("bb");
+			psmt.setString(3, dcomment.trim());
+			System.out.println("cc");
+			count = psmt.executeUpdate();
+			System.out.println("2/6");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+			System.out.println("3/6");
+		}
+
+		return count;
 	}
 
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
-		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY "
-				+ " FROM DIARYCOMMENT "
-				+ " WHERE DSEQ = ? "
+		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY " + " FROM DIARYCOMMENT " + " WHERE DSEQ = ? "
 				+ " ORDER BY SEQ ASC ";
-		
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -222,8 +252,7 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new DiarycommentDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)));
-
+				list.add(new DiarycommentDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 
 			}
 		} catch (SQLException e) {
@@ -234,28 +263,27 @@ public class DiaryDao implements DiaryImpl {
 		return list;
 
 	}
-	// ´ñ±Û»èÁ¦
+
+	// ï¿½ï¿½Û»ï¿½ï¿½ï¿½
 	@Override
 	public int CommentDelete(int seq) {
 
-		String sql = " DELETE DIARYCOMMENT "
-				+	" WHERE SEQ = ? ";
-		
+		String sql = " DELETE DIARYCOMMENT " + " WHERE SEQ = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		int count = 0;
-		
+
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, seq);
-			
+
 			count = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return count;
 	}
-	
 
 }

@@ -206,7 +206,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="MemberServlet?command=login" method="post">
+      <form action="MemberServlet" method="post">
+      <input type="hidden" name="command" value="login">
+      <input type="hidden" name="page" value="1">
       <div class="modal-body" style="text-align: center;padding-bottom: 20px;">
 	<div>
 		<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;text-align: left;">아이디</p>

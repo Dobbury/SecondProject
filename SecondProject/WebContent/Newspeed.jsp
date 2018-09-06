@@ -10,12 +10,38 @@
 
 <%
 //	pds 리스트 받아오기
+int paging = Integer.parseInt(request.getParameter("page"));
+
 DiaryImpl diaryDao = DiaryDao.getInstance();
 
-List<JournalDto> journallist = diaryDao.getJournalList();
+int jcount = diaryDao.getCountJournal();
 
+List<JournalDto> journallist = diaryDao.getJournalList(paging);
 
-/* int page = Integer.parseInt(request.getParameter("page")); */
+int pagecount = jcount/9;
+
+if(jcount%9 > 0){
+	pagecount++;
+}
+
+int startPage = 0;
+
+int endPage = 0;
+
+if(paging > 5){
+	startPage = paging-5;
+}
+
+if(pagecount < paging+5){
+	startPage = pagecount-10;
+}
+
+if(paging < 6){
+	endPage = 10;
+}else{
+	endPage = paging+5;
+}
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -105,30 +131,43 @@ transition: all 40s;
 			
 			
 			
-			<%-- 
-			<div class="inner">
+			
+			<div>
 				<!-- paging -->
-				<div class="paging">
+				<div>
 				<%
-				if(page != 1){
+				if(paging != 1){
 					%>
-					<a href="#none" class="page prv">&lt;</a>
+					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
 				
-					<strong><%=page %></strong> 
 			<%
 			
-			for(int i = 1; i < diarylist.size()/9+1; i++){
-				%>
-				<a href="#none" class="page"><%=page+i %></a>
+			for(int i = startPage; i < pagecount; i++){
+				if(i+1 != paging){
+				%>				
+				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
 				<%
+				}else{
+					%>
+					<strong><%=paging %></strong>
+					<%
 				}
+				if(i+1 == endPage){
+					break;
+				}
+			}
+			
+			if(paging != pagecount){
 			%>
-			<a href="#none" class="page next">&gt;</a>
+			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<%
+			}
+			%>
 				</div>
-				 --%>
+				 
 				<!-- // paging -->
 			</div>
 			

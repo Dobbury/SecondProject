@@ -124,6 +124,8 @@ public class DiaryServlet extends HttpServlet{
 	        
 	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
 	         
+	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
+	         
 	         req.setAttribute("JournalDto", dto);
 	         req.setAttribute("DiaryList", Diarylist);
 	         List<DiarycommentDto> list = dao.Commantview(seq);

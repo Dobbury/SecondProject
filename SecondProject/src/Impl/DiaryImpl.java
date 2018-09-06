@@ -13,7 +13,9 @@ public interface DiaryImpl {
 	
 	public boolean addDiary(DiaryDto dto);
 	
-	public List<JournalDto> getJournalList();
+	public int getCountJournal();
+	
+	public List<JournalDto> getJournalList(int page);
 	
 	List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
 
