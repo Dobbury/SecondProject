@@ -20,5 +20,7 @@ public interface DiaryImpl {
 	public int CommantWrite(int seq,String id, String dcomment);
 	
 	public List<DiarycommentDto> Commantview(int seq);
+	
+	public DiaryDto getMyDiaryDto(int seq, String id);
 
 }

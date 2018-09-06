@@ -59,6 +59,12 @@ public class memberDto implements Serializable {
 		this.pw = pw;
 	}
 
+	@Override
+	public String toString() {
+		return "memberDto [id=" + id + ", pw=" + pw + ", nick=" + nick + ", name=" + name + "]";
+	}
+
+	
 
 }
 

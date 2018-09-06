@@ -144,6 +144,18 @@ public class DiaryServlet extends HttpServlet{
 				
 				
 			}
+		else if(command.equals("myDiaryDetail")) {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String id= req.getParameter("id");
+	         
+	         DiaryDto dto = dao.getMyDiaryDto(seq,id);
+	         req.setAttribute("DiaryDto", dto);
+	         
+	         List<DiarycommentDto> list = dao.Commantview(seq);
+	         req.setAttribute("DiarycommentDto", list);
+	         
+	         dispatch("Diarydetail.jsp", req, resp);
+		}
 
 	   }
 	   

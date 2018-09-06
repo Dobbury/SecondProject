@@ -95,23 +95,23 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("update")) {
 	         String id = req.getParameter("id");
-	         String pwd = req.getParameter("pwd");
+	         String pw = req.getParameter("pw");
 	         String name = req.getParameter("name");
 	         String nick = req.getParameter("nick");
 
 	         memberDto dto = new memberDto();
 	         dto.setId(id);
-	         dto.setPw(pwd);
+	         dto.setPw(pw);
 	         dto.setName(name);
 	         dto.setNick(nick);
 	         System.out.println(dto.toString());
-	         int isS = dao.editMember(dto);
-	         PrintWriter pw = resp.getWriter();
+	         int count = dao.editMember(dto);
+	         PrintWriter prw = resp.getWriter();
 	         
-	         if(isS>0) {
-	        	 pw.print("수정성공");
+	         if(count > 0) {
+	        	 prw.print("수정성공");
 	         }else {
-	        	 pw.print("수정실패");
+	        	 prw.print("수정실패");
 	         }
 	      }
 		

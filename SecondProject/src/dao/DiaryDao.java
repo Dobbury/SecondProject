@@ -26,7 +26,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public boolean addDiary(DiaryDto dto) {
 		
-		String sql = "INSERT INTO DIARY(LIKED,CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
+		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,?,SEQ_DIARY.NEXTVAL)";
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
@@ -36,11 +36,11 @@ public class DiaryDao implements DiaryImpl {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setInt(1, dto.getLiked());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getTitle());
-			psmt.setString(4, dto.getTday());
-			psmt.setString(5, dto.getId());
+
+			psmt.setString(1, dto.getContent());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getTday());
+			psmt.setString(4, dto.getId());
 			
 			count = psmt.executeUpdate();
 			
@@ -57,7 +57,7 @@ public class DiaryDao implements DiaryImpl {
 	
 	public List<DiaryDto> getDiaryList(){
 		
-		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT, LIKED FROM DIARY ";
+		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -70,16 +70,17 @@ public class DiaryDao implements DiaryImpl {
 			System.out.println("1/6 getMemInfo suceess");
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getMemInfo suceess");
+			System.out.println("2/6  getDiaryList suceess");
 
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new DiaryDto(rs.getInt(6), rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1)));
+				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1)));
 
 			}
 		} catch (SQLException e) {
-			System.out.println("get information failed");
+			System.out.println(e.getMessage());
+			System.out.println("getDiaryList failed");
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -87,7 +88,7 @@ public class DiaryDao implements DiaryImpl {
 	}
 	
 	public DiaryDto getDiaryDto(int seq) {
-		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT, LIKED FROM DIARY WHERE SEQ = ? ";
+		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE SEQ = ? ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -97,21 +98,21 @@ public class DiaryDao implements DiaryImpl {
 		
 		try {
 			conn = DBConnection.makeConnection();
-			System.out.println("1/6 getMemInfo suceess");
+			System.out.println("1/6 getDiaryDto suceess");
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getMemInfo suceess");
+			System.out.println("2/6 getDiaryDto suceess");
 			
 			psmt.setInt(1, seq);
 
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				dto = new DiaryDto(rs.getInt(6), rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1));
+				dto = new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1));
 
 			}
 		} catch (SQLException e) {
-			System.out.println("get information failed");
+			System.out.println("getDiaryDto failed");
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -168,10 +169,10 @@ public class DiaryDao implements DiaryImpl {
 		
 		try {
 			conn = DBConnection.makeConnection();
-			System.out.println("1/6 getMemInfo suceess");
+			System.out.println("1/6 Commantview suceess");
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getMemInfo suceess");
+			System.out.println("2/6 Commantview suceess");
 			
 			psmt.setInt(1, seq);
 
@@ -187,9 +188,41 @@ public class DiaryDao implements DiaryImpl {
 			DBClose.close(psmt, conn, rs);
 		}
 		return list;
+			
+	}
+	
+	public DiaryDto getMyDiaryDto(int seq, String id) {
+		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE SEQ = ? AND ID= ? ";
 		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
 		
+		DiaryDto dto = null;
 		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMyDiaryDto suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMyDiaryDto suceess");
+			
+			psmt.setInt(1, seq);
+			psmt.setString(2, id);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				dto = new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2), rs.getInt(1));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("getMyDiaryDto failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("getMyDiaryDto end");
+		return dto;
 	}
 	
 

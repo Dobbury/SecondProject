@@ -1,12 +1,20 @@
+<%@page import="Impl.DiaryImpl"%>
+<%@page import="dao.DiaryDao"%>
+<%@page import="dto.DiarycommentDto"%>
+<%@page import="java.util.List"%>
+<%@page import="dto.DiaryDto"%>
 <%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
    memberDto dto  = (memberDto)session.getAttribute("user");
+
+	DiaryDto diaryDto = (DiaryDto)request.getAttribute("DiaryDto");
+	List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
-   
-   //테스트 코드
-   //boolean isS=(boolean)request.getAttribute("isS");
+	DiaryImpl diaryDao = DiaryDao.getInstance();
+
+	List<DiaryDto> diarylist = diaryDao.getDiaryList();
    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -194,25 +202,28 @@ ul.tab li.current {
 			<main style="padding-top:80px;">
 			<div
 				style="width: 100%; text-align: center; padding: 20px 0 20px 0;">
-				<div class="diary">
-					<div class="Dimage"></div>
-					<a href="">제목</a><br> <span style="text-align: right;">조회수</span>
-					<span style="text-align: left">날짜</span>
+				<%
+				if(diarylist.size()<9){
+					for(int i=0;i<diarylist.size();i++){
+						%>
+						<div class="diary">
+						<a href="DiaryServlet?command=myDiaryDetail&seq=<%=diarylist.get(i).getSeq()%>&id=<%=dto.getId()%>">
+						<div class="Dimage"></div>
+						<%=diarylist.get(i).getTitle()%><br>
+						</a>
+						<span style="text-align: right">조회수</span>
+						<span style="text-align: left"><%=diarylist.get(i).getTday().substring(0, 10)%></span>	
 				</div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-				<div class="diary"></div>
-
+						<%
+					}
+				}
+				%>
 			</div>
 			
 
 			<div
 				style="display: table; clear: both; width: 100%; padding: 20px 0 20px 0;">
-				<button style="float: right;"></button>
+				<button style="top: left;">캘린더 보기</button>
 			</div>
 			</main>
 		</div>
@@ -224,16 +235,16 @@ ul.tab li.current {
 				<tr>
 					<td>ID</td>
 					<td><input type="text" id="id" readonly="readonly"
-						value=" <%=dto.getId()%> " name="id"></td>
+						value="<%=dto.getId()%>" name="id"></td>
 				</tr>
 				<tr>
 					<td>PW</td>
-					<td><input type="text" id="pwd" name="pwd"></td>
+					<td><input type="text" id="pw" name="pw"></td>
 				</tr>
 				<tr>
 					<td>이름</td>
 					<td><input type="text" id="name" readonly="readonly"
-						value=" <%=dto.getName()%>" name="name"></td>
+						value="<%=dto.getName()%>" name="name"></td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
@@ -271,7 +282,7 @@ ul.tab li.current {
 				data: {
 					command: "update",
 					id : $("#id").val(),
-					pwd : $("#pwd").val(),
+					pw : $("#pw").val(),
 					name : $("#name").val(),
 					nick : $("#nickname").val()
 				},

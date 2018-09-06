@@ -25,6 +25,8 @@ public class MemberDao implements MemberImpl {
 
 	@Override
 	public int editMember(memberDto dto) {
+		
+		System.out.println(dto.toString());
 		String sql=" UPDATE MEM "
 				+ " SET PW=?, NICK=?"
 				+ " WHERE ID=? ";
@@ -46,10 +48,7 @@ public class MemberDao implements MemberImpl {
 			psmt.setString(3, dto.getId());
 			
 			count=psmt.executeUpdate();
-			
-			
-			
-			
+						
 			System.out.println("3/6 edit member success");
 			
 		} catch (SQLException e) {
@@ -58,7 +57,7 @@ public class MemberDao implements MemberImpl {
 			DBClose.close(psmt, conn, null);
 		}
 		System.out.println("4/6 edit member success");
-		
+		System.out.println(count);
 		return count;
 	}
 
