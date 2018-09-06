@@ -22,5 +22,7 @@ public interface DiaryImpl {
 	public int CommantWrite(int seq,String id, String dcomment);
 	
 	public List<DiarycommentDto> Commantview(int seq);
+	
+	public int CommentDelete(int seq);
 
 }

@@ -22,7 +22,17 @@
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="Design/css/style.min.css" rel="stylesheet">
-  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+  <!-- css -->
+  <link href="style.css" rel="stylesheet">
+  
+  
+   <!-- JQuery -->
+   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   <script type="text/javascript" src="Design/js/popper.min.js"></script>
+   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="Design/js/mdb.min.js"></script>
+   
+  
 
   <style type="text/css">
     /* Necessary for full page carousel*/
@@ -126,12 +136,12 @@
       </a>
 
 		
-
-        <!-- Right -->
+<!-- 
+        Right
         <ul class="navbar-menu">
           <li><a href="#">뉴스피드</a></li>
           <li><a href="#">마이페이지</a></li>
-        </ul>
+        </ul> -->
 
     </div>
   </nav>
