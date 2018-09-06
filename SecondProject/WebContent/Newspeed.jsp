@@ -197,9 +197,7 @@ transition: all 40s;
   
 <jsp:include page="footer.jsp"></jsp:include> 
 
-<<<<<<< HEAD
 
-=======
    
    
    
@@ -210,8 +208,6 @@ transition: all 40s;
 }
   
   </script>
->>>>>>> 60b41e644545875ebb8521db2d4d970ffb3684ad
-  
 
 
 

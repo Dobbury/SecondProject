@@ -22,16 +22,13 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
-<<<<<<< HEAD
-import net.sf.json.JSONArray;
- 
-=======
+
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
 import dto.JournalDto;
 
 
->>>>>>> 60b41e644545875ebb8521db2d4d970ffb3684ad
+
 public class DiaryServlet extends HttpServlet{
 
 	@Override
@@ -54,16 +51,16 @@ public class DiaryServlet extends HttpServlet{
 		String command = req.getParameter("command");
 		
 		if(command.equals("insert")) {
-			System.out.println("1�떒怨�");
+			System.out.println("1占쎈뼊�⑨옙");
 			String content = req.getParameter("content");
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
 			String id = req.getParameter("id");
 
 
-			System.out.println("2단계");
+			System.out.println("2�떒怨�");
 
-			//첫번째 이미지 경로 가져오기
+			//泥ル쾲吏� �씠誘몄� 寃쎈줈 媛��졇�삤湲�
 			if(content.contains("<img src")) {
 				String tmp[] = content.split("img");
 				String firstImageURL[] = tmp[1].split("\"");
@@ -77,9 +74,9 @@ public class DiaryServlet extends HttpServlet{
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setTday(tday);
-			System.out.println("3�떒怨�");
+			System.out.println("3占쎈뼊�⑨옙");
 			boolean b = dao.addDiary(dto);
-			System.out.println("4�떒怨�");
+			System.out.println("4占쎈뼊�⑨옙");
 			
 			if(b) {
 				
@@ -121,7 +118,7 @@ public class DiaryServlet extends HttpServlet{
 		PrintWriter pw = resp.getWriter();
 		pw.print(b);
 
-		}else if(command.equals("diaryDetail")) {
+		}/*else if(command.equals("diaryDetail")) {
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         
 	         JournalDto dto = dao.getJournalDto(seq);
@@ -151,9 +148,9 @@ public class DiaryServlet extends HttpServlet{
 				
 				int write = dao.CommantWrite(seq, loginid, dcomment);				
 				if(write == 1) {
-					System.out.println("占쏙옙占쏙옙韜쩔狗占�");
+					System.out.println("�뜝�룞�삕�뜝�룞�삕�윘姨붺떁�뜝占�");
 				}else {
-					System.out.println("占쏙옙占쏙옙韜쩍占쏙옙占�");
+					System.out.println("�뜝�룞�삕�뜝�룞�삕�윘姨띶뜝�룞�삕�뜝占�");
 				}
 				
 				JournalDto dto = dao.getJournalDto(seq);
@@ -173,9 +170,9 @@ public class DiaryServlet extends HttpServlet{
 			int commentseq = Integer.parseInt(req.getParameter("commentseq"));
 			int count = dao.CommentDelete(commentseq);
 			if(count == 1) {
-				System.out.println("삭제완료");
+				System.out.println("�궘�젣�셿猷�");
 			}else {
-				System.out.println("삭제실패");
+				System.out.println("�궘�젣�떎�뙣");
 			}
 			
 			int seq = Integer.parseInt(req.getParameter("seq"));
@@ -189,8 +186,21 @@ public class DiaryServlet extends HttpServlet{
 	        dispatch("Diarydetail.jsp", req, resp);
 			
 			
-		}
-	   }
+		}*/
+		
+	else if(command.equals("myDiaryDetail")) {
+	          int seq = Integer.parseInt(req.getParameter("seq"));
+	          String id= req.getParameter("id");
+	             
+	             DiaryDto dto = dao.getMyDiaryDto(seq,id);
+	             req.setAttribute("DiaryDto", dto);
+	             
+	             List<DiarycommentDto> list = dao.Commantview(seq);
+	             req.setAttribute("DiarycommentDto", list);
+	             
+	             dispatch("Diarydetail.jsp", req, resp);
+	       }
+	   
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
 	         throws ServletException, IOException {
