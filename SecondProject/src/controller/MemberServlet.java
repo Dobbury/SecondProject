@@ -46,7 +46,7 @@ public class MemberServlet extends HttpServlet {
 			if (dto != null) {
 				//req.setAttribute("memDto", dto);
 				req.getSession().setAttribute("user", dto);
-				dispatch("Newspeed.jsp", req, resp);
+				dispatch("Newspeed.jsp?page=1", req, resp);
 			}else {
 				PrintWriter out = resp.getWriter();
 

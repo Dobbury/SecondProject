@@ -53,6 +53,16 @@
   	<url-pattern>/CalendarServlet</url-pattern>
   </servlet-mapping>
   	
+  	
+    <servlet>
+  	<servlet-name>PdsServlet</servlet-name>
+  	<servlet-class>controller.PdsServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>PdsServlet</servlet-name>
+  	<url-pattern>/PdsServlet</url-pattern>
+  </servlet-mapping>
 
 </web-app>
 
