@@ -55,6 +55,7 @@ if(paging < 6){
 
  <style type="text/css">
  
+ 
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
@@ -108,21 +109,22 @@ transition: all 40s;
    <div class="container">
       
 		
-		
-			<div style="width:100%;background-color: yellow;text-align: center;  padding: 20px 0 20px 0;">
+		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
+			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
 			
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary">
+				<div class="diary" style="width: 300px;height: 300px;text-align: center;
+				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage">
+						<div class="Dimage" style="border:none">
 						</div>
-						<%=journallist.get(i).getTitle() %><br>
+						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
 					</a>
-					<span style="text-align: right;">조회수</span>
-					<span style="text-align: left"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
+					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
 				</div>
 			<%
 			}

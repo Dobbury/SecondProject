@@ -24,6 +24,53 @@
    <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="Design/js/mdb.min.js"></script>
    
+   <style type="text/css">
+   
+       html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
+
+    .navbar-menu{
+    margin-bottom: 0;
+    }
+    .navbar-menu li {
+          width: 100px;
+    	height: 30px;
+    	list-style: none;
+    	display: inline-block;
+    	margin-top: 7px;
+    	text-align: center;
+    	font-weight: 700;
+    	color: #fff;
+    	border: none;
+       
+    }.navbar-menu li a{
+        
+    	color: #fff;
+       
+    }
+
+    .Dimage{
+    	width: 280px;
+    	height: 220px;
+    	background-color: gray;
+    	margin-top: 10px;
+    	margin-left: 10px;
+    	
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+          background: #1C2331!important;
+      }
+  }
+
+ 
+   
+   </style>
 
 </head>
 <body>
