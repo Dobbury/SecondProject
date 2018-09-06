@@ -9,33 +9,28 @@
     
 
 <%
-//	pds 리스트 받아오기
+DiaryImpl dao = DiaryDao.getInstance();
+
 int paging = Integer.parseInt(request.getParameter("page"));
+int jcount = dao.getCountJournal();
 
-DiaryImpl diaryDao = DiaryDao.getInstance();
-
-int jcount = diaryDao.getCountJournal();
-
-List<JournalDto> journallist = diaryDao.getJournalList(paging);
-
+List<JournalDto> journallist = dao.getJournalList(paging);
 int pagecount = jcount/9;
-
-if(jcount%9 > 0){
+if(pagecount%jcount>0){
 	pagecount++;
 }
 
 int startPage = 0;
-
 int endPage = 0;
-
 if(paging > 5){
 	startPage = paging-5;
 }
-
 if(pagecount < paging+5){
 	startPage = pagecount-10;
 }
-
+if(pagecount < 5){
+	startPage = 0;
+}
 if(paging < 6){
 	endPage = 10;
 }else{
@@ -43,6 +38,8 @@ if(paging < 6){
 }
 
 %>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -98,9 +95,13 @@ transition: all 40s;
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-			<input type="text" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+          <form action="DiaryServlet" method="post">
+          	<input type="hidden" name="command" value="search">
+          	<input type="hidden" name="page" value="1">
+			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<a class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i></a>
+			<input type="submit" class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i>
+			</form>
 		  </div>
 		</div>
 		
@@ -134,11 +135,11 @@ transition: all 40s;
 			
 			
 			
-			<div>
+			<div style="display: inline-block;">
 				<!-- paging -->
 				<div>
 				<%
-				if(paging != 1){
+				if(paging != 1 || pagecount == 0){
 					%>
 					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
 					<%
@@ -162,7 +163,7 @@ transition: all 40s;
 				}
 			}
 			
-			if(paging != pagecount){
+			if(paging != pagecount || pagecount == 0){
 			%>
 			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
 			<%
@@ -200,9 +201,45 @@ transition: all 40s;
 }
   
   </script>
-  
+  <!-- 
+<script type="text/javascript">
 
+$(function(){
+	$(".page").click(function () {
+		$.ajax({
+			url : "DiaryServlet",
+			type : "GET",
+			data : {
+				command : "paging",
+				page : $(this).html()
+			},
+			datatype : "json",
+			success : function(data) {
+				journallist = JSON.parse(data);
+				
+				var o = "";
+				for (i = 0; i < journallist.length; i++) {
+					o += "<div class='diary' style='width: 300px;height: 300px;text-align: center; vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;'>"
+					+"<a href='DiaryServlet?command=diaryDetail&seq="+journallist[i].seq+"'>"
+						+"<div class='Dimage' style='border:none'>"
+						+"</div>"
+						+"<p style='margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;'>"+journallist[i].title+"</p>"
+					+"</a>"
+					+"<span style='text-align: right;color: #888;font-size: 14px;'>" + journallist[i].readcount + "</span>"
+					+"<span style='text-align: left;color: #888;font-size: 14px;'>"+journallist[i].wdate.substring(0,10)+"</span>"	
+				+"</div>";
+				}
+				$("#tourSel").append(o);
+			},
+			error : function() {
+			}
+		});
+		
+	});
+});
 
+</script>
+ -->
 
 </body>
 </html>

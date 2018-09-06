@@ -26,5 +26,8 @@ public interface DiaryImpl {
 	public List<DiarycommentDto> Commantview(int seq);
 	
 	public int CommentDelete(int seq);
-
+	
+	public List<JournalDto> getSearchJournalList(String stext, int page);
+	
+	public int getSearchCountJournal(String stext);
 }

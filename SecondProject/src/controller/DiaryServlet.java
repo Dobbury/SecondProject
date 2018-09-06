@@ -25,6 +25,7 @@ import dto.DiaryDto;
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
 import dto.JournalDto;
+import dto.PinDto;
 
 
 public class DiaryServlet extends HttpServlet{
@@ -184,7 +185,83 @@ public class DiaryServlet extends HttpServlet{
 	        dispatch("Diarydetail.jsp", req, resp);
 			
 			
-		}
+		}else if(command.equals("search")) {
+			String stext = req.getParameter("stext");
+			int page = Integer.parseInt(req.getParameter("page"));
+						
+			List<JournalDto> journallist = dao.getSearchJournalList(stext, page);
+			int jcount = dao.getSearchCountJournal(stext);
+			int pagecount = jcount/9;
+			if(jcount%9 > 0) {
+				pagecount++;
+			}
+			
+			
+			String result = "{\"list\":[";
+			for(JournalDto dto :journallist) {
+				   
+				   result+="{";
+				   
+				   result+="\"seq\":\""+dto.getSeq()+"\",\"startDate\":\""+dto.getStartDate()+"\",";
+				   result+="\"enddate\":\""+dto.getEndDate()+"\",\"readcount\":\""+dto.getReadcount()+"\",";
+				   result+="\"id\":\""+dto.getId()+"\",\"like_cnt\":\""+dto.getLike_cnt()+"\",";
+				   result+="\"wdate\":\""+dto.getWdate()+"\",\"title\":\""+dto.getTitle()+"\"},";
+			   }
+			result = result.substring(0, result.lastIndexOf(","));
+			result +="],";
+			result += "\"jcount\":" +jcount +",";
+			result += "\"pagecount\":" +pagecount +"}";
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(result);
+		}/*else if(command.equals("paging")) {
+			int page = Integer.parseInt(req.getParameter("page"));
+			List<JournalDto> journallist = dao.getJournalList(page);
+			int jcount = dao.getCountJournal();
+			int pagecount = jcount/9;
+			if(pagecount%9>0) {
+				pagecount++;
+			}
+			int startPage = 0;
+			int endPage = 0;
+			if(page > 5){
+				startPage = page-5;
+			}
+			if(pagecount < page+5){
+				startPage = pagecount-10;
+			}
+			if(pagecount < 5){
+				startPage = 0;
+			}
+			if(page < 6){
+				endPage = 10;
+			}else{
+				endPage = page+5;
+			}
+
+			String result = "{\"list\":[";
+			for(JournalDto dto :journallist) {
+				   
+				   result+="{";
+				   
+				   result+="\"seq\":\""+dto.getSeq()+"\",\"startDate\":\""+dto.getStartDate()+"\",";
+				   result+="\"enddate\":\""+dto.getEndDate()+"\",\"readcount\":\""+dto.getReadcount()+"\",";
+				   result+="\"id\":\""+dto.getId()+"\",\"like_cnt\":\""+dto.getLike_cnt()+"\",";
+				   result+="\"wdate\":\""+dto.getWdate()+"\",\"title\":\""+dto.getTitle()+"\"},";
+			   }
+			result = result.substring(0, result.lastIndexOf(","));
+			result +="],";
+			result += "\"jcount\":" +jcount +",";
+			result += "\"pagecount\":" +pagecount +",";
+			result += "\"startPage\":" +startPage +",";
+			result += "\"endPage\":" +endPage +"\"}";
+			
+			
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(result);
+		}*/
+		
 	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)

@@ -286,4 +286,79 @@ public class DiaryDao implements DiaryImpl {
 		return count;
 	}
 
+	@Override
+	public List<JournalDto> getSearchJournalList(String stext, int page) {
+		
+		String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE "
+				+ " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE "
+				+ " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+				+ " FROM JOURNAL WHERE TITLE LIKE('%" + stext + "%') ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		List<JournalDto> list = new ArrayList<>();
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			
+			psmt.setInt(1, page * 9);
+			psmt.setInt(2, page * 9 - 8);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+						rs.getInt(7), rs.getString(8), rs.getString(9)));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+		
+	}
+
+	@Override
+	public int getSearchCountJournal(String stext) {
+		
+		String sql = " SELECT COUNT(*) FROM JOURNAL WHERE TITLE LIKE('%" + stext + "%') ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int jcount = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				jcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return jcount;
+		
+	}
+	
+	
+	
+	
+
 }
