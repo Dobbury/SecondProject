@@ -322,6 +322,38 @@ public class DiaryDao implements DiaryImpl {
 		
 		return count>0 ? true:false;
 	}
+
+	@Override
+	public boolean addJournal(JournalDto dto) {
+		
+		String sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL)";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getId());
+			psmt.setString(3, dto.getEndDate());
+			psmt.setString(4, dto.getStartDate());
+			
+			count = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		return count > 0 ? true : false;
+		
+		return false;
+	}
 	
 
 }

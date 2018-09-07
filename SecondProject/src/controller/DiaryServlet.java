@@ -321,7 +321,15 @@ public class DiaryServlet extends HttpServlet{
 	        dispatch("Diarydetail.jsp", req, resp);
 			
 			
+		}else if(command.equals("jourInsert")) {
+			
+			
+			
+			PrintWriter pw = resp.getWriter();
+			
+			pw.print(true);
 		}
+		
 	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)

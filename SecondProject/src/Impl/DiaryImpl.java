@@ -13,6 +13,8 @@ public interface DiaryImpl {
 	
 	public boolean addDiary(DiaryDto dto);
 	
+	public boolean addJournal(JournalDto dto);
+	
 	public List<JournalDto> getJournalList();
 	
 	public DiaryDto getDiary(int seq); 

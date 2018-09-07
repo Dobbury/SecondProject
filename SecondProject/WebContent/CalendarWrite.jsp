@@ -26,6 +26,14 @@
   <!-- Your custom styles (optional) -->
   <link href="Design/css/style.min.css" rel="stylesheet">
   
+  <link rel="stylesheet" type="text/css" media="all" href="daterangepicker/daterangepicker.css" />
+ 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
+  <script type="text/javascript" src="daterangepicker/daterangepicker.js"></script>
+  
 
   <style type="text/css">
     /* Necessary for full page carousel*/
@@ -53,8 +61,6 @@
   }
   </style>
   
-  
-     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -118,6 +124,22 @@
 		    }
 		 }
 		 
+		//날짜 클릭하면 이동 
+		public String modal_calllist(int year, int month, int day,boolean h){
+					
+			String s = "";
+				    
+			String tday = year + "" + two((month+1)+"") +"" +  two((day+1)+"") + "";
+			System.out.println(tday);
+			if(h == false){
+				s += "<div style='width:30px; height:30px;'>";
+					  
+				return s;	
+			}else{
+				return tday;
+			}
+		}
+		
 		// 다이어리 타이틀 뿌리기
 		public String dTitle(int year, int month, int day, List<DiaryDto> list){
 			
@@ -135,6 +157,7 @@
 					s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
 					s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";	//차후 수정바람
 					s += String.format("%2d", day); //day를 2칸으로 다시 정정
+					s += "<br>"+list.get(i).getTitle();
 					s += "</div>";
 					
 				}
@@ -144,7 +167,30 @@
 			s += "</div>";
 			return s;
 		}	
-
+		
+		// 다이어리 타이틀 뿌리기
+		public String modal_dTitle(int year, int month, int day, List<DiaryDto> list){
+					
+			String s = "";
+						 
+			String tday= calllist(year,month, day-1 , true);
+						
+			for(int i=0;i<list.size();i++){			
+				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
+				String today = list.get(i).getTday().replace("-", "");
+				today = today.substring(0,8);
+				if(today.equals(tday)){
+					s += "<div style='width:30px; height:30px; background-color:gray;'>";
+					s += String.format("%2d", day); //day를 2칸으로 다시 정정
+					s += "</div>";
+								
+				}
+			}
+			if(s == "")
+				s += String.format("%2d", day); //day를 2칸으로 다시 정정
+			s += "</div>";
+			return s;
+		}	
 		%>
 		 
 		<%
@@ -295,8 +341,126 @@
 		</table>
   
   	
-	       
-	    <button type="button" onclick="myfunc()" > 취소 </button>
+	    
+		<!-- Buttons -->
+		<button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+			<!-- Modal -->
+			<div class="modal fade" id="jourAdd" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">×</button>
+							<h4 class="modal-title">Modal Header</h4>
+						</div>
+						<div class="modal-body">
+							
+							<div class="container">
+							<%							 
+							    if (prevMonth < 1) {
+							        prevYear--;
+							        prevMonth = 12;
+							    }
+							 
+							    // 12월인 경우 다음년 1월로 지정
+							    if (nextMonth > 12) {
+							        nextYear++;
+							        nextMonth = 1;
+							    }   					
+							%>
+				
+							<div align="center">			 
+							<table border="1">
+							<!-- 너비 -->
+							<col width="30">
+							<col width="30">
+							<col width="30">
+							<col width="30">
+							<col width="30">
+							<col width="30">
+							<col width="30">
+							 
+							    <tr>
+							        <td align="center" colspan="7">
+							            <%=year%>년 <%=month+1%>월 
+							        </td>
+							    </tr>
+							 
+							    <tr height="15">
+							        <td align="center">일</td>
+							        <td align="center">월</td>
+							        <td align="center">화</td>
+							        <td align="center">수</td>
+							        <td align="center">목</td>
+							        <td align="center">금</td>
+							        <td align="center">토</td>
+							    </tr>
+							    
+							    <tr height="30" align="left" valign="top">
+							        <%
+							            //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
+							            for(int i=1; i<dayOfWeek; i++){
+							                %>
+							                    <td>&nbsp;</td>
+							                <%
+							            }
+							        
+							            //해당 날짜의 모든 일정을 보이게
+							            for(int i=1; i<lastDay+1; i++){   
+							                %>
+							                    <td><!-- 날짜 뿌리기 -->
+							                        <%=modal_calllist(year, month, i ,false) %>		                    
+							                   
+							                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
+							                   		<%=modal_dTitle(year, month, i, list) %>        
+							                    </td>
+							                <%
+							                if((i+dayOfWeek-1)%7==0){
+							                    %>
+							                        </tr>
+							                        <tr height="10" align="left" valign="top">
+							                    <%
+							                }
+							            }
+							            
+							            for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
+							                %>
+							                    <td>&nbsp;</td>
+							                <%
+							            }
+							        %>
+							    </tr>
+							 
+							</table>
+							
+							
+							<br>
+							<p align="left">일정 선택</p>
+							<div>
+								<input type="text" name="daterange"
+									value="<%=month+1 %>/01/<%=year %> - <%=month+1 %>/01/<%=year %>" style="width: 100%"
+									align="middle" />
+							</div>
+							<br>
+							<p align="left">제목</p>
+							<div>
+								<input type="text" id="title" style="width: 100%" />
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="jourAddBtn">Add</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			<button type="button" onclick="myfunc()" > 취소 </button>
 		 <script type="text/javascript">
 	    function myfunc() {
 	    	location.href = "Newspeed.jsp";
@@ -306,7 +470,45 @@
 
 	
  <script type="text/javascript">
-	
+		
+		$(function() {
+		   $('input[name="daterange"]').daterangepicker({
+		     opens: 'right'
+		   }, function(start, end, label) {
+		     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		   });
+		   
+		   
+		});
+		
+		$("#jourAddBtn").click(function () {
+			var date=$('input[name="daterange"]').val();
+			var dates =date.split(" - ");
+			var s_date = dates[0].split("/");
+			var e_date = dates[1].split("/");
+			var start_date = s_date[2]+s_date[0]+s_date[1];
+			var end_date = e_date[2]+e_date[0]+e_date[1];
+			
+			
+			$.ajax({
+				url:"DiaryServlet",
+				data:{
+					command: "jourInsert",
+					startdate: start_date,
+					enddate: end_date,
+					title: $("#title").val()
+				},
+				type:"GET",
+				datatype:"json",
+				success:function(data){
+					alert("success");
+				},
+				error:function(){
+					
+				}
+			});
+		});
+		
 		$(function () {
 			$(".day").click(function () {
 				//diary 클래스를 가지고 잇는 요소가 있는지 없는지 판단.
@@ -384,7 +586,6 @@
  
   
   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Design/js/mdb.min.js"></script> 

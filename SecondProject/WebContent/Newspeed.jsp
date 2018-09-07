@@ -200,7 +200,7 @@ transition: all 40s;
   
 <jsp:include page="footer.jsp"></jsp:include> 
   
-
+<script> 
 	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
@@ -208,11 +208,8 @@ transition: all 40s;
 		  if($(this).scrollTop() >= 100) $el.addClass('fadeInUp').addClass('animate');
 		  else $el.removeClass('fadeInUp');
 		});
-	  
-  
-  </script>
-  
-
+	
+</script>
 
 </body>
 </html>
