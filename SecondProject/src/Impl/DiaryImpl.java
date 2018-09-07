@@ -13,6 +13,11 @@ public interface DiaryImpl {
 	
 	public List<JournalDto> getJournalList();
 	
+
+	public DiaryDto getDiary(int seq); 
+	
+	public boolean updateDiary(DiaryDto dto);
+
 	public JournalDto getJournalDto(int seq);
 	
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
@@ -23,14 +28,13 @@ public interface DiaryImpl {
 	
 	public int CommentDelete(int seq);
 	
-	public DiaryDto getDiary(int seq);
-	 
+	public List<JournalDto> getSearchJournalList(String stext, int page);
+	
+	public int getSearchCountJournal(String stext);
+	
+	
+	
+	
 	public List<JournalDto> myJournalList(String id);
-	
-	
-	
-	
-	// 이 밑은 병합할때 삭제 
-	public int getCountJournal();
-	public List<JournalDto> getJournalListpaging();
-	}
+}
+

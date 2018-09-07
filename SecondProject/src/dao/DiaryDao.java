@@ -291,42 +291,7 @@ public class DiaryDao implements DiaryImpl {
       return dto;
    }
 
-@Override
-  public DiaryDto getMyDiaryDto(int seq, String id) {
-	String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE SEQ = ? AND ID= ? ";
-    
-    Connection conn = null;
-    PreparedStatement psmt = null;
-    ResultSet rs = null;
-    
-    DiaryDto dto = null;
-    
-    try {
-       conn = DBConnection.makeConnection();
-       System.out.println("1/6 getMyDiaryDto suceess");
 
-       psmt = conn.prepareStatement(sql);
-       System.out.println("2/6 getMyDiaryDto suceess");
-       
-       psmt.setInt(1, seq);
-       psmt.setString(2, id);
-
-       rs = psmt.executeQuery();
-
-       while (rs.next()) {
-          dto = new DiaryDto(rs.getString(7),rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
-                  rs.getInt(1),"");
-
-       }
-    } catch (SQLException e) {
-       System.out.println("getMyDiaryDto failed");
-    } finally {
-       DBClose.close(psmt, conn, rs);
-    }
-    System.out.println("getMyDiaryDto end");
-    return dto;
-
-}
    
 
 	public int getCountJournal() {
@@ -338,6 +303,60 @@ public class DiaryDao implements DiaryImpl {
 		//여기도 삭제
 		return null;
 	}
+	
+	public List<JournalDto> myJournalList(String id) {
+
+
+	      String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL WHERE ID=? ";
+
+	      Connection conn = null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;
+
+	      List<JournalDto> list = new ArrayList<>();
+
+	      try {
+	         conn = DBConnection.makeConnection();
+	         System.out.println("1/6 myJournalList suceess");
+
+	         psmt = conn.prepareStatement(sql);
+	         System.out.println("2/6 myJournalList suceess");
+	         
+	         psmt.setString(1, id);
+	         System.out.println("3/6 myJournalList success");
+	         rs = psmt.executeQuery();
+
+	         while (rs.next()) {
+	            list.add(new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+	                  rs.getInt(6), rs.getString(7), rs.getString(8)));
+
+	         }
+	      } catch (SQLException e) {
+	         System.out.println("myJournalList failed");
+	      } finally {
+	         DBClose.close(psmt, conn, rs);
+	      }
+	      return list;
+	   }
+
+	@Override
+	public boolean updateDiary(DiaryDto dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<JournalDto> getSearchJournalList(String stext, int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSearchCountJournal(String stext) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	 
 
 }

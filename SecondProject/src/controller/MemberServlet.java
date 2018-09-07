@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Impl.DiaryImpl;
 import Impl.MemberImpl;
+import dao.DiaryDao;
 import dao.MemberDao;
+import dto.JournalDto;
 import dto.memberDto;
 
 public class MemberServlet extends HttpServlet {
@@ -45,12 +48,23 @@ public class MemberServlet extends HttpServlet {
 			
 			String id = req.getParameter("id");
 			String pw = req.getParameter("pw");
-
+			String page = req.getParameter("page");
 			memberDto dto = dao.doLogin(id, pw);
-
+			
 			if (dto != null) {
-				//req.setAttribute("memDto", dto);
+				/*DiaryImpl diaryDao = DiaryDao.getInstance();
+				int jcount = diaryDao.getCountJournal();
+				List<JournalDto> journallist = diaryDao.getJournalList(Integer.parseInt(page));
+				int pagecount = jcount/9;
+				if(jcount%9 > 0){
+					pagecount++;
+				}*/
+				
+				
 				req.getSession().setAttribute("user", dto);
+				/*req.setAttribute("jcount", jcount);
+				req.setAttribute("journallist", journallist);
+				req.setAttribute("pagecount", pagecount);*/
 				dispatch("Newspeed.jsp?page=1", req, resp);
 			}else {
 				PrintWriter out = resp.getWriter();

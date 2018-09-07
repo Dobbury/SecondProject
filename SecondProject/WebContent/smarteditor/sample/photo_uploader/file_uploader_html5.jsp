@@ -33,6 +33,6 @@
 	}
 	os.flush();
 	os.close();
-	sFileInfo += "&bNewLine=true&sFileName=" + name + "&sFileURL=" + "\\SecondProject\\upload\\" + realname;
+	sFileInfo += "&bNewLine=true&sFileName=" + name + "&sFileURL=" + "/SecondProject/upload/" + realname;
 	out.println(sFileInfo);
 %>
