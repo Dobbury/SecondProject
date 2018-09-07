@@ -427,5 +427,85 @@ public class DiaryDao implements DiaryImpl {
 		
 	}
 
+	@Override
+	public int addLike(int seq, String id) {
+		
+		String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
+		
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, seq);
+			psmt.setString(2, id.trim());
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		return count;
+		
+	}
+
+	@Override
+	public void countLike(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT+1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public int Likecheack(int seq,String loginid) {
+
+		String sql = " SELECT ID "
+				+ " FROM LIKE_JOURNAL "
+				+ " WHERE ID = ? AND JSEQ = ?";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, loginid);
+			psmt.setInt(2, seq);
+
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
 
 }

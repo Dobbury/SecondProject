@@ -34,4 +34,10 @@ public interface DiaryImpl {
 	public List<JournalDto> getSearchJournalList(String stext, int page);
 	
 	public int getSearchCountJournal(String stext);
+	
+	public int addLike(int seq, String id);
+	
+	public void countLike(int seq);
+	
+	public int Likecheack(int seq,String loginid);
 }
