@@ -12,9 +12,10 @@
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
+String stext = request.getParameter("stext");
+int jcount = dao.getSearchCountJournal(stext);
 
-List<JournalDto> journallist = dao.getJournalList(paging);
+List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
 int pagecount = jcount/9;
 if(pagecount%jcount>0){
 	pagecount++;
@@ -79,49 +80,6 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
- 	
- 	
-.fadeInUp {
-	-webkit-animation-name: fadeInUp;
-	animation-name: fadeInUp;
-}
-
-
-@-webkit-keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		transform: translateY(40px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
-}
-
-@keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		-ms-transform: translateY(40px);
-		transform: translateY(40px);
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		-ms-transform: translateY(0);
-	}
-}
-
-.animate {
-	-webkit-animation-duration: 3s;
-	animation-duration: 3s;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
-}
- 	
  </style>
   
 </head>
@@ -141,9 +99,9 @@ transition: all 40s;
           <form action="search.jsp" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
-			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i>
 			</form>
 		  </div>
 		</div>
@@ -160,18 +118,15 @@ transition: all 40s;
 			
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary " style="width: 300px;height: 300px;text-align: center;
+				<div class="diary" style="width: 300px;height: 300px;text-align: center;
 				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="border:none">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;margin-left: 10px;"><%=journallist.get(i).getTitle() %></p>
+						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
 					</a>
-					<div style="text-align: left;margin-left: 10px;">
-					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getId() %>님</span>&nbsp;|&nbsp;
 					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
 					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
-					</div>
 				</div>
 			<%
 			}
@@ -187,7 +142,7 @@ transition: all 40s;
 				<%
 				if(paging != 1 || pagecount == 0){
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -197,7 +152,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -211,7 +166,7 @@ transition: all 40s;
 			
 			if(paging != pagecount || pagecount == 0){
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -223,13 +178,6 @@ transition: all 40s;
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
-		<!-- SCRIPTS -->
-  	<script type="text/javascript">
-  	function gocal() {  		
-  		location.href= "CalendarWrite.jsp";	
-	}
-  
-  </script>
 	</div>
 
    </div>
@@ -243,17 +191,19 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
-  
-  <script>
 
-	
-	  $(window).scroll(function() {
-		  var $el = $('.diary');
-		  
-		  if($(this).scrollTop() >= 100) $el.addClass('fadeInUp').addClass('animate');
-		  else $el.removeClass('fadeInUp');
-		});
-	  
+   
+   
+   
+  <!-- SCRIPTS -->
+  <script type="text/javascript">
+  $(function(){
+	 $("#stext").val(<%=stext%>); 
+  });
+  
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
   
   </script>
   <!-- 
@@ -293,9 +243,8 @@ $(function(){
 	});
 });
 
-
-
 </script>
--->
+ -->
+
 </body>
 </html>
