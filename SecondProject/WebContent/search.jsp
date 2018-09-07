@@ -123,6 +123,33 @@ transition: all 40s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
+.searchbtn{
+	height: 40px;
+    margin-left: -4px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+ 	.paging-box{
+ 		width: 100%;display: table;
+ 		    padding-top: 80px;
+ 	}
+ 	.paging-box a,strong {
+ 		margin: 3px;
+ 		color: #555;
+ 		    font-size: 14px;
+}
+ 	
+ 	.paging-box strong {
+
+    color: red;
+ 	}
  </style>
   
 </head>
@@ -144,7 +171,7 @@ transition: all 40s;
           	<input type="hidden" name="page" value="1">
 			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i>
+			<input type="submit" class="searchbtn" value="">
 			</form>
 		  </div>
 		</div>
@@ -185,7 +212,12 @@ transition: all 40s;
 			}
 			}else{
 			%>
-				<div>검색결과가 없습니다.</div>
+			<div style="padding: 100px;padding: 100px;    background-color: #f9f9f9; width: 94%;margin: 10px auto;">
+			<img alt="노데이터" src="img/no-data.png" style="width: 100px;">
+				<div style="font-size: 26px;margin-top: 20px;">
+				검색결과가 없습니다.
+				</div>
+				</div>
 			<%
 			}
 			
@@ -193,8 +225,8 @@ transition: all 40s;
 			
 			
 			
-			
-			<div style="display: inline-block;">
+			<div class="paging-box">
+			<div >
 				<!-- paging -->
 				<div>
 				<%
@@ -234,7 +266,7 @@ transition: all 40s;
 				 
 				<!-- // paging -->
 			</div>
-			
+			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>

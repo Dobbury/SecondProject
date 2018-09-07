@@ -162,7 +162,7 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id) {
-		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? < TDAY AND ? > TDAY AND ID = ? ";
+		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -267,7 +267,7 @@ public class DiaryDao implements DiaryImpl {
 
 	}
 
-	// ��ۻ���
+	// 占쏙옙芳占쏙옙占�
 	@Override
 	public int CommentDelete(int seq) {
 
