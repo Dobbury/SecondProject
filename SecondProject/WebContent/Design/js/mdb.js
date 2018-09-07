@@ -14819,7 +14819,7 @@ var WOW;
 
 (function ($) {
 
-  var SCROLLING_NAVBAR_OFFSET_TOP = 50;
+  var SCROLLING_NAVBAR_OFFSET_TOP = 150;
 
   $(window).on('scroll', function () {
 

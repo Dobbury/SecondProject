@@ -25,6 +25,7 @@ import dto.DiaryDto;
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
 import dto.JournalDto;
+import dto.memberDto;
 
 
 public class DiaryServlet extends HttpServlet{
@@ -138,9 +139,9 @@ public class DiaryServlet extends HttpServlet{
 				
 				
 				int seq = Integer.parseInt(req.getParameter("seq"));
-				String loginid = req.getParameter("loginid");
+				String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
 				String dcomment = req.getParameter("dcomment");
-				
+				System.out.println(loginid);
 				
 				int write = dao.CommantWrite(seq, loginid, dcomment);				
 				if(write == 1) {
@@ -149,15 +150,10 @@ public class DiaryServlet extends HttpServlet{
 					System.out.println("占쏙옙占쏙옙韜쩍占쏙옙占�");
 				}
 				
-				JournalDto dto = dao.getJournalDto(seq);
-
-				
-		        List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
-		        req.setAttribute("JournalDto", dto);
-		        req.setAttribute("DiaryList", Diarylist);
-				List<DiarycommentDto> list = dao.Commantview(seq);
-		        req.setAttribute("DiarycommentDto", list);
-		        dispatch("Diarydetail.jsp", req, resp);
+				resp.sendRedirect("DiaryServlet?command=diaryDetail&seq="+seq);
+		        
+		       
+		        
 				
 				
 			}
