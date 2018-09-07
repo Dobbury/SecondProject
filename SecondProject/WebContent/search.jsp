@@ -9,6 +9,7 @@
     
 
 <%
+request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
@@ -17,8 +18,10 @@ int jcount = dao.getSearchCountJournal(stext);
 
 List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
 int pagecount = jcount/9;
-if(pagecount%jcount>0){
-	pagecount++;
+if(jcount!=0){
+	if(pagecount%jcount>0){
+		pagecount++;
+	}
 }
 
 int startPage = 0;
@@ -80,6 +83,46 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
+ 	.fadeInUp {
+	-webkit-animation-name: fadeInUp;
+	animation-name: fadeInUp;
+}
+
+
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		transform: translateY(40px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		-ms-transform: translateY(40px);
+		transform: translateY(40px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+	}
+}
+
+.animate {
+	-webkit-animation-duration: 3s;
+	animation-duration: 3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
  </style>
   
 </head>
@@ -107,7 +150,7 @@ transition: all 40s;
 		</div>
 		
   
-<main style="padding-top:80px;">
+<main id="main" style="padding-top:80px;">
    <div class="container">
       
 		
@@ -115,19 +158,34 @@ transition: all 40s;
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
-			
+			if(journallist.size()!=0){
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary" style="width: 300px;height: 300px;text-align: center;
-				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
+				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="border:none">
+						<div class="Dimage" style="">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
+						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
-					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
-					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					<div class="diary-textbox">
+					<span class="diary-id"><%=journallist.get(i).getId() %> 님</span>
+					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
+					<span class="diary-date"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					
+					</div>
+					<div class="diary-heartbox">
+					<span style="text-align: right;color: #888;font-size: 14px;">
+					<span class="diary-heart"></span>
+
+					<%=journallist.get(i).getLike_cnt() %>
+					</span>
+					</div>
 				</div>
+			<%
+			}
+			}else{
+			%>
+				<div>검색결과가 없습니다.</div>
 			<%
 			}
 			
@@ -140,7 +198,8 @@ transition: all 40s;
 				<!-- paging -->
 				<div>
 				<%
-				if(paging != 1 || pagecount == 0){
+				if(paging == 1 || pagecount == 0){
+				}else{
 					%>
 					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
@@ -164,7 +223,8 @@ transition: all 40s;
 				}
 			}
 			
-			if(paging != pagecount || pagecount == 0){
+			if(paging == pagecount || pagecount == 0){
+			}else{
 			%>
 			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
@@ -198,12 +258,28 @@ transition: all 40s;
   <!-- SCRIPTS -->
   <script type="text/javascript">
   $(function(){
-	 $("#stext").val(<%=stext%>); 
+	 $("#stext").val('<%=stext%>'); 
+	 
+	 var scmove = $('#main').offset().top;
+	 $('html, body').animate( { scrollTop : scmove }, 400 );
   });
   
   function gocal() {
 	location.href= "CalendarServlet?command=gocal";	
 }
+  
+  </script>
+  
+  <script>
+
+	
+	  $(window).scroll(function() {
+		  var $el = $('.diary');
+		  
+		  if($(this).scrollTop() >= 100) $el.addClass('fadeInUp').addClass('animate');
+		  else $el.removeClass('fadeInUp');
+		});
+	  
   
   </script>
   <!-- 

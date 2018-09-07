@@ -63,14 +63,7 @@
     opacity: 0.9;
     }
 
-    .Dimage{
-    	width: 280px;
-    	height: 220px;
-    	background-color: gray;
-    	margin-top: 10px;
-    	margin-left: 10px;
-    	
-    }.navbar-brand {
+    .navbar-brand {
     	background-image: url('img/logo.png');
     	background-size: 100% 100%;
     	width: 130px;
@@ -84,7 +77,38 @@
       }
   }
 
-   
+   .diary{
+ 	width: 300px;height: 300px;text-align: center;
+	vertical-align: top;float: left;margin: 60px 34px 0 33px; border: 1px solid #ccc;display: table;
+ 	}
+ 	.Dimage{
+    	width: 300px;
+    	height: 220px;
+    	background-color: gray;
+    	border:none;
+    }.diary-title{
+    margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;
+    margin-left: 10px;white-space: nowrap;
+    overflow: hidden;text-overflow: ellipsis;
+    width: 280px;
+    }
+ 	.diary-textbox{
+ 	text-align: left;margin-left: 10px;padding-right: 10px;    word-break: break-all;
+ 	}
+ 	.diary-id{
+ 	text-align: left;color: #888;font-size: 14px;
+ 	}
+ 	.diary-date{
+ 	text-align: left;color: #888;font-size: 14px;
+ 	}
+ 	.diary-heartbox{
+ 	text-align: right; margin-left: -1px; padding-right: 10px; margin-top: 15px;
+   	    border-top: 1px solid #ccc;width: 300px;height: 30px;padding-top: 5px;
+ 	}
+ 	.diary-heart{
+ 		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
+   		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
+ 	}
    </style>
 
 </head>
@@ -97,7 +121,7 @@
     <div class="container">
 
       <!-- logo -->
-      <a class="navbar-brand" href="Newspeed.jsp" target="_blank">
+      <a class="navbar-brand" href="Newspeed.jsp?page=1">
        
       </a>
 
