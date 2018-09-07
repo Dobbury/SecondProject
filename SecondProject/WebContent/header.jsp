@@ -97,7 +97,7 @@
     <div class="container">
 
       <!-- logo -->
-      <a class="navbar-brand" href="Newspeed.jsp" target="_blank">
+      <a class="navbar-brand" href="Newspeed.jsp?page=1">
        
       </a>
 
