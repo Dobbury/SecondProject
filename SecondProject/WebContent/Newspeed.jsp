@@ -79,6 +79,49 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
+ 	
+ 	
+.fadeInUp {
+	-webkit-animation-name: fadeInUp;
+	animation-name: fadeInUp;
+}
+
+
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		transform: translateY(40px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		-ms-transform: translateY(40px);
+		transform: translateY(40px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+	}
+}
+
+.animate {
+	-webkit-animation-duration: 3s;
+	animation-duration: 3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+ 	
  </style>
   
 </head>
@@ -117,15 +160,18 @@ transition: all 40s;
 			
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary" style="width: 300px;height: 300px;text-align: center;
+				<div class="diary " style="width: 300px;height: 300px;text-align: center;
 				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="border:none">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
+						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;margin-left: 10px;"><%=journallist.get(i).getTitle() %></p>
 					</a>
+					<div style="text-align: left;margin-left: 10px;">
+					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getId() %>님</span>&nbsp;|&nbsp;
 					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
 					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					</div>
 				</div>
 			<%
 			}
@@ -177,6 +223,13 @@ transition: all 40s;
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<!-- SCRIPTS -->
+  	<script type="text/javascript">
+  	function gocal() {  		
+  		location.href= "CalendarWrite.jsp";	
+	}
+  
+  </script>
 	</div>
 
    </div>
@@ -190,15 +243,17 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
+  
+  <script>
 
-   
-   
-   
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
+	
+	  $(window).scroll(function() {
+		  var $el = $('.diary');
+		  
+		  if($(this).scrollTop() >= 100) $el.addClass('fadeInUp').addClass('animate');
+		  else $el.removeClass('fadeInUp');
+		});
+	  
   
   </script>
   <!-- 
@@ -238,8 +293,9 @@ $(function(){
 	});
 });
 
-</script>
- -->
 
+
+</script>
+-->
 </body>
 </html>

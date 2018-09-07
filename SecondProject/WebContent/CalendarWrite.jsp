@@ -1,13 +1,15 @@
+<%@page import="dto.DiaryDto"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dto.memberDto"%>
 <%@page import="Impl.CalendarImpl"%>
 <%@page import="dao.CalendarDao"%>
-<%@page import="dto.CalendarDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
 <html>
 <head>
 
@@ -16,7 +18,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <!-- Bootstrap core CSS -->
   <link href="Design/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
@@ -50,6 +52,9 @@
       }
   }
   </style>
+  
+  
+     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -81,10 +86,6 @@
 <main style="padding-top:80px;">
 	<div class="container">
 		
-		<h1>여기서 작업하시면 돼요</h1>
-      	<div>안녕하세요</div>
-
-
 		<%!
 		 
 		//빈문자열 여부
@@ -99,55 +100,52 @@
 		 
 		//날짜 클릭하면 이동 
 		public String calllist(int year, int month, int day,boolean h){
+			
 		    String s = "";
 		    
+
 		    String tday = year + "" + two((month+1)+"") +"" +  two((day+1)+"") + "";
 		    System.out.println(tday);
 		    if(h == false){
-		      s += String.format("<a href=CalendarServlet?command=writeDiary&tday=%s>",tday );
-			  s += String.format("%2d", day); //day를 2칸으로 다시 정정
-			  s += "</a>";
-		  
+		      s += "<div class='day' style='width:100px; height:100px;'>";
+		      s += String.format("<input type='hidden' value='CalendarServlet?command=writeDiary&tday=%s'>",tday );
+			  
+			  /* s += "</div>";
+		   */
 			  return s;	
 		    }else{
 		    	return tday;
 		    }
 		 }
-		
-		// 일정표시가 10글자 이상이면 ...으로 표시
-		public String dot3(String msg){
-		    String s ="";
-		    if(msg.length()>=10){
-		        s = msg.substring(0, 10); //10자까지 확보
-		        s += "…";
-		    }else{
-		        s = msg.trim();
-		    }  
-		    return s;
-		}
 		 
 		// 다이어리 타이틀 뿌리기
-		public String dTitle(int year, int month, int day, List<CalendarDto> list){
+		public String dTitle(int year, int month, int day, List<DiaryDto> list){
+			
 			String s = "";
+			 
+			String tday= calllist(year,month, day-1 , true);
 			
-			for(int i=0;i<list.size();i++){
-				
-				String lyear = list.get(i).getToday().substring(0,4);
-				String lmonth = list.get(i).getToday().substring(4,6);
-				String lday = list.get(i).getToday().substring(6,8);
-				
-				if(lyear.equals(year+"") && lmonth.equals(month+"") && lday.equals(day+"")){
-					s += dot3(list.get(i).getTitle());
-					return s;
+			
+			for(int i=0;i<list.size();i++){			
+				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
+				String today = list.get(i).getTday().replace("-", "");
+				today = today.substring(0,8);
+				if(today.equals(tday)){
+					
+					s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
+					s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";	//차후 수정바람
+					s += String.format("%2d", day); //day를 2칸으로 다시 정정
+					s += "</div>";
+					
 				}
-			}
-			
+		    }
+			if(s == "")
+				s += String.format("%2d", day); //day를 2칸으로 다시 정정
+			s += "</div>";
 			return s;
-		}
-		
-	
+		}	
+
 		%>
-		 
 		 
 		<%
 		 
@@ -159,6 +157,7 @@
 		int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
 		 
 		cal.set(year, month, 1); //연 월 일 세팅!
+		
 		 
 		//다음/이전월 계산
 		    int prevYear = year;
@@ -198,7 +197,7 @@
 		 
 		
 		//로그인한 사람의 id
-		memberDto dto = (memberDto)request.getAttribute("dto");   //뉴스피드 --서블릿 -- 캘린더write
+		memberDto dto = (memberDto)request.getSession().getAttribute("user");   //뉴스피드 --서블릿 -- 캘린더write
 		System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
 		 
 		 
@@ -209,7 +208,7 @@
 		String tday = calllist(year	,month,1,b);		
 		System.out.println("tday는 : " + tday);
 				
-		List<CalendarDto> list = cdao.getCalList(dto.getId() , tday+"");
+		List<DiaryDto> list = cdao.getCalList(dto.getId());
 		System.out.println("List<CalendarDto> list 는 : " + list);  
 		%>
 		 
@@ -269,9 +268,10 @@
 		                %>
 		                    <td><!-- 날짜 뿌리기 -->
 		                        <%=calllist(year, month, i ,false) %>		                    
-		                        &nbsp;                
-		                   		<!-- 다이어리 타이틀 뿌리기-->
+		                   
+		                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
 		                   		<%=dTitle(year, month, i, list) %>
+		                   				                   
 		                    </td>
 		                    
 		                <%
@@ -304,12 +304,24 @@
 		</script> 
 
 
-
-
-
-
-
-
+	
+ <script type="text/javascript">
+	
+		$(function () {
+			$(".day").click(function () {
+				//diary 클래스를 가지고 잇는 요소가 있는지 없는지 판단.
+				if($(this).children('.diary').length){
+					alert($(this).children('.diary').children('input').val());
+					location.href = $(this).children('.diary').children('input').val();
+				}else{
+					//alert($(this).children('input').val());
+					location.href = $(this).children('input').val();
+					
+				}
+			});
+		});
+	</script>
+  
     </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
@@ -368,6 +380,9 @@
 
 
   <!-- SCRIPTS -->
+  
+ 
+  
   <!-- JQuery -->
    <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="Design/js/popper.min.js"></script>

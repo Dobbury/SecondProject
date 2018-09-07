@@ -3,11 +3,13 @@ package dto;
 import java.io.Serializable;
 
 public class pinCommentDto implements Serializable {
+	
 	private double grade;
 	private String pcomment;
 	private String id;
 	private String pinname;
 	private int seq;
+	
 	
 	public pinCommentDto() {
 		super();
