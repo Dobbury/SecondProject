@@ -63,14 +63,7 @@
     opacity: 0.9;
     }
 
-    .Dimage{
-    	width: 300px;
-    	height: 220px;
-    	background-color: gray;
-
-    	
-    	
-    }.navbar-brand {
+    .navbar-brand {
     	background-image: url('img/logo.png');
     	background-size: 100% 100%;
     	width: 130px;
