@@ -12,9 +12,10 @@
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
+String stext = request.getParameter("stext");
+int jcount = dao.getSearchCountJournal(stext);
 
-List<JournalDto> journallist = dao.getJournalList(paging);
+List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
 int pagecount = jcount/9;
 if(pagecount%jcount>0){
 	pagecount++;
@@ -98,9 +99,9 @@ transition: all 40s;
           <form action="search.jsp" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
-			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i>
 			</form>
 		  </div>
 		</div>
@@ -141,7 +142,7 @@ transition: all 40s;
 				<%
 				if(paging != 1 || pagecount == 0){
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -151,7 +152,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -165,7 +166,7 @@ transition: all 40s;
 			
 			if(paging != pagecount || pagecount == 0){
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -196,6 +197,10 @@ transition: all 40s;
    
   <!-- SCRIPTS -->
   <script type="text/javascript">
+  $(function(){
+	 $("#stext").val(<%=stext%>); 
+  });
+  
   function gocal() {
 	location.href= "CalendarServlet?command=gocal";	
 }

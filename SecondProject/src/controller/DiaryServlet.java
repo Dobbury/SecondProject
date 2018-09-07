@@ -187,34 +187,11 @@ public class DiaryServlet extends HttpServlet{
 			
 		}else if(command.equals("search")) {
 			String stext = req.getParameter("stext");
-			int page = Integer.parseInt(req.getParameter("page"));
-						
-			List<JournalDto> journallist = dao.getSearchJournalList(stext, page);
-			int jcount = dao.getSearchCountJournal(stext);
-			int pagecount = jcount/9;
-			if(jcount%9 > 0) {
-				pagecount++;
-			}
 			
-			
-			String result = "{\"list\":[";
-			for(JournalDto dto :journallist) {
-				   
-				   result+="{";
-				   
-				   result+="\"seq\":\""+dto.getSeq()+"\",\"startDate\":\""+dto.getStartDate()+"\",";
-				   result+="\"enddate\":\""+dto.getEndDate()+"\",\"readcount\":\""+dto.getReadcount()+"\",";
-				   result+="\"id\":\""+dto.getId()+"\",\"like_cnt\":\""+dto.getLike_cnt()+"\",";
-				   result+="\"wdate\":\""+dto.getWdate()+"\",\"title\":\""+dto.getTitle()+"\"},";
-			   }
-			result = result.substring(0, result.lastIndexOf(","));
-			result +="],";
-			result += "\"jcount\":" +jcount +",";
-			result += "\"pagecount\":" +pagecount +"}";
-			
-			PrintWriter pw = resp.getWriter();
-			pw.print(result);
-		}/*else if(command.equals("paging")) {
+			req.setAttribute("stext", stext);
+			dispatch("search.jsp?page=1", req, resp);
+		}
+		/*else if(command.equals("paging")) {
 			int page = Integer.parseInt(req.getParameter("page"));
 			List<JournalDto> journallist = dao.getJournalList(page);
 			int jcount = dao.getCountJournal();
