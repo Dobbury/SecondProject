@@ -30,7 +30,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public boolean addDiary(DiaryDto dto) {
 
-		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ) VALUES(?,?,?,?,SEQ_DIARY.NEXTVAL)";
+		String sql = "INSERT INTO DIARY(CONTENT,TITLE,TDAY,ID,SEQ,PINS,JOUR_CHECK,FIRST_IMG) VALUES(?,?,?,?,SEQ_DIARY.NEXTVAL,?,0,?)";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -44,7 +44,9 @@ public class DiaryDao implements DiaryImpl {
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getTday());
 			psmt.setString(4, dto.getId());
-
+			psmt.setString(5, dto.getPin_Seqs());
+			psmt.setString(6, dto.getFisrt_Img());
+			
 			count = psmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -125,7 +127,7 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id) {
-		String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? < TDAY AND ? > TDAY AND ID = ? ";
+		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? < TDAY AND ? > TDAY AND ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -143,13 +145,13 @@ public class DiaryDao implements DiaryImpl {
 			psmt.setString(1, startdate);
 			psmt.setString(2, enddate);
 			psmt.setString(3, id);
-			
+
 			System.out.println("3/6 getMemInfo suceess");
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-				list.add(new DiaryDto(rs.getString(5), rs.getString(4), rs.getString(3), rs.getString(2),
-						rs.getInt(1)));
+				list.add(new DiaryDto(rs.getString(7),rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
+						rs.getInt(1),""));
 
 			}
 			System.out.println("5/6 getMemInfo suceess");
@@ -234,7 +236,7 @@ public class DiaryDao implements DiaryImpl {
 		return list;
 
 	}
-	// ´ñ±Û»èÁ¦
+	// ï¿½ï¿½Û»ï¿½ï¿½ï¿½
 	@Override
 	public int CommentDelete(int seq) {
 
@@ -255,6 +257,70 @@ public class DiaryDao implements DiaryImpl {
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public DiaryDto getDiary(int seq) {
+		
+		String sql = "SELECT CONTENT,TITLE,TDAY,ID,PINS,JOUR_CHECK,SEQ  FROM DIARY WHERE SEQ=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		DiaryDto dto = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getDiary suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getDiary suceess");
+			psmt.setInt(1, seq);
+			
+			rs = psmt.executeQuery();
+			
+			if (rs.next()) {
+				dto = new DiaryDto(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6), rs.getInt(7),"");
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return dto;
+	}
+
+	@Override
+	public boolean updateDiary(DiaryDto dto) {
+		
+		String sql ="UPDATE DIARY SET CONTENT=?,TITLE=?,ID=?,PINS=?,JOUR_CHECK=?,FIRST_IMG=? WHERE SEQ=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, dto.getContent());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getId());
+			psmt.setString(4, dto.getPin_Seqs());
+			psmt.setInt(5, dto.getJour_check());
+			psmt.setString(6, dto.getFisrt_Img());
+			psmt.setInt(7, dto.getSeq());
+			
+			count=psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0 ? true:false;
 	}
 	
 

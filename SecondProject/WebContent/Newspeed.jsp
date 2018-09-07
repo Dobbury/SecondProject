@@ -181,6 +181,13 @@ transition: all 40s;
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<!-- SCRIPTS -->
+  	<script type="text/javascript">
+  	function gocal() {  		
+  		location.href= "CalendarWrite.jsp";	
+	}
+  
+  </script>
 	</div>
 
    </div>
@@ -194,16 +201,8 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
-
-   
-   
-   
-  <!-- SCRIPTS -->
-  <script type="text/javascript">
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
   
+
 	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
@@ -215,7 +214,6 @@ transition: all 40s;
   
   </script>
   
-
 
 
 </body>

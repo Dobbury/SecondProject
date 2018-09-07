@@ -10,7 +10,8 @@ import java.util.List;
 import Impl.CalendarImpl;
 import db.DBClose;
 import db.DBConnection;
-import dto.CalendarDto;
+import dto.DiaryDto;
+ 
 
 public class CalendarDao implements CalendarImpl{
 	private static CalendarDao dao = new CalendarDao();
@@ -21,44 +22,46 @@ public class CalendarDao implements CalendarImpl{
 		return dao;
 	}
 	
-	//Ä¶¸°´õ¿¡  ¿©ÇàÀÏÁö Á¦¸ñ »Ñ·ÁÁÖ±â
+	//Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 		@Override
-		public List<CalendarDto> getCalList(String id, String tday) {
+		public List<DiaryDto> getCalList(String id) {
 			
-			String sql = " SELECT TITLE "
+			String sql = " SELECT SEQ , TDAY , TITLE , CONTENT "
 					+ " FROM DIARY "
-					+ " WHERE ID = ? " + id; 
+					+ " WHERE ID = ? " ; 
 			
 			Connection conn = null;
 			PreparedStatement psmt = null;
 			ResultSet rs = null;
 			
-			 List<CalendarDto> list = new ArrayList<CalendarDto>();
+			 List<DiaryDto> list = new ArrayList<DiaryDto>();
 		
 			try {
 				conn = DBConnection.makeConnection();
-				System.out.println("1/6 getCalList ¼º°ø");
+				System.out.println("1/6 getCalList ï¿½ï¿½ï¿½ï¿½");
 				
-				psmt = conn.prepareStatement(sql);		 				
-			
+				psmt = conn.prepareStatement(sql);		
+				psmt.setString(1, id);
 				rs = psmt.executeQuery();
-				System.out.println("2/6 getCalList ¼º°ø");
+				System.out.println("2/6 getCalList ï¿½ï¿½ï¿½ï¿½");
 			
 				while(rs.next()) {
-				 CalendarDto dto = new CalendarDto();
-				 dto.setId(id);
-				 dto.setToday(tday);
-				 dto.setTitle(rs.getString(1));
-				
-				list.add(dto);
+					DiaryDto dto = new DiaryDto();
+					dto.setSeq(rs.getInt(1));
+					dto.setContent(rs.getString(4));					
+					dto.setTday(rs.getString(2));
+					dto.setTitle(rs.getString(3));
+					dto.setId(id);
+
+					list.add(dto);
 				}
-				System.out.println("3/6 getCalList ¼º°ø"); 	
+				System.out.println("3/6 getCalList ï¿½ï¿½ï¿½ï¿½"); 	
 				
 			} catch (SQLException e) { 
 				e.printStackTrace();
 			}finally {
 				DBClose.close(psmt, conn, rs);
-				System.out.println("4/6 getCalList ¼º°ø"); 
+				System.out.println("4/6 getCalList ï¿½ï¿½ï¿½ï¿½"); 
 			}
 			
 			return list;

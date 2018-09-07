@@ -15,6 +15,10 @@ public interface DiaryImpl {
 	
 	public List<JournalDto> getJournalList();
 	
+	public DiaryDto getDiary(int seq); 
+	
+	public boolean updateDiary(DiaryDto dto);
+	
 	List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
 
 	public JournalDto getJournalDto(int seq);
