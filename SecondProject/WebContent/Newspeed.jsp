@@ -9,6 +9,7 @@
     
 
 <%
+request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));

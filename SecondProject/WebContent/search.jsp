@@ -9,6 +9,7 @@
     
 
 <%
+request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
@@ -187,7 +188,8 @@ transition: all 40s;
 				<!-- paging -->
 				<div>
 				<%
-				if(paging != 1 || pagecount == 0){
+				if(paging == 1 || pagecount == 0){
+				}else{
 					%>
 					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
@@ -211,7 +213,8 @@ transition: all 40s;
 				}
 			}
 			
-			if(paging != pagecount || pagecount == 0){
+			if(paging == pagecount || pagecount == 0){
+			}else{
 			%>
 			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
