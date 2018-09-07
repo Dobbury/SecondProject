@@ -10,7 +10,7 @@
 <head>
 
 <%
-	
+	request.setCharacterEncoding("utf-8");
 	
 	
 	memberDto dto = (memberDto) session.getAttribute("user");
