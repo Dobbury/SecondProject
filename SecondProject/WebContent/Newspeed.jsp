@@ -257,7 +257,6 @@ transition: all 40s;
   
   <script>
 
-<<<<<<< HEAD
 
    
    
@@ -269,7 +268,7 @@ transition: all 40s;
 }
   
   </script>
-=======
+<script type="text/javascript">
 	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
@@ -316,7 +315,6 @@ $(function(){
 		
 	});
 });
->>>>>>> 62a6e4cf444264d90d33b4fa7581ff581eb1887d
 
 
 
