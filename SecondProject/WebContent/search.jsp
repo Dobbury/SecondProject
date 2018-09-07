@@ -160,15 +160,25 @@ transition: all 40s;
 			if(journallist.size()!=0){
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary" style="width: 300px;height: 300px;text-align: center;
-				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
+				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="border:none">
+						<div class="Dimage" style="">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
+						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
-					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
-					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					<div class="diary-textbox">
+					<span class="diary-id"><%=journallist.get(i).getId() %> 님</span>
+					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
+					<span class="diary-date"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					
+					</div>
+					<div class="diary-heartbox">
+					<span style="text-align: right;color: #888;font-size: 14px;">
+					<span class="diary-heart"></span>
+
+					<%=journallist.get(i).getLike_cnt() %>
+					</span>
+					</div>
 				</div>
 			<%
 			}
