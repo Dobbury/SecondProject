@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+request.setCharacterEncoding("utf-8");
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -213,7 +216,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="MemberServlet?command=login" method="post">
+      <form action="MemberServlet" method="post">
+      <input type="hidden" name="command" value="login">
+      <input type="hidden" name="page" value="1">
       <div class="modal-body" style="text-align: center;padding-bottom: 20px;">
 	<div>
 		<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;text-align: left;">아이디</p>

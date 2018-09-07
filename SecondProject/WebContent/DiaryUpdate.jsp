@@ -11,6 +11,7 @@
     
     
 <%
+	request.setCharacterEncoding("utf-8");
 	DiaryDto diary = (DiaryDto)request.getAttribute("Diary");
 	List<pinCommentDto> pCommentlist = (List<pinCommentDto>)request.getAttribute("pCommentlist");
 	List<PinDto> pinlist = (List<PinDto>)request.getAttribute("pinlist");	

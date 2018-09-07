@@ -60,6 +60,7 @@ public class PinServlet extends HttpServlet {
 			   for(PinDto dto :list) {
 				   
 				   result+="{";
+				   
 				   result+="\"lat\":\""+dto.getLat()+"\",\"lng\":\""+dto.getLng()+"\",";
 				   result+="\"pin_name\":\""+dto.getPin_name()+"\",\"place_kind\":\""+dto.getKinds()+"\",";
 				   result+="\"location\":\""+dto.getLocation()+"\"},";

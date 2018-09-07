@@ -9,6 +9,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	request.setCharacterEncoding("utf-8");
 	System.out.println(request.getParameter("getUrl"));
 	
 	URL url = new URL(request.getParameter("getUrl").replace(" ","%20"));

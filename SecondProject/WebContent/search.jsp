@@ -13,12 +13,15 @@ request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
+String stext = request.getParameter("stext");
+int jcount = dao.getSearchCountJournal(stext);
 
-List<JournalDto> journallist = dao.getJournalList(paging);
+List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
 int pagecount = jcount/9;
-if(pagecount%jcount>0){
-	pagecount++;
+if(jcount!=0){
+	if(pagecount%jcount>0){
+		pagecount++;
+	}
 }
 
 int startPage = 0;
@@ -80,9 +83,7 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
- 	
- 	
-.fadeInUp {
+ 	.fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
@@ -122,8 +123,6 @@ transition: all 40s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
- 	
- 	
  </style>
   
 </head>
@@ -143,23 +142,23 @@ transition: all 40s;
           <form action="search.jsp" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
-			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" style="height: 40px;margin-left: -4px;"><i class="fa fa-search fa-2x"></i>
 			</form>
 		  </div>
 		</div>
 		
   
-<main style="padding-top:80px;">
+<main id="main" style="padding-top:80px;">
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
-			
+			if(journallist.size()!=0){
 			for(int i = 0; i < journallist.size();i++){
 			%>
 				<div class="diary">
@@ -184,6 +183,11 @@ transition: all 40s;
 				</div>
 			<%
 			}
+			}else{
+			%>
+				<div>검색결과가 없습니다.</div>
+			<%
+			}
 			
 			%>
 			
@@ -194,9 +198,10 @@ transition: all 40s;
 				<!-- paging -->
 				<div>
 				<%
-				if(paging != 1 || pagecount == 0){
+				if(paging == 1 || pagecount == 0){
+				}else{
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -206,7 +211,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -218,9 +223,10 @@ transition: all 40s;
 				}
 			}
 			
-			if(paging != pagecount || pagecount == 0){
+			if(paging == pagecount || pagecount == 0){
+			}else{
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -232,13 +238,6 @@ transition: all 40s;
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
-		<!-- SCRIPTS -->
-  	<script type="text/javascript">
-  	function gocal() {  		
-  		location.href= "CalendarWrite.jsp";	
-	}
-  
-  </script>
 	</div>
 
    </div>
@@ -252,10 +251,28 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
+
+   
+   
+   
+  <!-- SCRIPTS -->
+  <script type="text/javascript">
+  $(function(){
+	 $("#stext").val('<%=stext%>'); 
+	 
+	 var scmove = $('#main').offset().top;
+	 $('html, body').animate( { scrollTop : scmove }, 400 );
+  });
   
-<script> 
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
+  
+  </script>
+  
+  <script>
 
-
+	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
 		  
@@ -263,6 +280,7 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
+  
   </script>
   <!-- 
 <script type="text/javascript">
@@ -301,10 +319,8 @@ $(function(){
 	});
 });
 
-
->>>>>>> 86312e606fca49222826aa2bab6c44411d1a9877
-
 </script>
--->
+ -->
+
 </body>
 </html>
