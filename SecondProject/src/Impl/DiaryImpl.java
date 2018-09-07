@@ -13,7 +13,9 @@ public interface DiaryImpl {
 	
 	public boolean addDiary(DiaryDto dto);
 	
-	public List<JournalDto> getJournalList();
+	public int getCountJournal();
+	
+	public List<JournalDto> getJournalList(int page);
 	
 	public DiaryDto getDiary(int seq); 
 	
@@ -28,5 +30,8 @@ public interface DiaryImpl {
 	public List<DiarycommentDto> Commantview(int seq);
 	
 	public int CommentDelete(int seq);
-
+	
+	public List<JournalDto> getSearchJournalList(String stext, int page);
+	
+	public int getSearchCountJournal(String stext);
 }
