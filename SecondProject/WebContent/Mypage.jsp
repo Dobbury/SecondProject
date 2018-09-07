@@ -8,13 +8,10 @@
    pageEncoding="UTF-8"%>
 <%
    memberDto dto  = (memberDto)session.getAttribute("user");
-
-   DiaryDto diaryDto = (DiaryDto)request.getAttribute("DiaryDto");
-   List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
-   DiaryImpl diaryDao = DiaryDao.getInstance();
+   DiaryImpl dDao = DiaryDao.getInstance();
 
-   List<DiaryDto> diarylist = diaryDao.getDiaryList(startdate, enddate, id);
+   List<DiaryDto> jlist = (List)dDao.myJournalList(dto.getId());
    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -202,22 +199,20 @@ ul.tab li.current {
          <main style="padding-top:80px;">
          <div
             style="width: 100%; text-align: center; padding: 20px 0 20px 0;">
-            <%
-            if(diarylist.size()<9){
-               for(int i=0;i<diarylist.size();i++){
-                  %>
-                  <div class="diary">
-                  <a href="DiaryServlet?command=myDiaryDetail&seq=<%=diarylist.get(i).getSeq()%>&id=<%=dto.getId()%>">
-                  <div class="Dimage"></div>
-                  <%=diarylist.get(i).getTitle()%><br>
-                  </a>
-                  <span style="text-align: right">조회수</span>
-                  <span style="text-align: left"><%=diarylist.get(i).getTday().substring(0, 10)%></span>   
-            </div>
-                  <%
-               }
-            }
-            %>
+        <%
+        for(int i=0;i<jlist.size();i++){
+        	%>
+        	<div class="diary" style="width: 300px; height: 300px; text-align: center;
+        	vertical-align: top; float: left; margin: 30px 34px 0 33px; border: none">
+        	<a href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
+        	<div class="Diamage" style="border: none"></div>
+        	<p style="margin-top: 10px; margin-bottom: 5px; color: #111; font-weight: 700;"><%=jlist.get(i).getTitle()%></p>
+        	</a>
+        	<span style="text-align: right; color: #888; font-size: 14px;">ㅈㅎㅅ</span>
+        	<span style="text-align: left; color: #888;font-size: 14px;"><%=jlist.get(i).getWdate().substring(0, 10)%></span>
+        	<%
+        }
+        %>
          </div>
          
 

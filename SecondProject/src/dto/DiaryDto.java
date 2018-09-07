@@ -12,6 +12,7 @@ public class DiaryDto implements Serializable {
    private int jour_check;
    private int seq;
    private String fisrt_Img;
+   private String wdate;
    
    public DiaryDto() {
       super();
@@ -21,7 +22,7 @@ public class DiaryDto implements Serializable {
 
 
    public DiaryDto(String content, String title, String tday, String id, String pin_Seqs, int jour_check, int seq,
-         String fisrt_Img) {
+         String fisrt_Img,String wdate) {
       super();
       this.content = content;
       this.title = title;
@@ -31,9 +32,16 @@ public class DiaryDto implements Serializable {
       this.jour_check = jour_check;
       this.seq = seq;
       this.fisrt_Img = fisrt_Img;
+      this.wdate=wdate;
    }
 
-
+   public String getWdate() {
+	   return wdate;
+   }
+   
+   public void setWdate(String wdate) {
+	   this.wdate=wdate;
+   }
 
 
    public String getContent() {

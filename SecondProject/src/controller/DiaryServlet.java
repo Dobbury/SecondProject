@@ -200,6 +200,7 @@ public class DiaryServlet extends HttpServlet{
 	             
 	             dispatch("Diarydetail.jsp", req, resp);
 	       }
+	}
 	   
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)

@@ -25,11 +25,14 @@ public class MemberServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println(" doPost success");
 		doProcess(req, resp);
 	}
 
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		System.out.println("do Process success");
+		
+		
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
 
@@ -38,6 +41,8 @@ public class MemberServlet extends HttpServlet {
 		String command = req.getParameter("command");
 
 		if (command.equals("login")) {
+			System.out.println("login command success");
+			
 			String id = req.getParameter("id");
 			String pw = req.getParameter("pw");
 

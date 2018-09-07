@@ -16,7 +16,7 @@ DiaryImpl diaryDao = DiaryDao.getInstance();
 
 int jcount = diaryDao.getCountJournal();
 
-List<JournalDto> journallist = diaryDao.getJournalList(paging);
+List<JournalDto> journallist = diaryDao.getJournalListpaging();
 
 int pagecount = jcount/9;
 

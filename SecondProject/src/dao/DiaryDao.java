@@ -292,7 +292,7 @@ public class DiaryDao implements DiaryImpl {
    }
 
 @Override
-public DiaryDto getMyDiaryDto(int seq, String id) {
+  public DiaryDto getMyDiaryDto(int seq, String id) {
 	String sql = " SELECT SEQ, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE SEQ = ? AND ID= ? ";
     
     Connection conn = null;
@@ -328,5 +328,16 @@ public DiaryDto getMyDiaryDto(int seq, String id) {
 
 }
    
+
+	public int getCountJournal() {
+		// 임시로 만든거니까 삭제하세여
+	return 0;
+	}
+
+	public List<JournalDto> getJournalListpaging(){
+		//여기도 삭제
+		return null;
+	}
+	 
 
 }

@@ -25,7 +25,12 @@ public interface DiaryImpl {
 	
 	public DiaryDto getDiary(int seq);
 	 
-	public DiaryDto getMyDiaryDto(int seq, String id);
+	public List<JournalDto> myJournalList(String id);
 	
 	
-}
+	
+	
+	// 이 밑은 병합할때 삭제 
+	public int getCountJournal();
+	public List<JournalDto> getJournalListpaging();
+	}

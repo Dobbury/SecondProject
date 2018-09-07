@@ -22,7 +22,7 @@ public class CalendarDao implements CalendarImpl{
 		return dao;
 	}
 	
-	//Ä¶¸°´õ¿¡  ¿©ÇàÀÏÁö Á¦¸ñ »Ñ·ÁÁÖ±â
+	//Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 		@Override
 		public List<DiaryDto> getCalList(String id) {
 			
@@ -38,16 +38,16 @@ public class CalendarDao implements CalendarImpl{
 		
 			try {
 				conn = DBConnection.makeConnection();
-				System.out.println("1/6 getCalList ¼º°ø");
+				System.out.println("1/6 getCalList ï¿½ï¿½ï¿½ï¿½");
 				
 				psmt = conn.prepareStatement(sql);		
 				psmt.setString(1, id);
 				rs = psmt.executeQuery();
-				System.out.println("2/6 getCalList ¼º°ø");
+				System.out.println("2/6 getCalList ï¿½ï¿½ï¿½ï¿½");
 			
 				while(rs.next()) {
 					DiaryDto dto = new DiaryDto();
-					dto.setLiked(rs.getInt(1));
+					//dto.setLiked(rs.getInt(1));
 					dto.setContent(rs.getString(2));					
 					dto.setTday(rs.getString(3));
 					dto.setTitle(rs.getString(4));
@@ -58,13 +58,13 @@ public class CalendarDao implements CalendarImpl{
 				
 				list.add(dto);
 				}
-				System.out.println("3/6 getCalList ¼º°ø"); 	
+				System.out.println("3/6 getCalList ï¿½ï¿½ï¿½ï¿½"); 	
 				
 			} catch (SQLException e) { 
 				e.printStackTrace();
 			}finally {
 				DBClose.close(psmt, conn, rs);
-				System.out.println("4/6 getCalList ¼º°ø"); 
+				System.out.println("4/6 getCalList ï¿½ï¿½ï¿½ï¿½"); 
 			}
 			
 			return list;
