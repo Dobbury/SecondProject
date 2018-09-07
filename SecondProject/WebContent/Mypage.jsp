@@ -199,7 +199,11 @@ ul.tab li.current {
          <h3>내가 쓴 글 보기</h3>
          <main style="padding-top:80px;">
          <div
-            style="width: 100%; text-align: center; padding: 20px 0 20px 0;">
+            style="display: table; clear: both; width: 100%; padding: 20px 0 20px 0;">
+            <button style="top: left;" onclick="gocal()">캘린더 보기</button>
+         </div>
+         <div
+            style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
         <%
         for(int i=0;i<jlist.size();i++){
         	%>
@@ -211,16 +215,14 @@ ul.tab li.current {
         	</a>
         	<span style="text-align: right; color: #888; font-size: 14px;">ㅈㅎㅅ</span>
         	<span style="text-align: left; color: #888;font-size: 14px;"><%=jlist.get(i).getWdate().substring(0, 10)%></span>
+        	</div>
         	<%
         }
         %>
          </div>
          
 
-         <div
-            style="display: table; clear: both; width: 100%; padding: 20px 0 20px 0;">
-            <button style="top: left;">캘린더 보기</button>
-         </div>
+         
          </main>
       </div>
 
@@ -249,14 +251,17 @@ ul.tab li.current {
             </tr>
             <tr>
                <td><input type="button" id="edit" value="수정완료"></td>
-               <td><input type="button" name="back" value="취소"
-                  onclick="Mypage.jsp"></td>
+               <td><input type="button" name="back" value="취소"></td>
             </tr>
          </table>
       </div>
    </div>
 
-
+	<script type="text/javascript">
+	function gocal() {
+		location.href="CalendarWrite.jsp";
+	}
+	</script>
 
    <script>
       $(function() {
@@ -294,6 +299,12 @@ ul.tab li.current {
          
       });
    });
+   
+   $(function () {
+	$("#back").click(function () {
+		location.href="Mypage.jsp";
+	});
+});
    </script>
 
    <!-- --------------------------------------------------------------------------------- -->
