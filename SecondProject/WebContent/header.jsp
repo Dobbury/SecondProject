@@ -64,11 +64,11 @@
     }
 
     .Dimage{
-    	width: 280px;
+    	width: 300px;
     	height: 220px;
     	background-color: gray;
-    	margin-top: 10px;
-    	margin-left: 10px;
+
+    	
     	
     }.navbar-brand {
     	background-image: url('img/logo.png');

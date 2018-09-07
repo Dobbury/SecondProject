@@ -98,6 +98,38 @@ transition: all 40s;
 	animation-fill-mode: both;
 }
  	
+ 	.diary{
+ 	width: 300px;height: 300px;text-align: center;
+	vertical-align: top;float: left;margin: 60px 34px 0 33px; border: 1px solid #ccc;display: table;
+ 	}
+ 	.Dimage{
+    	width: 300px;
+    	height: 220px;
+    	background-color: gray;
+    	border:none;
+    }.diary-title{
+    margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;
+    margin-left: 10px;white-space: nowrap;
+    overflow: hidden;text-overflow: ellipsis;
+    width: 280px;
+    }
+ 	.diary-textbox{
+ 	text-align: left;margin-left: 10px;padding-right: 10px;    word-break: break-all;
+ 	}
+ 	.diary-id{
+ 	text-align: left;color: #888;font-size: 14px;
+ 	}
+ 	.diary-date{
+ 	text-align: left;color: #888;font-size: 14px;
+ 	}
+ 	.diary-heartbox{
+ 	text-align: right; margin-left: -1px; padding-right: 10px; margin-top: 15px;
+   	    border-top: 1px solid #ccc;width: 300px;height: 30px;padding-top: 5px;
+ 	}
+ 	.diary-heart{
+ 		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
+   		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
+ 	}
  </style>
   
 </head>
@@ -125,24 +157,31 @@ transition: all 40s;
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
+		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
 			
 			for(int i = 0; i < journallist.size();i++){
 			%>
-				<div class="diary " style="width: 300px;height: 300px;text-align: center;
-				vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;">
+				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="border:none">
+						<div class="Dimage" style="">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;margin-left: 10px;"><%=journallist.get(i).getTitle() %></p>
+						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
-					<div style="text-align: left;margin-left: 10px;">
-					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getId() %>님</span>&nbsp;|&nbsp;
-					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
-					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					<div class="diary-textbox">
+					<span class="diary-id"><%=journallist.get(i).getId() %> 님</span>
+					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
+					<span class="diary-date"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					
+					</div>
+					<div class="diary-heartbox">
+					<span style="text-align: right;color: #888;font-size: 14px;">
+					<span class="diary-heart"></span>
+
+					<%=journallist.get(i).getLike_cnt() %>
+					</span>
 					</div>
 				</div>
 			<%
