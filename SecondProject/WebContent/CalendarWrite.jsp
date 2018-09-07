@@ -112,14 +112,13 @@ request.setCharacterEncoding("utf-8");
 		    String s = "";
 		    
 
-		    String tday = year + "" + two((month+1)+"") +"" +  two((day+1)+"") + "";
+		    String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
 		    System.out.println(tday);
 		    if(h == false){
-		      s += "<div class='day' style='width:100px; height:100px;'>";
-		      s += String.format("<input type='hidden' value='CalendarServlet?command=writeDiary&tday=%s'>",tday );
-			  
-			  /* s += "</div>";
-		   */
+		    		
+		    	s += "<div class='day' style='width:100px; height:100px;'>";
+				s += String.format("<input type='hidden' value='CalendarServlet?command=writeDiary&tday=%s'>",tday );
+			 
 			  return s;	
 		    }else{
 		    	return tday;
@@ -131,8 +130,8 @@ request.setCharacterEncoding("utf-8");
 					
 			String s = "";
 				    
-			String tday = year + "" + two((month+1)+"") +"" +  two((day+1)+"") + "";
-			System.out.println(tday);
+			String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
+			
 			if(h == false){
 				s += "<div style='width:30px; height:30px;'>";
 					  
@@ -147,7 +146,7 @@ request.setCharacterEncoding("utf-8");
 			
 			String s = "";
 			 
-			String tday= calllist(year,month, day-1 , true);
+			String tday= calllist(year,month, day , true);
 			
 			
 			for(int i=0;i<list.size();i++){			
@@ -156,11 +155,19 @@ request.setCharacterEncoding("utf-8");
 				today = today.substring(0,8);
 				if(today.equals(tday)){
 					
-					s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
-					s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";	//차후 수정바람
-					s += String.format("%2d", day); //day를 2칸으로 다시 정정
-					s += "<br>"+list.get(i).getTitle();
-					s += "</div>";
+					if(list.get(i).getJour_check()==0){
+						s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
+						s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";	//차후 수정바람
+						s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "<br>"+list.get(i).getTitle();
+						s += "</div>";
+					}else{
+						s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&tday="+list.get(i).getTday()+"'>";	//차후 수정바람
+						s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "<br>"+list.get(i).getTitle();
+						s += "</div>";
+					}
 					
 				}
 		    }

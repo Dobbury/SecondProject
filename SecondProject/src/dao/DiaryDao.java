@@ -162,7 +162,7 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id) {
-		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? < TDAY AND ? > TDAY AND ID = ? ";
+		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -185,8 +185,11 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-
-				list.add(new DiaryDto(rs.getString(7),rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
+				String content = rs.getString(7);
+				
+				content = content.replaceAll("\\\\\"", "\"");
+				System.out.println("하위:"+content);
+				list.add(new DiaryDto(content,rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
 						rs.getInt(1),""));
 
 			}
@@ -414,6 +417,21 @@ public class DiaryDao implements DiaryImpl {
 			
 			count = psmt.executeUpdate();
 
+			System.out.println(dto.getStartDate() +" "+ dto.getEndDate());
+			DBClose.close(psmt, conn, null);
+			
+			if(count > 0 ? true : false) {
+				sql = "UPDATE DIARY SET JOUR_CHECK=1 WHERE ? <= TDAY AND ? >= TDAY AND ID=?";
+				
+				conn = DBConnection.makeConnection();
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, dto.getStartDate());
+				psmt.setString(2, dto.getEndDate());
+				psmt.setString(3, dto.getId());
+				
+				count = psmt.executeUpdate();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -454,6 +472,40 @@ public class DiaryDao implements DiaryImpl {
 		
 		return jcount;
 		
+	}
+
+	@Override
+	public int getJournalSeq(String tday) {
+		
+		String sql = " SELECT SEQ "
+				+ "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int seq = -1;
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			psmt.setString(1, tday);
+			psmt.setString(2, tday);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				seq = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return seq;
+
 	}
 
 

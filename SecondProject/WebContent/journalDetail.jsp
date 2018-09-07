@@ -10,19 +10,19 @@
 <head>
 
 <%
-	request.setCharacterEncoding("utf-8");
-	
-	
-	memberDto dto = (memberDto) session.getAttribute("user");
-	
-	String loginid = dto.getId();
-	JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+   request.setCharacterEncoding("utf-8");
+   
+   
+   memberDto dto = (memberDto) session.getAttribute("user");
+   
+   String loginid = dto.getId();
+   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
    List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
  
   for(int i=0;i<diarylist.size();i++){
-	  diarylist.get(i).toString();
+     diarylist.get(i).toString();
   }
 %>
 
@@ -127,18 +127,18 @@ html, body, header, .view {
       </div>
       
       <div class="journal-title" >
-	<h1>
-		<%=journalDto.getTitle() %>
-		</h1>
-	</div>
+   <h1>
+      <%=journalDto.getTitle() %>
+      </h1>
+   </div>
       
-	<div style="   padding: 40px;
+   <div style="   padding: 40px;
     background-color: #fff;
        -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
-	
-	
+   
+   
       <div class="diary-m">
       <%
                for(int i=0; i<diarylist.size(); i++ ){
@@ -150,7 +150,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
             
 
             <div class="diary-content" style="word-break: break-all;">
-	             <%=diarylist.get(i).getContent() %>
+                <%=diarylist.get(i).getContent() %>
             </div>
 
          </div>
@@ -225,8 +225,8 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
 <script type="text/javascript">
 
   function combtn(){
-	  location.href='DiaryServlet?command=commentwrite&seq='+<%=journalDto.getSeq() %>+'&loginid='+<%=loginid %>;
-	  
+     location.href='DiaryServlet?command=commentwrite&seq='+<%=journalDto.getSeq() %>+'&loginid='+<%=loginid %>;
+     
   }
 
 </script>
@@ -239,8 +239,8 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
      
       <form action="DiaryServlet?command=commentdelet" method="post">
       <div class="modal-body" style="text-align: center;">
-		<p>댓글을 삭제하시겠습니까?</p>
-		<input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
+      <p>댓글을 삭제하시겠습니까?</p>
+      <input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
         <input type="button" class="btn btn-red" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
       </div>
      
@@ -253,17 +253,17 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
    
    /* 댓글삭제 */
    function deletefuc(seq) {
-	   
-	   alert('삭제되었습니다.');
-	   location.href='DiaryServlet?command=deletecomment&seq='+seq
-			   
-		//$("#commantdelete").modal();
-	   
-	}
+      
+      alert('삭제되었습니다.');
+      location.href='DiaryServlet?command=deletecomment&seq='+seq
+            
+      //$("#commantdelete").modal();
+      
+   }
    
    function deletefucsend() {
-	   location.href='DiaryServlet?command=deletecomment&seq='+seq
-			  
+      location.href='DiaryServlet?command=deletecomment&seq='+seq
+           
 }
    
    </script>

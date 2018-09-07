@@ -28,6 +28,8 @@ public interface DiaryImpl {
 
 	public JournalDto getJournalDto(int seq);
 	
+	public int getJournalSeq(String tday);
+	
 	public int CommantWrite(int seq,String id, String dcomment);
 	
 	public List<DiarycommentDto> Commantview(int seq);
