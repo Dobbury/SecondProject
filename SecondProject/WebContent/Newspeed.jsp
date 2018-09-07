@@ -140,6 +140,7 @@ transition: all 40s;
 						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;margin-left: 10px;"><%=journallist.get(i).getTitle() %></p>
 					</a>
 					<div style="text-align: left;margin-left: 10px;">
+					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getId() %>님</span>&nbsp;|&nbsp;
 					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
 					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
 					</div>
@@ -202,6 +203,7 @@ transition: all 40s;
   
 <jsp:include page="footer.jsp"></jsp:include> 
   
+  <script>
 
 	
 	  $(window).scroll(function() {
