@@ -102,7 +102,7 @@ html, body, header, .view {
 </style>
 </head>
 
-<body>
+<body style="    background-color: #e9e9e9e9;" >
 
  <jsp:include page="header.jsp"></jsp:include> 
 
@@ -111,7 +111,7 @@ html, body, header, .view {
    <!-- ----------------------------------------html----------------------------------------- -->
    <!--여기서 하시면 됩니다-->
    <main style="padding-top:80px;">
-   <div class="container">
+   <div class="container" style="    max-width: 900px;">
 
       <div class="diary-t">
          <!-- 지도영역 -->
@@ -125,12 +125,19 @@ html, body, header, .view {
             <!-- <img alt="" src="img/lt04014209.png"> -->
          </div>
       </div>
-	
-	<div class="journal-title" >
+      
+      <div class="journal-title" >
 	<h1>
 		<%=journalDto.getTitle() %>
 		</h1>
 	</div>
+      
+	<div style="   padding: 40px;
+    background-color: #fff;
+       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
+	
 	
       <div class="diary-m">
       <%
@@ -138,9 +145,11 @@ html, body, header, .view {
             %>
          <div class="diary-cont">
             <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
-            <span class="diary-date"><%=diarylist.get(i).getTday() %></span>
+            <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>
+            <hr>
+            
 
-            <div class="diary-content">
+            <div class="diary-content" style="word-break: break-all;">
 	             <%=diarylist.get(i).getContent() %>
             </div>
 
@@ -149,21 +158,22 @@ html, body, header, .view {
                }
       %>
       </div>
-      
+      </div>
 
       <div class="diary-b">
 
-         <p class="diary-title">댓글</p>
+        
 
 
          <div class="diary-commant">
+          <h4>댓글</h4>
             <div class="diary-commant"style="padding: 30px; text-align: center; background: rgb(238, 241, 246) !important;">
             
             <%
                for(int i=0; i<commentview.size(); i++ ){
             %>
-            <div class="commant-view" style="margin-bottom: 20px;">
-               <div class="commant-id"style="text-align: left;padding-left: 68px;padding-right: 68px;font-weight: 700;margin-bottom: 8px;display: table;width: 100%;">
+            <div class="commant-view" style="margin-bottom: 20px;padding-left: 38px; padding-right: 38px;">
+               <div class="commant-id"style="text-align: left;font-weight: 700;margin-bottom: 8px;display: table;width: 100%;">
                <p style="float: left;">
                <%=commentview.get(i).getId() %>
                </p>
@@ -178,8 +188,8 @@ html, body, header, .view {
                </form>
                <%-- <span style="float: right; cursor: pointer;"  onclick="deletefuc(' <%=commentview.get(i).getSeq() %>')">x</span> --%>
                </div>
-               <div class="commant-content"style="width: 88%;word-break: break-all;text-align: left; margin-left: 68px; color:#555"><%=commentview.get(i).getDcomment() %></div>
-               <hr style="width: 88%;">
+               <div class="commant-content"style="width: 88%;word-break: break-all;text-align: left;  color:#555"><%=commentview.get(i).getDcomment() %></div>
+               <hr>
                
             </div>
             
@@ -189,13 +199,12 @@ html, body, header, .view {
             
             
                <div class="commant-write">
-                  <div class="commant-id"style="text-align: left; margin-left: 68px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
-                  <form action="DiaryServlet">
+                  <div class="commant-id"style="text-align: left; margin-left: 40px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
+                  <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
-                     <input type="hidden" name="loginid" value="<%=loginid %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
-                     <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
+                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
                   </form>
                </div>
@@ -212,6 +221,15 @@ html, body, header, .view {
 
    </div>
    </main>
+
+<script type="text/javascript">
+
+  function combtn(){
+	  location.href='DiaryServlet?command=commentwrite&seq='+<%=journalDto.getSeq() %>+'&loginid='+<%=loginid %>;
+	  
+  }
+
+</script>
 
    
 <!-- Modal -->

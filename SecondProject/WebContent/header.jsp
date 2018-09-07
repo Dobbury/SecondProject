@@ -14,8 +14,7 @@
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="Design/css/style.min.css" rel="stylesheet">
-  <!-- css -->
-  <link href="style.css" rel="stylesheet">
+
   
   
    <!-- JQuery -->
@@ -24,6 +23,69 @@
    <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="Design/js/mdb.min.js"></script>
    
+   <style type="text/css">
+   
+       html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
+
+    .navbar-menu{
+    margin-bottom: 0;
+    }
+    .navbar-menu li {
+       width: 100px;
+    height: 30px;
+    list-style: none;
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+       
+    }
+    .navbar-menu li:hover > a {
+     color: orange;
+       
+    }
+    .navbar-menu li a{
+        
+    	color: #fff;
+       
+    }
+    .navbar.scrolling-navbar.top-nav-collapse{
+    	    padding-top: 10px;
+    padding-bottom: 10px;
+    opacity: 0.9;
+    }
+
+    .Dimage{
+    	width: 280px;
+    	height: 220px;
+    	background-color: gray;
+    	margin-top: 10px;
+    	margin-left: 10px;
+    	
+    }.navbar-brand {
+    	background-image: url('img/logo.png');
+    	background-size: 100% 100%;
+    	width: 130px;
+    	height: 30px;
+    	    margin-bottom: 5px;
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+          background: #1C2331!important;
+      }
+  }
+
+   
+   </style>
 
 </head>
 <body>
@@ -36,7 +98,7 @@
 
       <!-- logo -->
       <a class="navbar-brand" href="Newspeed.jsp" target="_blank">
-        <strong>MDB</strong>
+       
       </a>
 
       

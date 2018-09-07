@@ -71,7 +71,7 @@
     background: linear-gradient(to top, transparent, rgba(0,0,0,0.6) 100%);
    }
    .header ul{
-      width: 80%;
+      width: 98%;
        height: 100%;
       padding: 28px 40px;
        margin: 0 auto;
@@ -83,7 +83,14 @@
    .header ul .rigth{
       float: right;
    }
-   
+   .navbar-brand {
+    	    background-image: url(img/logo.png);
+    background-size: 100% 100%;
+    width: 150px;
+    height: 37px;
+    margin-bottom: 5px;
+    float: left;
+    }
 #fp-nav ul li, .fp-slidesNav ul li{
 	    height: 36px;
 	    width: 30px;
@@ -147,9 +154,9 @@
     background: darkmagenta;
     color: #fff;
     
-	}
-	.scene {display: block; position: relative; width: 100%; 
-	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;} */
+	
+	/* .scene {display: block; position: relative; width: 100%; 
+	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}  */
    
 	
    </style>
@@ -161,9 +168,9 @@
 <div class="header">
 
       <ul>
-        <li class="left"><a href="#">로고</a></li>
+        <li class="left"><a href="#" class="navbar-brand"></a></li>
         <li class="rigth">
-   <button type="button" class="btn mainbtn2" data-toggle="modal" data-target="#basicExampleModal">
+   <button type="button" class="btn mainbtn2" data-toggle="modal" data-target="#basicExampleModal" style="">
   로그인
 </button>
          </li>
@@ -233,7 +240,7 @@
    <script type="text/javascript" src="fullPage/jquery.fullPage.js"></script>
    <script type="text/javascript" src="fullPage/examples/examples.js"></script>
 
-   <!--  <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function() {
          $('#fullpage').fullpage({
             'verticalCentered': false,
@@ -266,7 +273,7 @@
             location.href="MemberServlet?command=signPage";
          });
       });
-   </script> -->
+   </script> 
 
 </body>
 </html>
