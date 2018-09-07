@@ -137,10 +137,12 @@ transition: all 40s;
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="border:none">
 						</div>
-						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;"><%=journallist.get(i).getTitle() %></p>
+						<p style="margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;margin-left: 10px;"><%=journallist.get(i).getTitle() %></p>
 					</a>
+					<div style="text-align: left;margin-left: 10px;">
 					<span style="text-align: right;color: #888;font-size: 14px;">조회수</span>
 					<span style="text-align: left;color: #888;font-size: 14px;"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					</div>
 				</div>
 			<%
 			}
