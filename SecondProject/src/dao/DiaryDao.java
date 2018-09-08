@@ -24,6 +24,40 @@ public class DiaryDao implements DiaryImpl {
 	public static DiaryDao getInstance() {
 		return dao;
 	}
+	
+	@Override
+
+	public int getJournalSeq(String tday) {
+
+		String sql = " SELECT SEQ " + "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int seq = -1;
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			psmt.setString(1, tday);
+			psmt.setString(2, tday);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				seq = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return seq;
+
+	}
 
 	@Override
 	public boolean addDiary(DiaryDto dto) {
@@ -157,7 +191,7 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id) {
-		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? < TDAY AND ? > TDAY AND ID = ? ";
+		String sql = " SELECT SEQ,JOUR_CHECK, PINS, ID, TDAY, TITLE, CONTENT FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -258,7 +292,7 @@ public class DiaryDao implements DiaryImpl {
 
 	}
 
-	// ��ۻ���
+	// 占쏙옙芳占쏙옙占�
 	@Override
 	public int CommentDelete(int seq) {
 
@@ -532,37 +566,85 @@ public class DiaryDao implements DiaryImpl {
 
 	}
 
-	@Override
-	public int getJournalSeq(String tday) {
 
-		String sql = " SELECT SEQ " + "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
+	public int addLike(int seq, String id) {
+		
+		String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
+		
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
-		ResultSet rs = null;
 
-		int seq = -1;
+		int count = 0;
+
 		try {
 			conn = DBConnection.makeConnection();
-			System.out.println("1/6 getMemInfo suceess");
-
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getMemInfo suceess");
-			psmt.setString(1, tday);
-			psmt.setString(2, tday);
 
-			rs = psmt.executeQuery();
-
-			if (rs.next()) {
-				seq = rs.getInt(1);
-			}
+			psmt.setInt(1, seq);
+			psmt.setString(2, id.trim());
+			count = psmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("get information failed");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
-			DBClose.close(psmt, conn, rs);
+			DBClose.close(psmt, conn, null);
 		}
-		return seq;
 
+		return count;
+		
 	}
+
+	@Override
+	public void countLike(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT+1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public int Likecheack(int seq,String loginid) {
+
+		String sql = " SELECT ID "
+				+ " FROM LIKE_JOURNAL "
+				+ " WHERE ID = ? AND JSEQ = ?";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, loginid);
+			psmt.setInt(2, seq);
+
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+
 
 }

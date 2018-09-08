@@ -36,11 +36,19 @@ public interface DiaryImpl {
 	
 	public int getSearchCountJournal(String stext);
 	
+
 	public int countMyJournal(String id);
 	
 	
 	public List<JournalDto> myJournalList(String id, int page);
 
 	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
+
+	public int addLike(int seq, String id);
+	
+	public void countLike(int seq);
+	
+	public int Likecheack(int seq,String loginid);
+
 }
 

@@ -1,3 +1,5 @@
+<%@page import="dao.DiaryDao"%>
+<%@page import="Impl.DiaryImpl"%>
 <%@page import="dto.JournalDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.DiarycommentDto"%>
@@ -10,16 +12,18 @@
 <head>
 
 <%
-   request.setCharacterEncoding("utf-8");
-   
-   
-   memberDto dto = (memberDto) session.getAttribute("user");
-   
-   String loginid = dto.getId();
-   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
+	request.setCharacterEncoding("utf-8");
+	DiaryImpl dao = DiaryDao.getInstance();
+	
+	memberDto dto = (memberDto) session.getAttribute("user");
+	
+	String loginid = dto.getId();
+	JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
    List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
-   
+   int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);
  
   for(int i=0;i<diarylist.size();i++){
      diarylist.get(i).toString();
@@ -108,6 +112,7 @@ html, body, header, .view {
 
 
 
+
    <!-- ----------------------------------------html----------------------------------------- -->
    <!--여기서 하시면 됩니다-->
    <main style="padding-top:80px;">
@@ -160,11 +165,20 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
       </div>
       </div>
 
+
+	<div class="like_box">
+	
+	<button class="like_on" onclick="likefuc()">하위</button>
+	<button class="like_off">바위</button>
+	
+	
+	<div class="like_view">
+		좋아요 수 : <%=journalDto.getLike_cnt() %>
+	</div>
+	
+	</div>
+
       <div class="diary-b">
-
-        
-
-
          <div class="diary-commant">
           <h4>댓글</h4>
             <div class="diary-commant"style="padding: 30px; text-align: center; background: rgb(238, 241, 246) !important;">
@@ -229,6 +243,18 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
      
   }
 
+  
+  function likefuc() {
+	  
+	  if(<%=Likeckheack %> == 0){
+	  location.href='DiaryServlet?command=like&seq='+<%=journalDto.getSeq() %>+'&loginid=+'+'<%=loginid %>';
+	  }else{
+		  alert('이미 좋아요했다');
+	  }
+	  
+}
+  
+  
 </script>
 
    

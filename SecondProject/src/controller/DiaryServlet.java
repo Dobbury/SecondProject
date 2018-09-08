@@ -263,18 +263,29 @@ public class DiaryServlet extends HttpServlet {
 			pw.print(b);
 
 		}else if(command.equals("diaryDetail")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
 
-			
-			DiaryDto dto = dao.getDiary(seq);
-			
-			req.setAttribute("diary", dto);
-			
-			dispatch("DiaryDetail.jsp", req, resp);
+	         int seq = Integer.parseInt(req.getParameter("seq"));
+	         String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
+	         
+	         JournalDto dto = dao.getJournalDto(seq);
 
-		
+	        
+	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
+	         
+	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
+	         
+	         
+	         req.setAttribute("JournalDto", dto);
+	         req.setAttribute("DiaryList", Diarylist);
+	         List<DiarycommentDto> list = dao.Commantview(seq);
+	         req.setAttribute("DiarycommentDto", list);
+	         
+	         dispatch("Diarydetail.jsp", req, resp);
+	         
+	      }
 
-		}else if (command.equals("journalDetail")) {
+
+		else if (command.equals("journalDetail")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
 
 			JournalDto dto = dao.getJournalDto(seq);
@@ -359,6 +370,21 @@ public class DiaryServlet extends HttpServlet {
 
 			req.setAttribute("stext", stext);
 			dispatch("search.jsp?page=1", req, resp);
+			
+			
+		}
+		
+		else if(command.equals("like")) {
+			
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String id = req.getParameter("loginid");
+			
+			int like = dao.addLike(seq,id);
+			dao.countLike(seq);
+			
+			
+			resp.sendRedirect("DiaryServlet?command=diaryDetail&seq="+seq);
+			
 		}
 	}
 

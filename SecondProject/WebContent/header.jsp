@@ -36,7 +36,7 @@
     margin-bottom: 0;
     }
     .navbar-menu li {
-       width: 100px;
+       width: 120px;
     height: 30px;
     list-style: none;
     display: inline-block;
@@ -49,7 +49,7 @@
        
     }
     .navbar-menu li:hover > a {
-     color: orange;
+    letter-spacing: 3px;
        
     }
     .navbar-menu li a{
@@ -130,8 +130,10 @@
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">이달의 명소</a></li>
+
+          <li><a href="#">이달의명소</a></li>
           <li><a href="Mypage.jsp?page=1">마이페이지</a></li>
+
         </ul>
 
     </div>
