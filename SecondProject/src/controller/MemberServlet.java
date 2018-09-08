@@ -55,7 +55,7 @@ public class MemberServlet extends HttpServlet {
 				/*DiaryImpl diaryDao = DiaryDao.getInstance();
 				int jcount = diaryDao.getCountJournal();
 				List<JournalDto> journallist = diaryDao.getJournalList(Integer.parseInt(page));
-				int pagecount = jcount/9;
+				int pagecount = jcount/9; 
 				if(jcount%9 > 0){
 					pagecount++;
 				}*/

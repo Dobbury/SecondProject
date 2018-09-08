@@ -204,9 +204,7 @@ transition: all 40s;
 					<%
 				}
 				%>
-				
 			<%
-			
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
@@ -221,7 +219,6 @@ transition: all 40s;
 					break;
 				}
 			}
-			
 			if(paging != pagecount || pagecount == 0){
 			%>
 			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
