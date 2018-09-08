@@ -22,9 +22,11 @@ public interface DiaryImpl {
 
 	public JournalDto getJournalDto(int seq);
 	
-	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
+
+	public int getJournalSeq(String tday);
 	
-	public int CommantWrite(int seq, String id, String dcomment);
+	public int CommantWrite(int seq,String id, String dcomment);
+
 	
 	public List<DiarycommentDto> Commantview(int seq);
 	
@@ -38,5 +40,7 @@ public interface DiaryImpl {
 	
 	
 	public List<JournalDto> myJournalList(String id, int page);
+
+	public List<DiaryDto> getDiaryList(String startdate, String enddate, String id);
 }
 

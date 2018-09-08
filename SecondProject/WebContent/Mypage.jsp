@@ -245,7 +245,7 @@ ul.tab li.current {
 
 		<!-- Right -->
 		<ul class="navbar-menu">
-			<li><a href="Newspeed.jsp">뉴스피드</a></li>
+			<li><a href="Newspeed.jsp?page=1">뉴스피드</a></li>
 			<li><a href="Mypage.jsp?page=1">마이페이지</a></li>
 
 		</ul>

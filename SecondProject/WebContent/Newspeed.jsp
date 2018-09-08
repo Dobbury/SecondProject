@@ -19,8 +19,10 @@ int jcount = dao.getCountJournal();
 
 List<JournalDto> journallist = dao.getJournalList(paging);
 int pagecount = jcount/9;
+if(pagecount != 0){
 if(pagecount%jcount>0){
 	pagecount++;
+}
 }
 
 int startPage = 0;
@@ -165,7 +167,7 @@ transition: all 40s;
 			for(int i = 0; i < journallist.size();i++){
 			%>
 				<div class="diary">
-					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
+					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
@@ -235,17 +237,17 @@ transition: all 40s;
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
 		<!-- SCRIPTS -->
-  	<script type="text/javascript">
-  	function gocal() {  		
-  		location.href= "CalendarWrite.jsp";	
-	}
-  
-  </script>
+  		<script type="text/javascript">
+  			function gocal() {  		
+  				location.href= "CalendarWrite.jsp";	
+			}
+
+ 		 </script>
 	</div>
 
    </div>
 			
-		</div>
+</div>
 	
 	
 </main>
