@@ -255,7 +255,8 @@ transition: all 40s;
   
 <jsp:include page="footer.jsp"></jsp:include> 
   
-  <script>
+<script> 
+
 
 
    
@@ -277,7 +278,6 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
-  
   </script>
   <!-- 
 <script type="text/javascript">
@@ -315,7 +315,6 @@ $(function(){
 		
 	});
 });
-
 
 
 </script>

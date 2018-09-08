@@ -329,7 +329,15 @@ public class DiaryServlet extends HttpServlet{
 			req.setAttribute("DiaryDto", dto);
 	        dispatch("Diarydetail.jsp", req, resp);
 			
+
+		}else if(command.equals("jourInsert")) {
 			
+			
+			
+			PrintWriter pw = resp.getWriter();
+			
+			pw.print(true);
+		
 		}else if(command.equals("search")) {
 			String stext = req.getParameter("stext");
 			

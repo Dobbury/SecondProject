@@ -8,11 +8,13 @@ import dto.JournalDto;
 
 public interface DiaryImpl {
 	
+
+
+	public boolean addJournal(JournalDto dto);
 	
+	public int getCountJournal();
 	public boolean addDiary(DiaryDto dto);
-	
-	public List<JournalDto> getJournalList();
-	
+	public List<JournalDto> getJournalList(int page);
 
 	public DiaryDto getDiary(int seq); 
 	
@@ -32,9 +34,9 @@ public interface DiaryImpl {
 	
 	public int getSearchCountJournal(String stext);
 	
+	public int countMyJournal(String id);
 	
 	
-	
-	public List<JournalDto> myJournalList(String id);
+	public List<JournalDto> myJournalList(String id, int page);
 }
 
