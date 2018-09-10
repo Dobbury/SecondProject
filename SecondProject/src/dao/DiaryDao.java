@@ -96,6 +96,14 @@ public class DiaryDao implements DiaryImpl {
 				+ " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
 				+ " FROM JOURNAL ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
 
+		
+		/*
+			select c.rnum, c.seq, c.id, c.title, c.content, c.rdate, c.wdate
+			from (select rownum as rnum, a.seq, a.id, a.title, a.content, a.rdate, a.wdate
+			from (select seq, id, title, content, rdate, wdate
+			from calendar where rdate > to_char(sysdate, 'yyyymmddhh24mi') order by rdate asc) a where rownum <= ? ) c where c.rnum >= ?
+		 */
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -206,6 +214,7 @@ public class DiaryDao implements DiaryImpl {
 		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) "
 				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
 
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 
@@ -238,7 +247,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
 		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY " + " FROM DIARYCOMMENT " + " WHERE DSEQ = ? "
-				+ " ORDER BY SEQ ASC ";
+				+ " ORDER BY DDAY DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

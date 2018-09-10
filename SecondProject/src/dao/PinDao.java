@@ -263,4 +263,151 @@ public class PinDao implements PinImpl {
 
 		return count >0 ? true : false ;
 	}
+
+	@Override
+	public List<PinDto> getAllPinList(int page) {
+		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
+				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
+				+ " FROM PIN) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+		
+		
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<PinDto> list = new ArrayList<>();
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, page*9);
+			psmt.setInt(2, page*9-8);
+			
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new PinDto(
+						rs.getDouble(2),
+						rs.getDouble(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6)
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+		
+	}
+
+	@Override
+	public int getAllPinCount() {
+		String sql = " SELECT COUNT(*) FROM PIN ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int pcount = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				pcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return pcount;
+	}
+
+	@Override
+	public List<PinDto> getSearchPinList(int page, String stext) {
+		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
+				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
+				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%') A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+		
+		
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<PinDto> list = new ArrayList<>();
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, page*9);
+			psmt.setInt(2, page*9-8);
+			
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new PinDto(
+						rs.getDouble(2),
+						rs.getDouble(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6)
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int getSearchPinCount(String stext) {
+		String sql = " SELECT COUNT(*) FROM PIN WHERE PINNAME LIKE('%" + stext + "%') ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int pcount = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				pcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return pcount;
+	}
 }

@@ -20,8 +20,15 @@ public class DBConnection {
 		try {
 
 
+<<<<<<< HEAD
 			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.60:1521:xe", "hr", "hr");
+=======
+
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "hr", "hr");
+
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.60:1521:xe", "hr", "hr");
+>>>>>>> d444ae8a112aa0ea72d2e33711982c8fd866798d
 
 			System.out.println("DB Connection Success");
 			
