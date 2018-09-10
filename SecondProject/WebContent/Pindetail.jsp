@@ -7,6 +7,7 @@
 <%
 PinDto dto = (PinDto)request.getAttribute("pin");
 List<pinCommentDto> list = (List<pinCommentDto>)request.getAttribute("pinCList");
+String grade_AVG = request.getParameter("grade_AVG");
 
 %>
 <html>
@@ -48,7 +49,7 @@ List<pinCommentDto> list = (List<pinCommentDto>)request.getAttribute("pinCList")
 		<div class="pinview">
 			<div class="map">핀 찍혀있는 지도</div>
 		<p class="pinloc">주소 : <%=dto.getLocation() %></p>
-		<p class="pinavg">평점 : <%=dto.getGrade_AVG() %></p>
+		<p class="pinavg">평점 : <%=grade_AVG %> </p>
 		
 		<div class="pincomment">
 		<%

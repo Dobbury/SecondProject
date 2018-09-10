@@ -14,7 +14,10 @@ PinImpl dao = PinDao.getInstance();
 int paging = Integer.parseInt(request.getParameter("page"));
 int pcount = dao.getAllPinCount();
 
-List<PinDto> pinlist = dao.getAllPinList(paging);
+// 수정
+//List<PinDto> pinlist = dao.getAllPinList(paging);
+
+List<String[]> pinlist = dao.pinAVG();
 int pagecount = 1;
 pagecount = pcount/9;
 if(pcount != 0){
@@ -125,7 +128,21 @@ transition: all 40s;
 	animation-fill-mode: both;
 }
  	
- 	
+ 	.searchbtn{
+	height: 40px;
+    margin-left: -4px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+   background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+ 	.searchbtn:hover{
+ 		background-color: #999;
+ 	}
  </style>
   
 </head>
@@ -147,7 +164,7 @@ transition: all 40s;
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" value="">
 			</form>
 		  </div>
 		</div>
@@ -165,17 +182,17 @@ transition: all 40s;
 			for(int i = 0; i < pinlist.size();i++){
 			%>
 				<div class="diary">
-					<a href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i).getPin_name()%>">
+					<a href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i)[0]%>&grade_AVG=<%=pinlist.get(i)[2] %>">
 						<div class="Dimage" style="">
-							<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>&zoom=13&size=600x300&maptype=roadmap
-								&markers=color:blue%7Clabel:S%7C<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>
+							<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=dao.getPin(pinlist.get(i)[0]).getLat()%>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>&zoom=13&size=600x300&maptype=roadmap
+								&markers=color:blue%7Clabel:S%7C<%=dao.getPin(pinlist.get(i)[0]).getLat() %>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>
 								&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
 						</div>
-						<p class="diary-title"><%=pinlist.get(i).getPin_name() %></p>
+						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=pinlist.get(i).getKinds() %></span>	
+					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
 					
 					</div>
 				</div>

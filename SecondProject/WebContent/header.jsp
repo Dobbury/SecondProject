@@ -86,11 +86,13 @@
     	height: 220px;
     	background-color: gray;
     	border:none;
-    }.diary-title{
+    }
+    .diary-title{
     margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;
     margin-left: 10px;white-space: nowrap;
     overflow: hidden;text-overflow: ellipsis;
-    width: 280px;
+    vertical-align: bottom;
+
     }
  	.diary-textbox{
  	text-align: left;margin-left: 10px;padding-right: 10px;    word-break: break-all;
@@ -100,6 +102,9 @@
  	}
  	.diary-date{
  	text-align: left;color: #888;font-size: 14px;
+ 	padding-bottom: 7px;
+    margin-left: 10px;
+        display: inline-block;
  	}
  	.diary-heartbox{
  	text-align: right; margin-left: -1px; padding-right: 10px; margin-top: 15px;
@@ -109,6 +114,8 @@
  		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
    		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
  	}
+ 	
+ 	
    </style>
 
 </head>

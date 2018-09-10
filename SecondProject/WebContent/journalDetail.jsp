@@ -1,3 +1,8 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="dao.CalendarDao"%>
+<%@page import="Impl.CalendarImpl"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="dao.DiaryDao"%>
 <%@page import="Impl.DiaryImpl"%>
 <%@page import="dto.JournalDto"%>
@@ -10,21 +15,110 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<%!
+		 
+		//빈문자열 여부
+		public boolean nvl(String msg){
+		    return msg == null || msg.trim().equals("")?true:false;
+		}
+		 
+		//숫자 한자리를 1 > 01로 바꾸기
+		public String two(String msg){
+		    return msg.trim().length()<2?"0"+msg:msg.trim();
+		}
+		 
+		
+		 
+		//날짜 클릭하면 이동 
+		public String calllist(int year, int month, int day,boolean h){
+					
+			String s = "";
+				    
+			String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
+			
+			if(h == false){
+				s += "<div style='width:50px; height:50px;'>";
+					  
+				return s;	
+			}else{
+				return tday;
+			}
+		}
+		
+		
+		// 다이어리 타이틀 뿌리기
+		public String dTitle(int year, int month, int day, List<DiaryDto> list){
+					
+			String s = "";
+						 
+			String tday= calllist(year,month, day , true);
+						
+			for(int i=0;i<list.size();i++){			
+				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
+				String today = list.get(i).getTday().replace("-", "");
+				today = today.substring(0,8);
+				if(today.equals(tday)){
+					
+					
+					if(list.get(i).getJour_check()==1){
+						s += "<div style='width:50px; height:50px; background-color:black;'>";
+						s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "</div>";
+					}
+				}
+			}
+			if(s == "")
+				s += String.format("%2d", day); //day를 2칸으로 다시 정정
+			s += "</div>";
+			return s;
+		}	
+%>
+<%
+		 
+		Calendar cal = Calendar.getInstance();
+		 
+		//연도 받아오기 
+		//달 받아오기  0부터 시작함 
+		int year = request.getParameter("y") == null ? cal.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("y"));
+		int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
+		 
+		cal.set(year, month, 1); //연 월 일 세팅!
+		
+		 
+		
+	 
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일 구하기 (1~7)
+		System.out.println("확인용 날짜 : " + year+"년 "+ month+" 월");
+		 
+		
+		//로그인한 사람의 id
+		memberDto dto = (memberDto)request.getSession().getAttribute("user");   //뉴스피드 --서블릿 -- 캘린더write
+		System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
+		 
+		 
+		//caledar list
+		CalendarImpl cdao = CalendarDao.getInstance();
+	
+		boolean b = true;
+		String tday = calllist(year	,month,1,b);		
+		System.out.println("tday는 : " + tday);
+				
+		List<DiaryDto> list = cdao.getCalList(dto.getId());
+		System.out.println("List<CalendarDto> list 는 : " + list);  
+%>
 <%
 
 
    request.setCharacterEncoding("utf-8");
 	DiaryImpl dao = DiaryDao.getInstance();
 
-   
-   memberDto dto = (memberDto) session.getAttribute("user");
-   
+  
    String loginid = dto.getId();
    JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
 
    List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
+   Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");	//각 날짜별(시퀀스로 관리) 위도 경도
    int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);
  
   for(int i=0;i<diarylist.size();i++){
@@ -71,14 +165,17 @@ html, body, header, .view {
     color: #777;
     display: inline-block;
     margin-right: 12px;
-    margin-left: 9px;
+<<<<<<< HEAD
+    margin-left: 5px;
+=======
+        margin-left: 3px;
+>>>>>>> 9f480c083f05b0e5b4fca2348c55c6d81c710c4e
 }
 .journal-date{
 	font-size: 14px;
     color: #888;
 }
 .diary-t {
-   display: table;
    margin-top: 20px;
    width: 100%;
   
@@ -86,16 +183,21 @@ html, body, header, .view {
 
 .diary-t div {
    width: 50%;
-   display: table;
    border: 1px solid;
     height: 400px;
 }
+.diary-cont{
+    padding: 40px;
+    margin-top: 20px;
+    background-color: #fff;
+    -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 
-
-
-.diary-t .map {
-   float: left;
 }
+
+
+
 
 .diary-t .calendar {
    float: right;
@@ -149,7 +251,59 @@ html, body, header, .view {
 	    padding-left: 20px;
     padding-right: 20px;
 }
+.diary-cont{
+ padding: 40px;margin-top:20px;
+    background-color: #fff;
+       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
+}
+#maps{
+	width: 50%;
+    position: relative;
+    overflow: hidden;
+    height: 370px;
+    display: inline-block;
+    margin-right: 60px;
+}
+.calendar{
+	    display: inline-block;
+    height: 370px;
+}
 </style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
+<script type="text/javascript">
+
+var basic_lat= 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+var basic_lng = 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+
+function initialize() {
+	
+	var map = new google.maps.Map(document.getElementById('maps'), {
+		zoom: 12,
+		center: {lat:basic_lat, lng:basic_lng}
+	});
+	
+		  
+	/* // Adds a marker to the map.
+	function addMarker(location,map) {
+		// Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        var marker = new google.maps.Marker({
+			position: location,
+			label: labels[labelIndex++ % labels.length],
+			map: map,
+			title:"뿌리뿌리"
+		});
+		//modal_Marker.push(marker);
+	}
+	 */
+/* 	for(i = 0 ; i < basic_Marker.length ; i++){
+		addMarker(basic_Marker[i],map);
+	} */
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 
 <body style="    background-color: #e9e9e9e9;" >
@@ -173,24 +327,84 @@ html, body, header, .view {
      
    </div>
 
-      <div class="diary-t">
+      <div style="width: 100%">
          <!-- 지도영역 -->
-         <div class="map">
-            <p>지도</p>
+       <div id="maps" style="width: 50%;">
          </div>
+        
+<!--          <div class="map">
+         	<div id="maps" style="width: 100%; height: 100%"></div>
+         </div> -->
          <!-- 달력영역 -->
-         <div class="calendar">
-            <p>달력</p>
+         <div class="calendar" align="center">
+         	<table border="1">
+				<!-- 너비 -->
+				<col width="50">
+				<col width="50">
+				<col width="50">
+				<col width="50">
+				<col width="50">
+				<col width="50">
+				<col width="50">
+				 
+				    <tr>
+				        <td align="center" colspan="7">
+				            <%=year%>년 <%=month+1%>월 
+				        </td>
+				    </tr>
+				 
+				    <tr height="25">
+				        <td align="center">일</td>
+				        <td align="center">월</td>
+				        <td align="center">화</td>
+				        <td align="center">수</td>
+				        <td align="center">목</td>
+				        <td align="center">금</td>
+				        <td align="center">토</td>
+				    </tr>
+				    
+				    <tr height="50" align="left" valign="top">
+				        <%
+				            //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
+				            for(int i=1; i<dayOfWeek; i++){
+				                %>
+				                    <td>&nbsp;</td>
+				                <%
+				            }
+				      		//그 달의 최대 일자
+			            	int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+				      		
+				            //해당 날짜의 모든 일정을 보이게
+				            for(int i=1; i<lastDay+1; i++){   
+				                %>
+				                  <td><!-- 날짜 뿌리기 -->
+				                     <%=calllist(year, month, i ,false) %>		                    
+				                   
+				                		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
+				                		<%=dTitle(year, month, i, list) %>        
+				                    </td>
+				                <%
+				                if((i+dayOfWeek-1)%7==0){
+				                    %>
+				                        </tr>
+				                        <tr height="50" align="left" valign="top">
+				                    <%
+				                }
+				            }
+				            
+				            for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
+				                %>
+				                    <td>&nbsp;</td>
+				                <%
+			 	}
+				%>
+				</tr>
+							 
+			</table>
          </div>
       </div>
       
-   
-      
-   <div style="   padding: 40px;margin-top:20px;
-    background-color: #fff;
-       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
--moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
+
    
    
       <div class="diary-m">
@@ -211,7 +425,6 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
          <%
                }
       %>
-      </div>
       </div>
 
 	<div class="like_view">
