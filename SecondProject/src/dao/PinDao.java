@@ -447,4 +447,5 @@ public class PinDao implements PinImpl {
 		
 		return pcount;
 	}
+
 }
