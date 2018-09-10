@@ -261,12 +261,13 @@ public class DiaryServlet extends HttpServlet{
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
 			
-		}else if(command.equals("diaryDetail")) {
+		}else if(command.equals("journalDetail")) {
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
 	         
 	         JournalDto dto = dao.getJournalDto(seq);
-
+	         
+	         
 	        
 	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
 	         
@@ -278,7 +279,7 @@ public class DiaryServlet extends HttpServlet{
 	         List<DiarycommentDto> list = dao.Commantview(seq);
 	         req.setAttribute("DiarycommentDto", list);
 	         
-	         dispatch("Diarydetail.jsp", req, resp);
+	         dispatch("journalDetail.jsp", req, resp);
 	         
 	      }
 		
@@ -298,7 +299,7 @@ public class DiaryServlet extends HttpServlet{
 					System.out.println("占쏙옙占쏙옙韜쩍占쏙옙占�");
 				}
 				
-				resp.sendRedirect("DiaryServlet?command=diaryDetail&seq="+seq);
+				resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
 		        
 		       
 		        
@@ -323,7 +324,7 @@ public class DiaryServlet extends HttpServlet{
 			List<DiarycommentDto> list = dao.Commantview(seq);
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
-	        dispatch("Diarydetail.jsp", req, resp);
+	        dispatch("journalDetail.jsp", req, resp);
 			
 			
 		}else if(command.equals("search")) {
@@ -340,11 +341,21 @@ public class DiaryServlet extends HttpServlet{
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			String id = req.getParameter("loginid");
 			
-			int like = dao.addLike(seq,id);
+			dao.addLike(seq,id);
 			dao.countLike(seq);
 			
 			
-			resp.sendRedirect("DiaryServlet?command=diaryDetail&seq="+seq);
+			resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
+			
+		}else if(command.equals("likedel")) {
+			
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String id = req.getParameter("loginid");
+			
+			dao.deleteLike(seq,id);
+			dao.countLikedel(seq);
+			
+			resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
 			
 		}
 		/*else if(command.equals("paging")) {
