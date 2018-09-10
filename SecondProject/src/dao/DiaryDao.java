@@ -760,7 +760,10 @@ public class DiaryDao implements DiaryImpl {
 		conn = DBConnection.makeConnection();
 
 		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
 			psmt.executeUpdate();
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
