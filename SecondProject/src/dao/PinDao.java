@@ -132,7 +132,7 @@ public class PinDao implements PinImpl {
 	@Override
 	public PinDto getPin(String pin_name) {
 		
-		String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
+String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
