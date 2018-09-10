@@ -317,7 +317,6 @@ public class DiaryServlet extends HttpServlet {
 	        	 
 	        	 map.put(dDto.getSeq(), latlnglist);
 	         }
-	         Diarylist.get(1).getPin_Seqs();
 	         
 	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
 	         
