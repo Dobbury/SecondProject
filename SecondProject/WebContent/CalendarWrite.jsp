@@ -7,6 +7,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 request.setCharacterEncoding("utf-8");
@@ -15,7 +16,8 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
@@ -93,7 +95,8 @@ request.setCharacterEncoding("utf-8");
   <!--여기서 하시면 됩니다-->
 <main style="padding-top:80px;">
 	<div class="container">
-		
+		<div class="table-response">
+			
 		<%!
 		 
 		//빈문자열 여부
@@ -274,7 +277,7 @@ request.setCharacterEncoding("utf-8");
 		 
 		<div align="center">
 		 
-		<table border="1">
+		<table border="1" class="table">
 		<!-- 너비 -->
 		<col width="100">
 		<col width="100">
@@ -470,6 +473,7 @@ request.setCharacterEncoding("utf-8");
 					</div>
 
 				</div>
+			</div>
 			</div>
 
 
