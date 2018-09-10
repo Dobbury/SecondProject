@@ -152,7 +152,6 @@ request.setCharacterEncoding("utf-8");
 			String tday= calllist(year,month, day , true);
 			
 
-			
 			for(int i=0;i<list.size();i++){			
 				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
 				String today = list.get(i).getTday().replace("-", "");
