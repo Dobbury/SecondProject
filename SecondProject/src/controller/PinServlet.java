@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,15 @@ public class PinServlet extends HttpServlet {
 			   System.out.println(result);
 			   PrintWriter pw =resp.getWriter();
 			   pw.print((String)result);
+			   
+		   }else if(command.equals("PinRank")) {
+			  List<String[]> list = dao.pinAVG();
+			   
+			   
+			  for(String str[] : list ) {
+				  System.out.println(str[0]+ " "+str[1] + " " +str[2]);
+			  }
+			   
 		   }
 		   
 	 }

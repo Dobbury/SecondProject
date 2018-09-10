@@ -1,3 +1,5 @@
+<%@page import="dao.DiaryDao"%>
+<%@page import="Impl.DiaryImpl"%>
 <%@page import="dto.DiaryDto"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dto.memberDto"%>
@@ -146,6 +148,7 @@ request.setCharacterEncoding("utf-8");
 		
 		// 다이어리 타이틀 뿌리기
 		public String dTitle(int year, int month, int day, List<DiaryDto> list){
+			DiaryImpl dao = DiaryDao.getInstance();
 			
 			String s = "";
 			 
@@ -167,7 +170,7 @@ request.setCharacterEncoding("utf-8");
 						s += "</div>";
 					}else{
 						s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
-						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&tday="+list.get(i).getTday()+"'>";	//차후 수정바람
+						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";	//차후 수정바람
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "<br>"+list.get(i).getTitle();
 						s += "</div>";
@@ -187,17 +190,24 @@ request.setCharacterEncoding("utf-8");
 					
 			String s = "";
 						 
-			String tday= calllist(year,month, day-1 , true);
+			String tday= calllist(year,month, day , true);
 						
 			for(int i=0;i<list.size();i++){			
 				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
 				String today = list.get(i).getTday().replace("-", "");
 				today = today.substring(0,8);
 				if(today.equals(tday)){
-					s += "<div style='width:30px; height:30px; background-color:gray;'>";
-					s += String.format("%2d", day); //day를 2칸으로 다시 정정
-					s += "</div>";
-								
+					
+					
+					if(list.get(i).getJour_check()==0){
+						s += "<div style='width:30px; height:30px; background-color:gray;'>";
+						s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "</div>";
+					}else{
+						s += "<div style='width:30px; height:30px; background-color:black;'>";
+						s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "</div>";
+					}
 				}
 			}
 			if(s == "")
@@ -518,7 +528,14 @@ request.setCharacterEncoding("utf-8");
 				type:"GET",
 				datatype:"json",
 				success:function(data){
-					alert("success");
+					if(data=="cntfalse"){
+						alert("일정을 잘못선택했거나 중간에 일지를 작성하지 않은 날짜가 있습니다. 확인하고 다시 시도해 주세요.");
+					}else if(data=="checkfalse"){
+						alert("이미 등록된 일정이 포함되어 있습니다. 확인하고 다시 시도해 주세요.");
+					}else{
+						alert("일정 추가 성공!");
+						location.href="Newspeed.jsp?page=1";
+					}
 				},
 				error:function(){
 					

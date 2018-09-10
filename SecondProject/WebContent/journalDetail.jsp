@@ -13,13 +13,15 @@
 
 <%
 
-	request.setCharacterEncoding("utf-8");
+
+   request.setCharacterEncoding("utf-8");
 	DiaryImpl dao = DiaryDao.getInstance();
-	
-	memberDto dto = (memberDto) session.getAttribute("user");
-	
-	String loginid = dto.getId();
-	JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
+   
+   memberDto dto = (memberDto) session.getAttribute("user");
+   
+   String loginid = dto.getId();
+   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
 
    List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
@@ -59,20 +61,37 @@ html, body, header, .view {
    list-style: none;
    display: inline-block;
 }
-
+.journal-title{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.journal-id{
+	    font-size: 18px;
+    font-weight: 700;
+    color: #777;
+    display: inline-block;
+    margin-right: 12px;
+    margin-left: 9px;
+}
+.journal-date{
+	font-size: 14px;
+    color: #888;
+}
 .diary-t {
    display: table;
-   margin-top: 40px;
+   margin-top: 20px;
+   width: 100%;
+  
 }
 
 .diary-t div {
    width: 50%;
    display: table;
+   border: 1px solid;
+    height: 400px;
 }
 
-.diary-t div img {
-   width: 100%;
-}
+
 
 .diary-t .map {
    float: left;
@@ -103,6 +122,33 @@ html, body, header, .view {
       background: #1C2331 !important;
    }
 }
+.like_box{
+	margin-top: 10px;
+}
+.like_off {
+	width: 25px;
+	height: 25px;
+	background-image: url('img/heart_off.png');
+	background-size: 100% 100%;
+	    display: inline-block;
+    vertical-align: middle;
+}.like_on {
+	width: 25px;
+	height: 25px;
+	background-image: url('img/heart_on.png');
+	background-size: 100% 100%;
+	    display: inline-block;
+    vertical-align: middle;
+}
+.like_view{
+	    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+.commant-write{
+	    padding-left: 20px;
+    padding-right: 20px;
+}
 </style>
 </head>
 
@@ -118,26 +164,29 @@ html, body, header, .view {
    <main style="padding-top:80px;">
    <div class="container" style="    max-width: 900px;">
 
+   <div class="journal-title" >
+   <h1>
+      <%=journalDto.getTitle() %>
+      </h1>
+       <span class="journal-id">  <%=journalDto.getId() %></span>
+      <span class="journal-date"><%=journalDto.getWdate().substring(0,16) %></span>
+     
+   </div>
+
       <div class="diary-t">
          <!-- 지도영역 -->
          <div class="map">
             <p>지도</p>
-            <!-- <img alt="" src="img/005.jpg"> -->
          </div>
          <!-- 달력영역 -->
          <div class="calendar">
             <p>달력</p>
-            <!-- <img alt="" src="img/lt04014209.png"> -->
          </div>
       </div>
       
-      <div class="journal-title" >
-   <h1>
-      <%=journalDto.getTitle() %>
-      </h1>
-   </div>
+   
       
-   <div style="   padding: 40px;
+   <div style="   padding: 40px;margin-top:20px;
     background-color: #fff;
        -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
@@ -165,16 +214,22 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
       </div>
       </div>
 
-
-	<div class="like_box">
-	
-	<button class="like_on" onclick="likefuc()">하위</button>
-	<button class="like_off">바위</button>
-	
-	
 	<div class="like_view">
-		좋아요 수 : <%=journalDto.getLike_cnt() %>
+		<%=journalDto.getLike_cnt() %> 명이 좋아합니다
 	</div>
+	<div class="like_box">
+	<% if(Likeckheack == 0) {%>
+	<a id="like_box"onclick="likefuc()"><span class="like_off"></span><span style="font-size: 13px;"> 좋아요</span></a>
+	<% 
+	}else{
+	%>
+	<a id="like_box" onclick="likedelfuc()"><span class="like_on"></span><span style="font-size: 13px;"> 좋아요</span></a>
+	<%
+	}
+	%>
+
+	
+	
 	
 	</div>
 
@@ -186,8 +241,8 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
             <%
                for(int i=0; i<commentview.size(); i++ ){
             %>
-            <div class="commant-view" style="margin-bottom: 20px;padding-left: 38px; padding-right: 38px;">
-               <div class="commant-id"style="text-align: left;font-weight: 700;margin-bottom: 8px;display: table;width: 100%;">
+            <div class="commant-view" style="margin-bottom: 20px;padding-left: 20px; padding-right: 20px;">
+               <div class="commant-id"style="text-align: left;font-weight: 700;margin-bottom: 3px;display: table;width: 100%;">
                <p style="float: left;">
                <%=commentview.get(i).getId() %>
                </p>
@@ -213,11 +268,11 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
             
             
                <div class="commant-write">
-                  <div class="commant-id"style="text-align: left; margin-left: 40px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
+                  <div class="commant-id"style="text-align: left;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
-                     <textarea rows="2" cols="20" name="dcomment" style="width: 80%; height: 70px; vertical-align: text-bottom;"></textarea>
+                     <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;"></textarea>
                       <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
                   </form>
@@ -246,14 +301,18 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
   
   function likefuc() {
 	  
-	  if(<%=Likeckheack %> == 0){
+	  //var likebox = document.getElementById("like_box"); 
 	  location.href='DiaryServlet?command=like&seq='+<%=journalDto.getSeq() %>+'&loginid=+'+'<%=loginid %>';
-	  }else{
-		  alert('이미 좋아요했다');
-	  }
+	  //likebox.classList.add( 'like_off' );
+	 
+	
 	  
 }
-  
+  function likedelfuc(){
+	  location.href='DiaryServlet?command=likedel&seq='+<%=journalDto.getSeq() %>+'&loginid=+'+'<%=loginid %>';
+      //likebox.classList.add( 'like_on' );
+	  
+  }
   
 </script>
 
