@@ -128,7 +128,21 @@ transition: all 40s;
 	animation-fill-mode: both;
 }
  	
- 	
+ 	.searchbtn{
+	height: 40px;
+    margin-left: -4px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+   background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+ 	.searchbtn:hover{
+ 		background-color: #999;
+ 	}
  </style>
   
 </head>
@@ -150,7 +164,7 @@ transition: all 40s;
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" value="">
 			</form>
 		  </div>
 		</div>

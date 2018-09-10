@@ -317,7 +317,7 @@ public class DiaryServlet extends HttpServlet {
 	        	 
 	        	 map.put(dDto.getSeq(), latlnglist);
 	         }
-	         
+
 	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
 	         
 	         req.setAttribute("locations", map);

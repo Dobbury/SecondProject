@@ -166,66 +166,10 @@ ul.tab li.current {
 	vertical-align: top;
 }
 
-@media ( min-width : 800px) and (max-width: 850px) {
-	.navbar
-	
-	
-	
-   
-	
-	
-	:not
-	
-	
-	
-    
-   
-	
-	
-	(
-	.top-nav-collapse
-	
-	
-	
-    
-   
-	
-	
-	)
-	{
-	background
-	
-	
-	
-   
-	
-	
-	:
-	
-	
-	
-    
-   
-	
-	
-	#1C2331
-	
-	
-	
-    
-   
-	
-	
-	!
-	important
-	
-	
-	
-   
-	
-	
-	;
-}
+@media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+          background: #1C2331!important;
+      }
 }
 </style>
 </head>
@@ -463,7 +407,6 @@ ul.tab li.current {
 
 	<!-- Initializations -->
 	<!-- 
-
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();

@@ -165,14 +165,17 @@ html, body, header, .view {
     color: #777;
     display: inline-block;
     margin-right: 12px;
+<<<<<<< HEAD
     margin-left: 5px;
+=======
+        margin-left: 3px;
+>>>>>>> 9f480c083f05b0e5b4fca2348c55c6d81c710c4e
 }
 .journal-date{
 	font-size: 14px;
     color: #888;
 }
 .diary-t {
-   display: table;
    margin-top: 20px;
    width: 100%;
   
@@ -180,7 +183,6 @@ html, body, header, .view {
 
 .diary-t div {
    width: 50%;
-   display: table;
    border: 1px solid;
     height: 400px;
 }
@@ -195,9 +197,7 @@ html, body, header, .view {
 }
 
 
-.diary-t .map {
-   float: left;
-}
+
 
 .diary-t .calendar {
    float: right;
@@ -251,16 +251,35 @@ html, body, header, .view {
 	    padding-left: 20px;
     padding-right: 20px;
 }
+.diary-cont{
+ padding: 40px;margin-top:20px;
+    background-color: #fff;
+       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
+}
+#maps{
+	width: 50%;
+    position: relative;
+    overflow: hidden;
+    height: 370px;
+    display: inline-block;
+    margin-right: 60px;
+}
+.calendar{
+	    display: inline-block;
+    height: 370px;
+}
 </style>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
 <script type="text/javascript">
 
-var basic_lat= <%=locationMap.get(diarylist.get(0).getSeq()).get(0)[0] %>;
-var basic_lng = <%=locationMap.get(diarylist.get(0).getSeq()).get(0)[1] %>;
+var basic_lat= 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+var basic_lng = 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
 
 function initialize() {
 	
-	var map = new google.maps.Map(document.getElementById('map'), {
+	var map = new google.maps.Map(document.getElementById('maps'), {
 		zoom: 12,
 		center: {lat:basic_lat, lng:basic_lng}
 	});
@@ -307,11 +326,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <span class="journal-date"><%=journalDto.getWdate().substring(0,16) %></span>
      
    </div>
-      <div class="diary-t">
+
+      <div style="width: 100%">
          <!-- 지도영역 -->
-         <div class="map" style="display: table;">
-         	<div id="map" style="width: 100%; height: 100%"></div>
+       <div id="maps" style="width: 50%;">
          </div>
+        
+<!--          <div class="map">
+         	<div id="maps" style="width: 100%; height: 100%"></div>
+         </div> -->
          <!-- 달력영역 -->
          <div class="calendar" align="center">
          	<table border="1">
@@ -380,8 +403,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			</table>
          </div>
       </div>
-      
-   
       
 
    
