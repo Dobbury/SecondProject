@@ -193,8 +193,11 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-
-				list.add(new DiaryDto(rs.getString(7),rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
+				String content = rs.getString(7);
+				
+				content = content.replaceAll("\\\\\"", "\"");
+				System.out.println("하위:"+content);
+				list.add(new DiaryDto(content,rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
 						rs.getInt(1),""));
 
 			}
@@ -276,7 +279,7 @@ public class DiaryDao implements DiaryImpl {
 
 	}
 
-	// ��ۻ���
+	// 占쏙옙芳占쏙옙占�
 	@Override
 	public int CommentDelete(int seq) {
 
@@ -403,8 +406,52 @@ public class DiaryDao implements DiaryImpl {
 		return count>0 ? true:false;
 	}
 
+	@Override
+	public boolean addJournal(JournalDto dto) {
 		
+		String sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL)";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
 
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getId());
+			psmt.setString(3, dto.getEndDate());
+			psmt.setString(4, dto.getStartDate());
+			
+			count = psmt.executeUpdate();
+
+			System.out.println(dto.getStartDate() +" "+ dto.getEndDate());
+			DBClose.close(psmt, conn, null);
+			
+			if(count > 0 ? true : false) {
+				sql = "UPDATE DIARY SET JOUR_CHECK=1 WHERE ? <= TDAY AND ? >= TDAY AND ID=?";
+				
+				conn = DBConnection.makeConnection();
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, dto.getStartDate());
+				psmt.setString(2, dto.getEndDate());
+				psmt.setString(3, dto.getId());
+				
+				count = psmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		return count > 0 ? true : false;
+		
+	}
+	
 	@Override
 	public int getSearchCountJournal(String stext) {
 		
@@ -434,6 +481,163 @@ public class DiaryDao implements DiaryImpl {
 		
 		return jcount;
 		
+	}
+
+	@Override
+	public void addLike(int seq, String id) {
+		
+		String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
+		
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, seq);
+			psmt.setString(2, id.trim());
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		
+	}
+
+	@Override
+	public void countLike(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT+1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public int Likecheack(int seq,String loginid) {
+
+		String sql = " SELECT ID "
+				+ " FROM LIKE_JOURNAL "
+				+ " WHERE ID = ? AND JSEQ = ?";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, loginid);
+			psmt.setInt(2, seq);
+
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
+	public int getJournalSeq(String tday) {
+		
+		String sql = " SELECT SEQ "
+				+ "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		int seq = -1;
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			psmt.setString(1, tday);
+			psmt.setString(2, tday);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				seq = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return seq;
+
+	}
+
+	@Override
+	public void deleteLike(int seq, String loginid) {
+		String sql = " DELETE FROM LIKE_JOURNAL "
+				+	" WHERE ID = ? AND JSEQ = ? " ;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			
+			psmt.setString(1, loginid.trim());
+			psmt.setInt(2, seq);
+			
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void countLikedel(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT-1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 

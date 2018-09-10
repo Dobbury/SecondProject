@@ -60,14 +60,14 @@ if(paging < 6){
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
-width:100%;height: 100%;padding-top: 280px;background-image: url('img/main_bg06.png');background-size: 100% 100%;
+width:100%;height: 100%;padding-top: 280px;background-image: url('img/b5.jpg');background-size: 100% 100%;
 background-position: center center ;
 transition: all 40s;
 	
  }
- .searchbg:hover{
+/*  .searchbg:hover{
  	background-size: 150% 150%;
- }
+ } */
  .searchbtn{
  	height: 40px;
     margin-left: -4px;
@@ -125,8 +125,33 @@ transition: all 40s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
+ 	.searchbtn{
+	height: 40px;
+    margin-left: -4px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+   background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+ 	.paging-box{
+ 		width: 100%;display: table;
+ 		    padding-top: 80px;
+ 	}
+ 	.paging-box a,strong {
+ 		margin: 3px;
+ 		color: #555;
+ 		    font-size: 14px;
+}
  	
- 	
+ 	.paging-box strong {
+ 		
+
+    color: red;
+ 	}
  </style>
   
 </head>
@@ -148,7 +173,7 @@ transition: all 40s;
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" value="">
 			</form>
 		  </div>
 		</div>
@@ -166,7 +191,7 @@ transition: all 40s;
 			for(int i = 0; i < journallist.size();i++){
 			%>
 				<div class="diary">
-					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
+					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
@@ -193,7 +218,7 @@ transition: all 40s;
 			
 			
 			
-			<div style="display: inline-block;">
+			<div class="paging-box">
 				<!-- paging -->
 				<div>
 				<%
@@ -235,17 +260,17 @@ transition: all 40s;
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
 		<!-- SCRIPTS -->
-  	<script type="text/javascript">
-  	function gocal() {  		
-  		location.href= "CalendarWrite.jsp";	
-	}
-  
-  </script>
+  		<script type="text/javascript">
+  			function gocal() {  		
+  				location.href= "CalendarWrite.jsp";	
+			}
+
+ 		 </script>
 	</div>
 
    </div>
 			
-		</div>
+</div>
 	
 	
 </main>
@@ -255,9 +280,9 @@ transition: all 40s;
   
 <jsp:include page="footer.jsp"></jsp:include> 
   
-  <script>
+<script> 
 
-	
+
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
 		  
@@ -265,7 +290,6 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
-  
   </script>
   <!-- 
 <script type="text/javascript">
@@ -303,7 +327,6 @@ $(function(){
 		
 	});
 });
-
 
 
 </script>
