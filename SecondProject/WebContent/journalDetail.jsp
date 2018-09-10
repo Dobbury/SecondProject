@@ -13,6 +13,7 @@
 
 <%
 
+
    request.setCharacterEncoding("utf-8");
 	DiaryImpl dao = DiaryDao.getInstance();
 
@@ -21,6 +22,7 @@
    
    String loginid = dto.getId();
    JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
    List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);

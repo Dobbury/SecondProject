@@ -83,7 +83,7 @@ request.setCharacterEncoding("utf-8");
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">마이페이지</a></li>
+          <li><a href="Mypage.jsp?page=1">마이페이지</a></li>
         </ul>
 
     </div>
@@ -151,6 +151,7 @@ request.setCharacterEncoding("utf-8");
 			 
 			String tday= calllist(year,month, day , true);
 			
+
 			
 			for(int i=0;i<list.size();i++){			
 				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
@@ -177,6 +178,7 @@ request.setCharacterEncoding("utf-8");
 			if(s == "")
 				s += String.format("%2d", day); //day를 2칸으로 다시 정정
 			s += "</div>";
+
 			return s;
 		}	
 		
@@ -333,10 +335,12 @@ request.setCharacterEncoding("utf-8");
 		                %>
 		                    <td><!-- 날짜 뿌리기 -->
 		                        <%=calllist(year, month, i ,false) %>		                    
+
 		                   
 		                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
 		                   		<%=dTitle(year, month, i, list) %>
 		                   				                   
+
 		                    </td>
 		                    
 		                <%

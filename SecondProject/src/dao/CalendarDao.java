@@ -26,7 +26,9 @@ public class CalendarDao implements CalendarImpl{
 		@Override
 		public List<DiaryDto> getCalList(String id) {
 			
+
 			String sql = " SELECT SEQ , TDAY , TITLE , CONTENT,JOUR_CHECK "
+
 					+ " FROM DIARY "
 					+ " WHERE ID = ? " ; 
 			
@@ -47,6 +49,7 @@ public class CalendarDao implements CalendarImpl{
 			
 				while(rs.next()) {
 					DiaryDto dto = new DiaryDto();
+
 					dto.setSeq(rs.getInt(1));
 					dto.setContent(rs.getString(4));					
 					dto.setTday(rs.getString(2));
@@ -55,6 +58,7 @@ public class CalendarDao implements CalendarImpl{
 					dto.setId(id);
 
 					list.add(dto);
+
 				}
 				System.out.println("3/6 getCalList ����"); 	
 				

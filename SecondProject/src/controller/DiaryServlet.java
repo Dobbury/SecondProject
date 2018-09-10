@@ -22,6 +22,7 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
+
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
 import dto.JournalDto;
@@ -32,7 +33,9 @@ import dto.PinDto;
 import dto.memberDto;
 
 
-public class DiaryServlet extends HttpServlet{
+
+public class DiaryServlet extends HttpServlet {
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +55,8 @@ public class DiaryServlet extends HttpServlet{
 		DiaryImpl dao = DiaryDao.getInstance();
 		
 		String command = req.getParameter("command");
-		
+
+
 		if (command.equals("insert")) {
 			System.out.println("1단계");
 			String content = req.getParameter("content");
@@ -121,6 +125,7 @@ public class DiaryServlet extends HttpServlet{
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setTday(tday);
+
 			System.out.println(pin_Seqs);
 			dto.setPin_Seqs(pin_Seqs);
 			dto.setFisrt_Img(fisrt_img);
@@ -128,7 +133,8 @@ public class DiaryServlet extends HttpServlet{
 			System.out.println("3단계");
 			boolean b = dao.addDiary(dto);
 			System.out.println("4단계");
-			
+
+
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
 		
@@ -243,6 +249,7 @@ public class DiaryServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 
+
 			DiaryDto dto = new DiaryDto();
 			dto.setContent(content);
 			dto.setId(id);
@@ -260,6 +267,7 @@ public class DiaryServlet extends HttpServlet{
 			
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
+
 
 		}else if(command.equals("journalUpdate")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
@@ -280,6 +288,7 @@ public class DiaryServlet extends HttpServlet{
 
 			
 		}else if(command.equals("journalDetail")) {
+
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
 	         
@@ -300,8 +309,6 @@ public class DiaryServlet extends HttpServlet{
 	         dispatch("journalDetail.jsp", req, resp);
 	         
 	      }
-		
-	
 		else if(command.equals("commentwrite")) { 
 				
 				
@@ -319,19 +326,17 @@ public class DiaryServlet extends HttpServlet{
 				
 				resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
 		        
-		       
-		        
-				
-				
-			}
+		}
 		else if(command.equals("deletecomment")) {
 			
 			int commentseq = Integer.parseInt(req.getParameter("commentseq"));
 			int count = dao.CommentDelete(commentseq);
-			if(count == 1) {
+
+			if (count == 1) {
 				System.out.println("삭제완료");
 			}else {
 				System.out.println("삭제실패");
+
 			}
 			
 			int seq = Integer.parseInt(req.getParameter("seq"));
@@ -369,7 +374,7 @@ public class DiaryServlet extends HttpServlet{
 		}else if(command.equals("search")) {
 			String stext = req.getParameter("stext");
 
-			
+
 			req.setAttribute("stext", stext);
 			dispatch("search.jsp?page=1", req, resp);
 			
@@ -423,57 +428,10 @@ public class DiaryServlet extends HttpServlet{
 				PrintWriter pw = resp.getWriter();
 				pw.print(b);				
 			}
+		}
 
 		}
-		/*else if(command.equals("paging")) {
-			int page = Integer.parseInt(req.getParameter("page"));
-			List<JournalDto> journallist = dao.getJournalList(page);
-			int jcount = dao.getCountJournal();
-			int pagecount = jcount/9;
-			if(pagecount%9>0) {
-				pagecount++;
-			}
-			int startPage = 0;
-			int endPage = 0;
-			if(page > 5){
-				startPage = page-5;
-			}
-			if(pagecount < page+5){
-				startPage = pagecount-10;
-			}
-			if(pagecount < 5){
-				startPage = 0;
-			}
-			if(page < 6){
-				endPage = 10;
-			}else{
-				endPage = page+5;
-			}
 
-			String result = "{\"list\":[";
-			for(JournalDto dto :journallist) {
-				   
-				   result+="{";
-				   
-				   result+="\"seq\":\""+dto.getSeq()+"\",\"startDate\":\""+dto.getStartDate()+"\",";
-				   result+="\"enddate\":\""+dto.getEndDate()+"\",\"readcount\":\""+dto.getReadcount()+"\",";
-				   result+="\"id\":\""+dto.getId()+"\",\"like_cnt\":\""+dto.getLike_cnt()+"\",";
-				   result+="\"wdate\":\""+dto.getWdate()+"\",\"title\":\""+dto.getTitle()+"\"},";
-			   }
-			result = result.substring(0, result.lastIndexOf(","));
-			result +="],";
-			result += "\"jcount\":" +jcount +",";
-			result += "\"pagecount\":" +pagecount +",";
-			result += "\"startPage\":" +startPage +",";
-			result += "\"endPage\":" +endPage +"\"}";
-			
-			
-			
-			PrintWriter pw = resp.getWriter();
-			pw.print(result);
-		}*/
-		
-	   }
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
 	         throws ServletException, IOException {
@@ -484,4 +442,5 @@ public class DiaryServlet extends HttpServlet{
 	
 
 	
+
 }
