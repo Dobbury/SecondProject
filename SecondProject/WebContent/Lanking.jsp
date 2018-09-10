@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.PinDao"%>
+<%@page import="Impl.PinImpl"%>
 <%@page import="dto.JournalDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.DiaryDao"%>
@@ -10,6 +13,24 @@
 	DiaryImpl dao = DiaryDao.getInstance();
 	
 	List<JournalDto> list = dao.getBestJournal();
+	
+	PinImpl pindao = PinDao.getInstance();
+	
+	List<String[]> pinlist = pindao.pinAVG();
+	
+	List<String[]> restolist = new ArrayList<>();
+	List<String[]> hotellist = new ArrayList<>();
+	List<String[]> tourlist = new ArrayList<>();
+	
+	for(int i = 0; i < pinlist.size();i++){
+		if(pinlist.get(i)[1].equals("resto")){
+			restolist.add(pinlist.get(i));
+		}else if(pinlist.get(i)[1].equals("hotel")){
+			hotellist.add(pinlist.get(i));
+		}else if(pinlist.get(i)[1].equals("tour")){
+			tourlist.add(pinlist.get(i));
+		}
+	}
 %>
 
 <html>
@@ -33,9 +54,23 @@
     padding: 10px;
     margin-bottom: 15px;
 }
+.lankbox ul{
+	padding: 0;
+	width: 100%;
+}
 .lankbox li {
 	margin: 5px 0;
-	list-style: decimal;
+    list-style: none;
+    width: 198px;
+}
+
+.lankbox li a{
+	color: #333;
+    font-size: 14px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 </style>
@@ -84,29 +119,46 @@
 	<div class="lankbox">
 		<div class="lankbox_title">장소</div>
 		 <ul style="display: table;">
-
-		 	<li><a href="Pindetail.jsp">d</a></li>
-
+		<%
+		for(int i = 0; i < tourlist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="Pindetail.jsp?pinname=<%=tourlist.get(i)[0]%>"><%=tourlist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 <div class="lankbox">
 		<div class="lankbox_title">맛집</div>
 		 <ul style="display: table;">
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
+		<%
+		for(int i = 0; i < restolist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="Pindetail.jsp?pinname=<%=restolist.get(i)[0]%>"><%=restolist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 	<div class="lankbox">
 		<div class="lankbox_title">숙소</div>
 		 <ul style="display: table;">
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
+		 <%
+		for(int i = 0; i < hotellist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="Pindetail.jsp?pinname=<%=hotellist.get(i)[0]%>"><%=hotellist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 

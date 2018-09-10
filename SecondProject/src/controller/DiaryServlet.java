@@ -367,7 +367,9 @@ public class DiaryServlet extends HttpServlet {
 			List<DiarycommentDto> list = dao.Commantview(seq);
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
+
 	        dispatch("journalDetail.jsp", req, resp);
+
 
 			
 		}else if(command.equals("search")) {
