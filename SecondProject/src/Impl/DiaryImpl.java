@@ -49,4 +49,6 @@ public interface DiaryImpl {
 	public void deleteLike(int seq,String loginid);
 	
 	public void countLikedel(int seq);
+	
+	public List<JournalDto> getBestJournal();
 }

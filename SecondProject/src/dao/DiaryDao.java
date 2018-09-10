@@ -640,5 +640,39 @@ public class DiaryDao implements DiaryImpl {
 		}
 	}
 
+	@Override
+	public List<JournalDto> getBestJournal() {
+		String sql = " SELECT A.RNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE " + 
+				" FROM (SELECT ROWNUM AS RNUM, SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ORDER BY LIKE_CNT DESC) A " + 
+				 "WHERE RNUM <= 4 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		List<JournalDto> list = new ArrayList<>();
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+						rs.getInt(7), rs.getString(8), rs.getString(9)));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+
 
 }

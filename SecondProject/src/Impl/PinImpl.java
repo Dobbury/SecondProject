@@ -27,5 +27,6 @@ public interface PinImpl {
 	
 	public List<PinDto> getSearchPinList(int page, String stext);
 	
-	public int getSearchPinCount(String stext); 
+	public int getSearchPinCount(String stext);
+	
 }
