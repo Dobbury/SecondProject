@@ -129,8 +129,10 @@
 
         <!-- Right -->
         <ul class="navbar-menu">
-          <li><a href="#">뉴스피드</a></li>
-          <li><a href="Lanking.jsp">이달의명소</a></li>
+
+          <li><a href="Newspeed.jsp?page=1">뉴스피드</a></li>
+          <li><a href="Pinspeed.jsp?page=1">장소정보</a></li>
+          <li><a href="Lanking.jsp">이달의 명소</a></li>
           <li><a href="Mypage.jsp">마이페이지</a></li>
         </ul>
 
