@@ -447,4 +447,5 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		
 		return pcount;
 	}
+
 }
