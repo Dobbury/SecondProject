@@ -198,7 +198,7 @@ ul.tab li.current {
       </ul>
 
       <div id="tab1" class="tabcontent current">
-         <h3>내가 쓴 글 보기</h3>
+         
          <main style="padding-top:80px;">
          <div
             style="width: 100%; text-align: center; padding: 20px 0 20px 0;">
@@ -230,7 +230,7 @@ ul.tab li.current {
 
       <div id="tab2" class="tabcontent">
          <h3>회원정보 수정</h3>
-         <p>회원정보 수정하는 칸</p>
+        
          <table>
             <tr>
                <td>ID</td>
