@@ -1,7 +1,6 @@
-<%@page import="dto.JournalDto"%>
-<%@page import="dto.DiaryDto"%>
-<%@page import="dao.DiaryDao"%>
-<%@page import="Impl.DiaryImpl"%>
+<%@page import="dto.PinDto"%>
+<%@page import="dao.PinDao"%>
+<%@page import="Impl.PinImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.memberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,16 +9,16 @@
 
 <%
 request.setCharacterEncoding("utf-8");
-DiaryImpl dao = DiaryDao.getInstance();
+PinImpl dao = PinDao.getInstance();
 
 int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
-System.out.println(jcount);
-List<JournalDto> journallist = dao.getJournalList(paging);
-int pagecount = 0;
-if(jcount != 0){
-	pagecount = jcount/9;
-	if(pagecount%jcount>0){
+int pcount = dao.getAllPinCount();
+
+List<PinDto> pinlist = dao.getAllPinList(paging);
+int pagecount = 1;
+pagecount = pcount/9;
+if(pcount != 0){
+	if(pagecount%pcount>0){
 		pagecount++;
 	}
 }
@@ -158,31 +157,23 @@ transition: all 40s;
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">장소정보</h3>
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
 			
-			for(int i = 0; i < journallist.size();i++){
+			for(int i = 0; i < pinlist.size();i++){
 			%>
 				<div class="diary">
-					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
+					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i).getPin_name()%>">
 						<div class="Dimage" style="">
 						</div>
-						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
+						<p class="diary-title"><%=pinlist.get(i).getPin_name() %></p>
 					</a>
 					<div class="diary-textbox">
-					<span class="diary-id"><%=journallist.get(i).getId() %> 님</span>
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=journallist.get(i).getWdate().substring(0,10) %></span>	
+					<span class="diary-date"><%=pinlist.get(i).getKinds() %></span>	
 					
-					</div>
-					<div class="diary-heartbox">
-					<span style="text-align: right;color: #888;font-size: 14px;">
-					<span class="diary-heart"></span>
-
-					<%=journallist.get(i).getLike_cnt() %>
-					</span>
 					</div>
 				</div>
 			<%
@@ -200,7 +191,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./Pinspeed.jsp?page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
@@ -208,7 +199,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./Pinspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -222,7 +213,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./Pinspeed.jsp?page=<%=paging+1%>">&gt;</a>
 			<%
 			}
 			%>
@@ -230,17 +221,6 @@ transition: all 40s;
 				 
 				<!-- // paging -->
 			</div>
-			
-			
-			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
-		<!-- SCRIPTS -->
-  	<script type="text/javascript">
-  	function gocal() {  		
-  		location.href= "CalendarWrite.jsp";	
-	}
-  
-  </script>
 	</div>
 
    </div>
@@ -267,46 +247,7 @@ transition: all 40s;
 	  
   
   </script>
-  <!-- 
-<script type="text/javascript">
-
-$(function(){
-	$(".page").click(function () {
-		$.ajax({
-			url : "DiaryServlet",
-			type : "GET",
-			data : {
-				command : "paging",
-				page : $(this).html()
-			},
-			datatype : "json",
-			success : function(data) {
-				journallist = JSON.parse(data);
-				
-				var o = "";
-				for (i = 0; i < journallist.length; i++) {
-					o += "<div class='diary' style='width: 300px;height: 300px;text-align: center; vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;'>"
-					+"<a href='DiaryServlet?command=diaryDetail&seq="+journallist[i].seq+"'>"
-						+"<div class='Dimage' style='border:none'>"
-						+"</div>"
-						+"<p style='margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;'>"+journallist[i].title+"</p>"
-					+"</a>"
-					+"<span style='text-align: right;color: #888;font-size: 14px;'>" + journallist[i].readcount + "</span>"
-					+"<span style='text-align: left;color: #888;font-size: 14px;'>"+journallist[i].wdate.substring(0,10)+"</span>"	
-				+"</div>";
-				}
-				$("#tourSel").append(o);
-			},
-			error : function() {
-			}
-		});
-		
-	});
-});
 
 
-
-</script>
--->
 </body>
 </html>

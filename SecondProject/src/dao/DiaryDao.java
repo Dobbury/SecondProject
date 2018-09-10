@@ -211,6 +211,7 @@ public class DiaryDao implements DiaryImpl {
 		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) "
 				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
 
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 
@@ -243,7 +244,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
 		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY " + " FROM DIARYCOMMENT " + " WHERE DSEQ = ? "
-				+ " ORDER BY SEQ ASC ";
+				+ " ORDER BY DDAY DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
