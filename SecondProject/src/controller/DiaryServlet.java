@@ -347,29 +347,7 @@ public class DiaryServlet extends HttpServlet {
 			List<DiarycommentDto> list = dao.Commantview(seq);
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
-	        dispatch("journalDetail.jsp", req, resp);
-
-
-			PrintWriter pw = resp.getWriter();
-			
-			
-			String endDate = req.getParameter("enddate");
-			String startDate = req.getParameter("startdate");
-			String id = ((memberDto)req.getSession().getAttribute("user")).getId();
-			String title = req.getParameter("title");
-			
-			System.out.println(endDate +" "+startDate+" "+id + "  "+ title);
-			int cnt = Integer.parseInt(endDate)-Integer.parseInt(startDate)+1;
-			if(cnt != dao.getDiaryCount(startDate, endDate,id)) {
-				pw.print("cntfalse");
-				return;
-			}
-			
-			if(cnt != dao.checkJournal(startDate, endDate,id)) {
-				pw.print("checkfalse");
-				return;
-			}
-			
+	        dispatch("journalDetail.jsp", req, resp);		
 
 			
 		}else if(command.equals("search")) {
