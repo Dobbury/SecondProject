@@ -1,3 +1,4 @@
+
 <%@page import="dto.PinDto"%>
 <%@page import="dao.PinDao"%>
 <%@page import="Impl.PinImpl"%>
@@ -8,13 +9,14 @@
     
 
 <%
+
 request.setCharacterEncoding("utf-8");
 PinImpl dao = PinDao.getInstance();
-
+String stext = request.getParameter("stext");
 int paging = Integer.parseInt(request.getParameter("page"));
-int pcount = dao.getAllPinCount();
+int pcount = dao.getSearchPinCount(stext);
 
-List<PinDto> pinlist = dao.getAllPinList(paging);
+List<PinDto> pinlist = dao.getSearchPinList(paging, stext);
 int pagecount = 1;
 pagecount = pcount/9;
 if(pcount != 0){
@@ -39,6 +41,7 @@ if(paging < 6){
 }else{
 	endPage = paging+5;
 }
+
 
 %>
 
@@ -82,9 +85,7 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
- 	
- 	
-.fadeInUp {
+ 	.fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
@@ -124,8 +125,33 @@ transition: all 40s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
+.searchbtn{
+	height: 40px;
+    margin-left: -4px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+ 	.paging-box{
+ 		width: 100%;display: table;
+ 		    padding-top: 80px;
+ 	}
+ 	.paging-box a,strong {
+ 		margin: 3px;
+ 		color: #555;
+ 		    font-size: 14px;
+}
  	
- 	
+ 	.paging-box strong {
+
+    color: red;
+ 	}
  </style>
   
 </head>
@@ -145,31 +171,28 @@ transition: all 40s;
           <form action="Pinsearch.jsp" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
-			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
-			<input type="submit" class="fa fa-search fa-2x" style="height: 40px;margin-left: -4px;">
+			<input type="submit" class="searchbtn" value="">
 			</form>
 		  </div>
 		</div>
 		
   
-<main style="padding-top:80px;">
+<main id="main" style="padding-top:80px;">
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">장소정보</h3>
+		<h3 style="margin-left: 35px;font-weight: 700;">장소정보</h3>
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
-			
+			if(pinlist.size()!=0){
 			for(int i = 0; i < pinlist.size();i++){
 			%>
 				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i).getPin_name()%>">
 						<div class="Dimage" style="">
-							<img style="width: 400px; height: 300px;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>&zoom=13&size=600x300&maptype=roadmap
-								&markers=color:blue%7Clabel:S%7C<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>
-								&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
 						</div>
 						<p class="diary-title"><%=pinlist.get(i).getPin_name() %></p>
 					</a>
@@ -177,7 +200,19 @@ transition: all 40s;
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
 					<span class="diary-date"><%=pinlist.get(i).getKinds() %></span>	
 					
+					
 					</div>
+					
+				</div>
+			<%
+			}
+			}else{
+			%>
+			<div style="padding: 100px;padding: 100px;    background-color: #f9f9f9; width: 94%;margin: 10px auto;">
+			<img alt="노데이터" src="img/no-data.png" style="width: 100px;">
+				<div style="font-size: 26px;margin-top: 20px;">
+				검색결과가 없습니다.
+				</div>
 				</div>
 			<%
 			}
@@ -186,23 +221,25 @@ transition: all 40s;
 			
 			
 			
-			
-			<div style="display: inline-block;">
+			<div class="paging-box">
+			<div >
 				<!-- paging -->
 				<div>
 				<%
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Pinspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./Pinsearch.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
+				
 			<%
+			
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Pinspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./Pinsearch.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -213,10 +250,11 @@ transition: all 40s;
 					break;
 				}
 			}
+			
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Pinspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./Pinsearch.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -224,6 +262,10 @@ transition: all 40s;
 				 
 				<!-- // paging -->
 			</div>
+			</div>
+			
+			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+		<button style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>
@@ -237,6 +279,24 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
+
+   
+   
+   
+  <!-- SCRIPTS -->
+  <script type="text/javascript">
+  $(function(){
+	 $("#stext").val('<%=stext%>'); 
+	 
+	 var scmove = $('#main').offset().top;
+	 $('html, body').animate( { scrollTop : scmove }, 400 );
+  });
+  
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
+  
+  </script>
   
   <script>
 

@@ -348,7 +348,7 @@ public class DiaryServlet extends HttpServlet {
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
 	        dispatch("journalDetail.jsp", req, resp);
-			
+
 
 			PrintWriter pw = resp.getWriter();
 			
@@ -370,6 +370,7 @@ public class DiaryServlet extends HttpServlet {
 				return;
 			}
 			
+
 			
 		}else if(command.equals("search")) {
 			String stext = req.getParameter("stext");
@@ -409,6 +410,41 @@ public class DiaryServlet extends HttpServlet {
 			req.setAttribute("stext", stext);
 			dispatch("search.jsp?page=1", req, resp);
 			
+		}else if (command.equals("jourInsert")) {
+			
+			PrintWriter pw = resp.getWriter();
+			
+			
+			String endDate = req.getParameter("enddate");
+			String startDate = req.getParameter("startdate");
+			String id = ((memberDto)req.getSession().getAttribute("user")).getId();
+			String title = req.getParameter("title");
+			
+			System.out.println(endDate +" "+startDate+" "+id + "  "+ title);
+			int cnt = Integer.parseInt(endDate)-Integer.parseInt(startDate)+1;
+			if(cnt != dao.getDiaryCount(startDate, endDate,id)) {
+				pw.print("cntfalse");
+				return;
+			}
+			
+			if(cnt != dao.checkJournal(startDate, endDate,id)) {
+				pw.print("checkfalse");
+				return;
+			}
+			
+			JournalDto dto = new JournalDto();
+			
+			dto.setEndDate(endDate);
+			dto.setStartDate(startDate);
+			dto.setId(id);
+			dto.setTitle(title);
+	
+			dao.addJournal(dto);
+			
+			
+			
+			pw.print(true);
+
 		}else if(command.equals("jourCancle")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			String id = ((memberDto)req.getSession().getAttribute("user")).getId();

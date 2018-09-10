@@ -136,9 +136,14 @@ public class DiaryDao implements DiaryImpl {
 		ResultSet rs = null;
 
 		JournalDto dto = null;
+
 		try {
 			conn = DBConnection.makeConnection();
 			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			psmt.setInt(1, seq);
 
 			rs = psmt.executeQuery();
 
@@ -146,9 +151,7 @@ public class DiaryDao implements DiaryImpl {
 				dto = new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
 						rs.getInt(6), rs.getString(7), rs.getString(8));
 			}
-		} catch (
-
-		SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("get information failed");
 		} finally {
 			DBClose.close(psmt, conn, rs);
@@ -181,9 +184,12 @@ public class DiaryDao implements DiaryImpl {
 			rs = psmt.executeQuery();
 			System.out.println("4/6 getMemInfo suceess");
 			while (rs.next()) {
-
-				list.add(new DiaryDto(rs.getString(7), rs.getString(6), rs.getString(5), rs.getString(4),
-						rs.getString(3), rs.getInt(2), rs.getInt(1), ""));
+				String content = rs.getString(7);
+				
+				content = content.replaceAll("\\\\\"", "\"");
+				System.out.println("하위:"+content);
+				list.add(new DiaryDto(content,rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(3),rs.getInt(2),
+						rs.getInt(1),""));
 
 			}
 			System.out.println("5/6 getMemInfo suceess");
@@ -232,7 +238,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
 		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY " + " FROM DIARYCOMMENT " + " WHERE DSEQ = ? "
-				+ " ORDER BY DDAY DESC ";
+				+ " ORDER BY SEQ ASC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -251,6 +257,10 @@ public class DiaryDao implements DiaryImpl {
 
 			rs = psmt.executeQuery();
 
+			while (rs.next()) {
+				list.add(new DiarycommentDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+
+			}
 		} catch (SQLException e) {
 			System.out.println("get information failed");
 		} finally {
