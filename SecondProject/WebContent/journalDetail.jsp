@@ -69,7 +69,7 @@ html, body, header, .view {
     color: #777;
     display: inline-block;
     margin-right: 12px;
-    margin-left: 9px;
+    margin-left: 5px;
 }
 .journal-date{
 	font-size: 14px;
@@ -88,7 +88,15 @@ html, body, header, .view {
    border: 1px solid;
     height: 400px;
 }
+.diary-cont{
+    padding: 40px;
+    margin-top: 20px;
+    background-color: #fff;
+    -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 
+}
 
 
 .diary-t .map {
@@ -184,11 +192,7 @@ html, body, header, .view {
       
    
       
-   <div style="   padding: 40px;margin-top:20px;
-    background-color: #fff;
-       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
--moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
+
    
    
       <div class="diary-m">
@@ -209,7 +213,6 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
          <%
                }
       %>
-      </div>
       </div>
 
 	<div class="like_view">
