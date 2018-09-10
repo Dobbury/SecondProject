@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -294,13 +295,33 @@ public class DiaryServlet extends HttpServlet {
 	         
 	         JournalDto dto = dao.getJournalDto(seq);
 	         
-	         
 	        
 	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
 	         
+	         Map<Integer,List<String[]>> map = new HashMap<>();
+	         for(DiaryDto dDto : Diarylist) {
+	        	 
+	        	 String pins[]=dDto.getPin_Seqs().split(",");
+	        	 
+	        	 List<String[]> latlnglist = new ArrayList<>();
+	        	 for(String pinSeq : pins) {
+	        		 PinImpl pDao = PinDao.getInstance();
+	        		 pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
+	        		 String pinname=pCDto.getPinname();
+	        		 PinDto pin = pDao.getPin(pinname);
+	        		 
+	        		 String location[] = { pin.getLat()+"",pin.getLng()+""};
+	        		 System.out.println(pin.getLat()+" "+pin.getLng());
+	        		 latlnglist.add(location);
+	        	 }
+	        	 
+	        	 map.put(dDto.getSeq(), latlnglist);
+	         }
+	         /*Diarylist.get(1).getPin_Seqs();*/
+	         
 	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
 	         
-	         
+	         req.setAttribute("locations", map);
 	         req.setAttribute("JournalDto", dto);
 	         req.setAttribute("DiaryList", Diarylist);
 	         List<DiarycommentDto> list = dao.Commantview(seq);

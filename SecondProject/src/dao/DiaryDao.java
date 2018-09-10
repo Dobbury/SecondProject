@@ -484,353 +484,388 @@ public class DiaryDao implements DiaryImpl {
          DBClose.close(psmt, conn, null);
       }
 
-      return count > 0 ? true : false;
-   }
 
-   @Override
-   public boolean addJournal(JournalDto dto) {
+		return count > 0 ? true : false;
+	}
 
-      String sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL)";
+	@Override
+	public boolean addJournal(JournalDto dto) {
 
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      int count = 0;
+		String sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL)";
 
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
 
-         psmt.setString(1, dto.getTitle());
-         psmt.setString(2, dto.getId());
-         psmt.setString(3, dto.getEndDate());
-         psmt.setString(4, dto.getStartDate());
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
 
-         count = psmt.executeUpdate();
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getId());
+			psmt.setString(3, dto.getEndDate());
+			psmt.setString(4, dto.getStartDate());
 
-         System.out.println(dto.getStartDate() + " " + dto.getEndDate());
-         DBClose.close(psmt, conn, null);
+			count = psmt.executeUpdate();
 
-         if (count > 0 ? true : false) {
-            sql = "UPDATE DIARY SET JOUR_CHECK=1 WHERE ? <= TDAY AND ? >= TDAY AND ID=?";
+			System.out.println(dto.getStartDate() + " " + dto.getEndDate());
+			DBClose.close(psmt, conn, null);
 
-            conn = DBConnection.makeConnection();
-            psmt = conn.prepareStatement(sql);
+			if (count > 0 ? true : false) {
+				sql = "UPDATE DIARY SET JOUR_CHECK=1 WHERE ? <= TDAY AND ? >= TDAY AND ID=?";
 
-            psmt.setString(1, dto.getStartDate());
-            psmt.setString(2, dto.getEndDate());
-            psmt.setString(3, dto.getId());
+				conn = DBConnection.makeConnection();
+				psmt = conn.prepareStatement(sql);
 
-            count = psmt.executeUpdate();
-         }
-      } catch (Exception e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      } finally {
-         DBClose.close(psmt, conn, null);
-      }
+				psmt.setString(1, dto.getStartDate());
+				psmt.setString(2, dto.getEndDate());
+				psmt.setString(3, dto.getId());
 
-      return count > 0 ? true : false;
+				count = psmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
 
-   }
+		return count > 0 ? true : false;
 
-   @Override
-   public int getSearchCountJournal(String stext) {
+	}
 
-      String sql = " SELECT COUNT(*) FROM JOURNAL WHERE TITLE LIKE('%" + stext + "%') ";
+	@Override
+	public int getSearchCountJournal(String stext) {
 
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      ResultSet rs = null;
+		String sql = " SELECT COUNT(*) FROM JOURNAL WHERE TITLE LIKE('%" + stext + "%') ";
 
-      int jcount = 0;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
 
-      try {
-         conn = DBConnection.makeConnection();
-         System.out.println("1/6 getMemInfo suceess");
+		int jcount = 0;
 
-         psmt = conn.prepareStatement(sql);
-         System.out.println("2/6 getMemInfo suceess");
-         rs = psmt.executeQuery();
-         if (rs.next()) {
-            jcount = rs.getInt(1);
-         }
-      } catch (SQLException e) {
-         System.out.println("get information failed");
-      } finally {
-         DBClose.close(psmt, conn, rs);
-      }
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
 
-      return jcount;
-      
-   }
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				jcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
 
-   @Override
-   public void addLike(int seq, String id) {
+		return jcount;
+		
+	}
 
-      
-      String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
-            + " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
-      
+	@Override
+	public void addLike(int seq, String id) {
 
-      Connection conn = null;
-      PreparedStatement psmt = null;
+		
+		String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
+		
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
 
 
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
 
-         psmt.setInt(1, seq);
-         psmt.setString(2, id.trim());
-         psmt.executeUpdate();
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      } finally {
-         DBClose.close(psmt, conn, null);
-      }
+			psmt.setInt(1, seq);
+			psmt.setString(2, id.trim());
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
 
-      
-   }
+		
+	}
 
-   @Override
-   public void countLike(int seq) {
-      
-      String sql = " UPDATE JOURNAL "
-            + " SET LIKE_CNT = LIKE_CNT+1 "
-            + " WHERE SEQ = ? ";
-                  
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      
-      conn = DBConnection.makeConnection();
+	@Override
+	public void countLike(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT+1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
 
-      try {
-         psmt = conn.prepareStatement(sql);
-         
-         psmt.setInt(1, seq);
-         
-         psmt.executeUpdate();
-         
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
-      
-   }
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
-   @Override
-   public int Likecheack(int seq,String loginid) {
+	@Override
+	public int Likecheack(int seq,String loginid) {
 
-      String sql = " SELECT ID "
-            + " FROM LIKE_JOURNAL "
-            + " WHERE ID = ? AND JSEQ = ?";
+		String sql = " SELECT ID "
+				+ " FROM LIKE_JOURNAL "
+				+ " WHERE ID = ? AND JSEQ = ?";
 
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      int count = 0;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
 
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
-         psmt.setString(1, loginid);
-         psmt.setInt(2, seq);
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, loginid);
+			psmt.setInt(2, seq);
 
-         count = psmt.executeUpdate();
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
-      return count;
-   }
-   
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 
-   public int getJournalSeq(String tday) {
-      System.out.println("getJournalSeqTest: "+tday);
-      String sql = " SELECT SEQ "
-            + "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
+	public int getJournalSeq(String tday) {
+		System.out.println("getJournalSeqTest: "+tday);
+		String sql = " SELECT SEQ "
+				+ "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
 
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      ResultSet rs = null;
-      
-      int seq = -1;
-      try {
-         conn = DBConnection.makeConnection();
-         System.out.println("1/6 getMemInfo suceess");
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		int seq = -1;
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
 
-         psmt = conn.prepareStatement(sql);
-         System.out.println("2/6 getMemInfo suceess");
-         psmt.setString(1, tday.substring(0, 10));
-         psmt.setString(2, tday.substring(0,10));
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+			psmt.setString(1, tday.substring(0, 10));
+			psmt.setString(2, tday.substring(0,10));
 
-         rs = psmt.executeQuery();
+			rs = psmt.executeQuery();
 
-         if (rs.next()) {
-            seq = rs.getInt(1);
-         }
-      } catch (SQLException e) {
-         System.out.println("get information failed");
-      } finally {
-         DBClose.close(psmt, conn, rs);
-      }
-      return seq;
+			if (rs.next()) {
+				seq = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return seq;
 
-   }
-   
-   @Override
-   public int getDiaryCount(String startdate, String enddate,String id) {
-      String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ?";
-      
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      ResultSet rs= null;
-      
-      int count=0;
-      try {
+	}
+	
+	@Override
+	public int getDiaryCount(String startdate, String enddate,String id) {
+		String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs= null;
+		
+		int count=0;
+		try {
 
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
-         
-         psmt.setString(1, startdate);
-         psmt.setString(2, enddate);
-         psmt.setString(3, id);
-         
-         rs = psmt.executeQuery();
-         
-         if(rs.next()) {
-            count = rs.getInt(1);
-         }
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      return count;
-   }
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, startdate);
+			psmt.setString(2, enddate);
+			psmt.setString(3, id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 
-   @Override
-   public int checkJournal(String startDate, String endDate,String id) {
-      String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? AND JOUR_CHECK=0";
-      
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      ResultSet rs= null;
-      
-      int count=0;
-      try {
+	@Override
+	public int checkJournal(String startDate, String endDate,String id) {
+		String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? AND JOUR_CHECK=0";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs= null;
+		
+		int count=0;
+		try {
 
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
-         
-         psmt.setString(1, startDate);
-         psmt.setString(2, endDate);
-         psmt.setString(3, id);
-         
-         rs = psmt.executeQuery();
-         
-         if(rs.next()) {
-            count = rs.getInt(1);
-         }
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      return count;
-   }
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, startDate);
+			psmt.setString(2, endDate);
+			psmt.setString(3, id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 
-   @Override
-   public boolean changeDiariesJour_Check_zero(String id, String startDate, String endDate) {
-      String sql ="UPDATE DIARY SET JOUR_CHECK=0 WHERE ID=? AND ?<=TDAY AND ? >=TDAY";
-      
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      
-      int count=0;
-      
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
-         
-         psmt.setString(1, id);
-         psmt.setString(2, startDate);
-         psmt.setString(3, endDate);
-         
-         count=psmt.executeUpdate();
-         
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      
-      return count>0 ? true:false;
-   }
+	@Override
+	public boolean changeDiariesJour_Check_zero(String id, String startDate, String endDate) {
+		String sql ="UPDATE DIARY SET JOUR_CHECK=0 WHERE ID=? AND ?<=TDAY AND ? >=TDAY";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, id);
+			psmt.setString(2, startDate);
+			psmt.setString(3, endDate);
+			
+			count=psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0 ? true:false;
+	}
 
-   @Override
-   public boolean deleteJournal(int seq) {
-      String sql ="DELETE FROM JOURNAL WHERE SEQ=?";
-      
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      
-      int count=0;
-      
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
-         
-         psmt.setInt(1, seq);
-         
-         count=psmt.executeUpdate();
-         
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      
-      return count>0 ? true:false;
-   }
-   @Override
-   public void deleteLike(int seq, String loginid) {
-      String sql = " DELETE FROM LIKE_JOURNAL "
-            +   " WHERE ID = ? AND JSEQ = ? " ;
-      Connection conn = null;
-      PreparedStatement psmt = null;
+	@Override
+	public boolean deleteJournal(int seq) {
+		String sql ="DELETE FROM JOURNAL WHERE SEQ=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			count=psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0 ? true:false;
+	}
+	@Override
+	public void deleteLike(int seq, String loginid) {
+		String sql = " DELETE FROM LIKE_JOURNAL "
+				+	" WHERE ID = ? AND JSEQ = ? " ;
+		Connection conn = null;
+		PreparedStatement psmt = null;
 
-      try {
-         conn = DBConnection.makeConnection();
-         psmt = conn.prepareStatement(sql);
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
 
-         
-         psmt.setString(1, loginid.trim());
-         psmt.setInt(2, seq);
-         
-         psmt.executeUpdate();
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
-      
-   }
+			
+			psmt.setString(1, loginid.trim());
+			psmt.setInt(2, seq);
+			
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
-   @Override
-   public void countLikedel(int seq) {
-      
-      String sql = " UPDATE JOURNAL "
-            + " SET LIKE_CNT = LIKE_CNT-1 "
-            + " WHERE SEQ = ? ";
-                  
-      Connection conn = null;
-      PreparedStatement psmt = null;
-      
-      conn = DBConnection.makeConnection();
+	@Override
+	public void countLikedel(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT-1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
 
-      try {
-         psmt = conn.prepareStatement(sql);
-         psmt.setInt(1, seq);
-         psmt.executeUpdate();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			psmt.executeUpdate();
 
-         
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
-   }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<JournalDto> getBestJournal() {
+		String sql = " SELECT A.RNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE " + 
+				" FROM (SELECT ROWNUM AS RNUM, SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ORDER BY LIKE_CNT DESC) A " + 
+				 "WHERE RNUM <= 4 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		List<JournalDto> list = new ArrayList<>();
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 getMemInfo suceess");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getMemInfo suceess");
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+						rs.getInt(7), rs.getString(8), rs.getString(9)));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("get information failed");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
 
 
 

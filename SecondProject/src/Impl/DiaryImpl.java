@@ -65,6 +65,7 @@ public interface DiaryImpl {
 	
 	public void countLikedel(int seq);
 
+	public List<JournalDto> getBestJournal();
 
 }
 
