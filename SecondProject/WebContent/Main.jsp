@@ -37,14 +37,19 @@
    /* Style for our header texts
    * --------------------------------------- */
    h1{
-      font-size: 5em;
+      font-size: 4em;
       font-family: arial,helvetica;
       margin:0;
       padding:0;
+      color: #fff;
    }
+   h1:after {display: block; width: 200px; margin: 20px auto;border-bottom: 1px solid #fff;}
+   
    h2{
-      font-size: 2em;
-      margin: 0 0 18px 0;
+      font-size: 20px;
+          margin: 40px 0 50px 0;
+      color: #ffffff;
+   	   opacity: 0.5;
       font-family: arial,helvetica;
    }
 
@@ -53,24 +58,23 @@
    .section{
       text-align:center;
       overflow:hidden;
-      padding-top: 330px;
+        padding-top: 255px;
    }
 
    /* header */
    .header{
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #333;
-      z-index: 10;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    z-index: 10;
+    background: linear-gradient(to top, transparent, rgba(0,0,0,0.6) 100%);
    }
    .header ul{
-      width: 80%;
+      width: 98%;
        height: 100%;
-       padding: 18px 40px;
+      padding: 28px 40px;
        margin: 0 auto;
-       background-color: #fff;
        box-sizing: border-box;
    }
    .header ul .left{
@@ -79,8 +83,34 @@
    .header ul .rigth{
       float: right;
    }
-   
-
+   .navbar-brand {
+    	    background-image: url(img/logo.png);
+    background-size: 100% 100%;
+    width: 150px;
+    height: 37px;
+    margin-bottom: 5px;
+    float: left;
+    }
+#fp-nav ul li, .fp-slidesNav ul li{
+	    height: 36px;
+	    width: 30px;
+	    
+}
+#fp-nav ul li a span, .fp-slidesNav ul li a span{
+	width: 15px;
+	height: 15px;
+	 background: #fff;
+	 opacity: 0.7;
+}
+#fp-nav ul li a.active span, .fp-slidesNav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li:hover a.active span{
+	    height: 27px;
+    width: 15px;
+    margin: -9px 0px 0 -2px;
+    border-radius: 27%;
+}
+#fp-nav ul li a.active span {
+	opacity: 1;
+}
    
    /* Overwriting fullPage.js tooltip color
    * --------------------------------------- */
@@ -88,12 +118,47 @@
       color: #AAA;
    }
    #fp-nav span, .fp-slidesNav span{
-      border-color: #AAA;
+      border-color: #fff;
    }
    #fp-nav li .active span, .fp-slidesNav .active span{
-      background: #AAA;
+      background: #fff;
    }
-
+	
+	
+	#section0{
+		background-image: url('img/main_bg02.png');
+		background-size: 100% 100%;
+	}#section1{
+		background-image: url('img/main_bg03.png');
+		background-size: 100% 100%;
+	}#section2{
+		background-image: url('img/main_bg01.png');
+		background-size: 100% 100%;
+	}
+	.mainbtn{
+	background: darkmagenta;
+    border-radius: 40px;
+    margin-bottom: 17px;
+    width: 180px;
+    height: 50px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+	}
+	.mainbtn2{
+	font-size: 12px;
+    width: 90px;
+    height: 32px;
+    border-radius: 20px;
+    background: darkmagenta;
+    color: #fff;
+    
+	
+	/* .scene {display: block; position: relative; width: 100%; 
+	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}  */
+   
+	
    </style>
 
 
@@ -105,9 +170,9 @@
 <div class="header">
 
       <ul>
-        <li class="left"><a href="#">로고</a></li>
+        <li class="left"><a href="#" class="navbar-brand"></a></li>
         <li class="rigth">
-   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+   <button type="button" class="btn mainbtn2" data-toggle="modal" data-target="#basicExampleModal" style="">
   로그인
 </button>
          </li>
@@ -116,28 +181,26 @@
 
 
 
+
 <div id="fullpage">
 
-   <div class="section" id="section0">
-      <h1>섹션1</h1>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
+   <div class="scene section" id="section0">
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
+      <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    
-   <div class="section" id="section1">
-   <h1>섹션2</h1>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
+   <div class="scene section" id="section1">
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
+      <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    
 
-   <div class="section moveDown" id="section2">
-   <h1>섹션3</h1>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  시작하기
-</button>
+   <div class="scene section moveDown" id="section2">
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
+      <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    
 </div>
@@ -145,38 +208,43 @@
 
 <!-- Modal -->
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" style="max-width: 330px;    top: 15%;">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <div class="modal-header" style="border-bottom: none">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="MemberServlet?command=login" method="post">
-      <div class="modal-body">
-
-         아이디 : <input type="text" name="id"><br><br>
-         비밀번호 : <input type="password" name="pw"> 
-      </div>
-      <div class="modal-footer">
-      <input type="submit" class="btn btn-primary" value="로그인">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="signup">회원가입</button>
-      </div>
+      <form action="MemberServlet" method="post">
+      <input type="hidden" name="command" value="login">
+      <input type="hidden" name="page" value="1">
+      <div class="modal-body" style="text-align: center;padding-bottom: 20px;">
+	<div>
+		<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;text-align: left;">아이디</p>
+      <input type="text" name="id"  style="width: 240px;height: 30px;">
+    </div>
+    <div>
+    	<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;margin-top: 10px;text-align: left;">비밀번호</p>
+        <input type="password" name="pw" style="width: 240px;height: 30px;"> 
+    </div>
+      <div style="margin: 10px 0 10px 0">
+      <input type="submit" class="btn btn-primary" value="로그인" style="width: 240px;display: block;margin: 0 auto;margin-top: 20px;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="signup"style=";width: 240px;display: block;margin: 0 auto;margin-top:5px">회원가입</button>
+        </div>
+        </div>
       </form>
+      
     </div>
   </div>
-</div>
+</div>	
 
 
 <!-- 풀페이지 관련 스크립트 -->
 
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script> -->
    <script type="text/javascript" src="fullPage/jquery.fullPage.js"></script>
    <script type="text/javascript" src="fullPage/examples/examples.js"></script>
 
-   <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function() {
          $('#fullpage').fullpage({
             'verticalCentered': false,
@@ -184,7 +252,7 @@
             'sectionsColor': ['#F0F2F4', '#fff', '#fff', '#fff'],
             'navigation': true,
             'navigationPosition': 'right',
-            'navigationTooltips': ['fullPage.js', 'Powerful', 'Amazing', 'Simple'],
+            'navigationTooltips': [],
 
             'afterLoad': function(anchorLink, index){
                if(index == 2){
@@ -209,7 +277,7 @@
             location.href="MemberServlet?command=signPage";
          });
       });
-   </script>
+   </script> 
 
 </body>
 </html>

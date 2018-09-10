@@ -12,20 +12,16 @@
 request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
-
 int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
+String stext = request.getParameter("stext");
+int jcount = dao.getSearchCountJournal(stext);
 
-
-System.out.println(jcount);
-List<JournalDto> journallist = dao.getJournalList(paging);
-int pagecount = 0;
-if(jcount != 0){
-	pagecount = jcount/9;
+List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
+int pagecount = jcount/9;
+if(jcount!=0){
 	if(pagecount%jcount>0){
 		pagecount++;
 	}
-
 }
 
 int startPage = 0;
@@ -64,14 +60,14 @@ if(paging < 6){
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
-width:100%;height: 100%;padding-top: 280px;background-image: url('img/b5.jpg');background-size: 100% 100%;
+width:100%;height: 100%;padding-top: 280px;background-image: url('img/main_bg06.png');background-size: 100% 100%;
 background-position: center center ;
 transition: all 40s;
 	
  }
-/*  .searchbg:hover{
+ .searchbg:hover{
  	background-size: 150% 150%;
- } */
+ }
  .searchbtn{
  	height: 40px;
     margin-left: -4px;
@@ -87,9 +83,7 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
- 	
- 	
-.fadeInUp {
+ 	.fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
@@ -129,18 +123,19 @@ transition: all 40s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
- 	.searchbtn{
+.searchbtn{
 	height: 40px;
     margin-left: -4px;
     border: none;
     margin-top: 1px;
     background-image: url(img/searchicon.png);
-   background-size: 80% 80%;
+    background-size: 80% 80%;
     background-repeat: no-repeat;
     background-position: center;
     vertical-align: bottom;
     cursor: pointer;
 }
+
  	.paging-box{
  		width: 100%;display: table;
  		    padding-top: 80px;
@@ -152,7 +147,6 @@ transition: all 40s;
 }
  	
  	.paging-box strong {
- 		
 
     color: red;
  	}
@@ -175,7 +169,7 @@ transition: all 40s;
           <form action="search.jsp" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
-			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
+			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
 			<input type="submit" class="searchbtn" value="">
 			</form>
@@ -183,19 +177,19 @@ transition: all 40s;
 		</div>
 		
   
-<main style="padding-top:80px;">
+<main id="main" style="padding-top:80px;">
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
-			
+			if(journallist.size()!=0){
 			for(int i = 0; i < journallist.size();i++){
 			%>
 				<div class="diary">
-					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
+					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
@@ -216,28 +210,40 @@ transition: all 40s;
 				</div>
 			<%
 			}
+			}else{
+			%>
+			<div style="padding: 100px;padding: 100px;    background-color: #f9f9f9; width: 94%;margin: 10px auto;">
+			<img alt="노데이터" src="img/no-data.png" style="width: 100px;">
+				<div style="font-size: 26px;margin-top: 20px;">
+				검색결과가 없습니다.
+				</div>
+				</div>
+			<%
+			}
 			
 			%>
 			
 			
 			
-			
 			<div class="paging-box">
+			<div >
 				<!-- paging -->
 				<div>
 				<%
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
+				
 			<%
+			
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -248,10 +254,11 @@ transition: all 40s;
 					break;
 				}
 			}
+			
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -259,22 +266,15 @@ transition: all 40s;
 				 
 				<!-- // paging -->
 			</div>
-			
+			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
-		<!-- SCRIPTS -->
-  		<script type="text/javascript">
-  			function gocal() {  		
-  				location.href= "CalendarWrite.jsp";	
-			}
-
- 		 </script>
 	</div>
 
    </div>
 			
-</div>
+		</div>
 	
 	
 </main>
@@ -283,22 +283,27 @@ transition: all 40s;
 
   
 <jsp:include page="footer.jsp"></jsp:include> 
-  
-<script> 
-
-
 
    
    
    
   <!-- SCRIPTS -->
   <script type="text/javascript">
+  $(function(){
+	 $("#stext").val('<%=stext%>'); 
+	 
+	 var scmove = $('#main').offset().top;
+	 $('html, body').animate( { scrollTop : scmove }, 400 );
+  });
+  
   function gocal() {
 	location.href= "CalendarServlet?command=gocal";	
 }
   
   </script>
-<script type="text/javascript">
+  
+  <script>
+
 	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
@@ -307,6 +312,7 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
+  
   </script>
   <!-- 
 <script type="text/javascript">
@@ -345,8 +351,8 @@ $(function(){
 	});
 });
 
-
 </script>
--->
+ -->
+
 </body>
 </html>

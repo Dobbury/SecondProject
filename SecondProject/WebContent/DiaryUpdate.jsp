@@ -1,14 +1,25 @@
+<%@page import="com.sun.xml.internal.bind.v2.runtime.output.Pcdata"%>
+<%@page import="dto.pinCommentDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.PinDto"%>
+<%@page import="java.util.List"%>
+<%@page import="dto.DiaryDto"%>
 <%@page import="dto.memberDto"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%
+	request.setCharacterEncoding("utf-8");
+	DiaryDto diary = (DiaryDto)request.getAttribute("Diary");
+	List<pinCommentDto> pCommentlist = (List<pinCommentDto>)request.getAttribute("pCommentlist");
+	List<PinDto> pinlist = (List<PinDto>)request.getAttribute("pinlist");	
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<%
-request.setCharacterEncoding("utf-8");
-%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -90,18 +101,51 @@ html, body, header, .view {
 	<% 
 	memberDto dto = (memberDto)session.getAttribute("user");
 	%>
+	
+	var beforePinSeq = "";
+	
+	var PinArr = new Array();
+	
+	<%for(pinCommentDto pCdto : pCommentlist){ %>
+		PinArr.push({
+			'pcomment' : '<%=pCdto.getPcomment()%>',
+			'grade' : <%=pCdto.getGrade()%>,
+			'pin_name' : '<%=pCdto.getPinname() %>',
+			'id' : '<%=pCdto.getId() %>'
+		});
+		beforePinSeq +=<%=pCdto.getSeq() %>+",";
+		
+	<%}%>
+	beforePinSeq += beforePinSeq.substring(0,beforePinSeq.lastIndexOf(","));
+	var seq = <%=diary.getSeq() %>
+	var jour = <%=diary.getJour_check() %>
+	
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var labelIndex = 0;
 	var basic_lat = 1;
 	var basic_lng = 1;
 	var basic_Marker=[];
+	<%
+		for(int i = 0 ; i < pinlist.size() ; i++){
+	%>
+		basic_lat = <%=pinlist.get(i).getLat() %>;
+		basic_lng = <%=pinlist.get(i).getLng() %>;
+		
+		basic_Marker.push({lat:basic_lat, lng:basic_lng});
+	<%
+		}
+	%>
+	
+	
+	
 	var modal_lat= 5.980408;
 	var modal_lng = 116.0734568;
 	var modal_Marker_lat=null;
 	var modal_Marker_lng=null;
 	var modal_Marker= [];
 	var address = '';
-	var tday =  '<%=request.getParameter("tday") %>';
+	var tday =  '<%=diary.getTday() %>';
+	alert(tday);
 	var id = '<%=dto.getId()%>';
 	
 	function initialize() {
@@ -284,30 +328,91 @@ html, body, header, .view {
     		<tr style="height: 30px">
     			<th>맛집: </th>
     			<td>
-    				<span id="restoPinArr"></span>
+    				<span id="restoPinArr">
+    					<%
+    						for(PinDto pDto : pinlist){
+    							if(pDto.getKinds().equals("resto")){
+    								for(pinCommentDto pCDto : pCommentlist){
+    									if(pCDto.getPinname().equals(pDto.getPin_name())){
+    									%>
+    										<div style='display:inline-block'>
+    											<input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
+    											<div class='pin_info' style='background-color:gray; display:inline-block;'>
+    												<%=pCDto.getPinname() %>
+    												
+    											</div>
+    											<input type='button' class='delete_pin_info' value='x'>
+    										</div>
+    									<%
+    									}
+    								}
+    							}
+    						} 
+    					%>
+    				</span>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>숙소: </th>
     			<td>
-    				<span id="hotelPinArr"></span>
+    				<span id="hotelPinArr">
+    					<%
+    						for(PinDto pDto : pinlist){
+    							if(pDto.getKinds().equals("hotel")){
+    								for(pinCommentDto pCDto : pCommentlist){
+    									if(pCDto.getPinname().equals(pDto.getPin_name())){
+    									%>
+    										<div style='display:inline-block'>
+	    										<input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
+    											<div class='pin_info' style='background-color:gray; display:inline-block;'>
+    												<%=pCDto.getPinname() %>
+    											</div>
+    											<input type='button' class='delete_pin_info' value='x'>
+    										</div>
+    									<%
+    									}
+    								}
+    							}
+    						} 
+    					%>
+    				</span>
     			</td>
     		</tr>
     		<tr style="height: 30px">
     			<th>관광지: </th>
     			<td>
-    				<span id="tourPinArr"></span>
+    				<span id="tourPinArr">
+    					<%
+    						for(PinDto pDto : pinlist){
+    							if(pDto.getKinds().equals("tour")){
+    								for(pinCommentDto pCDto : pCommentlist){
+    									if(pCDto.getPinname().equals(pDto.getPin_name())){
+    									%>
+    										<div style='display:inline-block'>
+	    										<input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
+    											<div class='pin_info' style='background-color:gray; display:inline-block;'>
+    												<%=pCDto.getPinname() %>												
+    											</div>
+    											<input type='button' class='delete_pin_info' value='x'>
+    										</div>
+    									<%
+    									}
+    								}
+    							}
+    						} 
+    					%>
+    				</span>
     			</td>
     		</tr>
     		<tr>
     			<td colspan="2">
-			    	<input type="text" class="text text-default" style="width: 1098px" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title">
+			    	<input type="text" class="text text-default" style="width: 1098px" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title" value='<%=diary.getTitle() %>'>
 			    </td>
     		<tr>
     		<tr>
     			<td colspan="2">
 			    	<!-- 크기 다시 맞춰야함 그리고 스마트 에디터로 만들어야함 -->
-    				<textarea style="height: 600px; width: 1096px" name="ir1" id="ir1" ></textarea>		
+    				<textarea style="height: 600px; width: 1096px" name="ir1" id="ir1"></textarea>		
     			</td>
     		<tr>
     		<tr style="height: 30px" align="center">
@@ -516,7 +621,7 @@ html, body, header, .view {
 		var hotellist = [];
 		var restolist = [];
 		var tourlist = [];
-		var PinArr = new Array();
+		
 		$(function() {
 			$("#diarySavebtn").click(function () {
 				if($("#title").val() == ""){
@@ -524,24 +629,25 @@ html, body, header, .view {
 					return;
 				}
 				
-				oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
-				var cont = document.getElementById("ir1").value;
 				var obj = new Object();
 				obj.PinObj =  PinArr;
 				$.ajax({
 					url:"DiaryServlet",
 					type:"GET",
 					data:{
-						'command':"insert",
-						'content': cont,
+						'command':"updateAf",
+						'content': oEditors.getById["ir1"].getIR(),
 						'title': $("#title").val(),
 						'tday': tday,
 						'id':id,
-						'PinObj':JSON.stringify(obj)
+						'PinObj':JSON.stringify(obj),
+						'seq': seq,
+						'jour': jour,
+						'beforePinSeq': beforePinSeq
 					},
 					datatype:"json",
 					success:function(data){
-						alert("일지 기록 성공!");
+						alert("일지 수정 성공!");
 						location.href="CalendarWrite.jsp";
 						
 					},
@@ -576,11 +682,10 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#hotelPinArr").append("<div style='display:inline-block'>"
-							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
-							+$("#addpinname").val()
-							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
+					$("#hotelPinArr").append("<div style='display:inline-block;'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
+												+$("#addpinname").val()
+												+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
+												+"</div><input type='button' class='delete_pin_info' value='x' ></div>");
 					$("#hotelSel").html("");
 					
 				}else if(pin_kind == "resto"){
@@ -595,10 +700,9 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#restoPinArr").append("<div style='display:inline-block'>"
-							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
+					$("#restoPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
 							+$("#addpinname").val()
+							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
 							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
 					$("#restoSel").html("");
 				}else if(pin_kind == "tour"){
@@ -613,10 +717,9 @@ html, body, header, .view {
 					
 					basic_Marker.push(location);
 					initialize();
-					$("#tourPinArr").append("<div style='display:inline-block'>"
-							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-							+"<div class='pin_info' style='background-color:gray; display:inline-block;'>"
+					$("#tourPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
 							+$("#addpinname").val()
+							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
 							+"</div><input type='button' class='delete_pin_info' value='x'></div>");
 					$("#tourSel").html("");
 				}
@@ -802,12 +905,12 @@ html, body, header, .view {
 			
 			updateP=this;
 			for(i = 0 ; i <PinArr.length ; i++){
-				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
+				
+				if(PinArr[i].pin_name == $(this).children('.pin_info_val').val()){
 					sel=i;
 					break;
 				}
 			}
-			
 			$("#pin_info_name").val(PinArr[sel].pin_name);
 			$("#Pin_Info_Modal").modal("show");
 			
@@ -831,20 +934,26 @@ html, body, header, .view {
 			$("#pin_info_grade").html("&nbsp;&nbsp;" + grade);
 			$("#grade").html("&nbsp;&nbsp;" + grade);
 		});
+		
 		////////////////////////////////////////////////////////////////////////
 		$(document).on("click",".delete_pin_info",function () {
-			$(this).parent().remove();
 			
 			for(i = 0 ; i <PinArr.length ; i++){
+				alert(PinArr[i].pin_name+ " "+$(this).parent().children('.pin_info_val').val());
+					
 				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
 					PinArr.splice(i,1);	//i번째에서 1개 제거
+					
 					break;
 				}
 			}
+			$(this).parent().remove();
 			
 		});
+		
 	</script>
 	<script type="text/javascript">
+		
 		var oEditors = [];
 
 		// 추가 글꼴 목록
@@ -867,10 +976,14 @@ html, body, header, .view {
 			fOnAppLoad : function() {
 				//예제 코드
 				//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+				var cont ='<%=diary.getContent() %>';
+				oEditors.getById["ir1"].exec("PASTE_HTML", [ cont ]);
 			},
 			fCreator : "createSEditor2"
 		});
-
+		
+		
+		
 		function pasteHTML() {
 			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
 			oEditors.getById["ir1"].exec("PASTE_HTML", [ sHTML ]);
