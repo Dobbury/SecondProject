@@ -15,6 +15,7 @@ DiaryImpl dao = DiaryDao.getInstance();
 int paging = Integer.parseInt(request.getParameter("page"));
 int jcount = dao.getCountJournal();
 
+System.out.println(jcount);
 List<JournalDto> journallist = dao.getJournalList(paging);
 int pagecount = jcount/9;
 if(pagecount%jcount>0){

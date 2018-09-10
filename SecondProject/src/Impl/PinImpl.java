@@ -1,6 +1,8 @@
 package Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dto.PinDto;
 import dto.pinCommentDto;
@@ -20,4 +22,6 @@ public interface PinImpl {
 	public int getLastPinSeq();
 	
 	public List<PinDto> PinList(String pin_name,String place_kind);
+	
+	public List<String[]> pinAVG();
 }

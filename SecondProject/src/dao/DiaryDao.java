@@ -291,6 +291,26 @@ public class DiaryDao implements DiaryImpl {
 		}
 		return count;
 	}
+	
+	@Override
+	public boolean CommentDeletes(int jseq) {
+		String sql = " DELETE DIARYCOMMENT " + " WHERE DSEQ = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, jseq);
+
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count>0 ? true:false;
+	}
 
 	@Override
 	public DiaryDto getDiary(int seq) {
@@ -476,14 +496,14 @@ public class DiaryDao implements DiaryImpl {
 
 	@Override
 	public int getJournalSeq(String tday) {
-		
+		System.out.println("getJournalSeqTest: "+tday);
 		String sql = " SELECT SEQ "
 				+ "FROM JOURNAL WHERE ? >=START_DATE AND ? <=END_DATE ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-
+		
 		int seq = -1;
 		try {
 			conn = DBConnection.makeConnection();
@@ -491,8 +511,8 @@ public class DiaryDao implements DiaryImpl {
 
 			psmt = conn.prepareStatement(sql);
 			System.out.println("2/6 getMemInfo suceess");
-			psmt.setString(1, tday);
-			psmt.setString(2, tday);
+			psmt.setString(1, tday.substring(0, 10));
+			psmt.setString(2, tday.substring(0,10));
 
 			rs = psmt.executeQuery();
 
@@ -507,6 +527,118 @@ public class DiaryDao implements DiaryImpl {
 		return seq;
 
 	}
+	
+	@Override
+	public int getDiaryCount(String startdate, String enddate,String id) {
+		String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs= null;
+		
+		int count=0;
+		try {
 
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, startdate);
+			psmt.setString(2, enddate);
+			psmt.setString(3, id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public int checkJournal(String startDate, String endDate,String id) {
+		String sql ="SELECT COUNT(*) FROM DIARY WHERE ? <= TDAY AND ? >= TDAY AND ID = ? AND JOUR_CHECK=0";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs= null;
+		
+		int count=0;
+		try {
+
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, startDate);
+			psmt.setString(2, endDate);
+			psmt.setString(3, id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public boolean changeDiariesJour_Check_zero(String id, String startDate, String endDate) {
+		String sql ="UPDATE DIARY SET JOUR_CHECK=0 WHERE ID=? AND ?<=TDAY AND ? >=TDAY";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, id);
+			psmt.setString(2, startDate);
+			psmt.setString(3, endDate);
+			
+			count=psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0 ? true:false;
+	}
+
+	@Override
+	public boolean deleteJournal(int seq) {
+		String sql ="DELETE FROM JOURNAL WHERE SEQ=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count=0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			count=psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0 ? true:false;
+	}
+	
 
 }
