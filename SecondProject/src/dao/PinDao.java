@@ -343,7 +343,7 @@ public class PinDao implements PinImpl {
 		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
 				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
 				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%') A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%')) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
 		Connection conn =null;
