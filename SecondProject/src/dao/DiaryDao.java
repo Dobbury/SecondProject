@@ -96,6 +96,14 @@ public class DiaryDao implements DiaryImpl {
 				+ " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
 				+ " FROM JOURNAL ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
 
+		
+		/*
+			select c.rnum, c.seq, c.id, c.title, c.content, c.rdate, c.wdate
+			from (select rownum as rnum, a.seq, a.id, a.title, a.content, a.rdate, a.wdate
+			from (select seq, id, title, content, rdate, wdate
+			from calendar where rdate > to_char(sysdate, 'yyyymmddhh24mi') order by rdate asc) a where rownum <= ? ) c where c.rnum >= ?
+		 */
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -206,6 +214,7 @@ public class DiaryDao implements DiaryImpl {
 		String sql = " INSERT INTO DIARYCOMMENT(SEQ, DSEQ, ID, DCOMMENT,DDAY) "
 				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?,?,SYSDATE)";
 
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 
@@ -238,7 +247,7 @@ public class DiaryDao implements DiaryImpl {
 	@Override
 	public List<DiarycommentDto> Commantview(int seq) {
 		String sql = " SELECT SEQ,ID,DCOMMENT,DDAY " + " FROM DIARYCOMMENT " + " WHERE DSEQ = ? "
-				+ " ORDER BY SEQ ASC ";
+				+ " ORDER BY DDAY DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -270,7 +279,7 @@ public class DiaryDao implements DiaryImpl {
 
 	}
 
-	// ��ۻ���
+	// 占쏙옙芳占쏙옙占�
 	@Override
 	public int CommentDelete(int seq) {
 
@@ -495,6 +504,83 @@ public class DiaryDao implements DiaryImpl {
 	}
 
 	@Override
+	public void addLike(int seq, String id) {
+		
+		String sql = " INSERT INTO LIKE_JOURNAL(SEQ, JSEQ, ID) "
+				+ " VALUES(SEQ_DCOMMENT.NEXTVAL,?,?)";
+		
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, seq);
+			psmt.setString(2, id.trim());
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		
+	}
+
+	@Override
+	public void countLike(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT+1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public int Likecheack(int seq,String loginid) {
+
+		String sql = " SELECT ID "
+				+ " FROM LIKE_JOURNAL "
+				+ " WHERE ID = ? AND JSEQ = ?";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, loginid);
+			psmt.setInt(2, seq);
+
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
 	public int getJournalSeq(String tday) {
 		System.out.println("getJournalSeqTest: "+tday);
 		String sql = " SELECT SEQ "
@@ -639,6 +725,47 @@ public class DiaryDao implements DiaryImpl {
 		
 		return count>0 ? true:false;
 	}
-	
+	@Override
+	public void deleteLike(int seq, String loginid) {
+		String sql = " DELETE FROM LIKE_JOURNAL "
+				+	" WHERE ID = ? AND JSEQ = ? " ;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+
+			
+			psmt.setString(1, loginid.trim());
+			psmt.setInt(2, seq);
+			
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void countLikedel(int seq) {
+		
+		String sql = " UPDATE JOURNAL "
+				+ " SET LIKE_CNT = LIKE_CNT-1 "
+				+ " WHERE SEQ = ? ";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		conn = DBConnection.makeConnection();
+
+		try {
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

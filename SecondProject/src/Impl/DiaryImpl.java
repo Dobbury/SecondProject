@@ -49,4 +49,15 @@ public interface DiaryImpl {
 	public boolean changeDiariesJour_Check_zero(String id, String startDate,String endDate);
 	
 	public boolean deleteJournal(int seq);
+
+	public void addLike(int seq, String id);
+	
+	public void countLike(int seq);
+	
+	public int Likecheack(int seq,String loginid);
+	
+	public void deleteLike(int seq,String loginid);
+	
+	public void countLikedel(int seq);
+
 }
