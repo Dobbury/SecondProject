@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Impl.PinImpl;
 import db.DBClose;
@@ -265,6 +267,41 @@ public class PinDao implements PinImpl {
 	}
 
 	@Override
+
+	public List<String[]> pinAVG() {
+		String sql ="SELECT PINCOMMENT.PINNAME,KINDS,AVG(GRADE) AS GRADE_AVG "
+				+ "FROM PINCOMMENT, PIN "
+				+ "WHERE PINCOMMENT.PINNAME = PIN.PINNAME "
+				+ "GROUP BY PINCOMMENT.PINNAME,KINDS "
+				+ "ORDER BY GRADE_AVG DESC";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<String[]> list = null;
+		
+		try {
+
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			rs = psmt.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				String arr[] = {rs.getString(1),rs.getString(2),String.format("%.2f", rs.getDouble(3))}; 
+				list.add(arr);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+	}
+
 	public List<PinDto> getAllPinList(int page) {
 		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
 				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "

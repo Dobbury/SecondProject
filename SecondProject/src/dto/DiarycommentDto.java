@@ -1,7 +1,7 @@
 package dto;
 
 public class DiarycommentDto {
-	
+
 	private int seq;
 	private String id;
 	private String dcomment;
@@ -54,6 +54,5 @@ public class DiarycommentDto {
 
 	
 		
-	
-	
+
 }

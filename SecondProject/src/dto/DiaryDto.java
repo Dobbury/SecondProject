@@ -3,6 +3,7 @@ package dto;
 import java.io.Serializable;
 
 public class DiaryDto implements Serializable {
+
 	
 	private String content;
 	private String title;
@@ -112,12 +113,14 @@ public class DiaryDto implements Serializable {
 
 
 
+
+
 	public void setFisrt_Img(String fisrt_Img) {
 		this.fisrt_Img = fisrt_Img;
 	}
-
-
+}
 
 
 		
-}
+
+

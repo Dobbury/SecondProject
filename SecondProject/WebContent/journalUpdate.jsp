@@ -16,8 +16,14 @@
    memberDto dto = (memberDto) session.getAttribute("user");
    
    String loginid = dto.getId();
+   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+   List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
+   List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    
-	DiaryDto Ddto =(DiaryDto)request.getAttribute("diary");
+ 
+  for(int i=0;i<diarylist.size();i++){
+     diarylist.get(i).toString();
+  }
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +32,8 @@
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>site</title>
-
+<!-- hover effects.css -->
+<link href="Design/css/hovereffect.css" rel="stylesheet">
 
 <style type="text/css">
 /* Necessary for full page carousel*/
@@ -88,11 +95,7 @@ html, body, header, .view {
    margin-right: 5px;
 }
 
-@media ( min-width : 800px) and (max-width: 850px) {
-   .navbar:not (.top-nav-collapse ) {
-      background: #1C2331 !important;
-   }
-}
+
 </style>
 </head>
 
@@ -105,7 +108,7 @@ html, body, header, .view {
    <!-- ----------------------------------------html----------------------------------------- -->
    <!--여기서 하시면 됩니다-->
    <main style="padding-top:80px;">
-   <div class="container" style="    max-width: 900px;">
+   <div class="container" style="max-width: 900px;">
 
       <div class="diary-t">
          <!-- 지도영역 -->
@@ -120,6 +123,11 @@ html, body, header, .view {
          </div>
       </div>
       
+      <div class="journal-title" >
+   <h1>
+      <%=journalDto.getTitle() %>
+      </h1>
+   </div>
       
    <div style="   padding: 40px;
     background-color: #fff;
@@ -129,40 +137,73 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
    
    
       <div class="diary-m">
+      <%
+               for(int i=0; i<diarylist.size(); i++ ){
+            %>
          <div class="diary-cont">
-            <p class="diary-title"><%=Ddto.getTitle() %></p>
-            <span class="diary-date" style="color:#555"><%=Ddto.getTday().substring(0,11) %></span>
+            <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
+            <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>
             <hr>
             
 
             <div class="diary-content" style="word-break: break-all;">
-                <%=Ddto.getContent() %>
+                <%=diarylist.get(i).getContent() %>
             </div>
-
+			
          </div>
-  
+         
+         <div align="right">
+         	<a href="DiaryServlet?command=update&seq=<%=diarylist.get(i).getSeq() %>" class="menu__link hover9"><span class="menu__label hover9__label">Update</span></a></a>
+         </div>
+         <%
+               }
+      %>
       </div>
+      </div>
+	
+	<br>
+	<div align="center">
+		<button style="width: 80%; height: 100px;" class="btn btn-primary" id="jourCancleBtn" ><font size="10">journal cancle</font></button>
 	</div>
-
-
-
-
-
-	</div>
-
- 
+	
    </main>
 
 
-   
+   <script type="text/javascript">
+   	$(function () {
+		$("#jourCancleBtn").click(function () {
+			var check=confirm("추가한 여행기록을 취소하시겠습니까?\n(기록한 일지는 그대로 남아 있습니다.)");
+			if(check!=0){
+				//YES
+				location.href="DiaryServlet?command=jourCancle&seq=<%=journalDto.getSeq() %>";
+				$.ajax({
+					url:"DiaryServlet",
+					type:"post",
+					data:{
+						command: "jourCancle",
+						seq: <%=journalDto.getSeq() %>
+					},
+					datatype: "json",
+					success:function(data){
+						if(data == "true"){
+							alert("success");
+							location.href="CalendarWrite.jsp";
+						}else{
+							alert("fail");
+						}
+					},
+					error:function(){
+						
+					}
+					
+				});
+			}else{
+				//NO
+			}
+		});
+	});
+   </script>
 
-<script type="text/javascript">
-   
- 
-
-   
-</script>
-   
    <!-- --------------------------------------------------------------------------------- -->
 
 

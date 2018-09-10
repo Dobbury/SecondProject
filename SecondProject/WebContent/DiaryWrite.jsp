@@ -802,11 +802,12 @@ html, body, header, .view {
 			
 			updateP=this;
 			for(i = 0 ; i <PinArr.length ; i++){
-				if(PinArr[i].pin_name == $(this).children('.pin_info_val').val()){
+				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
 					sel=i;
 					break;
 				}
 			}
+			
 			$("#pin_info_name").val(PinArr[sel].pin_name);
 			$("#Pin_Info_Modal").modal("show");
 			

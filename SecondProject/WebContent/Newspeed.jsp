@@ -12,8 +12,11 @@
 request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
+
 int paging = Integer.parseInt(request.getParameter("page"));
 int jcount = dao.getCountJournal();
+
+
 System.out.println(jcount);
 List<JournalDto> journallist = dao.getJournalList(paging);
 int pagecount = 0;
@@ -22,6 +25,7 @@ if(jcount != 0){
 	if(pagecount%jcount>0){
 		pagecount++;
 	}
+
 }
 
 int startPage = 0;
@@ -283,6 +287,19 @@ transition: all 40s;
 <script> 
 
 
+
+   
+   
+   
+  <!-- SCRIPTS -->
+  <script type="text/javascript">
+  function gocal() {
+	location.href= "CalendarServlet?command=gocal";	
+}
+  
+  </script>
+<script type="text/javascript">
+	
 	  $(window).scroll(function() {
 		  var $el = $('.diary');
 		  

@@ -22,6 +22,7 @@ import Impl.PinImpl;
 import dao.DiaryDao;
 import dao.PinDao;
 import dto.DiaryDto;
+
 import dto.pinCommentDto;
 import dto.DiarycommentDto;
 import dto.JournalDto;
@@ -32,7 +33,9 @@ import dto.PinDto;
 import dto.memberDto;
 
 
-public class DiaryServlet extends HttpServlet{
+
+public class DiaryServlet extends HttpServlet {
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +55,8 @@ public class DiaryServlet extends HttpServlet{
 		DiaryImpl dao = DiaryDao.getInstance();
 		
 		String command = req.getParameter("command");
-		
+
+
 		if (command.equals("insert")) {
 			System.out.println("1단계");
 			String content = req.getParameter("content");
@@ -121,6 +125,7 @@ public class DiaryServlet extends HttpServlet{
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setTday(tday);
+
 			System.out.println(pin_Seqs);
 			dto.setPin_Seqs(pin_Seqs);
 			dto.setFisrt_Img(fisrt_img);
@@ -128,7 +133,8 @@ public class DiaryServlet extends HttpServlet{
 			System.out.println("3단계");
 			boolean b = dao.addDiary(dto);
 			System.out.println("4단계");
-			
+
+
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
 		
@@ -243,6 +249,7 @@ public class DiaryServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 
+
 			DiaryDto dto = new DiaryDto();
 			dto.setContent(content);
 			dto.setId(id);
@@ -260,8 +267,28 @@ public class DiaryServlet extends HttpServlet{
 			
 			PrintWriter pw = resp.getWriter();
 			pw.print(b);
+
+
+		}else if(command.equals("journalUpdate")) {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+
+			JournalDto dto = dao.getJournalDto(seq);
+
+			List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"),
+					dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
+
+			System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
+
+			req.setAttribute("JournalDto", dto);
+			req.setAttribute("DiaryList", Diarylist);
+			List<DiarycommentDto> list = dao.Commantview(seq);
+			req.setAttribute("DiarycommentDto", list);
+
+			dispatch("journalUpdate.jsp", req, resp);
+
 			
 		}else if(command.equals("journalDetail")) {
+
 	         int seq = Integer.parseInt(req.getParameter("seq"));
 	         String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
 	         
@@ -282,8 +309,6 @@ public class DiaryServlet extends HttpServlet{
 	         dispatch("journalDetail.jsp", req, resp);
 	         
 	      }
-		
-	
 		else if(command.equals("commentwrite")) { 
 				
 				
@@ -301,19 +326,17 @@ public class DiaryServlet extends HttpServlet{
 				
 				resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
 		        
-		       
-		        
-				
-				
-			}
+		}
 		else if(command.equals("deletecomment")) {
 			
 			int commentseq = Integer.parseInt(req.getParameter("commentseq"));
 			int count = dao.CommentDelete(commentseq);
-			if(count == 1) {
+
+			if (count == 1) {
 				System.out.println("삭제완료");
 			}else {
 				System.out.println("삭제실패");
+
 			}
 			
 			int seq = Integer.parseInt(req.getParameter("seq"));
@@ -325,12 +348,34 @@ public class DiaryServlet extends HttpServlet{
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
 	        dispatch("journalDetail.jsp", req, resp);
+
+
+			PrintWriter pw = resp.getWriter();
 			
-	        
+			
+			String endDate = req.getParameter("enddate");
+			String startDate = req.getParameter("startdate");
+			String id = ((memberDto)req.getSession().getAttribute("user")).getId();
+			String title = req.getParameter("title");
+			
+			System.out.println(endDate +" "+startDate+" "+id + "  "+ title);
+			int cnt = Integer.parseInt(endDate)-Integer.parseInt(startDate)+1;
+			if(cnt != dao.getDiaryCount(startDate, endDate,id)) {
+				pw.print("cntfalse");
+				return;
+			}
+			
+			if(cnt != dao.checkJournal(startDate, endDate,id)) {
+				pw.print("checkfalse");
+				return;
+			}
+			
+
 			
 		}else if(command.equals("search")) {
 			String stext = req.getParameter("stext");
-			
+
+
 			req.setAttribute("stext", stext);
 			dispatch("search.jsp?page=1", req, resp);
 			
@@ -358,9 +403,71 @@ public class DiaryServlet extends HttpServlet{
 			
 			resp.sendRedirect("DiaryServlet?command=journalDetail&seq="+seq);
 			
+
+		} else if (command.equals("search")) {
+			String stext = req.getParameter("stext");
+
+			req.setAttribute("stext", stext);
+			dispatch("search.jsp?page=1", req, resp);
+			
+		}else if (command.equals("jourInsert")) {
+			
+			PrintWriter pw = resp.getWriter();
+			
+			
+			String endDate = req.getParameter("enddate");
+			String startDate = req.getParameter("startdate");
+			String id = ((memberDto)req.getSession().getAttribute("user")).getId();
+			String title = req.getParameter("title");
+			
+			System.out.println(endDate +" "+startDate+" "+id + "  "+ title);
+			int cnt = Integer.parseInt(endDate)-Integer.parseInt(startDate)+1;
+			if(cnt != dao.getDiaryCount(startDate, endDate,id)) {
+				pw.print("cntfalse");
+				return;
+			}
+			
+			if(cnt != dao.checkJournal(startDate, endDate,id)) {
+				pw.print("checkfalse");
+				return;
+			}
+			
+			JournalDto dto = new JournalDto();
+			
+			dto.setEndDate(endDate);
+			dto.setStartDate(startDate);
+			dto.setId(id);
+			dto.setTitle(title);
+	
+			dao.addJournal(dto);
+			
+			
+			
+			pw.print(true);
+
+		}else if(command.equals("jourCancle")) {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String id = ((memberDto)req.getSession().getAttribute("user")).getId();
+			
+			JournalDto jdto = dao.getJournalDto(seq);
+			
+			boolean b = dao.changeDiariesJour_Check_zero(id, jdto.getStartDate().substring(0, 10), jdto.getEndDate().substring(0, 10));
+			
+			if(b) {
+				dao.deleteJournal(seq);
+				//코멘트 다 삭제
+				dao.CommentDeletes(seq);
+				
+				PrintWriter pw = resp.getWriter();
+				pw.print(b);
+			}else {
+				PrintWriter pw = resp.getWriter();
+				pw.print(b);				
+			}
 		}
-		
-	   }
+
+		}
+
 	   
 	   public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
 	         throws ServletException, IOException {
@@ -371,4 +478,5 @@ public class DiaryServlet extends HttpServlet{
 	
 
 	
+
 }

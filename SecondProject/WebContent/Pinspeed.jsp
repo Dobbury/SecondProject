@@ -167,6 +167,9 @@ transition: all 40s;
 				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i).getPin_name()%>">
 						<div class="Dimage" style="">
+							<img style="width: 400px; height: 300px;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>&zoom=13&size=600x300&maptype=roadmap
+								&markers=color:blue%7Clabel:S%7C<%=pinlist.get(i).getLat() %>,<%=pinlist.get(i).getLng() %>
+								&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
 						</div>
 						<p class="diary-title"><%=pinlist.get(i).getPin_name() %></p>
 					</a>
