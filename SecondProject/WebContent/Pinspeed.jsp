@@ -186,7 +186,6 @@ transition: all 40s;
 					<span class="diary-date">평점 : <%=pinlist.get(i)[2] %></span>
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
 					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
-					<span><%=pinlist.get(i)[2] %></span>
 					</div>
 				</div>
 			<%

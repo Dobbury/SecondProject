@@ -201,7 +201,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 		 	
 		 	<span class="lanknumber"><%=i+1%></span>
 		 	<span class="lanktext"><%=tourlist.get(i)[0]%></span>
-		 	<span class="lankavg">60</span>
+		 	<span class="lankavg"><%=tourlist.get(i)[2] %></span>
 		 	
 		 	</a>
 		 	</li>
@@ -223,7 +223,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 		 	<a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>">
 		 	<span class="lanknumber"><%=i+1%></span>
 		 	<span class="lanktext"><%=restolist.get(i)[0]%></span>
-		 	<span class="lankavg">60</span>
+		 	<span class="lankavg"><%=restolist.get(i)[2] %></span>
 		 	
 		 	</a>
 		 	</li>
@@ -245,7 +245,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 		 	<a href="Pindetail.jsp?pinname=<%=hotellist.get(i)[0]%>">
 		 	<span class="lanknumber"><%=i+1%></span>
 		 	<span class="lanktext"><%=hotellist.get(i)[0]%></span>
-		 	<span class="lankavg">60</span>
+		 	<span class="lankavg"><%=hotellist.get(i)[2] %></span>
 		 	</a>
 		 	</li>
 		<%
