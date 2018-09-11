@@ -10,23 +10,11 @@
 
 <%
 request.setCharacterEncoding("utf-8");
-DiaryImpl dao = DiaryDao.getInstance();
 
 
-int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
-
-
-System.out.println(jcount);
-List<JournalDto> journallist = dao.getJournalList(paging);
-int pagecount = 0;
-if(jcount != 0){
-	pagecount = jcount/9;
-	if(pagecount%jcount>0){
-		pagecount++;
-	}
-
-}
+int paging = (int)request.getAttribute("page");
+int pagecount = (int)request.getAttribute("pagecount");
+List<JournalDto> journallist = (List<JournalDto>)request.getAttribute("journallist");
 
 int startPage = 0;
 int endPage = 0;
@@ -229,7 +217,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
@@ -237,7 +225,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -251,7 +239,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
 			<%
 			}
 			%>
@@ -308,45 +296,6 @@ transition: all 40s;
 		});
 	  
   </script>
-  <!-- 
-<script type="text/javascript">
-
-$(function(){
-	$(".page").click(function () {
-		$.ajax({
-			url : "DiaryServlet",
-			type : "GET",
-			data : {
-				command : "paging",
-				page : $(this).html()
-			},
-			datatype : "json",
-			success : function(data) {
-				journallist = JSON.parse(data);
-				
-				var o = "";
-				for (i = 0; i < journallist.length; i++) {
-					o += "<div class='diary' style='width: 300px;height: 300px;text-align: center; vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;'>"
-					+"<a href='DiaryServlet?command=diaryDetail&seq="+journallist[i].seq+"'>"
-						+"<div class='Dimage' style='border:none'>"
-						+"</div>"
-						+"<p style='margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;'>"+journallist[i].title+"</p>"
-					+"</a>"
-					+"<span style='text-align: right;color: #888;font-size: 14px;'>" + journallist[i].readcount + "</span>"
-					+"<span style='text-align: left;color: #888;font-size: 14px;'>"+journallist[i].wdate.substring(0,10)+"</span>"	
-				+"</div>";
-				}
-				$("#tourSel").append(o);
-			},
-			error : function() {
-			}
-		});
-		
-	});
-});
-
-
-</script>
--->
+ 
 </body>
 </html>
