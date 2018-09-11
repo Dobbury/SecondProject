@@ -240,13 +240,13 @@ transition: all 40s;
 			
 		</div>
 	
-	
+	<jsp:include page="footer.jsp"></jsp:include> 
 </main>
 <!-- --------------------------------------------------------------------------------- -->
 
 
   
-<jsp:include page="footer.jsp"></jsp:include> 
+
   
   <script>
 

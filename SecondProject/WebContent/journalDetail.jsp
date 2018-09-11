@@ -333,8 +333,13 @@ var pins={
 var map;
 var markers = [];
 
+<<<<<<< HEAD
 var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
 var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
+=======
+var basic_lat= 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+var basic_lng = 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+>>>>>>> 9b36c6032b14f073ce6bebb761fd4d733ebf555c
 
 function initialize() {
    
@@ -677,6 +682,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		   
 		   showMarkers();
 	   }
+
 
    });
    
