@@ -35,162 +35,162 @@ import dto.memberDto;
 
 public class DiaryServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req, resp);
-	}
+   @Override
+   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      doProcess(req, resp);
+   }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req, resp);
-	}
+   @Override
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      doProcess(req, resp);
+   }
 
-	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+   public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html; charset=utf-8");
+      req.setCharacterEncoding("utf-8");
+      resp.setContentType("text/html; charset=utf-8");
 
-		DiaryImpl dao = DiaryDao.getInstance();
+      DiaryImpl dao = DiaryDao.getInstance();
 
-		String command = req.getParameter("command");
+      String command = req.getParameter("command");
 
-		if (command.equals("insert")) {
-			System.out.println("1단계");
-			String content = req.getParameter("content");
-			content = content.replaceAll("\"", "\\\\\"");
-			System.out.println("ccc : " + content);
-			String tday = req.getParameter("tday");
-			String title = req.getParameter("title");
-			String id = req.getParameter("id");
+      if (command.equals("insert")) {
+         System.out.println("1단계");
+         String content = req.getParameter("content");
+         content = content.replaceAll("\"", "\\\\\"");
+         System.out.println("ccc : " + content);
+         String tday = req.getParameter("tday");
+         String title = req.getParameter("title");
+         String id = req.getParameter("id");
 
-			System.out.println("2단계");
+         System.out.println("2단계");
 
-			// 첫번째 이미지 경로 가져오기
-			String fisrt_img = "";
-			if (content.contains("<img src")) {
-				String tmp[] = content.split("img");
-				String firstImageURL[] = tmp[1].split("\\\\\"");
-				fisrt_img = firstImageURL[1];
+         // 첫번째 이미지 경로 가져오기
+         String fisrt_img = "";
+         if (content.contains("<img src")) {
+            String tmp[] = content.split("img");
+            String firstImageURL[] = tmp[1].split("\\\\\"");
+            fisrt_img = firstImageURL[1];
 
-			}
+         }
 
-			// 핀 코멘트 저장하고 핀네임 diary 테이블에 저장할 수 있게 , 사용해서 나열한 string 만들기
-			String PinObj = req.getParameter("PinObj");
+         // 핀 코멘트 저장하고 핀네임 diary 테이블에 저장할 수 있게 , 사용해서 나열한 string 만들기
+         String PinObj = req.getParameter("PinObj");
 
-			System.out.println(PinObj);
-			JSONParser jsonParser = new JSONParser();
+         System.out.println(PinObj);
+         JSONParser jsonParser = new JSONParser();
 
-			String pin_Seqs = "";
-			try {
-				JSONObject jsonObj = (JSONObject) jsonParser.parse(PinObj);
+         String pin_Seqs = "";
+         try {
+            JSONObject jsonObj = (JSONObject) jsonParser.parse(PinObj);
 
-				JSONArray pinArr = (JSONArray) jsonObj.get("PinObj");
+            JSONArray pinArr = (JSONArray) jsonObj.get("PinObj");
 
-				for (int i = 0; i < pinArr.size(); i++) {
-					JSONObject obj = (JSONObject) pinArr.get(i);
-					PinImpl pinDao = PinDao.getInstance();
+            for (int i = 0; i < pinArr.size(); i++) {
+               JSONObject obj = (JSONObject) pinArr.get(i);
+               PinImpl pinDao = PinDao.getInstance();
 
-					pinCommentDto pinCDto = new pinCommentDto();
+               pinCommentDto pinCDto = new pinCommentDto();
 
-					pinCDto.setGrade(Double.parseDouble(obj.get("grade").toString()));
-					pinCDto.setId(obj.get("id").toString());
-					pinCDto.setPcomment(obj.get("pcomment").toString());
-					pinCDto.setPinname(obj.get("pin_name").toString());
+               pinCDto.setGrade(Double.parseDouble(obj.get("grade").toString()));
+               pinCDto.setId(obj.get("id").toString());
+               pinCDto.setPcomment(obj.get("pcomment").toString());
+               pinCDto.setPinname(obj.get("pin_name").toString());
 
-					boolean pinb = pinDao.PinCommentInsert(pinCDto);
+               boolean pinb = pinDao.PinCommentInsert(pinCDto);
 
-					pin_Seqs += (pinDao.getLastPinSeq() + "");
+               pin_Seqs += (pinDao.getLastPinSeq() + "");
 
-					if (!pinb) {
-						PrintWriter pw = resp.getWriter();
-						pw.print(pinb);
+               if (!pinb) {
+                  PrintWriter pw = resp.getWriter();
+                  pw.print(pinb);
 
-						return;
-					}
-					if (i != pinArr.size() - 1) {
-						pin_Seqs += ",";
-					}
-				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+                  return;
+               }
+               if (i != pinArr.size() - 1) {
+                  pin_Seqs += ",";
+               }
+            }
+         } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
 
-			DiaryDto dto = new DiaryDto();
-			dto.setContent(content);
-			dto.setId(id);
-			dto.setTitle(title);
-			dto.setTday(tday);
+         DiaryDto dto = new DiaryDto();
+         dto.setContent(content);
+         dto.setId(id);
+         dto.setTitle(title);
+         dto.setTday(tday);
 
-			System.out.println(pin_Seqs);
-			dto.setPin_Seqs(pin_Seqs);
-			dto.setFisrt_Img(fisrt_img);
+         System.out.println(pin_Seqs);
+         dto.setPin_Seqs(pin_Seqs);
+         dto.setFisrt_Img(fisrt_img);
 
-			System.out.println("3단계");
-			boolean b = dao.addDiary(dto);
-			System.out.println("4단계");
+         System.out.println("3단계");
+         boolean b = dao.addDiary(dto);
+         System.out.println("4단계");
 
-			PrintWriter pw = resp.getWriter();
-			pw.print(b);
+         PrintWriter pw = resp.getWriter();
+         pw.print(b);
 
-		} else if (command.equals("Newspaging")) {
-			int page = Integer.parseInt(req.getParameter("page"));
-			int jcount = dao.getCountJournal();
+      } else if (command.equals("Newspaging")) {
+         int page = Integer.parseInt(req.getParameter("page"));
+         int jcount = dao.getCountJournal();
 
-			List<JournalDto> journallist = dao.getJournalList(page);
-			int pagecount = 0;
-			if (jcount != 0) {
-				pagecount = jcount / 9;
-				if (pagecount % jcount > 0) {
-					pagecount++;
-				}
-			}
+         List<JournalDto> journallist = dao.getJournalList(page);
+         int pagecount = 0;
+         if (jcount != 0) {
+            pagecount = jcount / 9;
+            if (pagecount % jcount > 0) {
+               pagecount++;
+            }
+         }
 
-			req.setAttribute("page", page);
-			req.setAttribute("journallist", journallist);
-			req.setAttribute("pagecount", pagecount);
-			dispatch("Newspeed.jsp", req, resp);
+         req.setAttribute("page", page);
+         req.setAttribute("journallist", journallist);
+         req.setAttribute("pagecount", pagecount);
+         dispatch("Newspeed.jsp", req, resp);
 
-		} else if (command.equals("update")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
+      } else if (command.equals("update")) {
+         int seq = Integer.parseInt(req.getParameter("seq"));
 
-			DiaryDto dto = dao.getDiary(seq);
+         DiaryDto dto = dao.getDiary(seq);
 
-			PinImpl pinDao = PinDao.getInstance();
+         PinImpl pinDao = PinDao.getInstance();
 
-			List<pinCommentDto> pCommentlist = new ArrayList<>();
-			List<PinDto> pinlist = new ArrayList<>();
-			System.out.println("ㅂㅂㅂㅂ" + dto.getPin_Seqs());
+         List<pinCommentDto> pCommentlist = new ArrayList<>();
+         List<PinDto> pinlist = new ArrayList<>();
+         System.out.println("ㅂㅂㅂㅂ" + dto.getPin_Seqs());
 
-			if (dto.getPin_Seqs() != null) {
-				String[] pin_Seqs = dto.getPin_Seqs().split(",");
+         if (dto.getPin_Seqs() != null) {
+            String[] pin_Seqs = dto.getPin_Seqs().split(",");
 
-				for (String pinSeq : pin_Seqs) {
-					System.out.println(Integer.parseInt(pinSeq));
-					pCommentlist.add(pinDao.getPinComment(Integer.parseInt(pinSeq)));
-				}
+            for (String pinSeq : pin_Seqs) {
+               System.out.println(Integer.parseInt(pinSeq));
+               pCommentlist.add(pinDao.getPinComment(Integer.parseInt(pinSeq)));
+            }
 
-				System.out.println(pCommentlist.size());
-				for (pinCommentDto pCdto : pCommentlist) {
-					pinlist.add(pinDao.getPin(pCdto.getPinname()));
-				}
-			}
+            System.out.println(pCommentlist.size());
+            for (pinCommentDto pCdto : pCommentlist) {
+               pinlist.add(pinDao.getPin(pCdto.getPinname()));
+            }
+         }
 
-			req.setAttribute("Diary", dto);
-			req.setAttribute("pCommentlist", pCommentlist);
-			req.setAttribute("pinlist", pinlist);
+         req.setAttribute("Diary", dto);
+         req.setAttribute("pCommentlist", pCommentlist);
+         req.setAttribute("pinlist", pinlist);
 
-			dispatch("DiaryUpdate.jsp", req, resp);
+         dispatch("DiaryUpdate.jsp", req, resp);
 
-		} else if (command.equals("updateAf")) {
+      } else if (command.equals("updateAf")) {
 
-			req.removeAttribute("Diary");
-			req.removeAttribute("pCommentlist");
-			req.removeAttribute("pinlist");
+         req.removeAttribute("Diary");
+         req.removeAttribute("pCommentlist");
+         req.removeAttribute("pinlist");
 
-			System.out.println("1단계");
-			String content = req.getParameter("content");
-			content = content.replaceAll("\"", "\\\\\"");
+         System.out.println("1단계");
+         String content = req.getParameter("content");
+         content = content.replaceAll("\"", "\\\\\"");
 
 			String tday = req.getParameter("tday");
 			String title = req.getParameter("title");
@@ -590,4 +590,7 @@ public class DiaryServlet extends HttpServlet {
 		dispatch.forward(req, resp);
 	}
 
+}
+
+         resp.sendRedirect("DiaryServlet?command=journalDetail&seq=" + seq);
 }

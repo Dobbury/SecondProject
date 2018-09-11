@@ -121,7 +121,6 @@
 
 
    request.setCharacterEncoding("utf-8");
-   DiaryImpl dao = DiaryDao.getInstance();
 
   
    String loginid = dto.getId();
@@ -130,7 +129,7 @@
    List<DiaryDto> list = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");   //각 날짜별(시퀀스로 관리) 위도 경도
-   int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);
+   int likecheck = (int)request.getAttribute("likecheck");
  
  
 %>
@@ -332,8 +331,8 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>;
+var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
+var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
 
 function initialize() {
    
@@ -506,7 +505,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <%=journalDto.getLike_cnt() %> 명이 좋아합니다
    </div>
    <div class="like_box">
-   <% if(Likeckheack == 0) {%>
+   <% if(likecheck == 0) {%>
    <a id="like_box"onclick="likefuc()"><span class="like_off"></span><span style="font-size: 13px;"> 좋아요</span></a>
    <% 
    }else{
