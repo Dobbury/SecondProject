@@ -55,6 +55,7 @@ request.setCharacterEncoding("utf-8");
           background: #1C2331!important;
       }
   }
+
   </style>
   
 </head>
@@ -136,7 +137,7 @@ request.setCharacterEncoding("utf-8");
 						s += "<br>"+list.get(i).getTitle();
 						s += "</div>";
 					}else{
-						s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+						s += "<div class='diary' style='width:100px; height:100px; background-color:black;margin:0;'>";
 						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";	//차후 수정바람
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "<br>"+list.get(i).getTitle();
