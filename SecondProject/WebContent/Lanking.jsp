@@ -1,6 +1,38 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.PinDao"%>
+<%@page import="Impl.PinImpl"%>
+<%@page import="dto.JournalDto"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.DiaryDao"%>
+<%@page import="Impl.DiaryImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+	DiaryImpl dao = DiaryDao.getInstance();
+	
+	List<JournalDto> list = dao.getBestJournal();
+	
+	PinImpl pindao = PinDao.getInstance();
+	
+	List<String[]> pinlist = pindao.pinAVG();
+	
+	List<String[]> restolist = new ArrayList<>();
+	List<String[]> hotellist = new ArrayList<>();
+	List<String[]> tourlist = new ArrayList<>();
+	
+	for(int i = 0; i < pinlist.size();i++){
+		if(pinlist.get(i)[1].equals("resto")){
+			restolist.add(pinlist.get(i));
+		}else if(pinlist.get(i)[1].equals("hotel")){
+			hotellist.add(pinlist.get(i));
+		}else if(pinlist.get(i)[1].equals("tour")){
+			tourlist.add(pinlist.get(i));
+		}
+	}
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,9 +54,23 @@
     padding: 10px;
     margin-bottom: 15px;
 }
+.lankbox ul{
+	padding: 0;
+	width: 100%;
+}
 .lankbox li {
 	margin: 5px 0;
-	list-style: decimal;
+    list-style: none;
+    width: 198px;
+}
+
+.lankbox li a{
+	color: #333;
+    font-size: 14px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 button{
@@ -75,89 +121,32 @@ button:hover:before,button:hover:after{
    <div class="container" style="      display: table;  max-width: 900px;padding-top: 30px;">
 	<h2>BEST Diary</h2>
   	<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
-	
-			 
+			<%
+			for(int i = 0; i < list.size();i++){
+			%>
 				<div class="diary"  style="margin: 60px 100px 0 33px">
-					<a href="DiaryServlet?command=journalDetail&amp;seq=2">
+					<a href="DiaryServlet?command=journalDetail&amp;seq=<%=list.get(i).getSeq()%>">
 						<div class="Dimage" style="">
 						</div>
-						<p class="diary-title">일정제목</p>
+						<p class="diary-title"><%=list.get(i).getTitle()%></p>
 					</a>
 					<div class="diary-textbox">
-					<span class="diary-id">a 님</span>
+					<span class="diary-id"><%=list.get(i).getId() %> 님</span>
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date">2018-09-06</span>	
+					<span class="diary-date"><%=list.get(i).getWdate() %></span>	
 					
 					</div>
 					<div class="diary-heartbox">
 					<span style="text-align: right;color: #888;font-size: 14px;">
 					<span class="diary-heart"></span>
-
-					6
-					</span>
-					</div>
-				</div>
-			<div class="diary" style="margin: 60px 100px 0 33px">
-					<a href="DiaryServlet?command=journalDetail&amp;seq=2">
-						<div class="Dimage" style="">
-						</div>
-						<p class="diary-title">일정제목</p>
-					</a>
-					<div class="diary-textbox">
-					<span class="diary-id">a 님</span>
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date">2018-09-06</span>	
+					<%=list.get(i).getLike_cnt() %>
 					
-					</div>
-					<div class="diary-heartbox">
-					<span style="text-align: right;color: #888;font-size: 14px;">
-					<span class="diary-heart"></span>
-
-					6
 					</span>
 					</div>
 				</div>
-			<div class="diary"  style="margin: 60px 100px 0 33px">
-					<a href="DiaryServlet?command=journalDetail&amp;seq=2">
-						<div class="Dimage" style="">
-						</div>
-						<p class="diary-title">일정제목</p>
-					</a>
-					<div class="diary-textbox">
-					<span class="diary-id">a 님</span>
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date">2018-09-06</span>	
-					
-					</div>
-					<div class="diary-heartbox">
-					<span style="text-align: right;color: #888;font-size: 14px;">
-					<span class="diary-heart"></span>
-
-					6
-					</span>
-					</div>
-				</div>
-				<div class="diary"  style="margin: 60px 100px 0 33px">
-					<a href="DiaryServlet?command=journalDetail&amp;seq=2">
-						<div class="Dimage" style="">
-						</div>
-						<p class="diary-title">일정제목</p>
-					</a>
-					<div class="diary-textbox">
-					<span class="diary-id">a 님</span>
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date">2018-09-06</span>	
-					
-					</div>
-					<div class="diary-heartbox">
-					<span style="text-align: right;color: #888;font-size: 14px;">
-					<span class="diary-heart"></span>
-
-					6
-					</span>
-					</div>
-				</div>
-		
+			<%
+			}
+			%>
 
    </div>
 	
@@ -168,31 +157,46 @@ button:hover:before,button:hover:after{
 	<div class="lankbox">
 		<div class="lankbox_title">장소</div>
 		 <ul style="display: table;">
-		 	<li><a href="Pindetail.jsp">장소 타이틀</a></li>
-			<li><a href="Pindetail.jsp">장소 타이틀</a></li>
-			<li><a href="Pindetail.jsp">장소 타이틀</a></li>
-			<li><a href="Pindetail.jsp">장소 타이틀</a></li>
-			<li><a href="Pindetail.jsp">장소 타이틀</a></li>
+		<%
+		for(int i = 0; i < tourlist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=tourlist.get(i)[0]%>"><%=tourlist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 <div class="lankbox">
 		<div class="lankbox_title">맛집</div>
 		 <ul style="display: table;">
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
+		<%
+		for(int i = 0; i < restolist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>"><%=restolist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 	<div class="lankbox">
 		<div class="lankbox_title">숙소</div>
 		 <ul style="display: table;">
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
-		 	<li>장소 타이틀</li>
+		 <%
+		for(int i = 0; i < hotellist.size();i++){
+			if(i==5){
+				break;
+			}
+		%>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>"><%=hotellist.get(i)[0]%></a></li>
+		<%
+		}
+		%>
 		 </ul>
 	</div>
 

@@ -20,7 +20,9 @@ public class PinDto implements Serializable {
 		this.Pin_name = Pin_name;
 		this.kinds = kinds;
 		this.location = location;
+		
 	}
+
 
 	public double getLat() {
 		return lat;

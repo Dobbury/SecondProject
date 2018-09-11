@@ -208,7 +208,7 @@ button:hover:before,button:hover:after{
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-          <form action="search.jsp" method="post">
+          <form action="DiaryServlet" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
@@ -233,6 +233,7 @@ button:hover:before,button:hover:after{
 				<div class="diary">
 					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
+							<img alt="xx" src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>

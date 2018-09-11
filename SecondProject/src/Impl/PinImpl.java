@@ -30,7 +30,10 @@ public interface PinImpl {
 	public int getAllPinCount();
 	
 	public List<PinDto> getSearchPinList(int page, String stext);
-	
+
 	public int getSearchPinCount(String stext); 
+
+
+	public List<pinCommentDto> getPinCommentList(String pin_name);
 
 }

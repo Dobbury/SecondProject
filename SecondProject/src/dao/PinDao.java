@@ -90,6 +90,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -132,7 +134,7 @@ public class PinDao implements PinImpl {
 	@Override
 	public PinDto getPin(String pin_name) {
 		
-		String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
+String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
@@ -163,6 +165,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -192,6 +196,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -231,6 +237,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -338,6 +346,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -380,7 +390,7 @@ public class PinDao implements PinImpl {
 		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
 				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
 				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%') A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%')) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
 		Connection conn =null;
@@ -412,8 +422,10 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
-		}
+		};
 		
 		return list;
 	}
@@ -447,4 +459,49 @@ public class PinDao implements PinImpl {
 		
 		return pcount;
 	}
+
+	@Override
+	public List<pinCommentDto> getPinCommentList(String pin_name) {
+		String sql = " SELECT GRADE,PCOMMENT,ID,PINNAME,SEQ FROM PINCOMMENT WHERE PINNAME = ? ";
+		
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<pinCommentDto> list = new ArrayList<>();
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, pin_name);
+		
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				pinCommentDto Dto =new pinCommentDto(
+						rs.getDouble(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getInt(5)
+						);
+				list.add(Dto);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+		
+	}
+	
+	
+
 }
