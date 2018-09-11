@@ -90,6 +90,7 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -163,6 +164,8 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -192,6 +195,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -231,6 +235,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -338,6 +343,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -412,6 +418,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -481,6 +488,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		

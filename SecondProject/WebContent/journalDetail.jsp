@@ -334,8 +334,8 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
-var basic_lng = 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+var basic_lat= 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
+var basic_lng = 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
 
 function initialize() {
    
@@ -647,6 +647,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
             alert(pins['seq_'+$(this).children('input').val()][i]);
             var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
             addMarker(location);
+
+            basic_lat=pins['seq_'+$(this).children('input').val()][i].lat;
+            basic_lat=pins['seq_'+$(this).children('input').val()][i].lng;
          }
          
          showMarkers();   
