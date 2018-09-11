@@ -292,7 +292,7 @@ public class DiaryServlet extends HttpServlet {
 			req.setAttribute("DiarycommentDto", list);
 
 			dispatch("journalUpdate.jsp", req, resp);
-	
+
 		}else if(command.equals("journalDetail")) {
 
 	         int seq = Integer.parseInt(req.getParameter("seq"));
@@ -334,6 +334,7 @@ public class DiaryServlet extends HttpServlet {
 	         
 	         dispatch("journalDetail.jsp", req, resp);
 	         
+
 
 		} else if (command.equals("commentwrite")) {
 
