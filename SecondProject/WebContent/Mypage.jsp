@@ -142,9 +142,9 @@ html, body, header, .view {
 /* Style the tab content */
 .tabcontent {
 	display: none;
-	background-color: rgb(0, 154, 200);
+	background-color:white;
 	padding: 6px 12px;
-	color: #fff;
+	color: #000000;
 }
 
 ul.tab li.current {
@@ -165,6 +165,48 @@ ul.tab li.current {
 	text-align: center;
 	vertical-align: top;
 }
+.btn1{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.btn1:hover{
+  background:#fff;
+  color:#003458;
+}
+.btn1:before,btn1:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+.btn1:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn1:hover:before,btn1:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+    
+body {
+	background-image: url("img/ivoryBg.jpg");
+	background-size: cover;
+}
 
 @media (min-width: 800px) and (max-width: 850px) {
       .navbar:not(.top-nav-collapse) {
@@ -175,38 +217,19 @@ ul.tab li.current {
 </head>
 
 <body>
-
-	<!-- Navbar -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-	<div class="container">
-
-		<!-- logo -->
-		<a class="navbar-brand" href="#" target="_blank"> <strong>MDB</strong>
-		</a>
-
-
-
-		<!-- Right -->
-		<ul class="navbar-menu">
-			<li><a href="Newspeed.jsp?page=1">뉴스피드</a></li>
-			<li><a href="Mypage.jsp?page=1">마이페이지</a></li>
-
+<jsp:include page="header.jsp"></jsp:include>
+<br><br><br><br>
+	<div id="container" class="tab-content card" style="background-color:#FFFAFA">
+		
+		<ul class="nav nav-tabs md-tabs nav-justified">
+			<li class="nav-item" data-tab="tab1"><a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
+			<li class="nav-item" data-tab="tab1"><a class="nav-link" data-toggle="tab" href="#panel2" role="tab">회원정보수정</a></li>
+			<li class="nav-item" data-tab="tab1"><a class="nav-link" href="CalendarWrite.jsp">캘린더 보기</a></li>
+			
 		</ul>
 
-	</div>
-	</nav>
-
-	<div id="container">
-		<h1>MYPAGE!!!!!!!!</h1>
-		<ul class="tab">
-			<li class="current" data-tab="tab1"><a href="#">내가 쓴 글 보기</a></li>
-			<li data-tab="tab2"><a href="#">회원정보수정</a></li>
-			<li data-tab="tab3"><a href="CalendarWrite.jsp">캘린더 보기</a></li>
-		</ul>
-
-		<div id="tab1" class="tabcontent current">
-			<h3>내가 쓴 글 보기</h3>
+		<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+			
 			<main style="padding-top:80px;">
 			<div class="container">
 
@@ -286,38 +309,56 @@ ul.tab li.current {
 		</div>
 		</main>
 
-		<div id="tab2" class="tabcontent">
-			<h3>회원정보 수정</h3>
-			<table>
+		<div class="tab-pane fade" id="panel2" role="tabpanel">
+			
+			<table align="center">
 				<tr>
 					<td>ID</td>
-					<td><input type="text" id="id" readonly="readonly"
-						value="<%=dto.getId()%>" name="id"></td>
+					<td>
+					<div class="md-form">
+					<input type="text" id="id" readonly="readonly"
+						value="<%=dto.getId()%>" name="id" class="form-control"></div></td>
+						
+						<!-- 
+						
+						<div class="md-form">
+  						  <input type="text" id="form1" class="form-control">
+ 					   <label for="form1" >Example label</label>
+						</div>
+						
+						 -->
 				</tr>
 				<tr>
 					<td>PW</td>
-					<td><input type="text" id="pw" name="pw"></td>
+					<td>
+					<div class="md-form">
+					<input type="text" id="pw" name="pw" class="form-control"></div></td>
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" id="name" readonly="readonly"
-						value="<%=dto.getName()%>" name="name"></td>
+					<td>
+					<div class="md-form">
+					<input type="text" id="name" readonly="readonly"
+						value="<%=dto.getName()%>" name="name" class="form-control"></div></td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" id="nickname" name="nickname">
+					<td>
+					<div class="md-form">
+					<input type="text" id="nickname" name="nickname" class="form-control"></div>
 					</td>
 				</tr>
-				<tr>
-					<td><input type="button" id="edit" value="수정완료"></td>
-					<td><input type="button" name="back" value="취소"></td>
-				</tr>
+				
 			</table>
+				<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt" id="edit" value="수정완료">
+				<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt"
+				id="back" value="취소">		
 		</div>
-		<div id="tab3" class="tabcontent"></div>
+		<div class="tab-pane fade" id="panel3" role="tabpanel">
+		</div>
 
 	</div>
-
+	
 
 
 	<script>
@@ -364,52 +405,6 @@ ul.tab li.current {
 		});
 	</script>
 
-	<!-- --------------------------------------------------------------------------------- -->
-
-
-	<!--Footer-->
-	<footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-
-	<hr class="my-4">
-
-	<div class="pb-4">
-		<a href="https://www.facebook.com/mdbootstrap" target="_blank"> <i
-			class="fa fa-facebook mr-3"></i>
-		</a> <a href="https://twitter.com/MDBootstrap" target="_blank"> <i
-			class="fa fa-twitter mr-3"></i>
-		</a> <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-			<i class="fa fa-youtube mr-3"></i>
-		</a> <a href="https://plus.google.com/u/0/b/107863090883699620484"
-			target="_blank"> <i class="fa fa-google-plus mr-3"></i>
-		</a> <a href="https://dribbble.com/mdbootstrap" target="_blank"> <i
-			class="fa fa-dribbble mr-3"></i>
-		</a> <a href="https://pinterest.com/mdbootstrap" target="_blank"> <i
-			class="fa fa-pinterest mr-3"></i>
-		</a> <a href="https://github.com/mdbootstrap/bootstrap-material-design"
-			target="_blank"> <i class="fa fa-github mr-3"></i>
-		</a> <a href="http://codepen.io/mdbootstrap/" target="_blank"> <i
-			class="fa fa-codepen mr-3"></i>
-		</a>
-	</div>
-
-	<!--Copyright-->
-	<div class="footer-copyright py-3">
-		© 2018 Copyright: <a
-			href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">
-			MDBootstrap.com </a>
-	</div>
-	<!--/.Copyright--> </footer>
-	<!--/.Footer-->
-
-
-
-
-	<!-- Initializations -->
-	<!-- 
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
-  </script> -->
+<jsp:include page="footer.jsp"></jsp:include> 
 </body>
 </html>
