@@ -125,7 +125,7 @@
 				break;
 			}
 		%>
-		 	<li><a href="Pindetail.jsp?pinname=<%=tourlist.get(i)[0]%>"><%=tourlist.get(i)[0]%></a></li>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=tourlist.get(i)[0]%>"><%=tourlist.get(i)[0]%></a></li>
 		<%
 		}
 		%>
@@ -140,7 +140,7 @@
 				break;
 			}
 		%>
-		 	<li><a href="Pindetail.jsp?pinname=<%=restolist.get(i)[0]%>"><%=restolist.get(i)[0]%></a></li>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>"><%=restolist.get(i)[0]%></a></li>
 		<%
 		}
 		%>
@@ -155,7 +155,7 @@
 				break;
 			}
 		%>
-		 	<li><a href="Pindetail.jsp?pinname=<%=hotellist.get(i)[0]%>"><%=hotellist.get(i)[0]%></a></li>
+		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>"><%=hotellist.get(i)[0]%></a></li>
 		<%
 		}
 		%>

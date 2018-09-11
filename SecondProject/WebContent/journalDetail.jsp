@@ -114,8 +114,7 @@
 		String tday = calllist(year	,month,1,b);		
 		System.out.println("tday는 : " + tday);
 				
-		List<DiaryDto> list = cdao.getCalList(dto.getId());
-		System.out.println("List<CalendarDto> list 는 : " + list);  
+		//List<DiaryDto> list = cdao.getCalList(dto.getId());
 %>
 <%
 
@@ -127,14 +126,12 @@
    String loginid = dto.getId();
    JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
 
-   List<DiaryDto> diarylist = (List<DiaryDto>)request.getAttribute("DiaryList");
+   List<DiaryDto> list = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");	//각 날짜별(시퀀스로 관리) 위도 경도
    int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);
  
-  for(int i=0;i<diarylist.size();i++){
-     diarylist.get(i).toString();
-  }
+ 
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -347,6 +344,8 @@ function initialize() {
 }
 //Adds a marker to the map.
 function addMarker(location) {
+	map.zoom=15;
+	map.panTo(location);
   var marker = new google.maps.Marker({
     position: location,
     map: map
@@ -484,16 +483,16 @@ google.maps.event.addDomListener(window, 'load', initialize);
    
       <div class="diary-m">
       <%
-               for(int i=0; i<diarylist.size(); i++ ){
+               for(int i=0; i<list.size(); i++ ){
             %>
          <div class="diary-cont">
-            <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
-            <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>
+            <p class="diary-title"><%=list.get(i).getTitle() %></p>
+            <span class="diary-date" style="color:#555"><%=list.get(i).getTday().substring(0,11) %></span>
             <hr>
             
 
             <div class="diary-content" style="word-break: break-all;">
-                <%=diarylist.get(i).getContent() %>
+                <%=list.get(i).getContent() %>
             </div>
 
          </div>
@@ -644,18 +643,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	   if(!$(this).children('input').prop("checked")){
 			
 		   for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
-				alert(pins['seq_'+$(this).children('input').val()][i]);
+				
 				var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
 				addMarker(location);
 				basic_lat=location.lat();
 			   	basic_lat=location.lng();
 		   }
-		   initialize();
+		    
 			showMarkers();	
 			
 	   }else{
 		   clearMarkers();
-		   alert(markers.length);
+		  
 		   for(var i = 0 ; i < markers.length ; i++){
 			   //alert(markers[i].position.lat());
 			   
@@ -667,8 +666,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						var befo=markers.length;
 					   markers.splice(i,1);
 					   
-					   alert(befo +" "+markers.length);
-						
+					  
 					}	
 			   }
 			   

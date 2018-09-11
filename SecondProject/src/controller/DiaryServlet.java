@@ -302,6 +302,7 @@ public class DiaryServlet extends HttpServlet {
 	         for(DiaryDto dDto : Diarylist) {
 	        	 
 	        	 String pins[]=dDto.getPin_Seqs().split(",");
+	       
 	        	 
 	        	 List<String[]> latlnglist = new ArrayList<>();
 	        	 for(String pinSeq : pins) {

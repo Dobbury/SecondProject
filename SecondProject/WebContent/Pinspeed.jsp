@@ -182,7 +182,7 @@ transition: all 40s;
 			for(int i = 0; i < pinlist.size();i++){
 			%>
 				<div class="diary">
-					<a href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i)[0]%>&grade_AVG=<%=pinlist.get(i)[2] %>">
+					<a href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i)[0]%>">
 						<div class="Dimage" style="">
 							<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=dao.getPin(pinlist.get(i)[0]).getLat()%>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>&zoom=13&size=600x300&maptype=roadmap
 								&markers=color:blue%7Clabel:S%7C<%=dao.getPin(pinlist.get(i)[0]).getLat() %>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>
@@ -193,7 +193,7 @@ transition: all 40s;
 					<div class="diary-textbox">
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
 					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
-					
+					<span><%=pinlist.get(i)[2] %></span>
 					</div>
 				</div>
 			<%

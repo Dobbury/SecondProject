@@ -316,7 +316,7 @@ html, body, header, .view {
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				<input type="button" value="취소" id="#">
+    				<input type="button" value="취소" id="CalendarWrite.jsp">
     			</td>
     		</tr>
     	</table>

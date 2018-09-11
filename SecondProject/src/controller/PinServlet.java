@@ -90,6 +90,18 @@ public class PinServlet extends HttpServlet {
 			   List<pinCommentDto> list = dao.getPinCommentList(pinname);
 			   req.setAttribute("pin", dto);
 			   req.setAttribute("pinCList", list);
+			   //&=<%=pinlist.get(i)[2] %>
+			   List<String[]> avglist = dao.pinAVG();
+			
+			   for(String pininfo[] : avglist ) {
+				   System.out.println(pininfo[0]+ "  "+pinname );
+				   if(pininfo[0].equals(pinname)) {
+					   System.out.println("value:"+pininfo[2]);
+					   req.setAttribute("grade_AVG", pininfo[2]);
+					   break;
+				   }
+			   }
+			   
 			   dispatch("Pindetail.jsp", req, resp);
 		   }
 		   
