@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="dao.CalendarDao"%>
@@ -37,7 +38,7 @@
 			String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
 			
 			if(h == false){
-				s += "<div style='width:50px; height:50px;'>";
+				s += "<div style='width:50px; height:50px;' data-toggle='buttons'>";
 					  
 				return s;	
 			}else{
@@ -59,11 +60,21 @@
 				today = today.substring(0,8);
 				if(today.equals(tday)){
 					
-					
+					/* 
 					if(list.get(i).getJour_check()==1){
-						s += "<div style='width:50px; height:50px; background-color:black;'>";
+						s += "<div style='width:50px; height:50px; background-color:black;' class='toggleMarker'>";
+						s += "<input type='hidden' value="+list.get(i).getSeq()+">";
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "</div>";
+					}
+					 */
+					if(list.get(i).getJour_check()==1){
+						s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
+						//s += "<input type='hidden' ";
+						s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
+						s += "<span class='glyphicon glyphicon-ok' ></span>";
+						//s += String.format("%2d", day); //day를 2칸으로 다시 정정
+						s += "</label>";
 					}
 				}
 			}
@@ -127,6 +138,11 @@
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <head>
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -135,6 +151,15 @@
 
 
 <style type="text/css">
+
+.btn span.glyphicon {    			
+	opacity: 0;	
+}
+.btn.active span.glyphicon {				
+	opacity: 1;		
+		
+}
+
 /* Necessary for full page carousel*/
 html, body, header, .view {
    height: 100%;
@@ -165,11 +190,7 @@ html, body, header, .view {
     color: #777;
     display: inline-block;
     margin-right: 12px;
-<<<<<<< HEAD
-    margin-left: 5px;
-=======
-        margin-left: 3px;
->>>>>>> 9f480c083f05b0e5b4fca2348c55c6d81c710c4e
+    margin-left: 3px;
 }
 .journal-date{
 	font-size: 14px;
@@ -271,37 +292,93 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
     height: 370px;
 }
 </style>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
 <script type="text/javascript">
+
+var pins={
+		<%	Iterator<Integer> it = locationMap.keySet().iterator();
+			while(it.hasNext()){
+				int seq = it.next();
+		%>
+				seq_<%=seq %> : [
+			<%
+				List<String[]> locationlist = locationMap.get(seq);
+				for(int i = 0 ; i < locationlist.size() ; i++){
+					%>
+					{
+						lat:<%=locationlist.get(i)[0] %>,
+						lng:<%=locationlist.get(i)[1] %>
+					}
+					<%
+						if(i != locationlist.size()-1){
+					%>
+						,
+					<%
+						}
+				}
+				%>
+				]
+				
+			<%	
+				if(it.hasNext()){
+			%>
+				,
+			<%
+				}
+			}
+		%>
+		
+};
+
+var map;
+var markers = [];
 
 var basic_lat= 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
 var basic_lng = 1; <%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
 
 function initialize() {
 	
-	var map = new google.maps.Map(document.getElementById('maps'), {
+	map = new google.maps.Map(document.getElementById('maps'), {
 		zoom: 12,
 		center: {lat:basic_lat, lng:basic_lng}
 	});
 	
-		  
-	/* // Adds a marker to the map.
-	function addMarker(location,map) {
-		// Add the marker at the clicked location, and add the next-available label
-        // from the array of alphabetical characters.
-        var marker = new google.maps.Marker({
-			position: location,
-			label: labels[labelIndex++ % labels.length],
-			map: map,
-			title:"뿌리뿌리"
-		});
-		//modal_Marker.push(marker);
-	}
-	 */
-/* 	for(i = 0 ; i < basic_Marker.length ; i++){
-		addMarker(basic_Marker[i],map);
-	} */
 }
+//Adds a marker to the map.
+function addMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  markers.push(marker);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+/* for(i = 0 ; i < basic_Marker.length ; i++){
+	addMarker(basic_Marker[i],map);
+} */
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
@@ -337,7 +414,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
          </div> -->
          <!-- 달력영역 -->
          <div class="calendar" align="center">
-         	<table border="1">
+         	<table border="1" >
 				<!-- 너비 -->
 				<col width="50">
 				<col width="50">
@@ -404,8 +481,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
          </div>
       </div>
       
-
-   
    
       <div class="diary-m">
       <%
@@ -562,7 +637,42 @@ google.maps.event.addDomListener(window, 'load', initialize);
    function deletefucsend() {
       location.href='DiaryServlet?command=deletecomment&seq='+seq
            
-}
+   }
+   
+   $(".btn").click(function () {
+	   //alert($(this).children('input').val());
+	   if(!$(this).children('input').prop("checked")){
+			
+		   for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
+				alert(pins['seq_'+$(this).children('input').val()][i]);
+				var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
+				addMarker(location);
+		   }
+		   
+			showMarkers();	
+			
+	   }else{
+		   clearMarkers();
+		   alert(markers.length);
+		   for(var i = 0 ; i < markers.length ; i++){
+			   //alert(markers[i].position.lat());
+			   
+			   for(var j = 0 ; j < pins['seq_'+$(this).children('input').val()].length ; j++){
+				   var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][j].lat,
+						   								pins['seq_'+$(this).children('input').val()][j].lng);
+					
+				   if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
+						alert("asd");
+						markers[i].splice(i,1);
+					}	
+			   }
+			   
+		   }
+		   
+		   showMarkers();
+	   }
+   });
+	
    
    </script>
    
