@@ -68,7 +68,7 @@
                   s += "</div>";
                }
                 */
-               if(list.get(i).getJour_check()==1){
+               if(list.get(i).getJour_check()==1 && list.get(i).getPin_Seqs() != null){
                   s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
                   //s += "<input type='hidden' ";
                   s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
@@ -333,13 +333,9 @@ var pins={
 var map;
 var markers = [];
 
-<<<<<<< HEAD
-var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
-=======
-var basic_lat= 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
-var basic_lng = 1;<%-- <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>; --%>
->>>>>>> 9b36c6032b14f073ce6bebb761fd4d733ebf555c
+var basic_lat=1;
+var basic_lng=1;
+
 
 function initialize() {
    

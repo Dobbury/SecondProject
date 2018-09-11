@@ -305,26 +305,25 @@ public class DiaryServlet extends HttpServlet {
 	         
 	         Map<Integer,List<String[]>> map = new HashMap<>();
 	         for(DiaryDto dDto : Diarylist) {
-	        	 
-	        	 String pins[]=dDto.getPin_Seqs().split(",");
-	       
-	        	 
 	        	 List<String[]> latlnglist = new ArrayList<>();
-	        	 for(String pinSeq : pins) {
-	        		 PinImpl pDao = PinDao.getInstance();
-	        		 pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
-	        		 String pinname=pCDto.getPinname();
-	        		 PinDto pin = pDao.getPin(pinname);
-	        		 
-	        		 String location[] = { pin.getLat()+"",pin.getLng()+""};
-	        		 System.out.println(pin.getLat()+" "+pin.getLng());
-	        		 latlnglist.add(location);
-	        	 }
 	        	 
+	        	 if(dDto.getPin_Seqs() != null) {
+	        		 String pins[]=dDto.getPin_Seqs().split(",");
+		        	 
+		        	 for(String pinSeq : pins) {
+		        		 PinImpl pDao = PinDao.getInstance();
+		        		 pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
+		        		 String pinname=pCDto.getPinname();
+		        		 PinDto pin = pDao.getPin(pinname);
+		        		 
+		        		 String location[] = { pin.getLat()+"",pin.getLng()+""};
+		        		 System.out.println(pin.getLat()+" "+pin.getLng());
+		        		 latlnglist.add(location);
+		        	 }
+	        	 }
 	        	 map.put(dDto.getSeq(), latlnglist);
 	         }
 
-	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
 	         
 	         req.setAttribute("locations", map);
 	         req.setAttribute("JournalDto", dto);

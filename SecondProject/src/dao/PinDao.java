@@ -376,18 +376,19 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 	}
 
 	@Override
-	public List<PinDto> getSearchPinList(int page, String stext) {
-		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
-				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
-				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%')) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+	public List<String[]> getSearchPinList(int page, String stext) {
+
+		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC, B.GRADE_AVG "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC, A.GRADE_AVG "
+				+ " FROM (SELECT LATI, LONGI, PINCOMMENT.PINNAME AS PINNAME, KINDS, LOC,AVG(GRADE) AS GRADE_AVG "
+				+ " FROM PINCOMMENT, PIN WHERE PINCOMMENT.PINNAME = PIN.PINNAME AND PINCOMMENT.PINNAME LIKE('%" + stext + "%') GROUP BY PINCOMMENT.PINNAME,KINDS,LATI,LONGI,LOC ) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<PinDto> list = new ArrayList<>();
+		List<String[]> list = new ArrayList<>();
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
@@ -398,16 +399,13 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 			
 			rs = psmt.executeQuery();
 			
+			list = new ArrayList<>();
 			while(rs.next()) {
-				list.add(new PinDto(
-						rs.getDouble(2),
-						rs.getDouble(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6)
-						));
-				
+				String arr[] = {rs.getString(4),rs.getString(5),String.format("%.2f", rs.getDouble(7))}; 
+				list.add(arr);
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

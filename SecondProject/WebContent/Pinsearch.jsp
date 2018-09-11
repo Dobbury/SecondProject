@@ -16,7 +16,7 @@ String stext = request.getParameter("stext");
 int paging = Integer.parseInt(request.getParameter("page"));
 int pcount = dao.getSearchPinCount(stext);
 
-List<PinDto> pinlist = dao.getSearchPinList(paging, stext);
+List<String[]> pinlist = dao.getSearchPinList(paging, stext);
 int pagecount = 1;
 pagecount = pcount/9;
 if(pcount != 0){
@@ -191,14 +191,17 @@ transition: all 40s;
 			for(int i = 0; i < pinlist.size();i++){
 			%>
 				<div class="diary">
-					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i).getPin_name()%>">
+					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i)[0]%>">
 						<div class="Dimage" style="">
+							<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=dao.getPin(pinlist.get(i)[0]).getLat()%>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>&zoom=13&size=600x300&maptype=roadmap
+								&markers=color:blue%7Clabel:S%7C<%=dao.getPin(pinlist.get(i)[0]).getLat() %>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>
+								&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
 						</div>
-						<p class="diary-title"><%=pinlist.get(i).getPin_name() %></p>
+						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=pinlist.get(i).getKinds() %></span>	
+					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
 					
 					
 					</div>

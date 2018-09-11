@@ -226,7 +226,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 		%>
 
 		 	<li>
-		 	<a href="Pindetail.jsp?pinname=<%=hotellist.get(i)[0]%>">
+		 	<a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
 		 	<span class="lanknumber"><%=i+1%></span>
 		 	<span class="lanktext"><%=hotellist.get(i)[0]%></span>
 		 	<span class="lankavg">60</span>
