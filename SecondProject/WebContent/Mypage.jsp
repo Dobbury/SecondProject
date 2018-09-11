@@ -11,19 +11,10 @@
 	request.setCharacterEncoding("utf-8");
 
 	memberDto dto = (memberDto) session.getAttribute("user");
+	int p = (int) request.getAttribute("page");
+	int pagecount = (int) request.getAttribute("pagecount");
+	List<JournalDto> jlist = (List<JournalDto>) request.getAttribute("jlist");
 
-	int p = Integer.parseInt(request.getParameter("page"));
-	DiaryImpl dDao = DiaryDao.getInstance();
-
-	int jcount = dDao.countMyJournal(dto.getId());
-	List<JournalDto> jlist = dDao.myJournalList(dto.getId(), p);
-
-	int pagecount = jcount / 6;
-	if(jcount != 0){
-		if (pagecount % jcount > 0) {
-			pagecount++;
-		}
-	}
 	int startPage = 0;
 	int endPage = 0;
 	if (p > 5) {
@@ -45,10 +36,6 @@
 <html>
 <head>
 <!-- 제이쿼리 -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -56,9 +43,6 @@
 <!-- JQuery -->
 <!-- <script> -->
 <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="Design/js/popper.min.js"></script>
-<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="Design/js/mdb.min.js"></script>
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -104,15 +88,6 @@ html, body, header, .view {
 	vertical-align: top;
 }
 
-.Dimage {
-	width: 280px;
-	height: 220px;
-	border: 1px solid blue;
-	background-color: gray;
-	margin-top: 10px;
-	margin-left: 10px;
-}
-
 #container {
 	width: 960px;
 	margin: 0 auto;
@@ -142,7 +117,7 @@ html, body, header, .view {
 /* Style the tab content */
 .tabcontent {
 	display: none;
-	background-color:white;
+	background-color: white;
 	padding: 6px 12px;
 	color: #000000;
 }
@@ -165,71 +140,84 @@ ul.tab li.current {
 	text-align: center;
 	vertical-align: top;
 }
-.btn1{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-.btn1:hover{
-  background:#fff;
-  color:#003458;
-}
-.btn1:before,btn1:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-.btn1:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-.btn1:hover:before,btn1:hover:after{
-  width:100%;
-  transition:800ms ease all;
+
+.btn1 {
+	background: #003458;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
 }
 
-    
+.btn1:hover {
+	background: #fff;
+	color: #003458;
+}
+
+.btn1:before, btn1:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #003458;
+	transition: 400ms ease all;
+}
+
+.btn1:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+.btn1:hover:before, btn1:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
 body {
 	background-image: url("img/ivoryBg.jpg");
 	background-size: cover;
 }
 
-@media (min-width: 800px) and (max-width: 850px) {
-      .navbar:not(.top-nav-collapse) {
-          background: #1C2331!important;
-      }
+@media ( min-width : 800px) and (max-width: 850px) {
+	.navbar:not (.top-nav-collapse ) {
+		background: #1C2331 !important;
+	}
 }
 </style>
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-<br><br><br><br>
-	<div id="container" class="tab-content card" style="background-color:#FFFAFA">
-		
+
+	<jsp:include page="header.jsp"></jsp:include>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="container" class="tab-content card"
+		style="background-color: #FFFAFA">
+
 		<ul class="nav nav-tabs md-tabs nav-justified">
-			<li class="nav-item" data-tab="tab1"><a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
-			<li class="nav-item" data-tab="tab1"><a class="nav-link" data-toggle="tab" href="#panel2" role="tab">회원정보수정</a></li>
-			<li class="nav-item" data-tab="tab1"><a class="nav-link" href="CalendarWrite.jsp">캘린더 보기</a></li>
-			
+			<li class="nav-item" data-tab="tab1"><a class="nav-link active"
+				data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
+			<li class="nav-item" data-tab="tab1"><a class="nav-link"
+				data-toggle="tab" href="#panel2" role="tab">회원정보수정</a></li>
+			<li class="nav-item" data-tab="tab1"><a class="nav-link"
+				href="CalendarWrite.jsp">캘린더 보기</a></li>
+
 		</ul>
 
 		<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
-			
+
+
 			<main style="padding-top:80px;">
 			<div class="container">
 
@@ -272,7 +260,7 @@ body {
 						<%
 							if (p != 1 || pagecount == 0) {
 						%>
-						<a href="./Mypage.jsp?page=<%=p - 1%>">&lt;</a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 						<%
 							}
 						%>
@@ -281,7 +269,7 @@ body {
 							for (int i = startPage; i < pagecount; i++) {
 								if (i + 1 != p) {
 						%>
-						<a href="./Mypage.jsp?page=<%=i + 1%>"><%=i + 1%></a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
 						<%
 							} else {
 						%>
@@ -295,7 +283,7 @@ body {
 
 							if (p != pagecount || pagecount == 0) {
 						%>
-						<a href="./Mypage.jsp?page=<%=p + 1%>">&gt;</a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 						<%
 							}
 						%>
@@ -310,16 +298,18 @@ body {
 		</main>
 
 		<div class="tab-pane fade" id="panel2" role="tabpanel">
-			
+
 			<table align="center">
 				<tr>
 					<td>ID</td>
 					<td>
-					<div class="md-form">
-					<input type="text" id="id" readonly="readonly"
-						value="<%=dto.getId()%>" name="id" class="form-control"></div></td>
-						
-						<!-- 
+						<div class="md-form">
+							<input type="text" id="id" readonly="readonly"
+								value="<%=dto.getId()%>" name="id" class="form-control">
+						</div>
+					</td>
+
+					<!-- 
 						
 						<div class="md-form">
   						  <input type="text" id="form1" class="form-control">
@@ -331,34 +321,39 @@ body {
 				<tr>
 					<td>PW</td>
 					<td>
-					<div class="md-form">
-					<input type="text" id="pw" name="pw" class="form-control"></div></td>
+						<div class="md-form">
+							<input type="text" id="pw" name="pw" class="form-control">
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td>이름</td>
 					<td>
-					<div class="md-form">
-					<input type="text" id="name" readonly="readonly"
-						value="<%=dto.getName()%>" name="name" class="form-control"></div></td>
+						<div class="md-form">
+							<input type="text" id="name" readonly="readonly"
+								value="<%=dto.getName()%>" name="name" class="form-control">
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
 					<td>
-					<div class="md-form">
-					<input type="text" id="nickname" name="nickname" class="form-control"></div>
+						<div class="md-form">
+							<input type="text" id="nickname" name="nickname"
+								class="form-control">
+						</div>
 					</td>
 				</tr>
-				
+
 			</table>
-				<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt" id="edit" value="수정완료">
-				<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt"
-				id="back" value="취소">		
+			<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt"
+				id="edit" value="수정완료"> <input type="button" class="btn1"
+				style="WIDTH: 30pt; HEIGHT: 20pt" id="back" value="취소">
 		</div>
-		<div class="tab-pane fade" id="panel3" role="tabpanel">
-		</div>
+		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 
 	</div>
-	
+
 
 
 	<script>
@@ -405,6 +400,6 @@ body {
 		});
 	</script>
 
-<jsp:include page="footer.jsp"></jsp:include> 
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

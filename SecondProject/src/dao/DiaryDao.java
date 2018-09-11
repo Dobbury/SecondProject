@@ -288,9 +288,11 @@ public class DiaryDao implements DiaryImpl {
          count = psmt.executeUpdate();
       } catch (SQLException e) {
          e.printStackTrace();
-      }finally {
-    	  DBClose.close(psmt, conn, null);
-	}
+
+      } finally {
+			DBClose.close(psmt, conn, null);
+		}
+
       return count;
    }
    
@@ -310,9 +312,11 @@ public class DiaryDao implements DiaryImpl {
          count = psmt.executeUpdate();
       } catch (SQLException e) {
          e.printStackTrace();
-      }finally {
-    	  DBClose.close(psmt, conn, null);
-	}
+
+      } finally {
+			DBClose.close(psmt, conn, null);
+		}
+
       return count>0 ? true:false;
    }
 
@@ -735,7 +739,9 @@ public class DiaryDao implements DiaryImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+
+		} finally {
+
 			DBClose.close(psmt, conn, rs);
 		}
 		return count;

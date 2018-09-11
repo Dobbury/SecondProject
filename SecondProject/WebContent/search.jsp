@@ -12,17 +12,10 @@
 request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
-int paging = Integer.parseInt(request.getParameter("page"));
 String stext = request.getParameter("stext");
-int jcount = dao.getSearchCountJournal(stext);
-
-List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
-int pagecount = jcount/9;
-if(jcount!=0){
-	if(pagecount%jcount>0){
-		pagecount++;
-	}
-}
+int paging = Integer.parseInt(request.getParameter("page"));
+int pagecount = (int)request.getAttribute("pagecount");
+List<JournalDto> journallist = (List<JournalDto>)request.getAttribute("journallist");
 
 int startPage = 0;
 int endPage = 0;
@@ -271,7 +264,7 @@ button:hover:before,button:hover:after{
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
+					<a href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -281,7 +274,7 @@ button:hover:before,button:hover:after{
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
+				<a href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -296,7 +289,7 @@ button:hover:before,button:hover:after{
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
+			<a href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>

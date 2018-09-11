@@ -256,7 +256,7 @@ button:hover:before,button:hover:after{
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="Newspeed.jsp">뉴스피드</a></li>
-          <li><a href="Mypage.jsp">마이페이지</a></li>
+          <li><a href="Mypage?page=1.jsp">마이페이지</a></li>
         </ul>
 
     </div>

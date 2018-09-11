@@ -52,20 +52,25 @@ public class MemberServlet extends HttpServlet {
 			memberDto dto = dao.doLogin(id, pw);
 			
 			if (dto != null) {
-				/*DiaryImpl diaryDao = DiaryDao.getInstance();
-				int jcount = diaryDao.getCountJournal();
-				List<JournalDto> journallist = diaryDao.getJournalList(Integer.parseInt(page));
-				int pagecount = jcount/9; 
-				if(jcount%9 > 0){
-					pagecount++;
-				}*/
+				DiaryImpl diaryDao = DiaryDao.getInstance();
 				
+				int paging = 1;
+				int jcount = diaryDao.getCountJournal();
+
+				List<JournalDto> journallist = diaryDao.getJournalList(paging);
+				int pagecount = 0;
+				if(jcount != 0){
+					pagecount = jcount/9;
+					if(pagecount%jcount>0){
+						pagecount++;
+					}
+				}
 				
 				req.getSession().setAttribute("user", dto);
-				/*req.setAttribute("jcount", jcount);
+				req.setAttribute("page", paging);
+				req.setAttribute("pagecount", pagecount);
 				req.setAttribute("journallist", journallist);
-				req.setAttribute("pagecount", pagecount);*/
-				dispatch("Newspeed.jsp?page=1", req, resp);
+				dispatch("Newspeed.jsp", req, resp);
 			}else {
 				PrintWriter out = resp.getWriter();
 
