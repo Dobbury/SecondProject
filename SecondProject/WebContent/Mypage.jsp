@@ -11,19 +11,10 @@
 	request.setCharacterEncoding("utf-8");
 
 	memberDto dto = (memberDto) session.getAttribute("user");
-
-	int p = Integer.parseInt(request.getParameter("page"));
-	DiaryImpl dDao = DiaryDao.getInstance();
-
-	int jcount = dDao.countMyJournal(dto.getId());
-	List<JournalDto> jlist = dDao.myJournalList(dto.getId(), p);
-
-	int pagecount = jcount / 6;
-	if(jcount != 0){
-		if (pagecount % jcount > 0) {
-			pagecount++;
-		}
-	}
+	int p = (int)request.getAttribute("page");
+	int pagecount = (int)request.getAttribute("pagecount");
+	List<JournalDto> jlist = (List<JournalDto>)request.getAttribute("jlist");
+	
 	int startPage = 0;
 	int endPage = 0;
 	if (p > 5) {
@@ -45,10 +36,6 @@
 <html>
 <head>
 <!-- 제이쿼리 -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -56,9 +43,7 @@
 <!-- JQuery -->
 <!-- <script> -->
 <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="Design/js/popper.min.js"></script>
-<script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="Design/js/mdb.min.js"></script>
+
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -102,15 +87,6 @@ html, body, header, .view {
 	margin: 10px;
 	text-align: center;
 	vertical-align: top;
-}
-
-.Dimage {
-	width: 280px;
-	height: 220px;
-	border: 1px solid blue;
-	background-color: gray;
-	margin-top: 10px;
-	margin-left: 10px;
 }
 
 #container {
@@ -176,26 +152,7 @@ ul.tab li.current {
 
 <body>
 
-	<!-- Navbar -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-	<div class="container">
-
-		<!-- logo -->
-		<a class="navbar-brand" href="#" target="_blank"> <strong>MDB</strong>
-		</a>
-
-
-
-		<!-- Right -->
-		<ul class="navbar-menu">
-			<li><a href="Newspeed.jsp?page=1">뉴스피드</a></li>
-			<li><a href="Mypage.jsp?page=1">마이페이지</a></li>
-
-		</ul>
-
-	</div>
-	</nav>
+	<jsp:include page="header.jsp"></jsp:include> 
 
 	<div id="container">
 		<h1>MYPAGE!!!!!!!!</h1>
@@ -249,7 +206,7 @@ ul.tab li.current {
 						<%
 							if (p != 1 || pagecount == 0) {
 						%>
-						<a href="./Mypage.jsp?page=<%=p - 1%>">&lt;</a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 						<%
 							}
 						%>
@@ -258,7 +215,7 @@ ul.tab li.current {
 							for (int i = startPage; i < pagecount; i++) {
 								if (i + 1 != p) {
 						%>
-						<a href="./Mypage.jsp?page=<%=i + 1%>"><%=i + 1%></a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
 						<%
 							} else {
 						%>
@@ -272,7 +229,7 @@ ul.tab li.current {
 
 							if (p != pagecount || pagecount == 0) {
 						%>
-						<a href="./Mypage.jsp?page=<%=p + 1%>">&gt;</a>
+						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 						<%
 							}
 						%>

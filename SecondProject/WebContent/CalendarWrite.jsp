@@ -21,14 +21,6 @@ request.setCharacterEncoding("utf-8");
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
-  <!-- Font Awesome -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <!-- Bootstrap core CSS -->
-  <link href="Design/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="Design/css/mdb.min.css" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="Design/css/style.min.css" rel="stylesheet">
   
   <link rel="stylesheet" type="text/css" media="all" href="daterangepicker/daterangepicker.css" />
  
@@ -68,27 +60,7 @@ request.setCharacterEncoding("utf-8");
 </head>
 
 <body>
-
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-    <div class="container">
-
-      <!-- logo -->
-      <a class="navbar-brand" href="#" target="_blank">
-        <strong>MDB</strong>
-      </a>
-
-		
-
-        <!-- Right -->
-        <ul class="navbar-menu">
-          <li><a href="#">뉴스피드</a></li>
-          <li><a href="Mypage.jsp?page=1">마이페이지</a></li>
-        </ul>
-
-    </div>
-  </nav>
-
+<jsp:include page="header.jsp"></jsp:include> 
   
   
 <!-- ----------------------------------------html----------------------------------------- -->
