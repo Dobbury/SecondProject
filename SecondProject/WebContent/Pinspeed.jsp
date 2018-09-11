@@ -167,6 +167,9 @@ transition: all 40s;
       
 		
 		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">장소정보</h3>
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 20px;">
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
