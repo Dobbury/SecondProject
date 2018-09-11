@@ -10,27 +10,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-	DiaryImpl dao = DiaryDao.getInstance();
-	
-	List<JournalDto> list = dao.getBestJournal();
-	
-	PinImpl pindao = PinDao.getInstance();
-	
-	List<String[]> pinlist = pindao.pinAVG();
-	
-	List<String[]> restolist = new ArrayList<>();
-	List<String[]> hotellist = new ArrayList<>();
-	List<String[]> tourlist = new ArrayList<>();
-	
-	for(int i = 0; i < pinlist.size();i++){
-		if(pinlist.get(i)[1].equals("resto")){
-			restolist.add(pinlist.get(i));
-		}else if(pinlist.get(i)[1].equals("hotel")){
-			hotellist.add(pinlist.get(i));
-		}else if(pinlist.get(i)[1].equals("tour")){
-			tourlist.add(pinlist.get(i));
-		}
-	}
+List<JournalDto> list = (List<JournalDto>)request.getAttribute("bjlist");
+List<String[]> restolist = (List<String[]>)request.getAttribute("restolist");
+List<String[]> hotellist = (List<String[]>)request.getAttribute("hotellist");
+List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
+
+
+
+
 %>
 
 <html>

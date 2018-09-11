@@ -90,7 +90,6 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -196,7 +195,6 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -237,7 +235,6 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -310,43 +307,34 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		return list;
 	}
 
-	public List<PinDto> getAllPinList(int page) {
-		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
-				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
-				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+	public List<String[]> getAllPinList(int page) {
+		String sql = " SELECT B.RNUM, B.PINNAME, B.KINDS, B.GRADE_AVG "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.PINNAME, A.KINDS, A.GRADE_AVG "
+				+ " FROM (SELECT PINCOMMENT.PINNAME AS PINNAME,KINDS,AVG(GRADE) AS GRADE_AVG "
+				+ " FROM PINCOMMENT, PIN WHERE PINCOMMENT.PINNAME = PIN.PINNAME GROUP BY PINCOMMENT.PINNAME,KINDS) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
-		Connection conn =null;
+		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<PinDto> list = new ArrayList<>();
+		List<String[]> list = null;
+		
 		try {
+
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			
 			psmt.setInt(1, page*9);
 			psmt.setInt(2, page*9-8);
-			
-			
 			rs = psmt.executeQuery();
-			
+			list = new ArrayList<>();
 			while(rs.next()) {
-				list.add(new PinDto(
-						rs.getDouble(2),
-						rs.getDouble(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6)
-						));
-				
+				String arr[] = {rs.getString(2),rs.getString(3),String.format("%.2f", rs.getDouble(4))}; 
+				list.add(arr);
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -422,7 +410,6 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		};
@@ -493,8 +480,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
-		}finally {
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		

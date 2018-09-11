@@ -11,20 +11,12 @@
 request.setCharacterEncoding("utf-8");
 PinImpl dao = PinDao.getInstance();
 
-int paging = Integer.parseInt(request.getParameter("page"));
-int pcount = dao.getAllPinCount();
-
+int paging = (int)request.getAttribute("page");
+int pagecount = (int)request.getAttribute("pagecount");
+List<String[]> pinlist = (List<String[]>)request.getAttribute("pinlist");
 // 수정
 //List<PinDto> pinlist = dao.getAllPinList(paging);
 
-List<String[]> pinlist = dao.pinAVG();
-int pagecount = 1;
-pagecount = pcount/9;
-if(pcount != 0){
-	if(pagecount%pcount>0){
-		pagecount++;
-	}
-}
 
 int startPage = 0;
 int endPage = 0;
@@ -191,6 +183,7 @@ transition: all 40s;
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
+					<span class="diary-date">평점 : <%=pinlist.get(i)[2] %></span>
 					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
 					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
 					<span><%=pinlist.get(i)[2] %></span>
@@ -211,7 +204,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Pinspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a href="./PinServlet?command=pinPaging&page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
@@ -219,7 +212,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Pinspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a href="./PinServlet?command=pinPaging&page=<%=i+1%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -233,7 +226,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Pinspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a href="./PinServlet?command=pinPaging&page=<%=paging+1%>">&gt;</a>
 			<%
 			}
 			%>
