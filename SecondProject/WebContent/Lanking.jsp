@@ -92,7 +92,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     text-overflow: ellipsis;
     vertical-align: middle;
         margin-right: 13px;
-        font-size: 13px;
+        font-size: 12px;
 }
 .lankavg{
 	    font-size: 12px;
@@ -137,7 +137,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
    <div class="container" style="      display: table;  max-width: 900px;padding-top: 30px;">
 	<h2 style="font-weight: 700;
     margin-bottom: 15px;    text-align: center;
-    font-size: 40px;">BEST Diary</h2>
+    font-size: 40px;color:#fff;">BEST Diary</h2>
   	<div style="width:100%;text-align: center;  padding: 0 0 90px 0;display: table;">
 			<%
 			for(int i = 0; i < list.size();i++){
@@ -171,11 +171,14 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 	
    </div>
    
-   <div style="    padding-bottom: 137px;
+   <div style="padding-bottom: 179px;
     width: 100%;
-    background-image: url(img/b3.jpg);
+    /* background-image: url(img/b3.jpg); */
     margin-top: 110px;
-    padding-top: 15px;">
+    padding-top: 15px;
+    position: absolute;
+    bottom: -25px;
+    background-color: rgb(0,0,0,0.3);">
     
     
     	<h2 style="margin: 50px; color: #fff; font-weight: 700;font-size: 50px;text-align: center;">Lanking</h2>
@@ -193,7 +196,15 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 				break;
 			}
 		%>
-		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=tourlist.get(i)[0]%>"><%=tourlist.get(i)[0]%></a></li>
+		 	<li>
+		 	<a href="PinServlet?command=pinDetail&pinname=<%=tourlist.get(i)[0]%>">
+		 	
+		 	<span class="lanknumber"><%=i+1%></span>
+		 	<span class="lanktext"><%=tourlist.get(i)[0]%></span>
+		 	<span class="lankavg">60</span>
+		 	
+		 	</a>
+		 	</li>
 		<%
 		}
 		%>
@@ -208,7 +219,14 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 				break;
 			}
 		%>
-		 	<li><a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>"><%=restolist.get(i)[0]%></a></li>
+		 	<li>
+		 	<a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>">
+		 	<span class="lanknumber"><%=i+1%></span>
+		 	<span class="lanktext"><%=restolist.get(i)[0]%></span>
+		 	<span class="lankavg">60</span>
+		 	
+		 	</a>
+		 	</li>
 		<%
 		}
 		%>
