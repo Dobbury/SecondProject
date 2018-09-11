@@ -412,7 +412,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
-		}
+		};
 		
 		return list;
 	}

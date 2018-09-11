@@ -90,9 +90,9 @@ public class DiaryDao implements DiaryImpl {
 
    public List<JournalDto> getJournalList(int page) {
 
-      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE "
-            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE "
-            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE, P.FIRST_IMG "
+            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE, J.FIRST_IMG "
+            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG "
             + " FROM JOURNAL ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
 
       Connection conn = null;
@@ -115,7 +115,7 @@ public class DiaryDao implements DiaryImpl {
 
          while (rs.next()) {
             list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
-                  rs.getInt(7), rs.getString(8), rs.getString(9)));
+                  rs.getInt(7), rs.getString(8), rs.getString(9),rs.getString(10)));
 
          }
       } catch (SQLException e) {
@@ -128,7 +128,7 @@ public class DiaryDao implements DiaryImpl {
 
    public JournalDto getJournalDto(int seq) {
 
-      String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+      String sql = " SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE,FIRST_IMG "
             + "FROM JOURNAL WHERE SEQ = ? ";
 
       Connection conn = null;
@@ -149,7 +149,7 @@ public class DiaryDao implements DiaryImpl {
 
          if (rs.next()) {
             dto = new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-                  rs.getInt(6), rs.getString(7), rs.getString(8));
+                  rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(9));
          }
       } catch (SQLException e) {
          System.out.println("get information failed");
@@ -288,6 +288,7 @@ public class DiaryDao implements DiaryImpl {
          count = psmt.executeUpdate();
       } catch (SQLException e) {
          e.printStackTrace();
+
       } finally {
 			DBClose.close(psmt, conn, null);
 		}
@@ -310,6 +311,7 @@ public class DiaryDao implements DiaryImpl {
          count = psmt.executeUpdate();
       } catch (SQLException e) {
          e.printStackTrace();
+
       } finally {
 			DBClose.close(psmt, conn, null);
 		}
@@ -351,9 +353,9 @@ public class DiaryDao implements DiaryImpl {
 
    public List<JournalDto> getSearchJournalList(String stext, int page) {
 
-      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE "
-            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE "
-            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE, P.FIRST_IMG "
+            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE, J.FIRST_IMG "
+            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG "
             + " FROM JOURNAL WHERE TITLE LIKE('%" + stext + "%') ORDER BY WDATE DESC) J "
             + " WHERE ROWNUM <= ? ) P " + " WHERE P.RNUM >= ? ";
 
@@ -377,7 +379,7 @@ public class DiaryDao implements DiaryImpl {
 
          while (rs.next()) {
             list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
-                  rs.getInt(7), rs.getString(8), rs.getString(9)));
+                  rs.getInt(7), rs.getString(8), rs.getString(9),rs.getString(10)));
 
          }
       } catch (SQLException e) {
@@ -421,9 +423,9 @@ public class DiaryDao implements DiaryImpl {
 
    @Override
    public List<JournalDto> myJournalList(String id, int page) {
-      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE "
-            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE "
-            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE "
+      String sql = " SELECT P.RNUM, P.SEQ, P.START_DATE, P.END_DATE, P.READCOUNT, P.ID, P.LIKE_CNT, P.WDATE, P.TITLE, P.FIRST_IMG "
+            + " FROM (SELECT ROWNUM AS RNUM, J.SEQ, J.START_DATE, J.END_DATE, J.READCOUNT, J.ID, J.LIKE_CNT, J.WDATE, J.TITLE, J.FIRST_IMG "
+            + " FROM (SELECT SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG "
             + " FROM JOURNAL WHERE ID = '" + id + "' ORDER BY WDATE DESC) J " + " WHERE ROWNUM <= ? ) P "
             + " WHERE P.RNUM >= ? ";
 
@@ -446,7 +448,7 @@ public class DiaryDao implements DiaryImpl {
 
          while (rs.next()) {
             list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
-                  rs.getInt(7), rs.getString(8), rs.getString(9)));
+                  rs.getInt(7), rs.getString(8), rs.getString(9),rs.getString(10)));
 
          }
       } catch (SQLException e) {
@@ -494,14 +496,36 @@ public class DiaryDao implements DiaryImpl {
 
 	@Override
 	public boolean addJournal(JournalDto dto) {
-
-		String sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL)";
-
+		
+		//get first_img
+		String sql = "SELECT FIRST_IMG FROM DIARY WHERE TDAY=? AND ID=?";
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
+		ResultSet rs =null;
 		int count = 0;
 
 		try {
+			//get first_img
+			////////////////////////////////////////
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, dto.getStartDate());
+			psmt.setString(2, dto.getId());
+			
+			rs = psmt.executeQuery();
+			String first_img="";
+			if(rs.next()) {
+				first_img = rs.getString(1);
+				
+			}
+			
+			DBClose.close(psmt, conn, rs);
+			
+			///////////////////////////////////////////////
+			sql = "INSERT INTO JOURNAL(TITLE,WDATE,LIKE_CNT,ID,READCOUNT,END_DATE,START_dATE,SEQ,FIRST_IMG) VALUES(?,SYSDATE,0,?,0,?,?,J_SEQ.NEXTVAL,?)";
+
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
 
@@ -509,7 +533,9 @@ public class DiaryDao implements DiaryImpl {
 			psmt.setString(2, dto.getId());
 			psmt.setString(3, dto.getEndDate());
 			psmt.setString(4, dto.getStartDate());
-
+			psmt.setString(5, first_img);
+			
+			
 			count = psmt.executeUpdate();
 
 			System.out.println(dto.getStartDate() + " " + dto.getEndDate());
@@ -711,6 +737,7 @@ public class DiaryDao implements DiaryImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
@@ -855,8 +882,8 @@ public class DiaryDao implements DiaryImpl {
 
 	@Override
 	public List<JournalDto> getBestJournal() {
-		String sql = " SELECT A.RNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE " + 
-				" FROM (SELECT ROWNUM AS RNUM, SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE FROM JOURNAL ORDER BY LIKE_CNT DESC) A " + 
+		String sql = " SELECT A.RNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE, A.FIRST_IMG " + 
+				" FROM (SELECT ROWNUM AS RNUM, SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG FROM JOURNAL ORDER BY LIKE_CNT DESC) A " + 
 				 "WHERE RNUM <= 4 ";
 		
 		Connection conn = null;
@@ -876,7 +903,7 @@ public class DiaryDao implements DiaryImpl {
 
 			while (rs.next()) {
 				list.add(new JournalDto(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
-						rs.getInt(7), rs.getString(8), rs.getString(9)));
+						rs.getInt(7), rs.getString(8), rs.getString(9),rs.getString(10)));
 
 			}
 		} catch (SQLException e) {

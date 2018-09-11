@@ -185,6 +185,7 @@ transition: all 40s;
 				<div class="diary">
 					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
+							<img alt="xx" src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>

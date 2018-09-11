@@ -7,7 +7,7 @@
 <%
 PinDto dto = (PinDto)request.getAttribute("pin");
 List<pinCommentDto> list = (List<pinCommentDto>)request.getAttribute("pinCList");
-String grade_AVG = request.getParameter("grade_AVG");
+String grade_AVG = (String)request.getAttribute("grade_AVG");
 
 %>
 <html>
@@ -38,6 +38,33 @@ String grade_AVG = request.getParameter("grade_AVG");
 }
 
 </style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
+<script type="text/javascript">
+var pinlat = <%=dto.getLat() %>;
+var pinlng = <%=dto.getLng() %>;
+function initialize() {
+	
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 12,
+		center: {lat:pinlat, lng:pinlng}
+	});
+	
+	//Adds a marker to the map.
+	function addMarker(location) {
+	  var marker = new google.maps.Marker({
+	    position: location,
+	    map: map
+	  });
+	  markers.push(marker);
+	}
+	var location=new google.maps.LatLng(pinlat,pinlng);
+	addMarker(location);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
 </head>
 <body>
  <jsp:include page="header.jsp"></jsp:include> 
@@ -47,7 +74,7 @@ String grade_AVG = request.getParameter("grade_AVG");
 	
 		<p class="pintitle"><%=dto.getPin_name() %></p>
 		<div class="pinview">
-			<div class="map">핀 찍혀있는 지도</div>
+			<div id="map" class="map"></div>
 		<p class="pinloc">주소 : <%=dto.getLocation() %></p>
 		<p class="pinavg">평점 : <%=grade_AVG %> </p>
 		

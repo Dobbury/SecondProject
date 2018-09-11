@@ -293,31 +293,62 @@ public class DiaryServlet extends HttpServlet {
 
 			dispatch("journalUpdate.jsp", req, resp);
 
-		} else if (command.equals("journalDetail")) {
+		}else if(command.equals("journalDetail")) {
 
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			String loginid = ((memberDto) req.getSession().getAttribute("user")).getId();
+	         int seq = Integer.parseInt(req.getParameter("seq"));
+	         String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
+	         
+	         JournalDto dto = dao.getJournalDto(seq);
+	         
+	        
+	         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"), dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
+	         
+	         Map<Integer,List<String[]>> map = new HashMap<>();
+	         for(DiaryDto dDto : Diarylist) {
+	        	 
+	        	 String pins[]=dDto.getPin_Seqs().split(",");
+	       
+	        	 
+	        	 List<String[]> latlnglist = new ArrayList<>();
+	        	 for(String pinSeq : pins) {
+	        		 PinImpl pDao = PinDao.getInstance();
+	        		 pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
+	        		 String pinname=pCDto.getPinname();
+	        		 PinDto pin = pDao.getPin(pinname);
+	        		 
+	        		 String location[] = { pin.getLat()+"",pin.getLng()+""};
+	        		 System.out.println(pin.getLat()+" "+pin.getLng());
+	        		 latlnglist.add(location);
+	        	 }
+	        	 
+	        	 map.put(dDto.getSeq(), latlnglist);
+	         }
 
-			JournalDto dto = dao.getJournalDto(seq);
+	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
+	         
+	         req.setAttribute("locations", map);
+	         req.setAttribute("JournalDto", dto);
+	         req.setAttribute("DiaryList", Diarylist);
+	         List<DiarycommentDto> list = dao.Commantview(seq);
+	         req.setAttribute("DiarycommentDto", list);
+	         
+	         dispatch("journalDetail.jsp", req, resp);
+	         
+	      }
+		else if(command.equals("commentwrite")) { 
+				
+				
+				int seq = Integer.parseInt(req.getParameter("seq"));
+				String loginid = ((memberDto)req.getSession().getAttribute("user")).getId();
+				String dcomment = req.getParameter("dcomment");
+				System.out.println(loginid);
+				
+				int write = dao.CommantWrite(seq, loginid, dcomment);				
+				if(write == 1) {
+					System.out.println("占쏙옙占쏙옙韜쩔狗占�");
+				}else {
+					System.out.println("占쏙옙占쏙옙韜쩍占쏙옙占�");
 
-			List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"),
-					dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
-
-			Map<Integer, List<String[]>> map = new HashMap<>();
-			for (DiaryDto dDto : Diarylist) {
-
-				String pins[] = dDto.getPin_Seqs().split(",");
-
-				List<String[]> latlnglist = new ArrayList<>();
-				for (String pinSeq : pins) {
-					PinImpl pDao = PinDao.getInstance();
-					pinCommentDto pCDto = pDao.getPinComment(Integer.parseInt(pinSeq));
-					String pinname = pCDto.getPinname();
-					PinDto pin = pDao.getPin(pinname);
-
-					String location[] = { pin.getLat() + "", pin.getLng() + "" };
-					System.out.println(pin.getLat() + " " + pin.getLng());
-					latlnglist.add(location);
 				}
 
 				map.put(dDto.getSeq(), latlnglist);
