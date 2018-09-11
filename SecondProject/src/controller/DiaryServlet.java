@@ -317,8 +317,7 @@ public class DiaryServlet extends HttpServlet {
 	        	 
 	        	 map.put(dDto.getSeq(), latlnglist);
 	         }
-	         /*Diarylist.get(1).getPin_Seqs();*/
-	         
+
 	         System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
 	         
 	         req.setAttribute("locations", map);
@@ -368,7 +367,9 @@ public class DiaryServlet extends HttpServlet {
 			List<DiarycommentDto> list = dao.Commantview(seq);
 	        req.setAttribute("DiarycommentDto", list);
 			req.setAttribute("DiaryDto", dto);
+
 	        dispatch("journalDetail.jsp", req, resp);
+
 
 			
 		}else if(command.equals("search")) {

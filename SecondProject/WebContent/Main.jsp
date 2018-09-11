@@ -180,8 +180,6 @@
    </div>
 
 
-
-
 <div id="fullpage">
 
    <div class="scene section" id="section0">

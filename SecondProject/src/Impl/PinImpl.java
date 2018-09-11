@@ -33,6 +33,7 @@ public interface PinImpl {
 
 	public int getSearchPinCount(String stext); 
 
-	public int getSearchPinCount(String stext);
+
+	public List<pinCommentDto> getPinCommentList(String pin_name);
 
 }

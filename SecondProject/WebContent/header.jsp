@@ -114,6 +114,8 @@
  		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
    		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
  	}
+ 	
+ 	
    </style>
 
 </head>
