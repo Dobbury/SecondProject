@@ -10,11 +10,14 @@ public class JournalDto {
 	private int like_cnt;
 	private String wdate;
 	private String title;
+	private String fisrt_Img;
 	
 	public JournalDto() {}
 	
+	
+
 	public JournalDto(int seq, String startDate, String endDate, int readcount, String id, int like_cnt, String wdate,
-			String title) {
+			String title, String fisrt_Img) {
 		super();
 		this.seq = seq;
 		this.startDate = startDate;
@@ -24,7 +27,10 @@ public class JournalDto {
 		this.like_cnt = like_cnt;
 		this.wdate = wdate;
 		this.title = title;
+		this.fisrt_Img = fisrt_Img;
 	}
+
+
 
 	public JournalDto(String startDate, String endDate, String id, String title) {
 		super();
@@ -96,6 +102,18 @@ public class JournalDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+
+
+	public String getFisrt_Img() {
+		return fisrt_Img;
+	}
+
+
+
+	public void setFisrt_Img(String fisrt_Img) {
+		this.fisrt_Img = fisrt_Img;
 	}
 	
 	

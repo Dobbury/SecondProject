@@ -25,7 +25,7 @@ public interface PinImpl {
 
 	public List<String[]> pinAVG();
 
-	public List<PinDto> getAllPinList(int page);
+	public List<String[]> getAllPinList(int page);
 	
 	public int getAllPinCount();
 	

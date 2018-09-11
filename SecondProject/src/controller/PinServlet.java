@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Impl.PinImpl;
 import dao.PinDao;
+import dto.JournalDto;
 import dto.PinDto;
 import dto.pinCommentDto;
 
@@ -90,7 +91,53 @@ public class PinServlet extends HttpServlet {
 			   List<pinCommentDto> list = dao.getPinCommentList(pinname);
 			   req.setAttribute("pin", dto);
 			   req.setAttribute("pinCList", list);
+			   //&=<%=pinlist.get(i)[2] %>
+			   List<String[]> avglist = dao.pinAVG();
+			
+			   for(String pininfo[] : avglist ) {
+				   System.out.println(pininfo[0]+ "  "+pinname );
+				   if(pininfo[0].equals(pinname)) {
+					   System.out.println("value:"+pininfo[2]);
+					   req.setAttribute("grade_AVG", pininfo[2]);
+					   break;
+				   }
+			   }
+			   
 			   dispatch("Pindetail.jsp", req, resp);
+		   }else if(command.equals("goPinspeed")) {
+			   int paging = 1;
+				int pcount = dao.getAllPinCount();
+
+				List<String[]> pinlist = dao.getAllPinList(paging);
+				int pagecount = 0;
+				if (pcount != 0) {
+					pagecount = pcount / 9;
+					if (pagecount % pcount > 0) {
+						pagecount++;
+					}
+				}
+
+				req.setAttribute("page", paging);
+				req.setAttribute("pagecount", pagecount);
+				req.setAttribute("pinlist", pinlist);
+				dispatch("Pinspeed.jsp", req, resp);
+		   }else if(command.equals("pinPaging")) {
+			   int page = Integer.parseInt(req.getParameter("page"));
+				int jcount = dao.getAllPinCount();
+
+				List<String[]> pinlist = dao.getAllPinList(page);
+				int pagecount = 0;
+				if (jcount != 0) {
+					pagecount = jcount / 9;
+					if (pagecount % jcount > 0) {
+						pagecount++;
+					}
+				}
+
+				req.setAttribute("page", page);
+				req.setAttribute("pagecount", pagecount);
+				req.setAttribute("pinlist", pinlist);
+				dispatch("Pinspeed.jsp", req, resp);
 		   }
 		   
 	 }
