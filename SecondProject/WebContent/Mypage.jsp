@@ -382,11 +382,11 @@ body {
 					},
 					success : function(data) {
 						alert(data);
-						location.href = "Mypage.jsp";
+						location.href = "Mypage.jsp?page=1";
 					},
 					error : function() {
 						alert("에러남");
-						location.href = "Mypage.jsp";
+						location.href = "Mypage.jsp?page=1";
 					}
 				});
 
