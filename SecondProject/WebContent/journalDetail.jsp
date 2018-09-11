@@ -647,8 +647,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				alert(pins['seq_'+$(this).children('input').val()][i]);
 				var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
 				addMarker(location);
+				basic_lat=location.lat();
+			   	basic_lat=location.lng();
 		   }
-		   
+		   initialize();
 			showMarkers();	
 			
 	   }else{
