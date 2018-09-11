@@ -331,6 +331,7 @@ var pins={
 var map;
 var markers = [];
 
+
 var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
 var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
 
@@ -639,42 +640,43 @@ google.maps.event.addDomListener(window, 'load', initialize);
    }
    
    $(".btn").click(function () {
-	   //alert($(this).children('input').val());
-	   if(!$(this).children('input').prop("checked")){
-			
-		   for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
-				
-				var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
-				addMarker(location);
-				basic_lat=location.lat();
-			   	basic_lat=location.lng();
-		   }
-		    
-			showMarkers();	
-			
-	   }else{
-		   clearMarkers();
-		  
-		   for(var i = 0 ; i < markers.length ; i++){
-			   //alert(markers[i].position.lat());
-			   
-			   for(var j = 0 ; j < pins['seq_'+$(this).children('input').val()].length ; j++){
-				   var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][j].lat,
-						   								pins['seq_'+$(this).children('input').val()][j].lng);
-					
-				   if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
-						var befo=markers.length;
-					   markers.splice(i,1);
-					   
-					  
-					}	
-			   }
-			   
-		   }
-		   
-		   showMarkers();
-	   }
+      //alert($(this).children('input').val());
+      if(!$(this).children('input').prop("checked")){
+         
+         for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
+            alert(pins['seq_'+$(this).children('input').val()][i]);
+            var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
+            addMarker(location);
 
+            basic_lat=pins['seq_'+$(this).children('input').val()][i].lat;
+            basic_lat=pins['seq_'+$(this).children('input').val()][i].lng;
+         }
+         
+         showMarkers();   
+         
+      }else{
+         clearMarkers();
+         alert(markers.length);
+         for(var i = 0 ; i < markers.length ; i++){
+            //alert(markers[i].position.lat());
+            
+            for(var j = 0 ; j < pins['seq_'+$(this).children('input').val()].length ; j++){
+               var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][j].lat,
+                                             pins['seq_'+$(this).children('input').val()][j].lng);
+               
+               if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
+                  var befo=markers.length;
+                  markers.splice(i,1);
+                  
+                  alert(befo +" "+markers.length);
+                  
+               }   
+            }
+            
+         }
+         
+         showMarkers();
+      }
    });
    
    
