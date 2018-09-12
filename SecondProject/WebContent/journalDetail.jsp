@@ -719,10 +719,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
          showMarkers();
       }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
    });
    
    
