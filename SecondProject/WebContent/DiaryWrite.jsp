@@ -757,7 +757,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray;'>"
+               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -774,7 +774,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray;'>"
+               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -790,7 +790,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray;' >"
+               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;' >"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
