@@ -247,6 +247,7 @@ html, body, header, .view {
 }
 .like_box{
    margin-top: 10px;
+       display: inline-block;
 }
 .like_off {
    width: 25px;
@@ -264,9 +265,10 @@ html, body, header, .view {
     vertical-align: middle;
 }
 .like_view{
-       margin-top: 15px;
     font-size: 14px;
     color: #555;
+    display: inline-block;
+    margin-right: 630px;
 }
 .commant-write{
        padding-left: 20px;
@@ -569,7 +571,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                for(int i=0; i<list.size(); i++ ){
             %>
          <div class="diary-cont">
-            <p class="diary-title"><%=list.get(i).getTitle() %></p>
+            <p class="diary-title" style="margin-left: 0;"><%=list.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=list.get(i).getTday().substring(0,11) %></span>
             <hr>
             
@@ -584,8 +586,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
       %>
       </div>
 
+	<div style="    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    padding: 10px 20px 15px 20px;
+    margin-top: 15px;
+    background-color: rgb(255,255,255,0.5);">
+
    <div class="like_view">
-      <%=journalDto.getLike_cnt() %> 명이 좋아합니다
+      <b style="font-size: 20px;"><%=journalDto.getLike_cnt() %></b> 명이 좋아합니다
    </div>
    <div class="like_box">
    <% if(Likeckheack == 0) {%>
@@ -597,7 +606,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <%
    }
    %>
-
+	</div>
    
    
    

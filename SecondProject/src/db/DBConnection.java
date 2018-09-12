@@ -19,7 +19,8 @@ public class DBConnection {
 		
 		try {
 
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.60:1521:xe", "hr", "hr");
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.60:1521:xe", "hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 			System.out.println("DB Connection Success");
 			
 		} catch (SQLException e) {			
