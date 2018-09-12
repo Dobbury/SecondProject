@@ -251,7 +251,6 @@ button:hover:before,button:hover:after{
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
-					<!-- <span style="display: inline-block; vertical-align:middle;   color: #ccc;">ㅣ</span> -->
 						<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
 						</span>
 					</div>

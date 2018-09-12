@@ -226,7 +226,7 @@ body {
 				if(today.equals(tday)){
 					
 					if(list.get(i).getJour_check()==0){
-						s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
+						s += "<div class='diary' style='width:100px; height:100px; background-color:gray; margin:0; text-align:left'>";
 						s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";	//차후 수정바람
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "<br>"+list.get(i).getTitle();
