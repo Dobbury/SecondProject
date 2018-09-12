@@ -167,64 +167,32 @@ button:hover:before, button:hover:after {
 	transition: 800ms ease all;
 }
 
-@
--webkit-keyframes fadeInUp { 0% {
-	opacity: 0;
-	-webkit-transform: translateY(40px);
-	transform: translateY(40px);
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		transform: translateY(40px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
 }
 
-100%
-{
-opacity
-:
- 
-1;
--webkit-transform
-:
- 
-translateY
-(0);
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(40px);
+		-ms-transform: translateY(40px);
+		transform: translateY(40px);
+	}
 
-		
-transform
-:
- 
-translateY
-(0);
-
-	
-}
-}
-@
-keyframes fadeInUp { 0% {
-	opacity: 0;
-	-webkit-transform: translateY(40px);
-	-ms-transform: translateY(40px);
-	transform: translateY(40px);
-}
-
-100%
-{
-opacity
-:
- 
-1;
--webkit-transform
-:
- 
-translateY
-(0);
-
-		
--ms-transform
-:
- 
-translateY
-(0);
-
-	
-}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+	}
 }
 .animate {
 	-webkit-animation-duration: 3s;
