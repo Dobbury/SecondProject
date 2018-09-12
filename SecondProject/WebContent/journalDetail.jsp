@@ -86,36 +86,36 @@
 %>
 <%
 
-		 
-		Calendar cal = Calendar.getInstance();
-		 
-		//연도 받아오기 
-		//달 받아오기  0부터 시작함 
-		int year = request.getParameter("y") == null ? cal.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("y"));
-		int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
-		 
-		cal.set(year, month, 1); //연 월 일 세팅!
-		
-		 
-		
-	 
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일 구하기 (1~7)
-		System.out.println("확인용 날짜 : " + year+"년 "+ month+" 월");
-		 
-		
-		//로그인한 사람의 id
-		memberDto dto = (memberDto)request.getSession().getAttribute("user");   //뉴스피드 --서블릿 -- 캘린더write
-		System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
-		 
-		 
-		//caledar list
-		CalendarImpl cdao = CalendarDao.getInstance();
-	
-		boolean b = true;
-		String tday = calllist(year	,month,1,b);		
-		System.out.println("tday는 : " + tday);
-				
-		//List<DiaryDto> list = cdao.getCalList(dto.getId());
+       
+      Calendar cal = Calendar.getInstance();
+       
+      //연도 받아오기 
+      //달 받아오기  0부터 시작함 
+      int year = request.getParameter("y") == null ? cal.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("y"));
+      int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
+       
+      cal.set(year, month, 1); //연 월 일 세팅!
+      
+       
+      
+    
+      int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일 구하기 (1~7)
+      System.out.println("확인용 날짜 : " + year+"년 "+ month+" 월");
+       
+      
+      //로그인한 사람의 id
+      memberDto dto = (memberDto)request.getSession().getAttribute("user");   //뉴스피드 --서블릿 -- 캘린더write
+      System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
+       
+       
+      //caledar list
+      CalendarImpl cdao = CalendarDao.getInstance();
+   
+      boolean b = true;
+      String tday = calllist(year   ,month,1,b);      
+      System.out.println("tday는 : " + tday);
+            
+      //List<DiaryDto> list = cdao.getCalList(dto.getId());
 
 %>
 <%
@@ -347,8 +347,8 @@ function initialize() {
 }
 //Adds a marker to the map.
 function addMarker(location) {
-	map.zoom=15;
-	map.panTo(location);
+   map.zoom=15;
+   map.panTo(location);
   var marker = new google.maps.Marker({
     position: location,
     map: map
@@ -643,41 +643,41 @@ google.maps.event.addDomListener(window, 'load', initialize);
    
    $(".btn").click(function () {
 
-	   //alert($(this).children('input').val());
-	   if(!$(this).children('input').prop("checked")){
-			
-		   for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
-				
-				var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
-				addMarker(location);
-				basic_lat=location.lat();
-			   	basic_lat=location.lng();
-		   }
-		    
-			showMarkers();	
-			
-	   }else{
-		   clearMarkers();
-		  
-		   for(var i = 0 ; i < markers.length ; i++){
-			   //alert(markers[i].position.lat());
-			   
-			   for(var j = 0 ; j < pins['seq_'+$(this).children('input').val()].length ; j++){
-				   var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][j].lat,
-						   								pins['seq_'+$(this).children('input').val()][j].lng);
-					
-				   if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
-						var befo=markers.length;
-					   markers.splice(i,1);
-					   
-					  
-					}	
-			   }
-			   
-		   }
-		   
-		   showMarkers();
-	   }
+      //alert($(this).children('input').val());
+      if(!$(this).children('input').prop("checked")){
+         
+         for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
+            
+            var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
+            addMarker(location);
+            basic_lat=location.lat();
+               basic_lat=location.lng();
+         }
+          
+         showMarkers();   
+         
+      }else{
+         clearMarkers();
+        
+         for(var i = 0 ; i < markers.length ; i++){
+            //alert(markers[i].position.lat());
+            
+            for(var j = 0 ; j < pins['seq_'+$(this).children('input').val()].length ; j++){
+               var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][j].lat,
+                                             pins['seq_'+$(this).children('input').val()][j].lng);
+               
+               if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
+                  var befo=markers.length;
+                  markers.splice(i,1);
+                  
+                 
+               }   
+            }
+            
+         }
+         
+         showMarkers();
+      }
 
 
    });

@@ -46,6 +46,7 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
@@ -159,6 +160,9 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
+ 	.starRev span{
+ 	cursor: auto;
+ 	}
  </style>
   
 </head>
@@ -191,7 +195,10 @@ transition: all 40s;
       
 		
 		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">장소정보</h3>
-			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 20px;">
+			<div style="width:100%;text-align: center;  padding: 0 0 80px 0;display: table;">
 	
 			 <% 
 			
@@ -207,7 +214,8 @@ transition: all 40s;
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
-						<span class="diary-date" style="margin:0px">평점 : <%=pinlist.get(i)[2] %>	
+					<!-- <span style="display: inline-block; vertical-align:middle;   color: #ccc;">ㅣ</span> -->
+						<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
 						</span>
 					</div>
 					<div class="diary-textbox" style="line-height: 30px; margin-bottom: 5px; display: table; width: 100%;">
@@ -238,8 +246,8 @@ transition: all 40s;
 						}
 						%>	
 							<div style="float: right; margin-right: 10px;" >
-							<span style="display: inline-block; vertical-align:middle;   color: #ccc;">|</span>
-							<span class="diary-date" style="vertical-align: middle; padding: 0px;"><%=pinlist.get(i)[1] %></span>	
+							
+							<span class="diary-date" style="margin-top: 5px;">평점 : <%=pinlist.get(i)[2] %></span>	
 							</div>
 						</div>
 					</div>	
