@@ -169,7 +169,9 @@ html, body, header, .view {
 .navbar-menu {
    margin-bottom: 0;
 }
-
+.days{
+     border: 1px solid #ddd; 
+}
 .navbar-menu li {
    width: 100px;
    height: 30px;
@@ -331,8 +333,8 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
+var basic_lat = 1;
+var basic_lng = 1;
 
 function initialize() {
    
@@ -412,8 +414,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <div id="maps" style="width: 100%; height: 100%"></div>
          </div> -->
          <!-- 달력영역 -->
-         <div class="calendar" align="center">
-            <table border="1" >
+         <div class="calendar" align="center" >
+            <table style="background-color: white; opacity: 0.95; box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);" >
             <!-- 너비 -->
             <col width="50">
             <col width="50">
@@ -424,27 +426,62 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <col width="50">
              
                 <tr>
-                    <td align="center" colspan="7">
-                        <%=year%>년 <%=month+1%>월 
-                    </td>
+                    <td align="center" colspan="7" class="modalcal">
+                       <h2>          
+                                 
+                                 <% 
+                                   String MONTH2="";
+                                  
+                                  if( month+1 == 1){
+                                      MONTH2 = "JANUARY";
+                                  }else if( month+1 == 2){
+                                     
+                                     MONTH2 = "FEBRUARY";
+                                  }else if( month+1 == 3){
+                                     MONTH2 = "MARCH";
+                                  }else if( month+1 == 4){
+                                     MONTH2 = "APRIL";
+                                  }else if( month+1 == 5){
+                                     MONTH2 = "MAY";
+                                  }else if( month+1 == 6){
+                                     MONTH2 = "JUNE";
+                                  }else if( month+1 == 7){
+                                     MONTH2 = "JULY";
+                                  }else if( month+1 == 8){
+                                     MONTH2 = "AUGUST";
+                                  }else if( month+1 == 9){
+                                     MONTH2 = "SEPTEMBER";
+                                  }else if( month+1 == 10){
+                                     MONTH2 = "OCTOBER";
+                                  }else if( month+1 == 11){
+                                     MONTH2 = "NOVEMBER";
+                                  }else if( month+1 == 12){
+                                     MONTH2 = "DECEMBER";
+                                  }
+
+                                  %>
+                                  <%=MONTH2 %>
+                                  &nbsp;
+                                <%=year%> 
+                         </h2>
+                     </td>
                 </tr>
              
-                <tr height="25">
-                    <td align="center">일</td>
-                    <td align="center">월</td>
-                    <td align="center">화</td>
-                    <td align="center">수</td>
-                    <td align="center">목</td>
-                    <td align="center">금</td>
-                    <td align="center">토</td>
+               <tr height="25" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
+						<td align="center">S</td>
+						<td align="center">M</td>
+						<td align="center">T</td>
+						<td align="center">W</td>
+						<td align="center">T</td>
+						<td align="center">F</td>
+						<td align="center">S</td>
                 </tr>
-                
                 <tr height="50" align="left" valign="top">
                     <%
                         //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
                         for(int i=1; i<dayOfWeek; i++){
                             %>
-                                <td>&nbsp;</td>
+                                <td class="days">&nbsp;</td>
                             <%
                         }
                         //그 달의 최대 일자
@@ -453,7 +490,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         //해당 날짜의 모든 일정을 보이게
                         for(int i=1; i<lastDay+1; i++){   
                             %>
-                              <td><!-- 날짜 뿌리기 -->
+                              <td class="days"><!-- 날짜 뿌리기 -->
                                  <%=calllist(year, month, i ,false) %>                          
                                
                                   <!-- 다이어리 타이틀 뿌리기-->                                                              
@@ -470,7 +507,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         
                         for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
                             %>
-                                <td>&nbsp;</td>
+                                <td class="days">&nbsp;</td>
                             <%
              }
             %>

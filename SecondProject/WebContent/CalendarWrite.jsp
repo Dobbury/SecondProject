@@ -191,7 +191,7 @@ request.setCharacterEncoding("utf-8");
          String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
          
          if(h == false){
-            s += "<div class='style_prevu_kit' style='width:30px; height:30px;'>";
+            s += "<div style='width:30px; height:30px;'>";
                  
             return s;   
          }else{
@@ -477,20 +477,8 @@ request.setCharacterEncoding("utf-8");
                   <div class="modal-body">
                      
                      <div class="container">
-                     <%                      
-                         if (prevMonth < 1) {
-                             prevYear--;
-                             prevMonth = 12;
-                         }
-                      
-                         // 12월인 경우 다음년 1월로 지정
-                         if (nextMonth > 12) {
-                             nextYear++;
-                             nextMonth = 1;
-                         }                  
-                     %>
-            
-                     <div align="center">          
+                    
+                     <div align="center" style="background-color: white;">          
                      <table style="border:1; color:#392f31">
                      <!-- 너비 -->
                      <col width="30">
@@ -542,7 +530,7 @@ request.setCharacterEncoding("utf-8");
                              </td>
                          </tr>
                       
-                         <tr height="15">
+                         <tr height="15" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
                              <td align="center">S</td>
                              <td align="center">M</td>
                              <td align="center">T</td>
@@ -554,17 +542,18 @@ request.setCharacterEncoding("utf-8");
                          
                          <tr height="30" align="center" valign="top">
                              <%
+                             
                                  //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
                                  for(int i=1; i<dayOfWeek; i++){
                                      %>
-                                         <td>&nbsp;</td>
+                                         <td class="days">&nbsp;</td>
                                      <%
                                  }
                              
                                  //해당 날짜의 모든 일정을 보이게
                                  for(int i=1; i<lastDay+1; i++){   
                                      %>
-                                         <td><!-- 날짜 뿌리기 -->
+                                         <td class="days"><!-- 날짜 뿌리기 -->
                                              <%=modal_calllist(year, month, i ,false) %>                          
                                         
                                               <!-- 다이어리 타이틀 뿌리기-->                                                              
@@ -581,14 +570,14 @@ request.setCharacterEncoding("utf-8");
                                  
                                  for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
                                      %>
-                                         <td>&nbsp;</td>
+                                         <td class="days">&nbsp;</td>
                                      <%
                                  }
                              %>
                          </tr>
                       
                      </table>
-                     
+                     </div>
                      
                      <br>
                      <p align="left">여행 날짜를 선택해 주세요</p>
