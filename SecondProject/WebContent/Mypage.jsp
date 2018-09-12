@@ -387,11 +387,10 @@ body {
 						nick : $("#nickname").val()
 					},
 					success : function(data) {
-						alert(data);
+						alert("ajax들어옴");
 						location.href = "Mypage.jsp?page=1";
 					},
 					error : function() {
-						alert("에러남");
 						location.href = "Mypage.jsp?page=1";
 					}
 				});
