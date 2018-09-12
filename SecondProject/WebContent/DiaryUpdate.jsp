@@ -146,43 +146,7 @@ html, body, header, .view {
     z-index: 10;        
 }
 
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
- 
+
 
 .selectbox{
    margin-right: 60px;
@@ -452,6 +416,7 @@ button:hover:before,button:hover:after{
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
 <main style="padding-top:80px;">
+
    <div class="container">
    
    <h2 style="font-weight: 700;
@@ -734,7 +699,7 @@ button:hover:before,button:hover:after{
       </table>
           
           
-          <table style="margin-top: 10px">
+          <table style="margin-top: 10px; background-color:white;">
           <tr>
              <td colspan="2">
                 <input type="text" class="text text-default" style="width: 1098px;height: 50px;  font-size: 18px;" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title" value='<%=diary.getTitle() %>'>
@@ -758,8 +723,6 @@ button:hover:before,button:hover:after{
        </table>
       
       
-      
-       
     </div>
     
  
@@ -785,8 +748,10 @@ button:hover:before,button:hover:after{
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="placeSaveBtn">Save Place</button>
+
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
+
       </div>
     </div>
   </div>
@@ -829,9 +794,11 @@ button:hover:before,button:hover:after{
      </div>
     
       <div class="modal-footer">
-         
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+
+      	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+
       </div>
     </div>
   </div>

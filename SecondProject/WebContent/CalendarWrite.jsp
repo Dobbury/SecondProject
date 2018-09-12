@@ -118,6 +118,7 @@ request.setCharacterEncoding("utf-8");
      color: #000;
   }
 
+
   .style_prevu_kit
 {
     display:inline-block;
@@ -150,7 +151,7 @@ request.setCharacterEncoding("utf-8");
     transform: scale(1);
 }
   main{
-   background-image: url('img/Lankbg2.png');
+   background-image: url('img/bgSample09.jpg');
     background-size: 100% 100%;
     background-position: center center;
     transition: all 40s;
@@ -160,11 +161,13 @@ request.setCharacterEncoding("utf-8");
     height: 140vh;
 
 
+
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 
 } 
+
 
   </style>
   
@@ -514,8 +517,10 @@ request.setCharacterEncoding("utf-8");
           
       </table>
       <!-- Buttons -->
-      <br>
-      <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+
+      <br><br>
+      <button type="button" data-toggle="modal" data-target="#jourAdd" class="btn btn-default">일정 추가하기</button>
+
      </div>
      	<br>
      </div>
@@ -671,9 +676,9 @@ request.setCharacterEncoding("utf-8");
 
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-default"
+                     <button type="button" class="btn btn-outline-dark"
                         data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="jourAddBtn">Add</button>
+                     <button type="button" class="btn btn-outline-primary" id="jourAddBtn">Add</button>
                   </div>
                </div>
 
@@ -681,7 +686,7 @@ request.setCharacterEncoding("utf-8");
          </div>
 
 
-         <button type="button" onclick="myfunc()" > 취소 </button>
+         <button class="btn btn-outline-light" type="button" onclick="myfunc()" > 취소 </button>
        <script type="text/javascript">
        function myfunc() {
           location.href = "Newspeed.jsp";
@@ -755,6 +760,7 @@ request.setCharacterEncoding("utf-8");
     </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
+<<<<<<< HEAD
 <jsp:include page="footer.jsp"></jsp:include>
 
 
@@ -771,5 +777,9 @@ request.setCharacterEncoding("utf-8");
     // Animations initialization
     new WOW().init();
   </script> -->
+=======
+
+<jsp:include page="footer.jsp"></jsp:include> 
+>>>>>>> 6bc81e74b237db1ae59c62b42ec10e329d97526a
 </body>
 </html>

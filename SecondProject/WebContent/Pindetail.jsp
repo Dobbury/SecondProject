@@ -50,7 +50,7 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
     height: 360px;
 }
 .pincomment{
-	background-color: rgb(238, 241, 246) !important;
+	background-color: rgba(0,0,0,0.1) !important;
     width: 100%;
     padding: 30px 20px 10px 20px;
        
@@ -93,42 +93,24 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 	    margin-bottom: 2px;
 }
 
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+main{
+   background-image: url('img/bgSample09.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
+
+
 
 </style>
 
@@ -192,7 +174,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</table>
 		
 		<p class="title">댓글</p>
-		<div class="pincomment">
+		<div class="pincomment"">
 		<%
 		for(int i = 0; i < list.size();i++){
 			

@@ -122,42 +122,8 @@ html, body, header, .view {
 .modal-backdrop{
     z-index: 10;        
 }
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
+
 .selectbox{
    margin-right: 60px;
    display: inline-block;
@@ -173,6 +139,7 @@ button:hover:before,button:hover:after{
     padding: 5px;
     
 }
+
 
 .pintable{
      width:100%;
@@ -209,6 +176,24 @@ button:hover:before,button:hover:after{
     border-radius: 3px;
     border: 1px solid #ccc;
 }
+
+
+ main{
+   background-image: url('img/bgSample13.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 </style>
 <script type="text/javascript" src="./smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -403,53 +388,56 @@ button:hover:before,button:hover:after{
     <br>
     
     <!-- <div>
-   <table align="center" class="insertbox">
-      <tr>
-         <th>숙소</th><th>맛집</th><th>관광지</th>
-      </tr>
-      <tr>
-         <td style=" width: 330px;text-align: center;">
-            <select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="hotelSel"></select>
-         </td>
-         <td style=" width: 330px;text-align: center;">
-            <select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
-         </td>
-         <td style=" width: 330px;text-align: center;">
-            <select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="tourSel"></select>
-         </td>
-      </tr>
-      <tr>
-         <td style="text-align: center;">
-            <input type="text" style="width: 165px; margin-left:20px" id="hotelMyDB_input">
-            <input type="button" style="width: 30px; margin-right: 20px" id="hotelMyDBSearch">
-         </td>
-         <td style="text-align: center;">
-            <input type="text" style="width: 165px; margin-left:20px" id="restoMyDB_input">
-            <input type="button" style="width: 30px; margin-right: 20px" id="restoMyDBSearch">
-         </td>
-         <td style="text-align: center;">
-            <input type="text" style="width: 165px; margin-left:20px" id="tourMyDB_input">
-            <input type="button" style="width: 30px; margin-right: 20px" id="tourMyDBSearch">
-         </td>
-      </tr>
-      <tr>
-         <td style="text-align: center;">
-            <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
-         </td>
-         <td style="text-align: center;">
-            <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
-         </td>
-         <td style="text-align: center;">
-            <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
-         </td>
-      </tr>
-   </table>
-   <br>
-   </div> -->
+	<table align="center" class="insertbox">
+		<tr>
+			<th>숙소</th><th>맛집</th><th>관광지</th>
+		</tr>
+		<tr>
+			<td style=" width: 330px;text-align: center;">
+				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="hotelSel"></select>
+			</td>
+			<td style=" width: 330px;text-align: center;">
+				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
+			</td>
+			<td style=" width: 330px;text-align: center;">
+				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="tourSel"></select>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<input type="text" style="width: 165px; margin-left:20px" id="hotelMyDB_input">
+				<input type="button" style="width: 30px; margin-right: 20px" id="hotelMyDBSearch">
+			</td>
+			<td style="text-align: center;">
+				<input type="text" style="width: 165px; margin-left:20px" id="restoMyDB_input">
+				<input type="button" style="width: 30px; margin-right: 20px" id="restoMyDBSearch">
+			</td>
+			<td style="text-align: center;">
+				<input type="text" style="width: 165px; margin-left:20px" id="tourMyDB_input">
+				<input type="button" style="width: 30px; margin-right: 20px" id="tourMyDBSearch">
+			</td>
+		</tr>
+		<tr>
+
+			<td style="text-align: center;">
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
+			</td>
+			<td style="text-align: center;">
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
+			</td>
+			<td style="text-align: center;">
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
+
+			</td>
+		</tr>
+	</table>
+	<br>
+	</div> -->
     
     <div style="padding: 30px 0 40px 115px; background-color: #f9f9f9;border: 1px solid #ccc; border-bottom: none;">
     
      <div class="selectbox">
+
         <p><i class="fa fa fa-home"></i>&nbsp;숙소</p>
         <div>
         <select size="10" style="width: 200px; height:200px;margin-left:20px; margin-right: 20px" id="hotelSel"></select>
@@ -466,6 +454,7 @@ button:hover:before,button:hover:after{
      </div>
      
      <div class="selectbox">
+
         <p><i class="fa fa fa-bed"></i>&nbsp;맛집</p>
         <div>
             <select size="10" style="width: 200px;height:200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
@@ -483,6 +472,7 @@ button:hover:before,button:hover:after{
      </div>
      
      <div class="selectbox">
+
         <p><i class="fa fa-plane"></i>&nbsp;관광지</p>
         <div>
             <select size="10" style="width: 200px;height:200px; margin-left:20px; margin-right: 20px" id="tourSel"></select>
@@ -524,9 +514,7 @@ button:hover:before,button:hover:after{
       </table>
     
     
-    
-    
-       <table style="margin-top: 10px">
+       <table style="margin-top: 10px; background-color:white;">
           <col style="width: 100px"><col style="width: 1000px">
           
           <tr>
@@ -551,7 +539,6 @@ button:hover:before,button:hover:after{
           </tr>
        </table>
       
-       
     </div>
     
  
@@ -577,8 +564,8 @@ button:hover:before,button:hover:after{
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="placeSaveBtn">Save Place</button>
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
       </div>
     </div>
   </div>
@@ -621,9 +608,10 @@ button:hover:before,button:hover:after{
      </div>
     
       <div class="modal-footer">
-         
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+
+      	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
       </div>
     </div>
   </div>
@@ -665,10 +653,10 @@ button:hover:before,button:hover:after{
       </form>
      </div>
     
-      <div class="modal-footer">
-         
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinUpdateBtn">Pin Update</button>
+      <div class="modal-footer"> 	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinUpdateBtn">Pin Update</button>
+
       </div>
     </div>
   </div>
