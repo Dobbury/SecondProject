@@ -270,9 +270,9 @@ html, body, header, .view {
        padding-left: 20px;
     padding-right: 20px;
 }
-<<<<<<< HEAD
 
-button{
+
+btn1{
   background:#003458;
   color:#fff;
   border:none;
@@ -284,11 +284,11 @@ button{
   transition:800ms ease all;
   outline:none;
 }
-button:hover{
+btn1:hover{
   background:#fff;
   color:#003458;
 }
-button:before,button:after{
+btn1:before,btn1:after{
   content:'';
   position:absolute;
   top:0;
@@ -298,18 +298,18 @@ button:before,button:after{
   background: #003458;
   transition:400ms ease all;
 }
-button:after{
+btn1:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
-button:hover:before,button:hover:after{
+btn1:hover:before,btn1:hover:after{
   width:100%;
   transition:800ms ease all;
 }
 
-=======
+
 .diary-cont{
  padding: 40px;margin-top:20px;
     background-color: #fff;
@@ -329,7 +329,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
        display: inline-block;
     height: 370px;
 }
->>>>>>> 84490ce6dbbe07fc466f75c054e4eb4ec60b75b7
+
 </style>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
@@ -603,7 +603,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;"></textarea>
-                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
+                      <input type="submit" class="btn1" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
                   </form>
                </div>
@@ -719,10 +719,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
          showMarkers();
       }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
    });
    
    

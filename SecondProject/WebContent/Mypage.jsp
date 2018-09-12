@@ -353,8 +353,9 @@ body {
 
 			</table>
 			<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt"
-				id="edit" value="수정완료"> <input type="button" class="btn1"
-				style="WIDTH: 30pt; HEIGHT: 20pt" id="back" value="취소">
+				id="edit" value="수정완료"> 
+				<input type="button" class="btn1"
+				style="WIDTH: 30pt; HEIGHT: 20pt; font-size: 5;" id="back" value="취소">
 		</div>
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 
@@ -387,11 +388,11 @@ body {
 						nick : $("#nickname").val()
 					},
 					success : function(data) {
-						alert("ajax들어옴");
-						location.href = "Mypage.jsp?page=1";
+						alert("수정 성공!");
+						location.href = "DiaryServlet?command=goMyPage";
 					},
 					error : function() {
-						location.href = "Mypage.jsp?page=1";
+						location.href = "DiaryServlet?command=goMyPage";
 					}
 				});
 
