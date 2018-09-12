@@ -192,6 +192,7 @@ request.setCharacterEncoding("utf-8");
          
          if(h == false){
             s += "<div class='style_prevu_kit' style='width:30px; height:30px;'>";
+
                  
             return s;   
          }else{
@@ -339,7 +340,7 @@ request.setCharacterEncoding("utf-8");
       
        
       <div align="center">
-       
+
       <table style="background-color: white; opacity: 0.95; box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13); border-radius: 10px 10px 0px 0px;" >
       <!-- 너비 -->
       <col width="100">
@@ -398,6 +399,7 @@ request.setCharacterEncoding("utf-8");
           </tr>
            
          
+
           <tr height="50" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
               <td align="center">SUN</td>
               <td align="center">MON</td>
@@ -455,14 +457,11 @@ request.setCharacterEncoding("utf-8");
           </tr>
           
       </table>
-      
       <!-- Buttons -->
       <br><br>
       <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
      </div>
-     
-       
-      
+
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">

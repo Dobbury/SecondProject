@@ -105,7 +105,7 @@ public class PinServlet extends HttpServlet {
 			   
 			   dispatch("Pindetail.jsp", req, resp);
 		   }else if(command.equals("goPinspeed")) {
-			   int paging = 1;
+			    int paging = 1;
 				int pcount = dao.getAllPinCount();
 
 				List<String[]> pinlist = dao.getAllPinList(paging);
@@ -122,7 +122,7 @@ public class PinServlet extends HttpServlet {
 				req.setAttribute("pinlist", pinlist);
 				dispatch("Pinspeed.jsp", req, resp);
 		   }else if(command.equals("pinPaging")) {
-			   int page = Integer.parseInt(req.getParameter("page"));
+			    int page = Integer.parseInt(req.getParameter("page"));
 				int jcount = dao.getAllPinCount();
 
 				List<String[]> pinlist = dao.getAllPinList(page);
@@ -138,6 +138,49 @@ public class PinServlet extends HttpServlet {
 				req.setAttribute("pagecount", pagecount);
 				req.setAttribute("pinlist", pinlist);
 				dispatch("Pinspeed.jsp", req, resp);
+		   }else if(command.equals("searchpin")) {
+			   String stext = req.getParameter("stext");
+			   int paging = 1;
+			   if(req.getParameter("page") == null || req.getParameter("page").equals("")) {
+				   
+			   }else {
+				   paging = Integer.parseInt(req.getParameter("page"));
+			   }
+			   int pcount = dao.getSearchPinCount(stext);
+
+			   List<String[]> pinlist = dao.getSearchPinList(paging, stext);
+			   int pagecount = 1;
+			   pagecount = pcount/9;
+			   if(pcount != 0){
+				   if(pagecount%pcount>0){
+					   pagecount++;
+				   }
+			   }
+			   req.setAttribute("page", paging);
+			   req.setAttribute("pagecount", pagecount);
+			   req.setAttribute("pinlist", pinlist);
+			   req.setAttribute("stext", stext);
+			   dispatch("Pinsearch.jsp", req, resp);
+			   
+
+		   }else if(command.equals("pinSearchPaging")) {
+			   String stext = req.getParameter("stext");
+			   int page = Integer.parseInt(req.getParameter("page"));
+			   int jcount = dao.getSearchPinCount(stext);
+
+			   List<String[]> pinlist = dao.getSearchPinList(page, stext);
+			   int pagecount = 0;
+			   if (jcount != 0) {
+				   pagecount = jcount / 9;
+				   if (pagecount % jcount > 0) {
+					   pagecount++;
+				   }
+			   }
+			   req.setAttribute("stext", stext);
+			   req.setAttribute("page", page);
+			   req.setAttribute("pagecount", pagecount);
+			   req.setAttribute("pinlist", pinlist);
+			   dispatch("Pinsearch.jsp", req, resp);
 		   }
 		   
 	 }
