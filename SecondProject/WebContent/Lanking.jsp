@@ -243,7 +243,7 @@ button:hover:before,button:hover:after{
           
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=tourlist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=tourlist.get(i)[2]%></span>
           
           </a>
           </li>
@@ -265,7 +265,7 @@ button:hover:before,button:hover:after{
           <a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=restolist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=restolist.get(i)[2]%></span>
           
           </a>
           </li>
@@ -284,10 +284,10 @@ button:hover:before,button:hover:after{
          }
       %>
           <li>
-          <a href="Pindetail.jsp?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
+          <a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=hotellist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=hotellist.get(i)[2] %></span>
           </a>
           </li>
       <%

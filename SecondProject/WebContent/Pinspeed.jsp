@@ -216,8 +216,8 @@ button:hover:before,button:hover:after{
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-          <form action="Pinsearch.jsp" method="post">
-          	<input type="hidden" name="command" value="search">
+          <form action="PinServlet" method="post">
+          	<input type="hidden" name="command" value="searchpin">
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">

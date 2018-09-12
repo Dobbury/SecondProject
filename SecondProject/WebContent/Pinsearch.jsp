@@ -13,17 +13,10 @@
 request.setCharacterEncoding("utf-8");
 PinImpl dao = PinDao.getInstance();
 String stext = request.getParameter("stext");
-int paging = Integer.parseInt(request.getParameter("page"));
-int pcount = dao.getSearchPinCount(stext);
+int paging = (int)request.getAttribute("page");
+int pagecount = (int)request.getAttribute("pagecount"); 
+List<String[]> pinlist = (List<String[]>)request.getAttribute("pinlist");
 
-List<String[]> pinlist = dao.getSearchPinList(paging, stext);
-int pagecount = 1;
-pagecount = pcount/9;
-if(pcount != 0){
-	if(pagecount%pcount>0){
-		pagecount++;
-	}
-}
 
 int startPage = 0;
 int endPage = 0;
@@ -168,8 +161,8 @@ transition: all 40s;
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-          <form action="Pinsearch.jsp" method="post">
-          	<input type="hidden" name="command" value="search">
+          <form action="PinServlet" method="post">
+          	<input type="hidden" name="command" value="searchpin">
           	<input type="hidden" name="page" value="1">
 			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
     border: 1px solid #aaa;">
@@ -232,7 +225,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Pinsearch.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
+					<a href="./PinServlet?command=pinSearchPaging&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -242,7 +235,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Pinsearch.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
+				<a href="./PinServlet?command=pinSearchPaging&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -257,7 +250,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Pinsearch.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
+			<a href="./PinServlet?command=pinSearchPaging&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
