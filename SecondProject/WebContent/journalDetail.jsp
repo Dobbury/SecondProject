@@ -69,11 +69,9 @@
                }
                 */
                if(list.get(i).getJour_check()==1){
-                  s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
-                  //s += "<input type='hidden' ";
+                  s += "<label  class='btn' style=' background-color:#96A5FF; font-size:20px; width: 100%; height: 100%; margin:0px; padding:13px;'>";
                   s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
                   s += "<span class='glyphicon glyphicon-ok' ></span>";
-                  //s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</label>";
                }
             }
