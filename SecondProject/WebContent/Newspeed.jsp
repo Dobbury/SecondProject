@@ -182,8 +182,12 @@ transition: all 40s;
 		<div style="display: table;width: 96%;">
 		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
 
+<<<<<<< HEAD
 		<!-- <a class="btn btn-primary"style="float: right;" onclick="gocal()">글쓰기</a> -->
 
+=======
+			<button style="float: right;height: 40px;margin-top: 25px;" onclick="gocal()">글쓰기</button>
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
 		</div>
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
@@ -264,7 +268,6 @@ transition: all 40s;
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 
-		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 		
 
 		<!-- SCRIPTS -->

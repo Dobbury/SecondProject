@@ -365,16 +365,8 @@ public class DiaryServlet extends HttpServlet {
          }
 
          int seq = Integer.parseInt(req.getParameter("seq"));
-         JournalDto dto = dao.getJournalDto(seq);
-         List<DiaryDto> Diarylist = dao.getDiaryList(dto.getStartDate().substring(0, 10).replace("-", "/"),
-         dto.getEndDate().substring(0, 10).replace("-", "/"), dto.getId());
-         req.setAttribute("JournalDto", dto);
-         req.setAttribute("DiaryList", Diarylist);
-         List<DiarycommentDto> list = dao.Commantview(seq);
-         req.setAttribute("DiarycommentDto", list);
-         req.setAttribute("DiaryDto", dto);
 
-         dispatch("journalDetail.jsp", req, resp);
+         resp.sendRedirect("DiaryServlet?command=journalDetail&seq=" + seq);
 
       } else if (command.equals("search")) {
          String stext = req.getParameter("stext");

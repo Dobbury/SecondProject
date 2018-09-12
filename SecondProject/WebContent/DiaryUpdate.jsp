@@ -146,6 +146,7 @@ html, body, header, .view {
     z-index: 10;        
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 button{
@@ -185,6 +186,10 @@ button:hover:before,button:hover:after{
   transition:800ms ease all;
 }
  
+=======
+
+
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
 
 .selectbox{
    margin-right: 60px;
@@ -222,7 +227,10 @@ button:hover:before,button:hover:after{
     margin-right: 6px;
     background-color: none;
 }
+<<<<<<< HEAD
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
 
 .searchbtn{
        height: 30px;
@@ -456,6 +464,7 @@ button:hover:before,button:hover:after{
   <!--여기서 하시면 됩니다-->
 <main style="padding-top:80px;">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<div class="container">
 	<div>
 	<table align="center">
@@ -610,6 +619,9 @@ button:hover:before,button:hover:after{
 		
     	
 =======
+=======
+
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
    <div class="container">
    
    <h2 style="font-weight: 700;
@@ -892,7 +904,7 @@ button:hover:before,button:hover:after{
       </table>
           
           
-          <table style="margin-top: 10px">
+          <table style="margin-top: 10px; background-color:white;">
           <tr>
              <td colspan="2">
                 <input type="text" class="text text-default" style="width: 1098px;height: 50px;  font-size: 18px;" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title" value='<%=diary.getTitle() %>'>
@@ -916,9 +928,12 @@ button:hover:before,button:hover:after{
        </table>
       
       
+<<<<<<< HEAD
       
        
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
     </div>
     
  
@@ -945,12 +960,19 @@ button:hover:before,button:hover:after{
       </div>
       <div class="modal-footer">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
    		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
 =======
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="placeSaveBtn">Save Place</button>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
+
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
       </div>
     </div>
   </div>
@@ -994,6 +1016,7 @@ button:hover:before,button:hover:after{
     
       <div class="modal-footer">
 <<<<<<< HEAD
+<<<<<<< HEAD
       	
 	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
    		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
@@ -1002,6 +1025,13 @@ button:hover:before,button:hover:after{
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+
+      	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
       </div>
     </div>
   </div>

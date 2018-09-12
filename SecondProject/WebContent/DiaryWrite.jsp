@@ -389,6 +389,9 @@ html, body, header, .view {
     
     <!-- <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
 	<table align="center" class="insertbox">
 		<tr>
 			<th>숙소</th><th>맛집</th><th>관광지</th>
@@ -434,6 +437,7 @@ html, body, header, .view {
 	</table>
 	<br>
 	</div> -->
+<<<<<<< HEAD
 =======
    <table align="center" class="insertbox">
       <tr>
@@ -479,10 +483,13 @@ html, body, header, .view {
    <br>
    </div> -->
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
     
     <div style="padding: 30px 0 40px 115px; background-color: #f9f9f9;border: 1px solid #ccc; border-bottom: none;">
     
      <div class="selectbox">
+<<<<<<< HEAD
 <<<<<<< HEAD
      	<p><i class="fa fa fa-home"></i>&nbsp;숙소</p>
      	<div>
@@ -498,6 +505,9 @@ html, body, header, .view {
      	</div>
 =======
         <p><i class="fa fa fa-home"></i>&nbsp;숙소</p>
+=======
+
+        <p><i class="fa fa fa-home"></i>&nbsp;숙소</p>
         <div>
         <select size="10" style="width: 200px; height:200px;margin-left:20px; margin-right: 20px" id="hotelSel"></select>
         </div>
@@ -509,11 +519,33 @@ html, body, header, .view {
         <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  
         class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
         </div>
->>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
      
      </div>
      
      <div class="selectbox">
+
+        <p><i class="fa fa fa-bed"></i>&nbsp;맛집</p>
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
+        <div>
+        <select size="10" style="width: 200px; height:200px;margin-left:20px; margin-right: 20px" id="hotelSel"></select>
+        </div>
+        <div style="margin-top: 8px">
+           <input type="text" style="width: 165px; margin-left:20px" id="hotelMyDB_input">
+         <input type="button" style="width: 30px;vertical-align: bottom; margin-right: 20px" id="hotelMyDBSearch" class="searchbtn">
+      </div>
+        <div>
+        <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  
+        class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
+        </div>
+<<<<<<< HEAD
+>>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
+     
+     </div>
+     
+     <div class="selectbox">
+<<<<<<< HEAD
 <<<<<<< HEAD
      	<p><i class="fa fa fa-bed"></i>&nbsp;맛집</p>
      	<div>
@@ -530,6 +562,10 @@ html, body, header, .view {
      	</div>
 =======
         <p><i class="fa fa fa-bed"></i>&nbsp;맛집</p>
+=======
+
+        <p><i class="fa fa-plane"></i>&nbsp;관광지</p>
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
         <div>
             <select size="10" style="width: 200px;height:200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
         </div>
@@ -542,6 +578,7 @@ html, body, header, .view {
                     class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
 
         </div>
+<<<<<<< HEAD
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
      
      </div>
@@ -576,6 +613,8 @@ html, body, header, .view {
 
         </div>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
      
      </div>
     
@@ -604,6 +643,7 @@ html, body, header, .view {
       </table>
     
     
+<<<<<<< HEAD
     
     
 <<<<<<< HEAD
@@ -635,6 +675,9 @@ html, body, header, .view {
     	
 =======
        <table style="margin-top: 10px">
+=======
+       <table style="margin-top: 10px; background-color:white;">
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
           <col style="width: 100px"><col style="width: 1000px">
           
           <tr>
@@ -659,8 +702,11 @@ html, body, header, .view {
           </tr>
        </table>
       
+<<<<<<< HEAD
        
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
     </div>
     
  
@@ -687,12 +733,17 @@ html, body, header, .view {
       </div>
       <div class="modal-footer">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
    		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
 =======
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="placeSaveBtn">Save Place</button>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
       </div>
     </div>
   </div>
@@ -700,7 +751,7 @@ html, body, header, .view {
 
 <!-- add_Pin Modal -->
 <div class="modal fade" id="add_Pin_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="top:5%">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">장소 이름 및 별점 등록</h4>
@@ -736,6 +787,7 @@ html, body, header, .view {
     
       <div class="modal-footer">
 <<<<<<< HEAD
+<<<<<<< HEAD
       	
 	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
    		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
@@ -744,6 +796,12 @@ html, body, header, .view {
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+
+      	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
       </div>
     </div>
   </div>
@@ -785,6 +843,7 @@ html, body, header, .view {
       </form>
      </div>
     
+<<<<<<< HEAD
       <div class="modal-footer">
 <<<<<<< HEAD
       	
@@ -795,6 +854,12 @@ html, body, header, .view {
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinUpdateBtn">Pin Update</button>
 >>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
+=======
+      <div class="modal-footer"> 	
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinUpdateBtn">Pin Update</button>
+
+>>>>>>> fa123c0b3ea27b62ccec1790c281ec4547dbe84e
       </div>
     </div>
   </div>
@@ -883,7 +948,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
+               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -900,7 +965,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
+               $("#restoPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -916,7 +981,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;' >"
+               $("#tourPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;' >"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
