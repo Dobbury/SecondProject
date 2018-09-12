@@ -47,6 +47,7 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
@@ -312,8 +313,6 @@ transition: all 40s;
 			</div>
 			</div>
 			
-			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>
@@ -345,6 +344,8 @@ transition: all 40s;
 }
   
   </script>
+  
+  
   
   <script>
 
