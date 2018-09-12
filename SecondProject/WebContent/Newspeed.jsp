@@ -44,11 +44,10 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
- 
- 
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
@@ -81,6 +80,44 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 
 
 @-webkit-keyframes fadeInUp {
@@ -174,8 +211,13 @@ transition: all 40s;
 <main style="padding-top:80px;">
    <div class="container">
       
-		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<div style="display: table;width: 96%;">
+		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
+		<a class="btn btn-primary"style="float: right;" onclick="gocal()">글쓰기</a>
+		</div>
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 10px;">
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
@@ -184,8 +226,8 @@ transition: all 40s;
 			%>
 				<div class="diary">
 					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="">
-							<img alt="xx" src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+						<div class="Dimage">
+							<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -251,7 +293,13 @@ transition: all 40s;
 			
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+<<<<<<< HEAD
+=======
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		
+	
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
+		
 		<!-- SCRIPTS -->
   		<script type="text/javascript">
   			function gocal() {  		

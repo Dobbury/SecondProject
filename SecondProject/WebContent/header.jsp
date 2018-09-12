@@ -18,7 +18,7 @@
   
   
    <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   <!-- <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script> -->
    <script type="text/javascript" src="Design/js/popper.min.js"></script>
    <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="Design/js/mdb.min.js"></script>
@@ -79,7 +79,7 @@
 
    .diary{
  	width: 300px;height: 300px;text-align: center;
-	vertical-align: top;float: left;margin: 60px 34px 0 33px; border: 1px solid #ccc;display: table;
+	vertical-align: top;float: left;margin: 40px 34px 0 33px; border: 1px solid #ccc;display: table;
  	}
  	.Dimage{
     	width: 300px;

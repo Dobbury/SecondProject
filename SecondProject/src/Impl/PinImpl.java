@@ -29,7 +29,7 @@ public interface PinImpl {
 	
 	public int getAllPinCount();
 	
-	public List<PinDto> getSearchPinList(int page, String stext);
+	public List<String[]> getSearchPinList(int page, String stext);
 
 	public int getSearchPinCount(String stext); 
 

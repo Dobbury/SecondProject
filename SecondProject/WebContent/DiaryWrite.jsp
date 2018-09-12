@@ -27,7 +27,7 @@ request.setCharacterEncoding("utf-8");
  <style type="text/css">
   
  .starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background: url('img/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -36,7 +36,7 @@ request.setCharacterEncoding("utf-8");
     cursor: pointer;
 }
 .starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background: url('img/ico_review.png') no-repeat right 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -75,7 +75,44 @@ html, body, header, .view {
 }
 .modal-backdrop{
     z-index: 10;        
-}​
+}
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+​
 
 
 </style>
@@ -219,7 +256,7 @@ html, body, header, .view {
         <!-- Right -->
         <ul class="navbar-menu">
           <li><a href="Newspeed.jsp">뉴스피드</a></li>
-          <li><a href="Mypage.jsp">마이페이지</a></li>
+          <li><a href="Mypage?page=1.jsp">마이페이지</a></li>
         </ul>
 
     </div>

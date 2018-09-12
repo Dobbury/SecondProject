@@ -230,6 +230,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="signup"style=";width: 240px;display: block;margin: 0 auto;margin-top:5px">회원가입</button>
         </div>
         </div>
+        
       </form>
       
     </div>

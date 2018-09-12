@@ -46,10 +46,35 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
- 
+
+  
+ .starR1{
+/*     background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0; */
+    background: url('img/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    /* background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0; */
+    background: url('img/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0 0;}
+.starR2.on{background-position:-15px 0;}
+
  
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
@@ -83,6 +108,43 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 
 
 @-webkit-keyframes fadeInUp {
@@ -135,6 +197,9 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
+ 	.starRev span{
+ 	cursor: auto;
+ 	}
  </style>
   
 </head>
@@ -167,7 +232,10 @@ transition: all 40s;
       
 		
 		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">장소정보</h3>
-			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 20px;">
+			<div style="width:100%;text-align: center;  padding: 0 0 80px 0;display: table;">
 	
 			 <% 
 			
@@ -183,10 +251,42 @@ transition: all 40s;
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
-					<span class="diary-date">평점 : <%=pinlist.get(i)[2] %></span>
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
+						<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
+						</span>
 					</div>
+					<div class="diary-textbox" style="line-height: 30px; margin-bottom: 5px; display: table; width: 100%;">
+						<div class="starRev">
+						<%
+						for(int j = 1 ; j<=10 ; j++){ 
+							if(j%2==1){
+								if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+						%>
+				  					<span class="starR1 on"></span>
+				  			<%
+								}else{
+				  			%>
+				  					<span class="starR1"></span>
+				  			<%
+				  				}
+							}else if(j%2==0){
+								if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+							%>
+		  							<span class="starR2 on"></span>
+							<% 
+								}else{
+							%>
+									<span class="starR2"></span>
+							<%
+								}
+							}
+						}
+						%>	
+							<div style="float: right; margin-right: 10px;" >
+							
+							<span class="diary-date" style="margin-top: 5px;">평점 : <%=pinlist.get(i)[2] %></span>	
+							</div>
+						</div>
+					</div>	
 				</div>
 			<%
 			}
@@ -257,7 +357,6 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
-  
   </script>
 
 

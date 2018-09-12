@@ -199,6 +199,7 @@ public class DiaryServlet extends HttpServlet {
          String jour = req.getParameter("jour");
          System.out.println("2단계");
 
+
          // 첫번째 이미지 경로 가져오기
          String fisrt_img = "";
          if (content.contains("<img src")) {
@@ -292,7 +293,7 @@ public class DiaryServlet extends HttpServlet {
          req.setAttribute("DiarycommentDto", list);
 
          dispatch("journalUpdate.jsp", req, resp);
-   
+
       }else if(command.equals("journalDetail")) {
 
             int seq = Integer.parseInt(req.getParameter("seq"));
@@ -305,36 +306,35 @@ public class DiaryServlet extends HttpServlet {
             
             Map<Integer,List<String[]>> map = new HashMap<>();
             for(DiaryDto dDto : Diarylist) {
-               
-               String pins[]=dDto.getPin_Seqs().split(",");
-          
-               
                List<String[]> latlnglist = new ArrayList<>();
-               for(String pinSeq : pins) {
-                  PinImpl pDao = PinDao.getInstance();
-                  pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
-                  String pinname=pCDto.getPinname();
-                  PinDto pin = pDao.getPin(pinname);
-                  
-                  String location[] = { pin.getLat()+"",pin.getLng()+""};
-                  System.out.println(pin.getLat()+" "+pin.getLng());
-                  latlnglist.add(location);
-               }
                
+               if(dDto.getPin_Seqs() != null) {
+                  String pins[]=dDto.getPin_Seqs().split(",");
+                  
+                  for(String pinSeq : pins) {
+                     PinImpl pDao = PinDao.getInstance();
+                     pinCommentDto pCDto=pDao.getPinComment(Integer.parseInt(pinSeq));
+                     String pinname=pCDto.getPinname();
+                     PinDto pin = pDao.getPin(pinname);
+                     
+                     String location[] = { pin.getLat()+"",pin.getLng()+""};
+                     System.out.println(pin.getLat()+" "+pin.getLng());
+                     latlnglist.add(location);
+                  }
+               }
                map.put(dDto.getSeq(), latlnglist);
             }
 
-            System.out.println(dto.getStartDate().substring(0, 10).replace("-", "/"));
-            int Likecheck = dao.Likecheack(dto.getSeq(), loginid);
             
             req.setAttribute("locations", map);
             req.setAttribute("JournalDto", dto);
             req.setAttribute("DiaryList", Diarylist);
             List<DiarycommentDto> list = dao.Commantview(seq);
             req.setAttribute("DiarycommentDto", list);
-            req.setAttribute("likecheck", Likecheck);
+            
             dispatch("journalDetail.jsp", req, resp);
             
+
 
       } else if (command.equals("commentwrite")) {
 
@@ -563,3 +563,4 @@ public class DiaryServlet extends HttpServlet {
    }
 
 }
+
