@@ -128,7 +128,7 @@
     <div class="container">
 
       <!-- logo -->
-      <a class="navbar-brand" href="Newspeed.jsp?page=1">
+      <a class="navbar-brand" href="DiaryServlet?command=goNewspeed">
        
       </a>
 
