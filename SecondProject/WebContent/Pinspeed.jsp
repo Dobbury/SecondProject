@@ -308,7 +308,7 @@ translateY
 			<%
 				for (int i = 0; i < pinlist.size(); i++) {
 			%>
-			<div class="diary">
+			<div class="diary fadeInUp animate">
 				<a
 					href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i)[0]%>">
 					<div class="Dimage" style="">
