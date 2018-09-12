@@ -284,7 +284,7 @@ button:hover:before,button:hover:after{
          }
       %>
           <li>
-          <a href="Pindetail.jsp?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
+          <a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=hotellist.get(i)[0]%></span>
           <span class="lankavg">60</span>

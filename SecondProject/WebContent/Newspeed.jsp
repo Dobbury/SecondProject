@@ -181,6 +181,11 @@ button:hover:before,button:hover:after{
 
     color: red;
  	}
+ 	
+ 	/* .diary-title {
+ 		margin-left: 0 !important;
+ 		margin-right: 0 !important;
+ 	} */
  </style>
   
 </head>
@@ -293,12 +298,10 @@ button:hover:before,button:hover:after{
 			
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-<<<<<<< HEAD
-=======
+	
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
 		
 	
->>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
 		
 		<!-- SCRIPTS -->
   		<script type="text/javascript">

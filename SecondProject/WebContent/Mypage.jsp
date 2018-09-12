@@ -208,9 +208,12 @@ body {
 	<br>
 	<br>
 	<br>
-	<div id="container" class="tab-content card"
-		style="background-color: #FFFAFA">
-
+	
+	<div style="height: 100%;">
+	
+	<div id="container" class="tab-content card"style="background-color: #FFFAFA;height: 600px;">
+	
+	
 		<ul class="nav nav-tabs md-tabs nav-justified">
 			<li class="nav-item" data-tab="tab1"><a class="nav-link active"
 				data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
@@ -226,11 +229,7 @@ body {
 
 			<main style="padding-top:80px;">
 			<div class="container">
-
-
-
-				<div
-					style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+				<div style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
 
 					<%
 						for (int i = 0; i < jlist.size(); i++) {
@@ -264,7 +263,7 @@ body {
 					<!-- paging -->
 					<div>
 						<%
-							if (p != 1 || pagecount == 0) {
+							if (p != 1 && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 						<%
@@ -287,7 +286,7 @@ body {
 								}
 							}
 
-							if (p != pagecount || pagecount == 0) {
+							if (p != pagecount && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 						<%
@@ -357,8 +356,9 @@ body {
 				style="WIDTH: 30pt; HEIGHT: 20pt" id="back" value="취소">
 		</div>
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
-
+</div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 
 
@@ -406,6 +406,5 @@ body {
 		});
 	</script>
 
-	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
