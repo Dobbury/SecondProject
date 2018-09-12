@@ -13,7 +13,7 @@
   <!-- Material Design Bootstrap -->
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="Design/css/style.min.css" rel="stylesheet">
+  <link href="Design/css/style.min.css" rel="stylesheet"> 
 
   
   
@@ -114,7 +114,9 @@
  		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
    		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
  	}
- 	
+ 	.diary-content p{
+ 		font-size: 14px;
+ 	}
  	
    </style>
 
@@ -141,8 +143,8 @@
           <li><a href="DiaryServlet?command=goNewspeed">뉴스피드</a></li>
           <li><a href="PinServlet?command=goPinspeed">장소정보</a></li>
           <li><a href="DiaryServlet?command=Lanking">이달의 명소</a></li>
-
           <li><a href="DiaryServlet?command=goMyPage">마이페이지</a></li>
+          <li><a href="MemberServlet?command=logout">로그아웃</a></li>
 
         </ul>
 

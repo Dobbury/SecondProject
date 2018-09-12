@@ -125,13 +125,14 @@ html, body, header, .view {
 	var basic_lat = 1;
 	var basic_lng = 1;
 	var basic_Marker=[];
+	var locations=[];
 	<%
 		for(int i = 0 ; i < pinlist.size() ; i++){
 	%>
 		basic_lat = <%=pinlist.get(i).getLat() %>;
 		basic_lng = <%=pinlist.get(i).getLng() %>;
 		
-		basic_Marker.push({lat:basic_lat, lng:basic_lng});
+		locations.push({lat:basic_lat, lng:basic_lng});
 	<%
 		}
 	%>
@@ -147,15 +148,17 @@ html, body, header, .view {
 	var tday =  '<%=diary.getTday() %>';
 	alert(tday);
 	var id = '<%=dto.getId()%>';
+	var map;
+	var modal_map;
 	
 	function initialize() {
 		modal_Marker_lat=null;
 		modal_Marker_lng=null;
-		var map = new google.maps.Map(document.getElementById('map'), {
+		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 12,
 			center: {lat:basic_lat, lng:basic_lng}
 		});
-		var modal_map = new google.maps.Map(document.getElementById('modal_map'), {
+		modal_map = new google.maps.Map(document.getElementById('modal_map'), {
 			zoom: 12,
 			center: {lat:modal_lat, lng:modal_lng}
 		});
@@ -213,35 +216,58 @@ html, body, header, .view {
           
 		});
    
-        // Adds a marker to the map.
-		function add_Modal_Marker(location, modal_map) {
-			// Add the marker at the clicked location, and add the next-available label
-			// from the array of alphabetical characters.
-			var marker = new google.maps.Marker({
-				position: location,
-				label: labels[labelIndex++ % labels.length],
-				map: modal_map,
-				title:"뿌리뿌리"
-			});
-			modal_Marker.push(marker);
-		}
-	      
-		// Adds a marker to the map.
-		function addMarker(location,map) {
-			// Add the marker at the clicked location, and add the next-available label
-	        // from the array of alphabetical characters.
-	        var marker = new google.maps.Marker({
-				position: location,
-				label: labels[labelIndex++ % labels.length],
-				map: map,
-				title:"뿌리뿌리"
-			});
-			//modal_Marker.push(marker);
-		}
-		
-		for(i = 0 ; i < basic_Marker.length ; i++){
-			addMarker(basic_Marker[i],map);
-		}
+        for(var i = 0 ; i< locations.length ; i++){
+        	addMarker(locations[i]);
+        }
+	}
+	// Adds a marker to the map.
+	function add_Modal_Marker(location) {
+		// Add the marker at the clicked location, and add the next-available label
+		// from the array of alphabetical characters.
+		var marker = new google.maps.Marker({
+			position: location,
+			label: labels[labelIndex++ % labels.length],
+			map: modal_map,
+			title:"뿌리뿌리"
+		});
+		modal_Marker.push(marker);
+	}
+      
+	// Adds a marker to the map.
+	function addMarker(location) {
+		// Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        map.zoom=15;
+		map.panTo(location);
+        var marker = new google.maps.Marker({
+			position: location,
+			label: labels[labelIndex++ % labels.length],
+			map: map,
+			title:"뿌리뿌리"
+		});
+        basic_Marker.push(marker);
+	}
+	// Sets the map on all markers in the array.
+	function setMapOnAll(map) {
+	  for (var i = 0; i < basic_Marker.length; i++) {
+		  basic_Marker[i].setMap(map);
+	  }
+	}
+
+	// Removes the markers from the map, but keeps them in the array.
+	function clearMarkers() {
+	  setMapOnAll(null);
+	}
+
+	// Shows any markers currently in the array.
+	function showMarkers() {
+	  setMapOnAll(map);
+	}
+
+	// Deletes all markers in the array by removing references to them.
+	function deleteMarkers() {
+	  clearMarkers();
+	  basic_Marker = [];
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
@@ -679,9 +705,7 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					
-					basic_Marker.push(location);
-					initialize();
+					addMarker(location);
 					$("#hotelPinArr").append("<div style='display:inline-block;'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
 												+$("#addpinname").val()
 												+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
@@ -697,9 +721,7 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					
-					basic_Marker.push(location);
-					initialize();
+					addMarker(location);
 					$("#restoPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
 							+$("#addpinname").val()
 							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
@@ -714,9 +736,7 @@ html, body, header, .view {
 						}
 					}
 					var location=new google.maps.LatLng(basic_lat,basic_lng);
-					
-					basic_Marker.push(location);
-					initialize();
+					addMarker(location);
 					$("#tourPinArr").append("<div style='display:inline-block'><div class='pin_info' style='background-color:gray; display:inline-block;'>"
 							+$("#addpinname").val()
 							+"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
@@ -938,16 +958,20 @@ html, body, header, .view {
 		////////////////////////////////////////////////////////////////////////
 		$(document).on("click",".delete_pin_info",function () {
 			
+			clearMarkers();
 			for(i = 0 ; i <PinArr.length ; i++){
-				alert(PinArr[i].pin_name+ " "+$(this).parent().children('.pin_info_val').val());
-					
 				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
+					alert("asdasd");
 					PinArr.splice(i,1);	//i번째에서 1개 제거
-					
+					basic_Marker.splice(i,1);
 					break;
 				}
 			}
+			
+			
 			$(this).parent().remove();
+			
+			showMarkers();
 			
 		});
 		

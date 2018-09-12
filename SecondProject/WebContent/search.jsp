@@ -46,7 +46,7 @@ if(paging < 6){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
-
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
  <style type="text/css">
  
  

@@ -98,7 +98,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
        font-size: 12px;
 }
   main{
-   background-image: url('img/bgSample11.jpg');
+   background-image: url('img/bgSample12.jpg');
     background-size: 100% 100%;
     background-position: center center;
     transition: all 40s;
@@ -150,6 +150,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
             <div class="diary"  >
                <a href="DiaryServlet?command=journalDetail&amp;seq=<%=list.get(i).getSeq()%>">
                   <div class="Dimage" style="">
+                  	<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=list.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
                   </div>
                   <p class="diary-title"><%=list.get(i).getTitle()%></p>
                </a>
@@ -208,7 +209,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
           
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=tourlist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=tourlist.get(i)[2]%></span>
           
           </a>
           </li>
@@ -230,7 +231,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
           <a href="PinServlet?command=pinDetail&pinname=<%=restolist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=restolist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=restolist.get(i)[2]%></span>
           
           </a>
           </li>
@@ -249,10 +250,10 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
          }
       %>
           <li>
-          <a href="Pindetail.jsp?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
+          <a href="PinServlet?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=hotellist.get(i)[0]%></span>
-          <span class="lankavg">60</span>
+          <span class="lankavg"><%=hotellist.get(i)[2] %></span>
           </a>
           </li>
       <%

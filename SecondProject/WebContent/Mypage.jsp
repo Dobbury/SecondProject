@@ -142,16 +142,22 @@ ul.tab li.current {
 }
 
 
-body {
-	background-image: url("img/mp-bg.jpg");
-	background-size: cover;
-	background-color: rgba( 50, 50, 50, 0.4 ); 
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+ body{
+   background-image: url('img/mp-bg.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
 
 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 
-}
+} 
 
 @media ( min-width : 800px) and (max-width: 850px) {
 	.navbar:not (.top-nav-collapse ) {
@@ -168,9 +174,12 @@ body {
 	<br>
 	<br>
 	<br>
-	<div id="container" class="tab-content card"
-		style="background-color: #FFFAFA">
-
+	
+	<div style="height: 100%;">
+	
+	<div id="container" class="tab-content card"style="background-color: #FFFAFA;height: 600px;">
+	
+	
 		<ul class="nav nav-tabs md-tabs nav-justified">
 			<li class="nav-item" data-tab="tab1"><a class="nav-link active"
 				data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
@@ -186,11 +195,7 @@ body {
 
 			<main style="padding-top:80px;">
 			<div class="container">
-
-
-
-				<div
-					style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+				<div style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
 
 					<%
 						for (int i = 0; i < jlist.size(); i++) {
@@ -198,7 +203,9 @@ body {
 					<div class="diary">
 						<a
 							href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
-							<div class="Dimage" style=""></div>
+							<div class="Dimage" style="">
+								<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=jlist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+							</div>
 							<p class="diary-title"><%=jlist.get(i).getTitle()%></p>
 						</a>
 						<div class="diary-textbox">
@@ -224,7 +231,7 @@ body {
 					<!-- paging -->
 					<div>
 						<%
-							if (p != 1 || pagecount == 0) {
+							if (p != 1 && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 						<%
@@ -247,7 +254,7 @@ body {
 								}
 							}
 
-							if (p != pagecount || pagecount == 0) {
+							if (p != pagecount && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 						<%
@@ -318,8 +325,9 @@ body {
 				 id="back" value="취소">
 		</div>
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
-
+</div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 
 
@@ -348,10 +356,11 @@ body {
 						nick : $("#nickname").val()
 					},
 					success : function(data) {
-						alert("수정 성공!");
+						alert(data);
 						location.href = "DiaryServlet?command=goMyPage";
 					},
 					error : function() {
+						alert("에러남");
 						location.href = "DiaryServlet?command=goMyPage";
 					}
 				});
@@ -366,6 +375,5 @@ body {
 		});
 	</script>
 
-	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -139,6 +139,10 @@ public class MemberServlet extends HttpServlet {
 //				if(isS == true) {
 //					resp.sendRedirect("Main.jsp");
 //				}
+	      }else if(command.equals("logout")) {
+	    	  req.getSession().removeAttribute("user");
+	    	  
+	    	  resp.sendRedirect("Main.jsp");
 	      }
 		
 	}

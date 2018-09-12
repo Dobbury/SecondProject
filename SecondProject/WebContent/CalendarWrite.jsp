@@ -71,16 +71,48 @@ request.setCharacterEncoding("utf-8");
      color: #000;
   }
 
-      
+
+  .style_prevu_kit
+{
+    display:inline-block;
+    border:0;
+    width:196px;
+    height:210px;
+    position: relative;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+	cursor: pointer;
+}
+
+.style_prevu_kit:hover
+{
+    box-shadow: 0px 0px 30px #AAB9FF;
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+}
   main{
-   background-image: url('img/bgSample02.jpg');
+   background-image: url('img/bgSample09.jpg');
     background-size: 100% 100%;
     background-position: center center;
     transition: all 40s;
     display: block;
     position: relative;
     width: 100%;
-    height: 216vh;
+    height: 140vh;
+
 
 
     background-repeat: no-repeat;
@@ -88,7 +120,7 @@ request.setCharacterEncoding("utf-8");
     background-size: cover;
 
 } 
-  
+
 
   </style>
   
@@ -130,7 +162,8 @@ request.setCharacterEncoding("utf-8");
           System.out.println(tday);
           if(h == false){
                 
-             s += "<div class='day' style='width:100px; height:100px;'>";
+             s += "<div class='day style_prevu_kit' style='width:100px; height:100px;'>";
+
             s += String.format("<input type='hidden' value='CalendarServlet?command=writeDiary&tday=%s'>",tday );
           
            return s;   
@@ -147,6 +180,7 @@ request.setCharacterEncoding("utf-8");
          String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
          
          if(h == false){
+
             s += "<div style='width:30px; height:30px;'>";
                  
             return s;   
@@ -172,13 +206,17 @@ request.setCharacterEncoding("utf-8");
             if(today.equals(tday)){
                
                if(list.get(i).getJour_check()==0){
-                  s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
+
+                  s += "<div class='diary style_prevu_kit' style='width:100px; height:100px; background-color:#D2E1FF;'>";
+
                   s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";   //차후 수정바람
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "<br>"+list.get(i).getTitle();
                   s += "</div>";
                }else{
-                  s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+
+                  s += "<div class='diary style_prevu_kit' style='width:100px; height:100px; background-color:#96A5FF;'>";
+
                   s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";   //차후 수정바람
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "<br>"+list.get(i).getTitle();
@@ -209,11 +247,11 @@ request.setCharacterEncoding("utf-8");
                
                
                if(list.get(i).getJour_check()==0){
-                  s += "<div style='width:30px; height:30px; background-color:gray;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#D2E1FF;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }else{
-                  s += "<div style='width:30px; height:30px; background-color:black;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#96A5FF;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }
@@ -295,8 +333,8 @@ request.setCharacterEncoding("utf-8");
       
        
       <div align="center">
-       
-      <table>
+      <table style="background-color: white; opacity: 0.95; box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13); border-radius: 10px 10px 0px 0px;" >
+
       <!-- 너비 -->
       <col width="100">
       <col width="100">
@@ -353,8 +391,8 @@ request.setCharacterEncoding("utf-8");
                </td>
           </tr>
            
-         
-          <tr height="50" style="background-color: #acb5c4; border-bottom: 2px solid #003458" >
+          <tr height="50" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
+
               <td align="center">SUN</td>
               <td align="center">MON</td>
               <td align="center">TUE</td>
@@ -411,11 +449,12 @@ request.setCharacterEncoding("utf-8");
           </tr>
           
       </table>
-        </div>
-     
-       
       <!-- Buttons -->
-      <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#jourAdd"">일정 추가</button>
+      <br><br>
+      <button type="button" data-toggle="modal" data-target="#jourAdd" class="btn btn-default">일정 추가하기</button>
+     </div>
+
+
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">
@@ -429,7 +468,9 @@ request.setCharacterEncoding("utf-8");
                   </div>
                   <div class="modal-body">
                      
-                     <div class="container">
+                     <div class="container">   
+                     <div align="center" style="background-color: white;">          
+
                      <%                      
                          if (prevMonth < 1) {
                              prevYear--;
@@ -443,7 +484,6 @@ request.setCharacterEncoding("utf-8");
                          }                  
                      %>
             
-                     <div align="center">          
                      <table style="border:1; color:#392f31">
                      <!-- 너비 -->
                      <col width="30">
@@ -494,8 +534,9 @@ request.setCharacterEncoding("utf-8");
                                 <%=year%> 
                              </td>
                          </tr>
-                      
-                         <tr height="15">
+
+                         <tr height="15" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
+
                              <td align="center">S</td>
                              <td align="center">M</td>
                              <td align="center">T</td>
@@ -507,17 +548,21 @@ request.setCharacterEncoding("utf-8");
                          
                          <tr height="30" align="center" valign="top">
                              <%
+                            
                                  //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
                                  for(int i=1; i<dayOfWeek; i++){
                                      %>
-                                         <td>&nbsp;</td>
+                                         <td class="days">&nbsp;</td>
+
+
                                      <%
                                  }
                              
                                  //해당 날짜의 모든 일정을 보이게
                                  for(int i=1; i<lastDay+1; i++){   
                                      %>
-                                         <td><!-- 날짜 뿌리기 -->
+                                         <td class="days"><!-- 날짜 뿌리기 -->
+
                                              <%=modal_calllist(year, month, i ,false) %>                          
                                         
                                               <!-- 다이어리 타이틀 뿌리기-->                                                              
@@ -534,14 +579,16 @@ request.setCharacterEncoding("utf-8");
                                  
                                  for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
                                      %>
-                                         <td>&nbsp;</td>
+                                         <td class="days">&nbsp;</td>
+
                                      <%
                                  }
                              %>
                          </tr>
                       
                      </table>
-                     
+                     </div>
+
                      
                      <br>
                      <p align="left">여행 날짜를 선택해 주세요</p>
@@ -615,7 +662,7 @@ request.setCharacterEncoding("utf-8");
                   alert("이미 등록된 일정이 포함되어 있습니다. 확인하고 다시 시도해 주세요.");
                }else{
                   alert("일정 추가 성공!");
-                  location.href="Newspeed.jsp?page=1";
+                  location.href="DiaryServlet?command=goNewspeed";
                }
             },
             error:function(){

@@ -13,11 +13,12 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
  .starR1{
-    background: url('img/ico_review.png') no-repeat -40px 0;
+    background: url('img/ico_review.png') no-repeat -34px 0;
     background-size: auto 100%;
     width: 10px;
     height: 20px;
@@ -49,15 +50,18 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
     height: 360px;
 }
 .pincomment{
-	background-color: rgb(238, 241, 246) !important;
+	background-color: rgba(0,0,0,0.1) !important;
     width: 100%;
     padding: 30px 20px 10px 20px;
        
 }
 .pincommant-avg{
-	    color: #555;
-    margin-top: 10px;
-     font-size: 14px;
+	        color: #555;
+    margin-top: 3px;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 7px;
+    font-size: 13px;
 }
 
 .pintable{
@@ -88,6 +92,23 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 	margin-right: 5px;
 	    margin-bottom: 2px;
 }
+
+main{
+   background-image: url('img/bgSample09.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 
 
 
@@ -153,7 +174,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</table>
 		
 		<p class="title">댓글</p>
-		<div class="pincomment">
+		<div class="pincomment"">
 		<%
 		for(int i = 0; i < list.size();i++){
 			
@@ -161,15 +182,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		<div class="commant-view" style="margin-bottom: 20px;padding-left: 20px; padding-right: 20px;    display: table;
     width: 100%;">	
                <div class="commant-id" style="text-align: left;font-weight: 700;margin-bottom: 3px;display: table;width: 100%;">
-               <p style="float: left;">
+               <p style="float: left;margin-bottom: 10px;">
                <%=list.get(i).getId() %>
                </p>
                
                
                </div>
-               <div class="commant-content" style="width: 88%;word-break: break-all;text-align: left;  color:#555"><%=list.get(i).getPcomment() %></div>
-               <div class="pincommant-avg">평점 : <%=list.get(i).getGrade() %></div>
-               <div class="starRev">
+               <div class="commant-content" style="width: 99%;word-break: break-all;text-align: left;  color:#555"><%=list.get(i).getPcomment() %></div>
+              
+               <div class="starRev" style="margin-top: 10px;">
 						<%
 						for(int j = 1 ; j<=10 ; j++){ 
 							if(j%2==1){
@@ -195,6 +216,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 							}
 						}
 						%>	
+						 <span class="pincommant-avg">평점 : <%=list.get(i).getGrade() %></span>
 				</div>
                <hr>
                
