@@ -69,11 +69,9 @@
                }
                 */
                if(list.get(i).getJour_check()==1){
-                  s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
-                  //s += "<input type='hidden' ";
+                  s += "<label  class='btn' style=' background-color:#96A5FF; font-size:20px; width: 100%; height: 100%; margin:0px; padding:13px;'>";
                   s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
                   s += "<span class='glyphicon glyphicon-ok' ></span>";
-                  //s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</label>";
                }
             }
@@ -139,7 +137,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <head>
@@ -171,7 +169,9 @@ html, body, header, .view {
 .navbar-menu {
    margin-bottom: 0;
 }
-
+.days{
+     border: 1px solid #ddd; 
+}
 .navbar-menu li {
    width: 100px;
    height: 30px;
@@ -271,6 +271,44 @@ html, body, header, .view {
        padding-left: 20px;
     padding-right: 20px;
 }
+
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 .diary-cont{
  padding: 40px;margin-top:20px;
     background-color: #fff;
@@ -290,6 +328,12 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
        display: inline-block;
     height: 370px;
 }
+
+.diary-m img{
+	width: 100%;
+}
+
+
 </style>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
@@ -333,7 +377,7 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= 1;
+var basic_lat = 1;
 var basic_lng = 1;
 
 function initialize() {
@@ -414,8 +458,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <div id="maps" style="width: 100%; height: 100%"></div>
          </div> -->
          <!-- 달력영역 -->
-         <div class="calendar" align="center">
-            <table border="1" >
+         <div class="calendar" align="center" >
+            <table style="background-color: white; opacity: 0.95; box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);" >
             <!-- 너비 -->
             <col width="50">
             <col width="50">
@@ -426,27 +470,62 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <col width="50">
              
                 <tr>
-                    <td align="center" colspan="7">
-                        <%=year%>년 <%=month+1%>월 
-                    </td>
+                    <td align="center" colspan="7" class="modalcal">
+                       <h2>          
+                                 
+                                 <% 
+                                   String MONTH2="";
+                                  
+                                  if( month+1 == 1){
+                                      MONTH2 = "JANUARY";
+                                  }else if( month+1 == 2){
+                                     
+                                     MONTH2 = "FEBRUARY";
+                                  }else if( month+1 == 3){
+                                     MONTH2 = "MARCH";
+                                  }else if( month+1 == 4){
+                                     MONTH2 = "APRIL";
+                                  }else if( month+1 == 5){
+                                     MONTH2 = "MAY";
+                                  }else if( month+1 == 6){
+                                     MONTH2 = "JUNE";
+                                  }else if( month+1 == 7){
+                                     MONTH2 = "JULY";
+                                  }else if( month+1 == 8){
+                                     MONTH2 = "AUGUST";
+                                  }else if( month+1 == 9){
+                                     MONTH2 = "SEPTEMBER";
+                                  }else if( month+1 == 10){
+                                     MONTH2 = "OCTOBER";
+                                  }else if( month+1 == 11){
+                                     MONTH2 = "NOVEMBER";
+                                  }else if( month+1 == 12){
+                                     MONTH2 = "DECEMBER";
+                                  }
+
+                                  %>
+                                  <%=MONTH2 %>
+                                  &nbsp;
+                                <%=year%> 
+                         </h2>
+                     </td>
                 </tr>
              
-                <tr height="25">
-                    <td align="center">일</td>
-                    <td align="center">월</td>
-                    <td align="center">화</td>
-                    <td align="center">수</td>
-                    <td align="center">목</td>
-                    <td align="center">금</td>
-                    <td align="center">토</td>
+               <tr height="25" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
+						<td align="center">S</td>
+						<td align="center">M</td>
+						<td align="center">T</td>
+						<td align="center">W</td>
+						<td align="center">T</td>
+						<td align="center">F</td>
+						<td align="center">S</td>
                 </tr>
-                
                 <tr height="50" align="left" valign="top">
                     <%
                         //빈칸 구하는 공식 (월 빈칸)     >> 시작 요일까지 이동
                         for(int i=1; i<dayOfWeek; i++){
                             %>
-                                <td>&nbsp;</td>
+                                <td class="days">&nbsp;</td>
                             <%
                         }
                         //그 달의 최대 일자
@@ -455,7 +534,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         //해당 날짜의 모든 일정을 보이게
                         for(int i=1; i<lastDay+1; i++){   
                             %>
-                              <td><!-- 날짜 뿌리기 -->
+                              <td class="days"><!-- 날짜 뿌리기 -->
                                  <%=calllist(year, month, i ,false) %>                          
                                
                                   <!-- 다이어리 타이틀 뿌리기-->                                                              
@@ -472,7 +551,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         
                         for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){
                             %>
-                                <td>&nbsp;</td>
+                                <td class="days">&nbsp;</td>
                             <%
              }
             %>
@@ -483,7 +562,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       
    
-      <div class="diary-m">
+      <div class="diary-m" style="width: 870px;">
       <%
                for(int i=0; i<list.size(); i++ ){
             %>
@@ -532,7 +611,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             %>
             <div class="commant-view" style="margin-bottom: 20px;padding-left: 20px; padding-right: 20px;">
                <div class="commant-id"style="text-align: left;font-weight: 700;margin-bottom: 3px;display: table;width: 100%;">
-               <p style="float: left;">
+               <p style="float: left;    font-size: 17px;">
                <%=commentview.get(i).getId() %>
                </p>
                <p style="float: left;margin-left: 10px;font-weight: 300;font-size: 12px;margin-top: 5px;">
@@ -552,7 +631,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                </form>
                <%-- <span style="float: right; cursor: pointer;"  onclick="deletefuc(' <%=commentview.get(i).getSeq() %>')">x</span> --%>
                </div>
-               <div class="commant-content"style="width: 88%;word-break: break-all;text-align: left;  color:#555"><%=commentview.get(i).getDcomment() %></div>
+               <div class="commant-content"style="width: 88%;word-break: break-all;    font-size: 15px;text-align: left;  color:#555"><%=commentview.get(i).getDcomment() %></div>
                <hr>
                
             </div>
@@ -563,7 +642,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             
             
                <div class="commant-write">
-                  <div class="commant-id"style="text-align: left;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
+                  <div class="commant-id"style="font-size: 17px;text-align: left;margin-left:10px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
@@ -672,7 +751,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						   								pins['seq_'+$(this).children('input').val()][j].lng);
 					
 				   if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
-						var befo=markers.length;
 					   markers.splice(i,1);
 					   
 					  
