@@ -23,6 +23,14 @@ request.setCharacterEncoding("utf-8");
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!-- Bootstrap core CSS -->
+  <link href="Design/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="Design/css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="Design/css/style.min.css" rel="stylesheet">
   
   <link rel="stylesheet" type="text/css" media="all" href="daterangepicker/daterangepicker.css" />
  
@@ -107,24 +115,54 @@ body {
           background: #1C2331!important;
       }
   }
+
   </style>
   
 </head>
 
 <body>
 
+<<<<<<< HEAD
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- logo -->
+      <a class="navbar-brand" href="#" target="_blank">
+        <strong>MDB</strong>
+      </a>
+
+		
+
+        <!-- Right -->
+        <ul class="navbar-menu">
+          <li><a href="#">뉴스피드</a></li>
+          <li><a href="#">마이페이지</a></li>
+        </ul>
+
+    </div>
+  </nav>
+
+  
+=======
 <jsp:include page="header.jsp"></jsp:include> 
 
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
   
 <main style="padding-top:80px;">
+<<<<<<< HEAD
+	<div class="container">
+		
+=======
 
 	<div class="container">
 		<div class="table-response">
 			
 
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
 		<%!
 		 
 		//빈문자열 여부
@@ -180,7 +218,7 @@ body {
 			 
 			String tday= calllist(year,month, day , true);
 			
-
+			
 			for(int i=0;i<list.size();i++){			
 				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
 				String today = list.get(i).getTday().replace("-", "");
@@ -194,7 +232,7 @@ body {
 						s += "<br>"+list.get(i).getTitle();
 						s += "</div>";
 					}else{
-						s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+						s += "<div class='diary' style='width:100px; height:100px; background-color:black;margin:0;'>";
 						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";	//차후 수정바람
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "<br>"+list.get(i).getTitle();
@@ -206,7 +244,6 @@ body {
 			if(s == "")
 				s += String.format("%2d", day); //day를 2칸으로 다시 정정
 			s += "</div>";
-
 			return s;
 		}	
 		
@@ -404,12 +441,10 @@ body {
 		                %>
 		                    <td><!-- 날짜 뿌리기 -->
 		                        <%=calllist(year, month, i ,false) %>		                    
-
 		                   
 		                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
 		                   		<%=dTitle(year, month, i, list) %>
 		                   				                   
-
 		                    </td>
 		                    
 		                <%
@@ -590,14 +625,6 @@ body {
 			</div>
 
 
-			<button type="button" onclick="myfunc()" > 취소 </button>
-		 <script type="text/javascript">
-	    function myfunc() {
-	    	location.href = "Newspeed.jsp";
-	    }  
-		</script> 
-
-
 	
  <script type="text/javascript">
 		
@@ -637,7 +664,7 @@ body {
 						alert("이미 등록된 일정이 포함되어 있습니다. 확인하고 다시 시도해 주세요.");
 					}else{
 						alert("일정 추가 성공!");
-						location.href="Newspeed.jsp?page=1";
+						location.href="DiaryServlet?command=Newspaging&page=1";
 					}
 				},
 				error:function(){

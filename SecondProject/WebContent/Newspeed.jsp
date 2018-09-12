@@ -44,6 +44,7 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
@@ -210,8 +211,13 @@ button:hover:before,button:hover:after{
 <main style="padding-top:80px;">
    <div class="container">
       
-		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<div style="display: table;width: 96%;">
+		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
+		<a class="btn btn-primary"style="float: right;" onclick="gocal()">글쓰기</a>
+		</div>
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 10px;">
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
@@ -220,8 +226,8 @@ button:hover:before,button:hover:after{
 			%>
 				<div class="diary">
 					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="">
-							<img alt="xx" src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+						<div class="Dimage">
+							<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -287,9 +293,12 @@ button:hover:before,button:hover:after{
 			
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+<<<<<<< HEAD
+=======
 		<button style="float: right;" onclick="gocal()">글쓰기</button>
 		
 	
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
 		
 		<!-- SCRIPTS -->
   		<script type="text/javascript">

@@ -68,7 +68,7 @@
                   s += "</div>";
                }
                 */
-               if(list.get(i).getJour_check()==1){
+               if(list.get(i).getJour_check()==1 && list.get(i).getPin_Seqs() != null){
                   s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
                   //s += "<input type='hidden' ";
                   s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
@@ -114,8 +114,7 @@
       String tday = calllist(year   ,month,1,b);      
       System.out.println("tday는 : " + tday);
             
-      List<DiaryDto> list = cdao.getCalList(dto.getId());
-      System.out.println("List<CalendarDto> list 는 : " + list);  
+
 
 %>
 <%
@@ -374,8 +373,9 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(diarylist.get(0).getSeq()).get(1)[1] %>;
+var basic_lat=1;
+var basic_lng=1;
+
 
 function initialize() {
    
@@ -387,8 +387,8 @@ function initialize() {
 }
 //Adds a marker to the map.
 function addMarker(location) {
-	map.zoom=15;
-	map.panTo(location);
+   map.zoom=15;
+   map.panTo(location);
   var marker = new google.maps.Marker({
     position: location,
     map: map
@@ -687,18 +687,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
       if(!$(this).children('input').prop("checked")){
          
          for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
-            alert(pins['seq_'+$(this).children('input').val()][i]);
+            
             var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
             addMarker(location);
-            basic_lat=pins['seq_'+$(this).children('input').val()][i].lat;
-            basic_lat=pins['seq_'+$(this).children('input').val()][i].lng;
+            basic_lat=location.lat();
+               basic_lat=location.lng();
          }
-         
+          
          showMarkers();   
          
       }else{
          clearMarkers();
-         alert(markers.length);
+        
          for(var i = 0 ; i < markers.length ; i++){
             //alert(markers[i].position.lat());
             
@@ -710,8 +710,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                   var befo=markers.length;
                   markers.splice(i,1);
                   
-                  alert(befo +" "+markers.length);
-                  
+                 
                }   
             }
             
@@ -720,6 +719,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
          showMarkers();
       }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
    });
    
    
