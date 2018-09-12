@@ -87,6 +87,7 @@ html, body, header, .view {
 .modal-backdrop{
     z-index: 10;        
 }
+
 button{
   background:#003458;
   color:#fff;
@@ -998,7 +999,6 @@ button:hover:before,button:hover:after{
 			clearMarkers();
 			for(i = 0 ; i <PinArr.length ; i++){
 				if(PinArr[i].pin_name == $(this).parent().children('.pin_info_val').val()){
-					alert("asdasd");
 					PinArr.splice(i,1);	//i번째에서 1개 제거
 					basic_Marker.splice(i,1);
 					break;
