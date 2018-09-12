@@ -264,7 +264,7 @@ body {
 					<!-- paging -->
 					<div>
 						<%
-							if (p != 1 || pagecount == 0) {
+							if (p != 1 && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 						<%
@@ -287,7 +287,7 @@ body {
 								}
 							}
 
-							if (p != pagecount || pagecount == 0) {
+							if (p != pagecount && pagecount != 0) {
 						%>
 						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 						<%
