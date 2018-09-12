@@ -157,23 +157,35 @@ body {
 
 @media ( min-width : 800px) and (max-width: 850px) {
    .navbar
+   
+   
    :not
+   
     
+   
    (
    .top-nav-collapse
+   
     
+   
    )
    {
    background
+   
+   
    :
+   
     
+   
    #1C2331
+   
     
+   
    !
    important
+   
+   
    ;
-   
-   
 }
 }
 </style>
@@ -187,7 +199,8 @@ body {
    <br>
    <br>
 
-       <div style="height: 100%; position: relative;display: table;margin: 0 auto;">
+   <div
+      style="height: 100%; position: relative; display: table; margin: 0 auto;">
 
 
       <div id="container" class="tab-content card"
@@ -210,7 +223,9 @@ body {
             <main style="padding-top:40px;">
             <div class="container">
                <div
-                  style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+                  style="width: 740px; text-align: center; padding: 0 0 20px 0; display: table; margin: 0 auto;">
+
+
 
                   <%
                      for (int i = 0; i < jlist.size(); i++) {
@@ -343,6 +358,8 @@ body {
          <div class="tab-pane fade" id="panel3" role="tabpanel"></div>
       </div>
    </div>
+   
+   <br><br>
    <jsp:include page="footer.jsp"></jsp:include>
 
 
