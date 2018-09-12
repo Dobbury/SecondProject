@@ -80,43 +80,6 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
-
 
 
 
@@ -218,7 +181,8 @@ button:hover:before,button:hover:after{
       
 		<div style="display: table;width: 96%;">
 		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
-		<a class="btn btn-primary"style="float: right;" onclick="gocal()">글쓰기</a>
+
+			<button style="float: right;height: 40px;margin-top: 25px;" onclick="gocal()">글쓰기</button>
 		</div>
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
@@ -299,10 +263,8 @@ button:hover:before,button:hover:after{
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
 
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
 		
-	
-		
+
 		<!-- SCRIPTS -->
   		<script type="text/javascript">
   			function gocal() {  		

@@ -95,42 +95,7 @@ transition: all 40s;
 	}
 }
 
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
 
 
 @keyframes fadeInUp {
@@ -222,6 +187,8 @@ button:hover:before,button:hover:after{
 				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
+													<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+						
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -300,7 +267,7 @@ button:hover:before,button:hover:after{
 			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>
@@ -319,6 +286,8 @@ button:hover:before,button:hover:after{
    
    
   <!-- SCRIPTS -->
+  
+  
   <script type="text/javascript">
   $(function(){
 	 $("#stext").val('<%=stext%>'); 
@@ -327,12 +296,15 @@ button:hover:before,button:hover:after{
 	 $('html, body').animate( { scrollTop : scmove }, 400 );
   });
   
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
+
   
   </script>
-  
+    		<script type="text/javascript">
+  			function gocal() {  		
+  				location.href= "CalendarWrite.jsp";	
+			}
+
+ 		 </script>
   <script>
 
 	

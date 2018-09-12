@@ -43,10 +43,41 @@ request.setCharacterEncoding("utf-8");
     .view {
       height: 100%;
     }
+     /* header */
+   .header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    z-index: 10;
+    background: linear-gradient(to top, transparent, rgba(0,0,0,0.6) 100%);
+   }
+   .header ul{
+      width: 98%;
+       height: 100%;
+      padding: 28px 40px;
+       margin: 0 auto;
+       box-sizing: border-box;
+   }
+   .header ul .left{
+      float: left;
+   }
+   .header ul .rigth{
+      float: right;
+   }
+   .navbar-brand {
+    	    background-image: url(img/logo.png);
+    background-size: 100% 100%;
+    width: 150px;
+    height: 37px;
+    margin-bottom: 5px;
+    float: left;
+    }
 	main{
 		height: 100%;
 		background-image: url("img/signup_back.png");
 		padding-top: 10%;
+		background-size: 100% 100%;
     
 	}
     .navbar-menu{
@@ -73,7 +104,7 @@ request.setCharacterEncoding("utf-8");
     border-radius: 1%;
     padding: 20px;
     text-align: center;
-    float: right;
+    margin: 30px auto;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   
   }
@@ -127,36 +158,22 @@ request.setCharacterEncoding("utf-8");
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-    <div class="container">
 
-      <!-- logo -->
-      <a class="navbar-brand" href="#" target="_blank">
-        <strong>MDB</strong>
-      </a>
+<div class="header">
 
-		
-<!-- 
-        Right
-        <ul class="navbar-menu">
-          <li><a href="#">뉴스피드</a></li>
-          <li><a href="#">마이페이지</a></li>
-        </ul> -->
+      <ul>
+        <li class="left"><a href="Main.jsp" class="navbar-brand"></a></li>
 
-    </div>
-  </nav>
+      </ul>
+   </div>
 
   
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
-<main style="padding-top:8%;">
+<main style="padding-top:5%;">
 	<div class="container">
-		<div class="signtext-box">
-		<h1 style="font-weight:  700;color: white;">Sign Up for Free</h1>
-		</div>
-		
+	<h1 style="font-weight:  700;color: white;text-align: center;">Sign Up for Free</h1>
 		<div class="signup-box">
 		
 			<!-- <form action="MemberServlet?command=signPage" method="post">

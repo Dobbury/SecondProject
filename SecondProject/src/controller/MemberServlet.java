@@ -134,7 +134,7 @@ public class MemberServlet extends HttpServlet {
 	         boolean isS = dao.editMember(dto);
 	         PrintWriter pw = resp.getWriter();
 	         
-	         pw.print(isS);
+	         pw.print("수정성공!!");
          
 //				if(isS == true) {
 //					resp.sendRedirect("Main.jsp");

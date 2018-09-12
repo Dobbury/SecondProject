@@ -247,6 +247,7 @@ html, body, header, .view {
 }
 .like_box{
    margin-top: 10px;
+       display: inline-block;
 }
 .like_off {
    width: 25px;
@@ -264,51 +265,32 @@ html, body, header, .view {
     vertical-align: middle;
 }
 .like_view{
-       margin-top: 15px;
     font-size: 14px;
     color: #555;
+    display: inline-block;
+    margin-right: 630px;
 }
 .commant-write{
        padding-left: 20px;
     padding-right: 20px;
 }
+  main{
+   background-image: url('img/bgSample09.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
 
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
+
 
 .diary-cont{
  padding: 40px;margin-top:20px;
@@ -330,9 +312,11 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
     height: 370px;
 }
 
+
 .diary-m img{
 	width: 100%;
 }
+
 
 
 </style>
@@ -442,17 +426,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <div class="container" style="    max-width: 900px;">
 
    <div class="journal-title" >
-   <h1>
+   <h1 style="    font-weight: 700;
+    font-size: 30px;">
       <%=journalDto.getTitle() %>
       </h1>
        <span class="journal-id">  <%=journalDto.getId() %></span>
       <span class="journal-date"><%=journalDto.getWdate().substring(0,16) %></span>
-     
+     <hr style="    border-top: 4px solid #ddd;
+    width: 870px;">
    </div>
 
       <div style="width: 100%">
          <!-- 지도영역 -->
-       <div id="maps" style="width: 50%;">
+       <div id="maps" style="width: 478px;margin-right: 72px;    margin-right: 30px;">
          </div>
         
 <!--          <div class="map">
@@ -569,7 +555,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                for(int i=0; i<list.size(); i++ ){
             %>
          <div class="diary-cont">
-            <p class="diary-title"><%=list.get(i).getTitle() %></p>
+            <p class="diary-title" style="margin-left: 0;"><%=list.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=list.get(i).getTday().substring(0,11) %></span>
             <hr>
             
@@ -584,8 +570,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
       %>
       </div>
 
+	<div style="    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    padding: 10px 20px 15px 20px;
+    margin-top: 15px;
+    background-color: rgb(255,255,255,0.5);">
+
    <div class="like_view">
-      <%=journalDto.getLike_cnt() %> 명이 좋아합니다
+      <b style="font-size: 20px;"><%=journalDto.getLike_cnt() %></b> 명이 좋아합니다
    </div>
    <div class="like_box">
    <% if(Likeckheack == 0) {%>
@@ -597,7 +590,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <%
    }
    %>
-
+	</div>
    
    
    
@@ -606,7 +599,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div class="diary-b">
          <div class="diary-commant">
           <h4>댓글</h4>
-            <div class="diary-commant"style="padding: 30px; text-align: center; background: rgb(238, 241, 246) !important;">
+            <div class="diary-commant"style="padding: 30px; text-align: center; background-color: rgba(0,0,0,0.2); !important;">
             
             <%
                for(int i=0; i<commentview.size(); i++ ){
@@ -648,8 +641,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
+
                      <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;resize: none;"></textarea>
-                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
+                      <input type="submit" value="댓글"style="vertical-align: text-bottom; height: 70px; font-size: 12pt;" class="btn btn-default">
+						<br><br>
 
                   </form>
                </div>
@@ -701,8 +696,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <form action="DiaryServlet?command=commentdelet" method="post">
       <div class="modal-body" style="text-align: center;">
       <p>댓글을 삭제하시겠습니까?</p>
-      <input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
-        <input type="button" class="btn btn-red" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
+      <input type="button" class="btn btn-outline-dark" value="예" onclick="deletefucsend()">
+        <input type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
       </div>
      
       </form>
