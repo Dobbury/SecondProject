@@ -137,7 +137,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <head>
@@ -271,6 +271,44 @@ html, body, header, .view {
        padding-left: 20px;
     padding-right: 20px;
 }
+
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 .diary-cont{
  padding: 40px;margin-top:20px;
     background-color: #fff;
@@ -290,6 +328,12 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
        display: inline-block;
     height: 370px;
 }
+
+.diary-m img{
+	width: 100%;
+}
+
+
 </style>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI&libraries=places"></script>
@@ -518,7 +562,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       
    
-      <div class="diary-m">
+      <div class="diary-m" style="width: 870px;">
       <%
                for(int i=0; i<list.size(); i++ ){
             %>
@@ -567,7 +611,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             %>
             <div class="commant-view" style="margin-bottom: 20px;padding-left: 20px; padding-right: 20px;">
                <div class="commant-id"style="text-align: left;font-weight: 700;margin-bottom: 3px;display: table;width: 100%;">
-               <p style="float: left;">
+               <p style="float: left;    font-size: 17px;">
                <%=commentview.get(i).getId() %>
                </p>
                <p style="float: left;margin-left: 10px;font-weight: 300;font-size: 12px;margin-top: 5px;">
@@ -581,7 +625,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                </form>
                <%-- <span style="float: right; cursor: pointer;"  onclick="deletefuc(' <%=commentview.get(i).getSeq() %>')">x</span> --%>
                </div>
-               <div class="commant-content"style="width: 88%;word-break: break-all;text-align: left;  color:#555"><%=commentview.get(i).getDcomment() %></div>
+               <div class="commant-content"style="width: 88%;word-break: break-all;    font-size: 15px;text-align: left;  color:#555"><%=commentview.get(i).getDcomment() %></div>
                <hr>
                
             </div>
@@ -592,11 +636,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
             
             
                <div class="commant-write">
-                  <div class="commant-id"style="text-align: left;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
+                  <div class="commant-id"style="font-size: 17px;text-align: left;margin-left:10px;font-weight: 700; margin-bottom: 8px;"><%=loginid %></div>
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
-                     <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;"></textarea>
+                     <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px;     width: 90%;vertical-align: text-bottom;"></textarea>
                       <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
                   </form>

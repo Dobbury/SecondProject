@@ -112,9 +112,57 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-​
+.selectbox{
+	margin-right: 60px;
+	display: inline-block;
+	text-align: center;
+}
+.selectbox p {
+	    font-size: 21px;
+    font-weight: 700;
+       border-bottom: 1px solid #ccc;
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 6px;
+    padding: 5px;
+    
+}
 
+.pintable{
+	  width:100%;
+}
+.pintable td{
+	  padding: 14px;
+    font-size: 16px;
+           border: 1px solid #ccc;
+            background-color: #f9f9f9;
+}
+.fa{
+	    margin-right: 15px;
+	    width: 10px;
+}
+.pin_info{
+	display: inline-block;
+    color: blue;
+    font-weight: 700;
+    margin-right: 6px;
+    background-color: none;
+}
 
+.searchbtn{
+	    height: 30px;
+    margin-left: -2px;
+    border: none;
+    margin-top: 1px;
+    background-image: url(img/searchicon.png);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: bottom;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
 </style>
 <script type="text/javascript" src="./smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -265,103 +313,154 @@ button:hover:before,button:hover:after{
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-    <div class="container">
-
-      <!-- logo -->
-      <a class="navbar-brand" href="#" target="_blank">
-        <strong>MDB</strong>
-      </a>
-
-		
-
-        <!-- Right -->
-        <ul class="navbar-menu">
-          <li><a href="Newspeed.jsp">뉴스피드</a></li>
-          <li><a href="Mypage?page=1.jsp">마이페이지</a></li>
-        </ul>
-
-    </div>
-  </nav>
-
   
+   <jsp:include page="header.jsp"></jsp:include> 
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
 <main style="padding-top:80px;">
 	<div class="container">
-	<div>
-	<table align="center">
+	
+	<h2 style="font-weight: 700;
+    border-bottom: 2px solid #ccc;
+    width: 99%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    margin-top: 30px;">일지 작성</h2>	
+	<div id="map" style="height: 400px; width: 1100px"></div>
+    <br>
+    
+    <!-- <div>
+	<table align="center" class="insertbox">
 		<tr>
 			<th>숙소</th><th>맛집</th><th>관광지</th>
 		</tr>
 		<tr>
-			<td>
+			<td style=" width: 330px;text-align: center;">
 				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="hotelSel"></select>
 			</td>
-			<td>
+			<td style=" width: 330px;text-align: center;">
 				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
 			</td>
-			<td>
+			<td style=" width: 330px;text-align: center;">
 				<select size="10" style="width: 200px; margin-left:20px; margin-right: 20px" id="tourSel"></select>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td style="text-align: center;">
 				<input type="text" style="width: 165px; margin-left:20px" id="hotelMyDB_input">
 				<input type="button" style="width: 30px; margin-right: 20px" id="hotelMyDBSearch">
 			</td>
-			<td>
+			<td style="text-align: center;">
 				<input type="text" style="width: 165px; margin-left:20px" id="restoMyDB_input">
 				<input type="button" style="width: 30px; margin-right: 20px" id="restoMyDBSearch">
 			</td>
-			<td>
+			<td style="text-align: center;">
 				<input type="text" style="width: 165px; margin-left:20px" id="tourMyDB_input">
 				<input type="button" style="width: 30px; margin-right: 20px" id="tourMyDBSearch">
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td style="text-align: center;">
 				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
 			</td>
-			<td>
+			<td style="text-align: center;">
 				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
 			</td>
-			<td>
+			<td style="text-align: center;">
 				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
 			</td>
 		</tr>
 	</table>
 	<br>
-	</div>
-	
-	<div id="map" style="height: 400px; width: 1100px"></div>
-    <br>
+	</div> -->
+    
+    <div style="padding: 30px 0 40px 115px; background-color: #f9f9f9;border: 1px solid #ccc; border-bottom: none;">
+    
+     <div class="selectbox">
+     	<p><i class="fa fa fa-home"></i>&nbsp;숙소</p>
+     	<div>
+     	<select size="10" style="width: 200px; height:200px;margin-left:20px; margin-right: 20px" id="hotelSel"></select>
+     	</div>
+     	<div style="margin-top: 8px">
+     		<input type="text" style="width: 165px; margin-left:20px" id="hotelMyDB_input">
+			<input type="button" style="width: 30px;vertical-align: bottom; margin-right: 20px" id="hotelMyDBSearch" class="searchbtn">
+		</div>
+     	<div>
+     	<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  
+     	class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
+     	</div>
+     
+     </div>
+     
+     <div class="selectbox">
+     	<p><i class="fa fa fa-bed"></i>&nbsp;맛집</p>
+     	<div>
+				<select size="10" style="width: 200px;height:200px; margin-left:20px; margin-right: 20px" id="restoSel"></select>
+     	</div>
+     	<div style="margin-top: 8px">
+     		<input type="text" style="width: 165px; margin-left:20px" id="restoMyDB_input">
+				<input type="button" style="width: 30px;vertical-align: bottom; margin-right: 20px" id="restoMyDBSearch" class="searchbtn">
+		</div>
+     	<div>
+     					<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  
+     					class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
+
+     	</div>
+     
+     </div>
+     
+     <div class="selectbox">
+     	<p><i class="fa fa-plane"></i>&nbsp;관광지</p>
+     	<div>
+				<select size="10" style="width: 200px;height:200px; margin-left:20px; margin-right: 20px" id="tourSel"></select>
+     	</div>
+     	<div style="margin-top: 8px">
+     		<input type="text" style="width: 165px; margin-left:20px" id="tourMyDB_input">
+				<input type="button" style="width: 30px;vertical-align: bottom; margin-right: 20px" id="tourMyDBSearch" class="searchbtn">
+		</div>
+     	<div>
+     					<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch" 
+     					 class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
+
+     	</div>
+     
+     </div>
+    
+    </div>
+    
     <div>
-    	<table border="1">
+    <table class="pintable">
+		<colgroup>
+		<col width="15%">
+		<col width="85%">
+		</colgroup>
+		
+		<tbody><tr>
+              <td class="align-middle"><small class="fa fa fa-home"></small> <small>맛집</small></td>
+               <td class="align-middle"><small><span id="restoPinArr"></span></small></td>
+         </tr>
+		<tr>
+              <td class="align-middle"><small class="fa fa fa-bed"></small> <small>숙소</small></td>
+               <td class="align-middle"><small><span id="hotelPinArr"></span></small></td>
+         </tr>
+         <tr>
+              <td class="align-middle"><small class="fa fa-plane"></small> <small>관광지</small></td>
+               <td class="align-middle"><small><span id="tourPinArr"></span></small></td>
+         </tr>
+		</tbody>
+		</table>
+    
+    
+    
+    
+    	<table style="margin-top: 10px">
     		<col style="width: 100px"><col style="width: 1000px">
-    		<tr style="height: 30px">
-    			<th>맛집: </th>
-    			<td>
-    				<span id="restoPinArr"></span>
-    			</td>
-    		</tr>
-    		<tr style="height: 30px">
-    			<th>숙소: </th>
-    			<td>
-    				<span id="hotelPinArr"></span>
-    			</td>
-    		</tr>
-    		<tr style="height: 30px">
-    			<th>관광지: </th>
-    			<td>
-    				<span id="tourPinArr"></span>
-    			</td>
-    		</tr>
+    		
     		<tr>
     			<td colspan="2">
-			    	<input type="text" class="text text-default" style="width: 1098px" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title">
+			    	<input type="text" class="text text-default" style="width: 1100px;    height: 50px;  font-size: 18px;" placeholder="여기에 제목을 입력 해 주세요" name="title" id="title">
 			    </td>
     		<tr>
     		<tr>
@@ -372,11 +471,11 @@ button:hover:before,button:hover:after{
     		<tr>
     		<tr style="height: 30px" align="center">
     			<td colspan="2">
-    				<input type="button" value="완료" id="diarySavebtn">
+    				<input type="button" class="btn btn-primary" value="완료" id="diarySavebtn">
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				<input type="button" value="취소" id="CalendarWrite.jsp">
+    				<input type="button" class="btn btn-primary" value="취소" id="CalendarWrite.jsp">
     			</td>
     		</tr>
     	</table>
@@ -510,55 +609,8 @@ button:hover:before,button:hover:after{
 
 <!-- --------------------------------------------------------------------------------- -->
 
+<jsp:include page="footer.jsp"></jsp:include> 
 
-<!--Footer-->
-<footer class="page-footer text-center font-small mt-4 wow fadeIn">
- 
-    <hr class="my-4">
-
-    <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-        <i class="fa fa-facebook mr-3"></i>
-      </a>
-
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i class="fa fa-twitter mr-3"></i>
-      </a>
-
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i class="fa fa-youtube mr-3"></i>
-      </a>
-
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fa fa-google-plus mr-3"></i>
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fa fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i class="fa fa-pinterest mr-3"></i>
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fa fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fa fa-codepen mr-3"></i>
-      </a>
-    </div>
-
-    <!--Copyright-->
-    <div class="footer-copyright py-3">
-      © 2018 Copyright:
-      <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
-    </div>
-    <!--/.Copyright-->
-
-  </footer>
-  <!--/.Footer-->
 
 
 
