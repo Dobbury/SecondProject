@@ -201,7 +201,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
 	
 	<br>
 	<div align="center">
-		<button style="width: 80%; height: 100px;" class="btn btn-primary" id="jourCancleBtn" ><font size="10">journal cancle</font></button>
+		<button id="jourCancleBtn" ><font size="4">journal cancle</font></button>
 	</div>
 	
    </main>

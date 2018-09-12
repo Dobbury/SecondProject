@@ -741,7 +741,6 @@ public class DiaryDao implements DiaryImpl {
 			e.printStackTrace();
 
 		} finally {
-
 			DBClose.close(psmt, conn, rs);
 		}
 		return count;

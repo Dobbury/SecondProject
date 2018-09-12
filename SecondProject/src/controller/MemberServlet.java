@@ -121,7 +121,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		else if(command.equals("update")) {
 	         String id = req.getParameter("id");
-	         String pwd = req.getParameter("pwd");
+	         String pwd = req.getParameter("pw");
 	         String name = req.getParameter("name");
 	         String nick = req.getParameter("nick");
 
@@ -135,6 +135,10 @@ public class MemberServlet extends HttpServlet {
 	         PrintWriter pw = resp.getWriter();
 	         
 	         pw.print(isS);
+         
+//				if(isS == true) {
+//					resp.sendRedirect("Main.jsp");
+//				}
 	      }
 		
 	}

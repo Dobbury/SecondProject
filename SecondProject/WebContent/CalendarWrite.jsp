@@ -435,7 +435,7 @@ body {
   	
 	    
 		<!-- Buttons -->
-		<button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가</button>
+		<button type="button" data-toggle="modal" data-target="#jourAdd"><font size="3">일정 추가</font></button>
 			<!-- Modal -->
 			<div class="modal fade" id="jourAdd" role="dialog">
 				<div class="modal-dialog">

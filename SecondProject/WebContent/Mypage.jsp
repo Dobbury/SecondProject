@@ -183,8 +183,14 @@ ul.tab li.current {
 }
 
 body {
-	background-image: url("img/ivoryBg.jpg");
+	background-image: url("img/mp-bg.jpg");
 	background-size: cover;
+	background-color: rgba( 50, 50, 50, 0.4 ); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+
+
 }
 
 @media ( min-width : 800px) and (max-width: 850px) {
