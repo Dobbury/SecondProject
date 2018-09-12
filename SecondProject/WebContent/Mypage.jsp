@@ -141,28 +141,40 @@ ul.tab li.current {
 	vertical-align: top;
 }
 
-
- body{
-   background-image: url('img/mp-bg.jpg');
-    background-size: 100% 100%;
-    background-position: center center;
-    transition: all 40s;
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 216vh;
-
-
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-
-} 
+body {
+	background-image: url('img/mp-bg.jpg');
+	background-size: 100% 100%;
+	background-position: center center;
+	transition: all 40s;
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 216vh;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
 
 @media ( min-width : 800px) and (max-width: 850px) {
-	.navbar:not (.top-nav-collapse ) {
-		background: #1C2331 !important;
-	}
+	.navbar
+	:not
+	 
+	(
+	.top-nav-collapse
+	 
+	)
+	{
+	background
+	:
+	 
+	#1C2331
+	 
+	!
+	important
+	;
+	
+	
+}
 }
 </style>
 </head>
@@ -174,115 +186,119 @@ ul.tab li.current {
 	<br>
 	<br>
 	<br>
-	
+
 	<div style="height: 100%;">
-	
-	<div id="container" class="tab-content card"style="background-color: #FFFAFA;height: 600px;">
-	
-	
-		<ul class="nav nav-tabs md-tabs nav-justified">
-			<li class="nav-item" data-tab="tab1"><a class="nav-link active"
-				data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
-			<li class="nav-item" data-tab="tab1"><a class="nav-link"
-				data-toggle="tab" href="#panel2" role="tab">회원정보수정</a></li>
-			<li class="nav-item" data-tab="tab1"><a class="nav-link"
-				href="CalendarWrite.jsp">캘린더 보기</a></li>
 
-		</ul>
-
-		<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+		<div id="container" class="tab-content card"
+			style="background-color: #FFFAFA; height: 600px;">
 
 
-			<main style="padding-top:80px;">
-			<div class="container">
-				<div style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+			<ul class="nav nav-tabs md-tabs nav-justified">
+				<li class="nav-item" data-tab="tab1"><a class="nav-link active"
+					data-toggle="tab" href="#panel1" role="tab">내가 쓴 글 보기</a></li>
+				<li class="nav-item" data-tab="tab1"><a class="nav-link"
+					data-toggle="tab" href="#panel2" role="tab">회원정보수정</a></li>
+				<li class="nav-item" data-tab="tab1"><a class="nav-link"
+					href="CalendarWrite.jsp">캘린더 보기</a></li>
 
-					<%
-						for (int i = 0; i < jlist.size(); i++) {
-					%>
-					<div class="diary">
-						<a
-							href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
-							<div class="Dimage" style="">
-								<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=jlist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+			</ul>
+
+			<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+
+
+				<main style="padding-top:80px;">
+				<div class="container">
+					<div
+						style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+
+						<%
+							for (int i = 0; i < jlist.size(); i++) {
+						%>
+						<div class="diary">
+							<a
+								href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
+								<div class="Dimage" style="">
+									<img alt="" onerror="this.src='img/img_is_not.png'"
+										src="<%=jlist.get(i).getFisrt_Img()%>"
+										style="width: 100%; height: 100%;">
+								</div>
+								<p class="diary-title"><%=jlist.get(i).getTitle()%></p>
+							</a>
+							<div class="diary-textbox">
+								<span class="diary-id"><%=jlist.get(i).getId()%> 님</span> <span
+									style="display: inline-block; margin: 0 5px; color: #ccc;">|</span>
+								<span class="diary-date"><%=jlist.get(i).getWdate().substring(0, 10)%></span>
+
 							</div>
-							<p class="diary-title"><%=jlist.get(i).getTitle()%></p>
-						</a>
-						<div class="diary-textbox">
-							<span class="diary-id"><%=jlist.get(i).getId()%> 님</span> <span
-								style="display: inline-block; margin: 0 5px; color: #ccc;">|</span>
-							<span class="diary-date"><%=jlist.get(i).getWdate().substring(0, 10)%></span>
+							<div class="diary-heartbox">
+								<span style="text-align: right; color: #888; font-size: 14px;">
+									<span class="diary-heart"></span> <%=jlist.get(i).getLike_cnt()%>
+								</span>
+							</div>
+						</div>
+						<%
+							}
+						%>
 
-						</div>
-						<div class="diary-heartbox">
-							<span style="text-align: right; color: #888; font-size: 14px;">
-								<span class="diary-heart"></span> <%=jlist.get(i).getLike_cnt()%>
-							</span>
-						</div>
+
 					</div>
-					<%
-						}
-					%>
 
-
-				</div>
-
-				<div style="display: inline-block;">
-					<!-- paging -->
-					<div>
-						<%
-							if (p != 1 && pagecount != 0) {
-						%>
-						<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
-						<%
-							}
-						%>
-
-						<%
-							for (int i = startPage; i < pagecount; i++) {
-								if (i + 1 != p) {
-						%>
-						<a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
-						<%
-							} else {
-						%>
-						<strong><%=p%></strong>
-						<%
-							}
-								if (i + 1 == endPage) {
-									break;
+					<div style="display: inline-block;">
+						<!-- paging -->
+						<div>
+							<%
+								if (p != 1 && pagecount != 0) {
+							%>
+							<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
+							<%
 								}
-							}
+							%>
 
-							if (p != pagecount && pagecount != 0) {
-						%>
-						<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
-						<%
-							}
-						%>
+							<%
+								for (int i = startPage; i < pagecount; i++) {
+									if (i + 1 != p) {
+							%>
+							<a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
+							<%
+								} else {
+							%>
+							<strong><%=p%></strong>
+							<%
+								}
+									if (i + 1 == endPage) {
+										break;
+									}
+								}
+
+								if (p != pagecount && pagecount != 0) {
+							%>
+							<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
+							<%
+								}
+							%>
+						</div>
+
+						<!-- // paging -->
 					</div>
 
-					<!-- // paging -->
+
 				</div>
-
-
 			</div>
-		</div>
-		</main>
+			</main>
 
-		<div class="tab-pane fade" id="panel2" role="tabpanel">
+			<div class="tab-pane fade" id="panel2" role="tabpanel">
 
-			<table align="center">
-				<tr>
-					<td>ID</td>
-					<td>
-						<div class="md-form">
-							<input type="text" id="id" readonly="readonly"
-								value="<%=dto.getId()%>" name="id" class="form-control">
-						</div>
-					</td>
+				<table align="center">
+					<tr>
+						<td>ID</td>
+						<td>
+							<div class="md-form">
+								<input type="text" id="id" readonly="readonly"
+									value="<%=dto.getId()%>" name="id" class="form-control">
+							</div>
+						</td>
 
-					<!-- 
+						<!-- 
 						
 						<div class="md-form">
   						  <input type="text" id="form1" class="form-control">
@@ -290,42 +306,41 @@ ul.tab li.current {
 						</div>
 						
 						 -->
-				</tr>
-				<tr>
-					<td>PW</td>
-					<td>
-						<div class="md-form">
-							<input type="text" id="pw" name="pw" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td>
-						<div class="md-form">
-							<input type="text" id="name" readonly="readonly"
-								value="<%=dto.getName()%>" name="name" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>
-						<div class="md-form">
-							<input type="text" id="nickname" name="nickname"
-								class="form-control">
-						</div>
-					</td>
-				</tr>
+					</tr>
+					<tr>
+						<td>PW</td>
+						<td>
+							<div class="md-form">
+								<input type="text" id="pw" name="pw" class="form-control">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td>
+							<div class="md-form">
+								<input type="text" id="name" readonly="readonly"
+									value="<%=dto.getName()%>" name="name" class="form-control">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>닉네임</td>
+						<td>
+							<div class="md-form">
+								<input type="text" id="nickname" name="nickname"
+									class="form-control">
+							</div>
+						</td>
+					</tr>
 
-			</table>
-			<input type="button" class="btn btn-outline-dark" 
-				id="edit" value="수정완료"> 
-				<input type="button" class="btn btn-outline-dark"
-				 id="back" value="취소">
+				</table>
+				<input type="button" class="btn btn-outline-dark" id="edit"
+					value="수정완료"> <input type="button"
+					class="btn btn-outline-dark" id="back" value="취소">
+			</div>
+			<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 		</div>
-		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
-</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 
