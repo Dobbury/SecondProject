@@ -68,7 +68,7 @@
                   s += "</div>";
                }
                 */
-               if(list.get(i).getJour_check()==1){
+               if(list.get(i).getJour_check()==1 && list.get(i).getPin_Seqs() != null){
                   s += "<label class='btn btn-warning'style='width: 100%; height: 100%; margin:0px'>";
                   //s += "<input type='hidden' ";
                   s += "<input type='checkbox' autocomplete='off' value="+list.get(i).getSeq()+">";
@@ -85,6 +85,7 @@
       }   
 %>
 <%
+
        
       Calendar cal = Calendar.getInstance();
        
@@ -121,6 +122,7 @@
 
 
    request.setCharacterEncoding("utf-8");
+   DiaryImpl dao = DiaryDao.getInstance();
 
   
    String loginid = dto.getId();
@@ -129,7 +131,7 @@
    List<DiaryDto> list = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");   //각 날짜별(시퀀스로 관리) 위도 경도
-   int likecheck = (int)request.getAttribute("likecheck");
+   int Likeckheack = dao.Likecheack(journalDto.getSeq(), loginid);
  
  
 %>
@@ -331,9 +333,9 @@ var pins={
 var map;
 var markers = [];
 
+var basic_lat=1;
+var basic_lng=1;
 
-var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
 
 function initialize() {
    
@@ -506,7 +508,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <%=journalDto.getLike_cnt() %> 명이 좋아합니다
    </div>
    <div class="like_box">
-   <% if(likecheck == 0) {%>
+   <% if(Likeckheack == 0) {%>
    <a id="like_box"onclick="likefuc()"><span class="like_off"></span><span style="font-size: 13px;"> 좋아요</span></a>
    <% 
    }else{
@@ -640,23 +642,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
    }
    
    $(".btn").click(function () {
+
       //alert($(this).children('input').val());
       if(!$(this).children('input').prop("checked")){
          
          for(var i = 0 ; i < pins['seq_'+$(this).children('input').val()].length ; i++){
-            alert(pins['seq_'+$(this).children('input').val()][i]);
+            
             var location=new google.maps.LatLng(pins['seq_'+$(this).children('input').val()][i].lat,pins['seq_'+$(this).children('input').val()][i].lng);
             addMarker(location);
-
-            basic_lat=pins['seq_'+$(this).children('input').val()][i].lat;
-            basic_lat=pins['seq_'+$(this).children('input').val()][i].lng;
+            basic_lat=location.lat();
+               basic_lat=location.lng();
          }
-         
+          
          showMarkers();   
          
       }else{
          clearMarkers();
-         alert(markers.length);
+        
          for(var i = 0 ; i < markers.length ; i++){
             //alert(markers[i].position.lat());
             
@@ -668,8 +670,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                   var befo=markers.length;
                   markers.splice(i,1);
                   
-                  alert(befo +" "+markers.length);
-                  
+                 
                }   
             }
             
@@ -677,6 +678,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
          
          showMarkers();
       }
+
+
    });
    
    

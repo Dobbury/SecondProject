@@ -24,7 +24,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 <style type="text/css">
 
 .lankbox{
@@ -119,6 +119,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     opacity: 0.95;
      background-color: #fff;
      border: none !important;
+     margin: 60px 34px 0 33px !important;
 }
 .diary-heartbox {
 
@@ -136,7 +137,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
 <main style="padding-top:80px;">
    <div class="container" style="      display: table;  max-width: 900px;padding-top: 30px;">
    <h2 style="font-weight: 700;
-    margin-bottom: 15px;    text-align: center;
+    text-align: center;
     font-size: 40px;color:#fff;">BEST Diary</h2>
      <div style="width:100%;text-align: center;  padding: 0 0 90px 0;display: table;">
          <%
@@ -178,7 +179,9 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     padding-top: 15px;
     position: absolute;
     bottom: -25px;
-    background-color: rgb(0,0,0,0.3);">
+    background-color: rgb(0,0,0,0.3);
+        padding-top: 60px;
+    ">
     
     
        <h2 style="margin: 50px; color: #fff; font-weight: 700;font-size: 50px;text-align: center;">Lanking</h2>
@@ -242,7 +245,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
          }
       %>
           <li>
-          <a href="Pindetail.jsp?pinname=<%=hotellist.get(i)[0]%>">
+          <a href="Pindetail.jsp?command=pinDetail&pinname=<%=hotellist.get(i)[0]%>">
           <span class="lanknumber"><%=i+1%></span>
           <span class="lanktext"><%=hotellist.get(i)[0]%></span>
           <span class="lankavg">60</span>
@@ -254,6 +257,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
        </ul>
    </div>
    </div>
+
 </div>
    
    </main>

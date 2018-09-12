@@ -21,7 +21,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2018 Copyright:
-      <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
+     <!--  <p> 하위~^_^.com </p> -->
     </div>
     <!--/.Copyright-->
 

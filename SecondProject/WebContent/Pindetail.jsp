@@ -51,7 +51,7 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 	    width: 10px;
 }
 .title{
-	margin-top: 20px;
+	margin-top: 40px;
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 5px;

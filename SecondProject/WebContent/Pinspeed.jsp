@@ -46,10 +46,33 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
- 
+
+  
+ .starR1{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0 0;}
+.starR2.on{background-position:-15px 0;}
+
  
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
@@ -135,6 +158,9 @@ transition: all 40s;
  	.searchbtn:hover{
  		background-color: #999;
  	}
+ 	.starRev span{
+ 	cursor: auto;
+ 	}
  </style>
   
 </head>
@@ -170,7 +196,7 @@ transition: all 40s;
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
     margin-top: 20px;">
-			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
+			<div style="width:100%;text-align: center;  padding: 0 0 80px 0;display: table;">
 	
 			 <% 
 			
@@ -186,11 +212,44 @@ transition: all 40s;
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
-					<span class="diary-date">평점 : <%=pinlist.get(i)[2] %></span>
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
-					<span><%=pinlist.get(i)[2] %></span>
+					<!-- <span style="display: inline-block; vertical-align:middle;   color: #ccc;">ㅣ</span> -->
+						<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
+						</span>
 					</div>
+					<div class="diary-textbox" style="line-height: 30px; margin-bottom: 5px; display: table; width: 100%;">
+						<input type="hidden" value=<%=pinlist.get(i)[2] %>>
+						<div class="starRev">
+						<%
+						for(int j = 1 ; j<=10 ; j++){ 
+							if(j%2==1){
+								if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+						%>
+				  					<span class="starR1 on"></span>
+				  			<%
+								}else{
+				  			%>
+				  					<span class="starR1"></span>
+				  			<%
+				  				}
+							}else if(j%2==0){
+								if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+							%>
+		  							<span class="starR2 on"></span>
+							<% 
+								}else{
+							%>
+									<span class="starR2"></span>
+							<%
+								}
+							}
+						}
+						%>	
+							<div style="float: right; margin-right: 10px;" >
+							
+							<span class="diary-date" style="margin-top: 5px;">평점 : <%=pinlist.get(i)[2] %></span>	
+							</div>
+						</div>
+					</div>	
 				</div>
 			<%
 			}
@@ -261,7 +320,6 @@ transition: all 40s;
 		  else $el.removeClass('fadeInUp');
 		});
 	  
-  
   </script>
 
 
