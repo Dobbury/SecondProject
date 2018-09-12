@@ -253,11 +253,11 @@ request.setCharacterEncoding("utf-8");
                
                
                if(list.get(i).getJour_check()==0){
-                  s += "<div style='width:30px; height:30px; background-color:#96A5FF;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#D2E1FF;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }else{
-                  s += "<div style='width:30px; height:30px; background-color:#7B68EE;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#96A5FF;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }
