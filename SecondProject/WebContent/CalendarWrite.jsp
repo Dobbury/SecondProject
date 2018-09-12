@@ -9,6 +9,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 request.setCharacterEncoding("utf-8");
@@ -17,10 +18,19 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!-- Bootstrap core CSS -->
+  <link href="Design/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="Design/css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="Design/css/style.min.css" rel="stylesheet">
   
   <link rel="stylesheet" type="text/css" media="all" href="daterangepicker/daterangepicker.css" />
  
@@ -50,23 +60,109 @@ request.setCharacterEncoding("utf-8");
     	display: inline-block;
     	
     }
+      .days{
+     border: 1px solid #ddd; 
+  }
+  .modalcal{
+     color: #000;
+  }
+    
+    
+    button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+body {
+	background-image: url("img/sss3.png");
+}
+
+
     @media (min-width: 800px) and (max-width: 850px) {
       .navbar:not(.top-nav-collapse) {
           background: #1C2331!important;
       }
   }
+
   </style>
   
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include> 
+
+<<<<<<< HEAD
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- logo -->
+      <a class="navbar-brand" href="#" target="_blank">
+        <strong>MDB</strong>
+      </a>
+
+		
+
+        <!-- Right -->
+        <ul class="navbar-menu">
+          <li><a href="#">뉴스피드</a></li>
+          <li><a href="#">마이페이지</a></li>
+        </ul>
+
+    </div>
+  </nav>
+
   
+=======
+<jsp:include page="header.jsp"></jsp:include> 
+
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
+  
 <main style="padding-top:80px;">
-	<div class="container">	
+<<<<<<< HEAD
+	<div class="container">
+		
+=======
+
+	<div class="container">
+		<div class="table-response">
+			
+
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
 		<%!
 		 
 		//빈문자열 여부
@@ -122,7 +218,7 @@ request.setCharacterEncoding("utf-8");
 			 
 			String tday= calllist(year,month, day , true);
 			
-
+			
 			for(int i=0;i<list.size();i++){			
 				// list 안에는 (로그인한 사용자 , 다이어리쓴날짜)
 				String today = list.get(i).getTday().replace("-", "");
@@ -136,7 +232,7 @@ request.setCharacterEncoding("utf-8");
 						s += "<br>"+list.get(i).getTitle();
 						s += "</div>";
 					}else{
-						s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+						s += "<div class='diary' style='width:100px; height:100px; background-color:black;margin:0;'>";
 						s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";	//차후 수정바람
 						s += String.format("%2d", day); //day를 2칸으로 다시 정정
 						s += "<br>"+list.get(i).getTitle();
@@ -148,7 +244,6 @@ request.setCharacterEncoding("utf-8");
 			if(s == "")
 				s += String.format("%2d", day); //day를 2칸으로 다시 정정
 			s += "</div>";
-
 			return s;
 		}	
 		
@@ -254,7 +349,7 @@ request.setCharacterEncoding("utf-8");
 		 
 		<div align="center">
 		 
-		<table border="1">
+		<table class="table" style="font-size: 15pt;">
 		<!-- 너비 -->
 		<col width="100">
 		<col width="100">
@@ -264,26 +359,67 @@ request.setCharacterEncoding("utf-8");
 		<col width="100">
 		<col width="100">
 		 
-		    <tr>
-		        <td align="center" colspan="7">
-		            <a href="CalendarWrite.jsp?y=<%=prevYear%>&m=<%=prevMonth%>">◁</a> 
-		            
-		            <%=year%>년 <%=month+1%>월 
-		            
-		            <a href="CalendarWrite.jsp?y=<%=nextYear%>&m=<%=nextMonth%>">▷</a>
-		        </td>
-		    
-		    </tr>
+		      <tr height="70" align="center">
+               <td>
+                  <a href="CalendarWrite.jsp?y=<%=prevYear%>&m=<%=prevMonth%>"><img src='img/cal_left.png'></a> 
+               </td>
+              <td align="center" colspan="5">
+                <h1>  
+                <% 
+                       String MONTH="";
+                      
+                      if( month+1 == 1){
+                          MONTH = "JANUARY";
+                      }else if( month+1 == 2){
+                         
+                         MONTH = "FEBRUARY";
+                      }else if( month+1 == 3){
+                         MONTH = "MARCH";
+                      }else if( month+1 == 4){
+                         MONTH = "APRIL";
+                      }else if( month+1 == 5){
+                         MONTH = "MAY";
+                      }else if( month+1 == 6){
+                         MONTH = "JUNE";
+                      }else if( month+1 == 7){
+                         MONTH = "JULY";
+                      }else if( month+1 == 8){
+                         MONTH = "AUGUST";
+                      }else if( month+1 == 9){
+                         MONTH = "SEPTEMBER";
+                      }else if( month+1 == 10){
+                         MONTH = "OCTOBER";
+                      }else if( month+1 == 11){
+                         MONTH = "NOVEMBER";
+                      }else if( month+1 == 12){
+                         MONTH = "DECEMBER";
+                      }
+
+                   %>
+                   <%=MONTH %>
+                      
+                </h1><br> 
+            <H3><%=year%></H3><br> 
+              </td>
+             <td>
+                  <a href="CalendarWrite.jsp?y=<%=nextYear%>&m=<%=nextMonth%>"><img src='img/cal_right.png'></a>
+               </td>
+          </tr>
+           
+         
+
 		 
-		    <tr height="50">
-		        <td align="center">일</td>
-		        <td align="center">월</td>
-		        <td align="center">화</td>
-		        <td align="center">수</td>
-		        <td align="center">목</td>
-		        <td align="center">금</td>
-		        <td align="center">토</td>
-		    </tr>
+          <tr height="50" style="background-color: #acb5c4; border-bottom: 2px solid #003458" >
+              <td align="center">SUN</td>
+              <td align="center">MON</td>
+              <td align="center">TUE</td>
+              <td align="center">WEN</td>
+              <td align="center">THU</td>
+              <td align="center">FRI</td>
+              <td align="center">SAT</td>
+          </tr>
+          
+
 		    
 		    <tr height="100" align="left" valign="top">
 		        <%
@@ -305,12 +441,10 @@ request.setCharacterEncoding("utf-8");
 		                %>
 		                    <td><!-- 날짜 뿌리기 -->
 		                        <%=calllist(year, month, i ,false) %>		                    
-
 		                   
 		                   		<!-- 다이어리 타이틀 뿌리기-->		                   				                   		
 		                   		<%=dTitle(year, month, i, list) %>
 		                   				                   
-
 		                    </td>
 		                    
 		                <%
@@ -336,7 +470,7 @@ request.setCharacterEncoding("utf-8");
   	
 	    
 		<!-- Buttons -->
-		<button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+		<button type="button" data-toggle="modal" data-target="#jourAdd"><font size="3">일정 추가</font></button>
 			<!-- Modal -->
 			<div class="modal fade" id="jourAdd" role="dialog">
 				<div class="modal-dialog">
@@ -345,7 +479,7 @@ request.setCharacterEncoding("utf-8");
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">×</button>
-							<h4 class="modal-title">Modal Header</h4>
+							<h4 class="modal-title">일정 추가</h4>
 						</div>
 						<div class="modal-body">
 							
@@ -364,7 +498,7 @@ request.setCharacterEncoding("utf-8");
 							%>
 				
 							<div align="center">			 
-							<table border="1">
+							<table>
 							<!-- 너비 -->
 							<col width="30">
 							<col width="30">
@@ -374,21 +508,58 @@ request.setCharacterEncoding("utf-8");
 							<col width="30">
 							<col width="30">
 							 
-							    <tr>
-							        <td align="center" colspan="7">
-							            <%=year%>년 <%=month+1%>월 
-							        </td>
-							    </tr>
-							 
+							   
+                         <tr align="center">
+                             <td align="center" colspan="7" class="modalcal">
+                                 
+                                 
+                                 <% 
+                                   String MONTH2="";
+                                  
+                                  if( month+1 == 1){
+                                      MONTH2 = "JANUARY";
+                                  }else if( month+1 == 2){
+                                     
+                                     MONTH2 = "FEBRUARY";
+                                  }else if( month+1 == 3){
+                                     MONTH2 = "MARCH";
+                                  }else if( month+1 == 4){
+                                     MONTH2 = "APRIL";
+                                  }else if( month+1 == 5){
+                                     MONTH2 = "MAY";
+                                  }else if( month+1 == 6){
+                                     MONTH2 = "JUNE";
+                                  }else if( month+1 == 7){
+                                     MONTH2 = "JULY";
+                                  }else if( month+1 == 8){
+                                     MONTH2 = "AUGUST";
+                                  }else if( month+1 == 9){
+                                     MONTH2 = "SEPTEMBER";
+                                  }else if( month+1 == 10){
+                                     MONTH2 = "OCTOBER";
+                                  }else if( month+1 == 11){
+                                     MONTH2 = "NOVEMBER";
+                                  }else if( month+1 == 12){
+                                     MONTH2 = "DECEMBER";
+                                  }
+
+                                  %>
+                                  <%=MONTH2 %>
+                                  &nbsp;
+                                <%=year%> 
+                             </td>
+                         </tr>
+
 							    <tr height="15">
-							        <td align="center">일</td>
-							        <td align="center">월</td>
-							        <td align="center">화</td>
-							        <td align="center">수</td>
-							        <td align="center">목</td>
-							        <td align="center">금</td>
-							        <td align="center">토</td>
-							    </tr>
+                             <td align="center">S</td>
+                             <td align="center">M</td>
+                             <td align="center">T</td>
+                             <td align="center">W</td>
+                             <td align="center">T</td>
+                             <td align="center">F</td>
+                             <td align="center">S</td>
+                         </tr>
+
 							    
 							    <tr height="30" align="left" valign="top">
 							        <%
@@ -451,14 +622,7 @@ request.setCharacterEncoding("utf-8");
 
 				</div>
 			</div>
-
-
-			<button type="button" onclick="myfunc()" > 취소 </button>
-		 <script type="text/javascript">
-	    function myfunc() {
-	    	location.href = "Newspeed.jsp";
-	    }  
-		</script> 
+			</div>
 
 
 	
@@ -500,7 +664,7 @@ request.setCharacterEncoding("utf-8");
 						alert("이미 등록된 일정이 포함되어 있습니다. 확인하고 다시 시도해 주세요.");
 					}else{
 						alert("일정 추가 성공!");
-						location.href="Newspeed.jsp?page=1";
+						location.href="DiaryServlet?command=Newspaging&page=1";
 					}
 				},
 				error:function(){
@@ -526,59 +690,8 @@ request.setCharacterEncoding("utf-8");
   
     </div>
 </main>
-<!-- --------------------------------------------------------------------------------- -->
 
-
-  <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
- 
-    <hr class="my-4">
-
-    <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-        <i class="fa fa-facebook mr-3"></i>
-      </a>
-
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i class="fa fa-twitter mr-3"></i>
-      </a>
-
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i class="fa fa-youtube mr-3"></i>
-      </a>
-
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fa fa-google-plus mr-3"></i>
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fa fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i class="fa fa-pinterest mr-3"></i>
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fa fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fa fa-codepen mr-3"></i>
-      </a>
-    </div>
-
-    <!--Copyright-->
-    <div class="footer-copyright py-3">
-      © 2018 Copyright:
-      <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
-    </div>
-    <!--/.Copyright-->
-
-  </footer>
-  <!--/.Footer-->
-
+<jsp:include page="footer.jsp"></jsp:include> 
 
 
   <!-- SCRIPTS -->

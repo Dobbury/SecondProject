@@ -95,6 +95,44 @@ html, body, header, .view {
    margin-right: 5px;
 }
 
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 
 </style>
 </head>
@@ -163,7 +201,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
 	
 	<br>
 	<div align="center">
-		<button style="width: 80%; height: 100px;" class="btn btn-primary" id="jourCancleBtn" ><font size="10">journal cancle</font></button>
+		<button id="jourCancleBtn" ><font size="4">journal cancle</font></button>
 	</div>
 	
    </main>
