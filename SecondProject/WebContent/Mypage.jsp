@@ -209,9 +209,9 @@ body {
 	<br>
 	<br>
 	
-	<div style="height: 100%;">
+	<div style="height: 100%; position: relative;display: table;margin: 0 auto;">
 	
-	<div id="container" class="tab-content card"style="background-color: #FFFAFA;height: 600px;">
+	<div id="container" class="tab-content card"style="background-color: #FFFAFA;padding-bottom: 50px;">
 	
 	
 		<ul class="nav nav-tabs md-tabs nav-justified">
@@ -227,9 +227,13 @@ body {
 		<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
 
 
-			<main style="padding-top:80px;">
+			<main style="padding-top:40px;">
 			<div class="container">
-				<div style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+				<div style="width: 740px;
+    text-align: center;
+    padding: 0 0 20px 0;
+    display: table;
+    margin: 0 auto;">
 
 					<%
 						for (int i = 0; i < jlist.size(); i++) {
@@ -360,8 +364,9 @@ body {
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 </div>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+	
 
+<jsp:include page="footer.jsp"></jsp:include>
 
 
 	<script>
