@@ -701,7 +701,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						   								pins['seq_'+$(this).children('input').val()][j].lng);
 					
 				   if(markers[i].position.lat()==location.lat() && markers[i].position.lng()==location.lng()){
-						var befo=markers.length;
 					   markers.splice(i,1);
 					   
 					  
