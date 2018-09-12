@@ -514,11 +514,13 @@ request.setCharacterEncoding("utf-8");
           
       </table>
       <!-- Buttons -->
-      <br><br>
+      <br>
       <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
      </div>
-
-
+     	<br>
+     </div>
+    
+	
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">

@@ -363,8 +363,9 @@ body {
 		</div>
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 </div>
+
 	</div>
-	
+	<br><br>
 
 <jsp:include page="footer.jsp"></jsp:include>
 
