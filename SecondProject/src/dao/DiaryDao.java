@@ -864,9 +864,9 @@ public class DiaryDao implements DiaryImpl {
 
 	@Override
 	public List<JournalDto> getBestJournal() {
-		String sql = " SELECT A.RNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE, A.FIRST_IMG "
-				+ " FROM (SELECT ROWNUM AS RNUM, SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG FROM JOURNAL ORDER BY LIKE_CNT DESC) A "
-				+ "WHERE RNUM <= 4 ";
+		String sql = " SELECT ROWNUM, A.SEQ, A.START_DATE, A.END_DATE, A.READCOUNT, A.ID, A.LIKE_CNT, A.WDATE, A.TITLE, A.FIRST_IMG "
+				+ " FROM (SELECT  SEQ, START_DATE, END_DATE, READCOUNT, ID, LIKE_CNT, WDATE, TITLE, FIRST_IMG FROM JOURNAL ORDER BY LIKE_CNT DESC) A "
+				+ "WHERE ROWNUM <= 4 ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

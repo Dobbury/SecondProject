@@ -52,7 +52,8 @@ if(paging < 6){
 
   
  .starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+/*     background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0; */
+    background: url('img/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -61,7 +62,8 @@ if(paging < 6){
     cursor: pointer;
 }
 .starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    /* background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0; */
+    background: url('img/ico_review.png') no-repeat right 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -209,7 +211,6 @@ transition: all 40s;
 						</span>
 					</div>
 					<div class="diary-textbox" style="line-height: 30px; margin-bottom: 5px; display: table; width: 100%;">
-						<input type="hidden" value=<%=pinlist.get(i)[2] %>>
 						<div class="starRev">
 						<%
 						for(int j = 1 ; j<=10 ; j++){ 

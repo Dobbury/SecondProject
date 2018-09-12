@@ -16,6 +16,28 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 <title>Insert title here</title>
 
 <style type="text/css">
+ .starR1{
+    background: url('img/ico_review.png') no-repeat -40px 0;
+    background-size: auto 100%;
+    width: 10px;
+    height: 20px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    background: url('img/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 10px;
+    height: 20px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0 0;}
+.starR2.on{background-position:-10px 0;}
+
+ 
 .pintitle{
 	font-size: 26px;
     font-weight: 700;
@@ -94,6 +116,33 @@ google.maps.event.addDomListener(window, 'load', initialize);
                </div>
                <div class="commant-content" style="width: 88%;word-break: break-all;text-align: left;  color:#555"><%=list.get(i).getPcomment() %></div>
                <div class="pincommant-avg">평점 : <%=list.get(i).getGrade() %></div>
+               <div class="starRev">
+						<%
+						for(int j = 1 ; j<=10 ; j++){ 
+							if(j%2==1){
+								if(j <= (int)list.get(i).getGrade()){
+						%>
+				  					<span class="starR1 on"></span>
+				  			<%
+								}else{
+				  			%>
+				  					<span class="starR1"></span>
+				  			<%
+				  				}
+							}else if(j%2==0){
+								if(j <= (int)list.get(i).getGrade()){
+							%>
+		  							<span class="starR2 on"></span>
+							<% 
+								}else{
+							%>
+									<span class="starR2"></span>
+							<%
+								}
+							}
+						}
+						%>	
+				</div>
                <hr>
                
             </div>

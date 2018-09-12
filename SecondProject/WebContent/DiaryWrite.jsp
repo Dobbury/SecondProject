@@ -27,7 +27,7 @@ request.setCharacterEncoding("utf-8");
  <style type="text/css">
   
  .starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background: url('img/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -36,7 +36,7 @@ request.setCharacterEncoding("utf-8");
     cursor: pointer;
 }
 .starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background: url('img/ico_review.png') no-repeat right 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
