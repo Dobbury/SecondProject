@@ -70,6 +70,54 @@ request.setCharacterEncoding("utf-8");
   .modalcal{
      color: #000;
   }
+  
+  .style_prevu_kit
+{
+    display:inline-block;
+    border:0;
+    width:196px;
+    height:210px;
+    position: relative;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+	cursor: pointer;
+}
+
+.style_prevu_kit:hover
+{
+    box-shadow: 0px 0px 30px #AAB9FF;
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+}
+  main{
+   background-image: url('img/Lankbg2.png');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 140vh;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
   </style>
   
   
@@ -126,7 +174,7 @@ request.setCharacterEncoding("utf-8");
           System.out.println(tday);
           if(h == false){
                 
-             s += "<div class='day' style='width:100px; height:100px;'>";
+             s += "<div class='day style_prevu_kit' style='width:100px; height:100px;'>";
             s += String.format("<input type='hidden' value='CalendarServlet?command=writeDiary&tday=%s'>",tday );
           
            return s;   
@@ -143,7 +191,7 @@ request.setCharacterEncoding("utf-8");
          String tday = year + "" + two((month+1)+"") +"" +  two((day)+"") + "";
          
          if(h == false){
-            s += "<div style='width:30px; height:30px;'>";
+            s += "<div class='style_prevu_kit' style='width:30px; height:30px;'>";
                  
             return s;   
          }else{
@@ -168,13 +216,13 @@ request.setCharacterEncoding("utf-8");
             if(today.equals(tday)){
                
                if(list.get(i).getJour_check()==0){
-                  s += "<div class='diary' style='width:100px; height:100px; background-color:gray;'>";
+                  s += "<div class='diary style_prevu_kit' style='width:100px; height:100px; background-color:#D2E1FF;'>";
                   s += "<input type='hidden' value='DiaryServlet?command=update&seq="+list.get(i).getSeq()+"'>";   //차후 수정바람
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "<br>"+list.get(i).getTitle();
                   s += "</div>";
                }else{
-                  s += "<div class='diary' style='width:100px; height:100px; background-color:black;'>";
+                  s += "<div class='diary style_prevu_kit' style='width:100px; height:100px; background-color:#96A5FF;'>";
                   s += "<input type='hidden' value='DiaryServlet?command=journalUpdate&seq="+dao.getJournalSeq(list.get(i).getTday())+"'>";   //차후 수정바람
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "<br>"+list.get(i).getTitle();
@@ -205,11 +253,11 @@ request.setCharacterEncoding("utf-8");
                
                
                if(list.get(i).getJour_check()==0){
-                  s += "<div style='width:30px; height:30px; background-color:gray;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#96A5FF;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }else{
-                  s += "<div style='width:30px; height:30px; background-color:black;'>";
+                  s += "<div style='width:30px; height:30px; background-color:#7B68EE;'>";
                   s += String.format("%2d", day); //day를 2칸으로 다시 정정
                   s += "</div>";
                }
@@ -292,7 +340,7 @@ request.setCharacterEncoding("utf-8");
        
       <div align="center">
        
-      <table>
+      <table style="background-color: white; opacity: 0.95; box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13); border-radius: 10px 10px 0px 0px;" >
       <!-- 너비 -->
       <col width="100">
       <col width="100">
@@ -350,7 +398,7 @@ request.setCharacterEncoding("utf-8");
           </tr>
            
          
-          <tr height="50" style="background-color: #acb5c4; border-bottom: 2px solid #003458" >
+          <tr height="50" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
               <td align="center">SUN</td>
               <td align="center">MON</td>
               <td align="center">TUE</td>
@@ -407,11 +455,14 @@ request.setCharacterEncoding("utf-8");
           </tr>
           
       </table>
-        </div>
+      
+      <!-- Buttons -->
+      <br><br>
+      <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+     </div>
      
        
-      <!-- Buttons -->
-      <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+      
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">
