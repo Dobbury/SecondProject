@@ -182,23 +182,22 @@
 
 <div id="fullpage">
 
-  <div class="scene section" id="section0">
-      
-      <h1> About Time</h1>
-      <h2> 잠들기 전 오늘 다녀온 여행지를 정리해보세요</h2>
+   <div class="scene section" id="section0">
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
       <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    
    <div class="scene section" id="section1">
-      <h1> PICK! PICK! PICK! </h1>
-      <h2> FOOD PICK! VIEW PICK! HOTEL PICK!<br>세 곳 을 골라 지도에 표시해보세요 </h2>
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
       <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    
 
    <div class="scene section moveDown" id="section2">
-      <h1> 여행자들의 이야기 </h1>
-      <h2> 다녀온 여행 명소를 여행자들과 공유해보세요 <br>이달의 명소를 통해 BEST여행후기를 볼 수 있습니다</h2>
+      <h1>타이틀들어가고 </h1>
+      <h2>간략한 설명이 들어가겠죠</h2>
       <button type="button" class="btn mainbtn" data-toggle="modal" data-target="#basicExampleModal">시작하기</button>
    </div>
    

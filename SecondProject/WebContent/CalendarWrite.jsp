@@ -47,23 +47,70 @@ request.setCharacterEncoding("utf-8");
     .view {
       height: 100%;
     }
+  
+.navbar-menu {
+   margin-bottom: 0;
+}
+
+.navbar-menu li {
+   width: 100px;
+   height: 30px;
+   border: 1px solid blue;
+   list-style: none;
+   display: inline-block;
+}
+
+
     .navbar-menu{
     margin-bottom: 0;
     }
     .navbar-menu li {
-       width: 100px;
-       height: 30px;
-       border:1px solid blue;
-       list-style: none;
-       display: inline-block;
+       width: 120px;
+    height: 30px;
+    list-style: none;
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    font-size: 14px;
        
     }
+    .navbar-menu li:hover > a {
+    letter-spacing: 3px;
+       
+    }
+    .navbar-menu li a{
+        
+       color: #fff;
+       
+    }
+    .navbar.scrolling-navbar.top-nav-collapse{
+           padding-top: 10px;
+    padding-bottom: 10px;
+    opacity: 0.9;
+    }
+
+    .navbar-brand {
+       background-image: url('img/logo.png');
+       background-size: 100% 100%;
+       width: 130px;
+       height: 30px;
+           margin-bottom: 5px;
+    }
+
     @media (min-width: 800px) and (max-width: 850px) {
       .navbar:not(.top-nav-collapse) {
           background: #1C2331!important;
       }
   }
-  
+
+@media ( min-width : 800px) and (max-width: 850px) {
+   .navbar:not (.top-nav-collapse ) {
+      background: #1C2331 !important;
+   }
+}
   .days{
      border: 1px solid #ddd; 
   }
@@ -129,11 +176,39 @@ request.setCharacterEncoding("utf-8");
 
 <body>
 
+<<<<<<< HEAD
 
   </nav>
 
    <jsp:include page="header.jsp"></jsp:include> 
 
+=======
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- logo -->
+      <a class="navbar-brand" href="DiaryServlet?command=goNewspeed">
+       
+      </a>
+
+      
+
+        <!-- Right -->
+        <ul class="navbar-menu">
+
+
+          <li><a href="DiaryServlet?command=goNewspeed">뉴스피드</a></li>
+          <li><a href="PinServlet?command=goPinspeed">장소정보</a></li>
+          <li><a href="DiaryServlet?command=Lanking">이달의 명소</a></li>
+
+          <li><a href="DiaryServlet?command=goMyPage">마이페이지</a></li>
+
+        </ul>
+
+    </div>
+  </nav>
+  
+>>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
@@ -689,7 +764,26 @@ request.setCharacterEncoding("utf-8");
     </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
+<<<<<<< HEAD
 
 <jsp:include page="footer.jsp"></jsp:include> 
+=======
+<jsp:include page="footer.jsp"></jsp:include>
+
+
+  <!-- SCRIPTS -->
+  
+ 
+  
+  <!-- JQuery -->
+  <script type="text/javascript" src="Design/js/popper.min.js"></script>
+  <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
+  <!-- Initializations --><!-- 
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script> -->
+>>>>>>> c6b2cb370636d370e0f03cbc3e32ae732ccb507a
 </body>
 </html>

@@ -99,6 +99,9 @@ html, body, header, .view {
 
 
 </style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 </head>
 
 <body style="    background-color: #e9e9e9e9;" >
@@ -112,36 +115,33 @@ html, body, header, .view {
    <main style="padding-top:80px;">
    <div class="container" style="max-width: 900px;">
 
-      <div class="diary-t">
-         <!-- 지도영역 -->
-         <div class="map">
-            <p>지도</p>
-            <!-- <img alt="" src="img/005.jpg"> -->
-         </div>
-         <!-- 달력영역 -->
-         <div class="calendar">
-            <p>달력</p>
-            <!-- <img alt="" src="img/lt04014209.png"> -->
-         </div>
-      </div>
+      <h1 style="font-weight: 700;
+    border-bottom: 2px solid #ccc;
+    width: 99%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: left;
+    margin-top: 30px;">작성중인 일정</h1>
       
       <div class="journal-title" >
-   <h1>
+   <h2 style="padding: 20px 0;">
       <%=journalDto.getTitle() %>
-      </h1>
+      </h2>
    </div>
       
-   <div style="   padding: 40px;
-    background-color: #fff;
-       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
--moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
+
    
-   
-      <div class="diary-m">
+      
       <%
                for(int i=0; i<diarylist.size(); i++ ){
             %>
+               <div style="   padding: 40px;
+    background-color: #fff;
+       -webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);margin-top: 20px;">
+   
+            <div class="diary-m">
          <div class="diary-cont">
             <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>
@@ -157,17 +157,19 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
          <div align="right">
          	<a href="DiaryServlet?command=update&seq=<%=diarylist.get(i).getSeq() %>" class="menu__link hover9"><span class="menu__label hover9__label">Update</span></a></a>
          </div>
+          </div>
+          
+      </div>
+	
          <%
                }
       %>
-      </div>
-      </div>
-	
+     
 	<br>
 	<div align="center">
 		<button class="btn btn-outline-dark" id="jourCancleBtn" ><font size="4">journal cancle</font></button>
 	</div>
-	
+	<br>	
    </main>
 
 

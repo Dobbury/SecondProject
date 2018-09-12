@@ -8,29 +8,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("utf-8");
+   request.setCharacterEncoding("utf-8");
 
-	memberDto dto = (memberDto) session.getAttribute("user");
-	int p = (int) request.getAttribute("page");
-	int pagecount = (int) request.getAttribute("pagecount");
-	List<JournalDto> jlist = (List<JournalDto>) request.getAttribute("jlist");
+   memberDto dto = (memberDto) session.getAttribute("user");
+   int p = (int) request.getAttribute("page");
+   int pagecount = (int) request.getAttribute("pagecount");
+   List<JournalDto> jlist = (List<JournalDto>) request.getAttribute("jlist");
 
-	int startPage = 0;
-	int endPage = 0;
-	if (p > 5) {
-		startPage = p - 5;
-	}
-	if (pagecount < p + 5) {
-		startPage = pagecount - 10;
-	}
-	if (pagecount < 5) {
-		startPage = 0;
-	}
-	if (p < 6) {
-		endPage = 10;
-	} else {
-		endPage = p + 5;
-	}
+   int startPage = 0;
+   int endPage = 0;
+   if (p > 5) {
+      startPage = p - 5;
+   }
+   if (pagecount < p + 5) {
+      startPage = pagecount - 10;
+   }
+   if (pagecount < 5) {
+      startPage = 0;
+   }
+   if (p < 6) {
+      endPage = 10;
+   } else {
+      endPage = p + 5;
+   }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -157,23 +157,35 @@ body {
 
 @media ( min-width : 800px) and (max-width: 850px) {
 	.navbar
+	
+   
 	:not
-	 
+	
+    
+   
 	(
 	.top-nav-collapse
-	 
+	
+    
+   
 	)
 	{
 	background
+	
+   
 	:
-	 
+	
+    
+   
 	#1C2331
-	 
+	
+    
+   
 	!
 	important
+	
+   
 	;
-	
-	
 }
 }
 </style>
@@ -187,10 +199,12 @@ body {
 	<br>
 	<br>
 
-	<div style="height: 100%;">
+	<div
+		style="height: 100%; position: relative; display: table; margin: 0 auto;">
+
 
 		<div id="container" class="tab-content card"
-			style="background-color: #FFFAFA; height: 600px;">
+			style="background-color: #FFFAFA; padding-bottom: 50px;">
 
 
 			<ul class="nav nav-tabs md-tabs nav-justified">
@@ -206,14 +220,16 @@ body {
 			<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
 
 
-				<main style="padding-top:80px;">
+				<main style="padding-top:40px;">
 				<div class="container">
 					<div
-						style="width: 100%; text-align: center; padding: 0 0 20px 0; display: table;">
+						style="width: 740px; text-align: center; padding: 0 0 20px 0; display: table; margin: 0 auto;">
+
+
 
 						<%
-							for (int i = 0; i < jlist.size(); i++) {
-						%>
+                     for (int i = 0; i < jlist.size(); i++) {
+                  %>
 						<div class="diary">
 							<a
 								href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
@@ -237,8 +253,8 @@ body {
 							</div>
 						</div>
 						<%
-							}
-						%>
+                     }
+                  %>
 
 
 					</div>
@@ -247,35 +263,35 @@ body {
 						<!-- paging -->
 						<div>
 							<%
-								if (p != 1 && pagecount != 0) {
-							%>
+                        if (p != 1 && pagecount != 0) {
+                     %>
 							<a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
 							<%
-								}
-							%>
+                        }
+                     %>
 
 							<%
-								for (int i = startPage; i < pagecount; i++) {
-									if (i + 1 != p) {
-							%>
+                        for (int i = startPage; i < pagecount; i++) {
+                           if (i + 1 != p) {
+                     %>
 							<a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
 							<%
-								} else {
-							%>
+                        } else {
+                     %>
 							<strong><%=p%></strong>
 							<%
-								}
-									if (i + 1 == endPage) {
-										break;
-									}
-								}
+                        }
+                           if (i + 1 == endPage) {
+                              break;
+                           }
+                        }
 
-								if (p != pagecount && pagecount != 0) {
-							%>
+                        if (p != pagecount && pagecount != 0) {
+                     %>
 							<a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
 							<%
-								}
-							%>
+                        }
+                     %>
 						</div>
 
 						<!-- // paging -->
@@ -299,13 +315,13 @@ body {
 						</td>
 
 						<!-- 
-						
-						<div class="md-form">
-  						  <input type="text" id="form1" class="form-control">
- 					   <label for="form1" >Example label</label>
-						</div>
-						
-						 -->
+                  
+                  <div class="md-form">
+                      <input type="text" id="form1" class="form-control">
+                   <label for="form1" >Example label</label>
+                  </div>
+                  
+                   -->
 					</tr>
 					<tr>
 						<td>PW</td>
@@ -347,48 +363,48 @@ body {
 
 
 	<script>
-		$(function() {
-			$('ul.tab li').click(function() {
-				var activeTab = $(this).attr('data-tab');
-				$('ul.tab li').removeClass('current');
-				$('.tabcontent').removeClass('current');
-				$(this).addClass('current');
-				$('#' + activeTab).addClass('current');
-			})
-		});
-	</script>
+      $(function() {
+         $('ul.tab li').click(function() {
+            var activeTab = $(this).attr('data-tab');
+            $('ul.tab li').removeClass('current');
+            $('.tabcontent').removeClass('current');
+            $(this).addClass('current');
+            $('#' + activeTab).addClass('current');
+         })
+      });
+   </script>
 	<script type="text/javascript">
-		$(function() {
-			$("#edit").click(function() {
-				$.ajax({
-					url : "MemberServlet",
-					type : "get",
-					data : {
-						command : "update",
-						id : $("#id").val(),
-						pw : $("#pw").val(),
-						name : $("#name").val(),
-						nick : $("#nickname").val()
-					},
-					success : function(data) {
-						alert(data);
-						location.href = "DiaryServlet?command=goMyPage";
-					},
-					error : function() {
-						alert("에러남");
-						location.href = "DiaryServlet?command=goMyPage";
-					}
-				});
+      $(function() {
+         $("#edit").click(function() {
+            $.ajax({
+               url : "MemberServlet",
+               type : "get",
+               data : {
+                  command : "update",
+                  id : $("#id").val(),
+                  pw : $("#pw").val(),
+                  name : $("#name").val(),
+                  nick : $("#nickname").val()
+               },
+               success : function(data) {
+                  alert(data);
+                  location.href = "DiaryServlet?command=goMyPage";
+               },
+               error : function() {
+                  alert("에러남");
+                  location.href = "DiaryServlet?command=goMyPage";
+               }
+            });
 
-			});
-		});
+         });
+      });
 
-		$(function() {
-			$("#back").click(function() {
-				location.href = "DiaryServlet?command=goMyPage";
-			});
-		});
-	</script>
+      $(function() {
+         $("#back").click(function() {
+            location.href = "DiaryServlet?command=goMyPage";
+         });
+      });
+   </script>
 
 </body>
 </html>

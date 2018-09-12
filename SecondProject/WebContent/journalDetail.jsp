@@ -84,14 +84,16 @@
 %>
 <%
 
-		 
+		JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
 		Calendar cal = Calendar.getInstance();
 		 
 		//연도 받아오기 
 		//달 받아오기  0부터 시작함 
-		int year = request.getParameter("y") == null ? cal.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("y"));
-		int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
-		 
+		System.out.println(journalDto.getStartDate().substring(0, 4)+" "+journalDto.getStartDate().substring(5, 7));
+		int year = Integer.parseInt(journalDto.getStartDate().substring(0, 4));
+		int month = Integer.parseInt(journalDto.getStartDate().substring(5, 7))-1;
+		
 		cal.set(year, month, 1); //연 월 일 세팅!
 		
 		 
@@ -124,8 +126,7 @@
 
   
    String loginid = dto.getId();
-   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
-
+   
    List<DiaryDto> list = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");   //각 날짜별(시퀀스로 관리) 위도 경도
@@ -246,6 +247,7 @@ html, body, header, .view {
 }
 .like_box{
    margin-top: 10px;
+       display: inline-block;
 }
 .like_off {
    width: 25px;
@@ -263,9 +265,10 @@ html, body, header, .view {
     vertical-align: middle;
 }
 .like_view{
-       margin-top: 15px;
     font-size: 14px;
     color: #555;
+    display: inline-block;
+    margin-right: 630px;
 }
 .commant-write{
        padding-left: 20px;
@@ -452,6 +455,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <col width="50">
              
                 <tr>
+                
                     <td align="center" colspan="7" class="modalcal">
                        <h2>          
                                  
@@ -549,7 +553,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                for(int i=0; i<list.size(); i++ ){
             %>
          <div class="diary-cont">
-            <p class="diary-title"><%=list.get(i).getTitle() %></p>
+            <p class="diary-title" style="margin-left: 0;"><%=list.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=list.get(i).getTday().substring(0,11) %></span>
             <hr>
             
@@ -564,8 +568,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
       %>
       </div>
 
+	<div style="    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    padding: 10px 20px 15px 20px;
+    margin-top: 15px;
+    background-color: rgb(255,255,255,0.5);">
+
    <div class="like_view">
-      <%=journalDto.getLike_cnt() %> 명이 좋아합니다
+      <b style="font-size: 20px;"><%=journalDto.getLike_cnt() %></b> 명이 좋아합니다
    </div>
    <div class="like_box">
    <% if(Likeckheack == 0) {%>
@@ -577,7 +588,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <%
    }
    %>
-
+	</div>
    
    
    

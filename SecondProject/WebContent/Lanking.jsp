@@ -91,11 +91,13 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
-        margin-right: 13px;
         font-size: 12px;
 }
 .lankavg{
-       font-size: 12px;
+           font-size: 12px;
+    width: 30px;
+    text-align: center;
+    display: inline-block;
 }
   main{
    background-image: url('img/bgSample12.jpg');

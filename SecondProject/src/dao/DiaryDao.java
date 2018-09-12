@@ -149,6 +149,7 @@ public class DiaryDao implements DiaryImpl {
 			if (rs.next()) {
 				dto = new JournalDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
 						rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9));
+				
 			}
 		} catch (SQLException e) {
 			System.out.println("get information failed");
