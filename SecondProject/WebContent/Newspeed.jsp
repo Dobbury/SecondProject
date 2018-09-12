@@ -48,8 +48,6 @@ if(paging < 6){
   <title>site</title>
 
  <style type="text/css">
- 
- 
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
@@ -82,6 +80,44 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 
 
 @-webkit-keyframes fadeInUp {
@@ -257,6 +293,12 @@ transition: all 40s;
 			
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
+<<<<<<< HEAD
+=======
+		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		
+	
+>>>>>>> 4c4f807d1d4cee670e3bc192753fce0ff5db06b3
 		
 		<!-- SCRIPTS -->
   		<script type="text/javascript">

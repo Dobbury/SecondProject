@@ -199,6 +199,7 @@ public class DiaryServlet extends HttpServlet {
          String jour = req.getParameter("jour");
          System.out.println("2단계");
 
+
          // 첫번째 이미지 경로 가져오기
          String fisrt_img = "";
          if (content.contains("<img src")) {
@@ -562,3 +563,4 @@ public class DiaryServlet extends HttpServlet {
    }
 
 }
+

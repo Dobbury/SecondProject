@@ -168,6 +168,7 @@ public class DiaryDao implements DiaryImpl {
 
 		List<DiaryDto> list = new ArrayList<>();
 
+
 		try {
 			conn = DBConnection.makeConnection();
 			System.out.println("1/6 getMemInfo suceess");
@@ -226,9 +227,11 @@ public class DiaryDao implements DiaryImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+
 			DBClose.close(psmt, conn, null);
 			System.out.println("3/6");
 		}
+
 
 		return count;
 	}
@@ -724,7 +727,6 @@ public class DiaryDao implements DiaryImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-
 			DBClose.close(psmt, conn, rs);
 		}
 		return count;

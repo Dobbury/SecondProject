@@ -118,7 +118,7 @@ public class MemberDao implements MemberImpl {
 
 	@Override
 	public boolean editMember(memberDto dto) {
-		String sql = " UPDATE MEM " + " SET PWD=?, NICK=?" + " WHERE ID=? ";
+		String sql = " UPDATE MEM " + " SET PW=?, NICK=?" + " WHERE ID=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -135,8 +135,11 @@ public class MemberDao implements MemberImpl {
 			psmt.setString(1, dto.getPw());
 			psmt.setString(2, dto.getNick());
 			psmt.setString(3, dto.getId());
-
-			psmt.executeQuery();
+			
+//			System.out.println("dto.getPw():"+ dto.getPw()+ "  Nick:"+ dto.getNick()+"   ID:" + dto.getId());
+			
+			count = psmt.executeUpdate();
+			//psmt.executeQuery();
 			System.out.println("3/6 edit member success");
 
 		} catch (SQLException e) {

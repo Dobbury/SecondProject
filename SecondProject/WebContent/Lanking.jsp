@@ -107,6 +107,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     width: 100%;
     height: 216vh;
 
+
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -128,6 +129,44 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     background-color: #fff;
     border: 1px solid #ccc !important;
     }
+
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 </style>
 
 
