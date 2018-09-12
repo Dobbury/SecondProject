@@ -94,7 +94,9 @@ html, body, header, .view {
    font-size: 28px;
    margin-right: 5px;
 }
-
+.diary-m img{
+	width: 100%;
+}
 button{
   background:#003458;
   color:#fff;
@@ -177,7 +179,7 @@ button:hover:before,button:hover:after{
 -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);margin-top: 20px;">
    
-            <div class="diary-m">
+            <div class="diary-m" style="    width: 870px;">
          <div class="diary-cont">
             <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>

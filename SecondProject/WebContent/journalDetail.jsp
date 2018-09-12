@@ -444,17 +444,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <div class="container" style="    max-width: 900px;">
 
    <div class="journal-title" >
-   <h1>
+   <h1 style="    font-weight: 700;
+    font-size: 30px;">
       <%=journalDto.getTitle() %>
       </h1>
        <span class="journal-id">  <%=journalDto.getId() %></span>
       <span class="journal-date"><%=journalDto.getWdate().substring(0,16) %></span>
-     
+     <hr style="    border-top: 4px solid #ddd;
+    width: 870px;">
    </div>
 
       <div style="width: 100%">
          <!-- 지도영역 -->
-       <div id="maps" style="width: 50%;">
+       <div id="maps" style="width: 478px;margin-right: 72px;    margin-right: 30px;">
          </div>
         
 <!--          <div class="map">

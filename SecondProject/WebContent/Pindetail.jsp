@@ -87,7 +87,7 @@ String grade_AVG = (String)request.getAttribute("grade_AVG");
 	width: 5px;
 	height: 10px;
 	display: inline-block;
-	background-color: #999;
+	background-color: #104aab;
 	content: "";
 	margin-right: 5px;
 	    margin-bottom: 2px;

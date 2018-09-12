@@ -153,7 +153,6 @@ request.setCharacterEncoding("utf-8");
    background-image: url('img/Lankbg2.png');
     background-size: 100% 100%;
     background-position: center center;
-    transition: all 40s;
     display: block;
     position: relative;
     width: 100%;
@@ -165,6 +164,19 @@ request.setCharacterEncoding("utf-8");
     background-size: cover;
 
 } 
+.insertbtn{
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    width: 500px;
+    height: 42px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #4285f4;
+    color: #fff;
+}
+.inserbtn:hover{
+	background-color: #fff;
+}
 
   </style>
   
@@ -515,7 +527,7 @@ request.setCharacterEncoding("utf-8");
       </table>
       <!-- Buttons -->
       <br><br>
-      <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+      <button type="button" data-toggle="modal" data-target="#jourAdd" class="insertbtn" >일정 추가하기</button>
      </div>
 
 
@@ -679,7 +691,7 @@ request.setCharacterEncoding("utf-8");
          </div>
 
 
-         <button type="button" onclick="myfunc()" > 취소 </button>
+         <!-- <button type="button" onclick="myfunc()" > 취소 </button> -->
        <script type="text/javascript">
        function myfunc() {
           location.href = "Newspeed.jsp";

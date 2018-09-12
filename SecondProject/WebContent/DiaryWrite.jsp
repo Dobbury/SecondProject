@@ -586,7 +586,7 @@ button:hover:before,button:hover:after{
 
 <!-- add_Pin Modal -->
 <div class="modal fade" id="add_Pin_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="top:5%">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">장소 이름 및 별점 등록</h4>
@@ -757,7 +757,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
+               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -774,7 +774,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;'>"
+               $("#restoPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
@@ -790,7 +790,7 @@ button:hover:before,button:hover:after{
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray; margin-right:4px;' >"
+               $("#tourPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;' >"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
