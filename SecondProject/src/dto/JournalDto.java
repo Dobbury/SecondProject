@@ -115,6 +115,15 @@ public class JournalDto {
 	public void setFisrt_Img(String fisrt_Img) {
 		this.fisrt_Img = fisrt_Img;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "JournalDto [seq=" + seq + ", startDate=" + startDate + ", endDate=" + endDate + ", readcount="
+				+ readcount + ", id=" + id + ", like_cnt=" + like_cnt + ", wdate=" + wdate + ", title=" + title
+				+ ", fisrt_Img=" + fisrt_Img + "]";
+	}
 	
 	
 	

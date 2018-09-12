@@ -84,14 +84,16 @@
 %>
 <%
 
-		 
+		JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
+
 		Calendar cal = Calendar.getInstance();
 		 
 		//연도 받아오기 
 		//달 받아오기  0부터 시작함 
-		int year = request.getParameter("y") == null ? cal.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("y"));
-		int month = request.getParameter("m") == null ? cal.get(Calendar.MONTH) : (Integer.parseInt(request.getParameter("m")) - 1);
-		 
+		System.out.println(journalDto.getStartDate().substring(0, 4)+" "+journalDto.getStartDate().substring(5, 7));
+		int year = Integer.parseInt(journalDto.getStartDate().substring(0, 4));
+		int month = Integer.parseInt(journalDto.getStartDate().substring(5, 7))-1;
+		
 		cal.set(year, month, 1); //연 월 일 세팅!
 		
 		 
@@ -124,8 +126,7 @@
 
   
    String loginid = dto.getId();
-   JournalDto journalDto = (JournalDto) request.getAttribute("JournalDto");
-
+   
    List<DiaryDto> list = (List<DiaryDto>)request.getAttribute("DiaryList");
    List<DiarycommentDto> commentview = (List<DiarycommentDto>)request.getAttribute("DiarycommentDto");
    Map<Integer,List<String[]>> locationMap = (Map<Integer,List<String[]>>)request.getAttribute("locations");   //각 날짜별(시퀀스로 관리) 위도 경도
@@ -470,6 +471,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <col width="50">
              
                 <tr>
+                
                     <td align="center" colspan="7" class="modalcal">
                        <h2>          
                                  
