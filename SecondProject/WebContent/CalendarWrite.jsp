@@ -675,7 +675,7 @@ request.setCharacterEncoding("utf-8");
                   alert("이미 등록된 일정이 포함되어 있습니다. 확인하고 다시 시도해 주세요.");
                }else{
                   alert("일정 추가 성공!");
-                  location.href="Newspeed.jsp?page=1";
+                  location.href="DiaryServlet?command=goNewspeed";
                }
             },
             error:function(){

@@ -185,6 +185,7 @@ button:hover:before,button:hover:after{
             <div class="diary"  >
                <a href="DiaryServlet?command=journalDetail&amp;seq=<%=list.get(i).getSeq()%>">
                   <div class="Dimage" style="">
+                  	<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=list.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
                   </div>
                   <p class="diary-title"><%=list.get(i).getTitle()%></p>
                </a>
