@@ -354,7 +354,7 @@ button:hover:before,button:hover:after{
 	  clearMarkers();
 	  basic_Marker = [];
 	}
-   
+
    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
@@ -795,6 +795,7 @@ button:hover:before,button:hover:after{
                      +"<div class='pin_info'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
+
                $("#tourSel").html("");
             }
             
@@ -841,6 +842,7 @@ button:hover:before,button:hover:after{
                   for (i = 0; i < hotellist.length; i++) {
                      o += '<option value="'+ hotellist[i].pin_name + '">'+ hotellist[i].pin_name+ '</option>';
                   }
+
                   $("#hotelSel").html("");
                   $("#hotelSel").append(o);
                },
