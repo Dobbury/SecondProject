@@ -108,43 +108,6 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
-
 
 
 @-webkit-keyframes fadeInUp {
@@ -251,7 +214,6 @@ button:hover:before,button:hover:after{
 						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
 					</a>
 					<div class="diary-textbox">
-					<!-- <span style="display: inline-block; vertical-align:middle;   color: #ccc;">ㅣ</span> -->
 						<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
 						</span>
 					</div>

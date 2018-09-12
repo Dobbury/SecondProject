@@ -141,46 +141,6 @@ ul.tab li.current {
 	vertical-align: top;
 }
 
-.btn1 {
-	background: #003458;
-	color: #fff;
-	border: none;
-	position: relative;
-	height: 60px;
-	font-size: 1.6em;
-	padding: 0 2em;
-	cursor: pointer;
-	transition: 800ms ease all;
-	outline: none;
-}
-
-.btn1:hover {
-	background: #fff;
-	color: #003458;
-}
-
-.btn1:before, btn1:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 2px;
-	width: 0;
-	background: #003458;
-	transition: 400ms ease all;
-}
-
-.btn1:after {
-	right: inherit;
-	top: inherit;
-	left: 0;
-	bottom: 0;
-}
-
-.btn1:hover:before, btn1:hover:after {
-	width: 100%;
-	transition: 800ms ease all;
-}
 
 body {
 	background-image: url("img/mp-bg.jpg");
@@ -352,10 +312,10 @@ body {
 				</tr>
 
 			</table>
-			<input type="button" class="btn1" style="WIDTH: 30pt; HEIGHT: 20pt"
+			<input type="button" class="btn btn-outline-dark" 
 				id="edit" value="수정완료"> 
-				<input type="button" class="btn1"
-				style="WIDTH: 30pt; HEIGHT: 20pt; font-size: 5;" id="back" value="취소">
+				<input type="button" class="btn btn-outline-dark"
+				 id="back" value="취소">
 		</div>
 		<div class="tab-pane fade" id="panel3" role="tabpanel"></div>
 
@@ -401,7 +361,7 @@ body {
 
 		$(function() {
 			$("#back").click(function() {
-				location.href = "Mypage.jsp?page=1";
+				location.href = "DiaryServlet?command=goMyPage";
 			});
 		});
 	</script>

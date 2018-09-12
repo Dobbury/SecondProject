@@ -70,44 +70,11 @@ request.setCharacterEncoding("utf-8");
   .modalcal{
      color: #000;
   }
+
       
-    button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+ 
   
+
   </style>
   
   
@@ -115,9 +82,11 @@ button:hover:before,button:hover:after{
 
 <body>
 
+
   </nav>
 
    <jsp:include page="header.jsp"></jsp:include> 
+
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
@@ -431,7 +400,7 @@ button:hover:before,button:hover:after{
      
        
       <!-- Buttons -->
-      <button type="button" data-toggle="modal" data-target="#jourAdd">일정 추가하기</button>
+      <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#jourAdd"">일정 추가</button>
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">
@@ -574,9 +543,9 @@ button:hover:before,button:hover:after{
 
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-default"
+                     <button type="button" class="btn btn-outline-dark"
                         data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="jourAddBtn">Add</button>
+                     <button type="button" class="btn btn-outline-primary" id="jourAddBtn">Add</button>
                   </div>
                </div>
 
@@ -584,7 +553,7 @@ button:hover:before,button:hover:after{
          </div>
 
 
-         <button type="button" onclick="myfunc()" > 취소 </button>
+         <button class="btn btn-outline-light" type="button" onclick="myfunc()" > 취소 </button>
        <script type="text/javascript">
        function myfunc() {
           location.href = "Newspeed.jsp";
@@ -658,7 +627,6 @@ button:hover:before,button:hover:after{
     </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
-
 
 <jsp:include page="footer.jsp"></jsp:include> 
 </body>

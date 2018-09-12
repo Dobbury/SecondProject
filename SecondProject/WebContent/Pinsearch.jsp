@@ -268,7 +268,7 @@ transition: all 40s;
 			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>

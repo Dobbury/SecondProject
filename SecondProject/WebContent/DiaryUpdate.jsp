@@ -87,43 +87,6 @@ html, body, header, .view {
 .modal-backdrop{
     z-index: 10;        
 }
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
-​
 
 
 </style>
@@ -344,13 +307,13 @@ button:hover:before,button:hover:after{
 		</tr>
 		<tr>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
 			</td>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
 			</td>
 			<td>
-				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
+				<button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch"  class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
 			</td>
 		</tr>
 	</table>
@@ -454,11 +417,11 @@ button:hover:before,button:hover:after{
     		<tr>
     		<tr style="height: 30px" align="center">
     			<td colspan="2">
-    				<input type="button" value="완료" id="diarySavebtn">
+    				<input type="button" value="완료" id="diarySavebtn" class="btn btn-outline-dark">
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				<input type="button" value="취소" id="#">
+    				<input type="button" value="취소" id="#" class="btn btn-outline-dark">
     			</td>
     		</tr>
     	</table>
@@ -489,8 +452,8 @@ button:hover:before,button:hover:after{
 		</form>
       </div>
       <div class="modal-footer">
-	     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   		 <button type="button" class="btn btn-primary" id="placeSaveBtn">Save Place</button>
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" id="placeSaveBtn">Save Place</button>
       </div>
     </div>
   </div>
@@ -534,8 +497,8 @@ button:hover:before,button:hover:after{
 	 
       <div class="modal-footer">
       	
-	     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   		 <button type="button" class="btn btn-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
+	     <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+   		 <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="pinSaveBtn">Save Place</button>
       </div>
     </div>
   </div>

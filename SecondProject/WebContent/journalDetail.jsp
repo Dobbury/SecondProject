@@ -603,7 +603,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                      <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;"></textarea>
-                      <input type="submit" class="btn1" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
+                      <input type="submit" class="btn btn-outline-dark" value="댓글"style="vertical-align: text-bottom; height: 70px; font-size: 10pt;">
 
                   </form>
                </div>
@@ -655,8 +655,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <form action="DiaryServlet?command=commentdelet" method="post">
       <div class="modal-body" style="text-align: center;">
       <p>댓글을 삭제하시겠습니까?</p>
-      <input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
-        <input type="button" class="btn btn-red" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
+      <input type="button" class="btn btn-outline-dark" value="예" onclick="deletefucsend()">
+        <input type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
       </div>
      
       </form>
