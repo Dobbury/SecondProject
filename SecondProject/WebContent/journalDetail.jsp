@@ -333,8 +333,8 @@ var pins={
 var map;
 var markers = [];
 
-var basic_lat= <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
-var basic_lng = <%=locationMap.get(list.get(0).getSeq()).get(1)[1] %>;
+var basic_lat= 1;
+var basic_lng = 1;
 
 function initialize() {
    
@@ -542,7 +542,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
                <input type="hidden" name="command" value="deletecomment">
                 <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
                <input type="hidden" name="commentseq" value="<%=commentview.get(i).getSeq() %>">
-               <input type="submit" style="float: right; cursor: pointer;" value="x">
+               <%
+               if(commentview.get(i).getId().equals(loginid)){
+               %>
+               		<input type="submit" style="float: right; cursor: pointer;" value="x">
+               <%
+               }
+               %>
                </form>
                <%-- <span style="float: right; cursor: pointer;"  onclick="deletefuc(' <%=commentview.get(i).getSeq() %>')">x</span> --%>
                </div>
@@ -561,7 +567,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
-                     <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;"></textarea>
+                     <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;resize: none;"></textarea>
                       <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
 
                   </form>

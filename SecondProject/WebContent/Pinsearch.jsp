@@ -51,6 +51,28 @@ if(paging < 6){
 
  <style type="text/css">
  
+  .starR1{
+/*     background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0; */
+    background: url('img/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    /* background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0; */
+    background: url('img/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0 0;}
+.starR2.on{background-position:-15px 0;}
  
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
@@ -181,27 +203,57 @@ transition: all 40s;
 	
 			 <% 
 			if(pinlist.size()!=0){
-			for(int i = 0; i < pinlist.size();i++){
-			%>
-				<div class="diary">
-					<a href="DiaryServlet?command=diaryDetail&pinname=<%=pinlist.get(i)[0]%>">
-						<div class="Dimage" style="">
-							<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=dao.getPin(pinlist.get(i)[0]).getLat()%>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>&zoom=13&size=600x300&maptype=roadmap
-								&markers=color:blue%7Clabel:S%7C<%=dao.getPin(pinlist.get(i)[0]).getLat() %>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>
-								&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
+				for(int i = 0; i < pinlist.size();i++){
+					%>
+						<div class="diary">
+							<a href="PinServlet?command=pinDetail&pinname=<%=pinlist.get(i)[0]%>">
+								<div class="Dimage" style="">
+									<img style="width: 100%; height: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=dao.getPin(pinlist.get(i)[0]).getLat()%>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>&zoom=13&size=600x300&maptype=roadmap
+										&markers=color:blue%7Clabel:S%7C<%=dao.getPin(pinlist.get(i)[0]).getLat() %>,<%=dao.getPin(pinlist.get(i)[0]).getLng() %>
+										&key=AIzaSyBp3NXTPG792Eg4zSYGpEGr8wYdAe3g4MI">
+								</div>
+								<p class="diary-title"><%=pinlist.get(i)[0] %></p>
+							</a>
+							<div class="diary-textbox">
+								<span class="diary-date" style="margin:0px"><%=pinlist.get(i)[1] %>
+								</span>
+							</div>
+							<div class="diary-textbox" style="line-height: 30px; margin-bottom: 5px; display: table; width: 100%;">
+								<div class="starRev">
+								<%
+								for(int j = 1 ; j<=10 ; j++){ 
+									if(j%2==1){
+										if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+								%>
+						  					<span class="starR1 on"></span>
+						  			<%
+										}else{
+						  			%>
+						  					<span class="starR1"></span>
+						  			<%
+						  				}
+									}else if(j%2==0){
+										if(j <= (int)Double.parseDouble(pinlist.get(i)[2])){
+									%>
+				  							<span class="starR2 on"></span>
+									<% 
+										}else{
+									%>
+											<span class="starR2"></span>
+									<%
+										}
+									}
+								}
+								%>	
+									<div style="float: right; margin-right: 10px;" >
+									
+									<span class="diary-date" style="margin-top: 5px;">평점 : <%=pinlist.get(i)[2] %></span>	
+									</div>
+								</div>
+							</div>	
 						</div>
-						<p class="diary-title"><%=pinlist.get(i)[0] %></p>
-					</a>
-					<div class="diary-textbox">
-					<span style="display: inline-block;margin: 0 5px;    color: #ccc;">|</span>
-					<span class="diary-date"><%=pinlist.get(i)[1] %></span>	
-					
-					
-					</div>
-					
-				</div>
-			<%
-			}
+					<%
+					}
 			}else{
 			%>
 			<div style="padding: 100px;padding: 100px;    background-color: #f9f9f9; width: 94%;margin: 10px auto;">

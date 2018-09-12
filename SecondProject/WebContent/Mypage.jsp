@@ -238,7 +238,9 @@ body {
 					<div class="diary">
 						<a
 							href="DiaryServlet?command=diaryDetail&seq=<%=jlist.get(i).getSeq()%>">
-							<div class="Dimage" style=""></div>
+							<div class="Dimage" style="">
+								<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=jlist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+							</div>
 							<p class="diary-title"><%=jlist.get(i).getTitle()%></p>
 						</a>
 						<div class="diary-textbox">
@@ -388,11 +390,11 @@ body {
 					},
 					success : function(data) {
 						alert(data);
-						location.href = "Mypage.jsp?page=1";
+						location.href = "DiaryServlet?command=goMyPage";
 					},
 					error : function() {
 						alert("에러남");
-						location.href = "Mypage.jsp?page=1";
+						location.href = "DiaryServlet?command=goMyPage";
 					}
 				});
 
@@ -401,7 +403,7 @@ body {
 
 		$(function() {
 			$("#back").click(function() {
-				location.href = "Mypage.jsp?page=1";
+				location.href = "DiaryServlet?command=goMyPage";
 			});
 		});
 	</script>
