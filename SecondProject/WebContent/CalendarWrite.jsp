@@ -547,12 +547,9 @@ request.setCharacterEncoding("utf-8");
                                 <%=year%> 
                              </td>
                          </tr>
-                      
-<<<<<<< HEAD
+
                          <tr height="15" style="background-color: #C8D7FF; border-bottom: 2px solid #003458" >
-=======
-                         <tr height="15">
->>>>>>> aedace9de21767563ab68a803d5097ad0bd93ac8
+
                              <td align="center">S</td>
                              <td align="center">M</td>
                              <td align="center">T</td>
