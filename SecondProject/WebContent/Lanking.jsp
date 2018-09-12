@@ -98,7 +98,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
        font-size: 12px;
 }
   main{
-   background-image: url('img/Lankbg2.png');
+   background-image: url('img/bgSample11.jpg');
     background-size: 100% 100%;
     background-position: center center;
     transition: all 40s;

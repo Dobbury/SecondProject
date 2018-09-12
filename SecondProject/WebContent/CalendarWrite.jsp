@@ -72,7 +72,22 @@ request.setCharacterEncoding("utf-8");
   }
 
       
- 
+  main{
+   background-image: url('img/bgSample02.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 216vh;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
   
 
   </style>

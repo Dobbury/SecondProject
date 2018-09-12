@@ -79,7 +79,7 @@ if(paging < 6){
  .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
  .searchbg {
-width:100%;height: 100%;padding-top: 280px;background-image: url('img/main_bg06.png');background-size: 100% 100%;
+width:100%;height: 100%;padding-top: 280px;background-image: url('img/main_bg06.jpg');background-size: 100% 100%;
 background-position: center center ;
 transition: all 40s;
 	
