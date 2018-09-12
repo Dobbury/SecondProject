@@ -13,7 +13,7 @@
   <!-- Material Design Bootstrap -->
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="Design/css/style.min.css" rel="stylesheet">
+  <link href="Design/css/style.min.css" rel="stylesheet"> 
 
   
   
