@@ -154,7 +154,6 @@ request.setCharacterEncoding("utf-8");
    background-image: url('img/bgSample09.jpg');
     background-size: 100% 100%;
     background-position: center center;
-    transition: all 40s;
     display: block;
     position: relative;
     width: 100%;
@@ -167,6 +166,19 @@ request.setCharacterEncoding("utf-8");
     background-size: cover;
 
 } 
+.insertbtn{
+box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
+    width: 500px;
+    height: 42px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #4285f4;
+    color: #fff;
+}
+.inserbtn:hover{
+	background-color: #fff;
+}
 
 
   </style>
@@ -517,13 +529,13 @@ request.setCharacterEncoding("utf-8");
           
       </table>
       <!-- Buttons -->
-
       <br><br>
-      <button type="button" data-toggle="modal" data-target="#jourAdd" class="btn btn-default">일정 추가하기</button>
+      <button type="button" data-toggle="modal" data-target="#jourAdd" class="insertbtn" >일정 추가하기</button>
+     </div>
 
      </div>
      	<br>
-     </div>
+     
     
 	
          <!-- Modal -->
@@ -686,14 +698,6 @@ request.setCharacterEncoding("utf-8");
          </div>
 
 
-         <button class="btn btn-outline-light" type="button" onclick="myfunc()" > 취소 </button>
-       <script type="text/javascript">
-       function myfunc() {
-          location.href = "Newspeed.jsp";
-       }  
-      </script> 
-
-
    
  <script type="text/javascript">
       
@@ -760,7 +764,6 @@ request.setCharacterEncoding("utf-8");
     </div>
 </main>
 <!-- --------------------------------------------------------------------------------- -->
-<<<<<<< HEAD
 <jsp:include page="footer.jsp"></jsp:include>
 
 
@@ -777,9 +780,5 @@ request.setCharacterEncoding("utf-8");
     // Animations initialization
     new WOW().init();
   </script> -->
-=======
-
-<jsp:include page="footer.jsp"></jsp:include> 
->>>>>>> 6bc81e74b237db1ae59c62b42ec10e329d97526a
 </body>
 </html>

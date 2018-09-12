@@ -95,7 +95,45 @@ html, body, header, .view {
    margin-right: 5px;
 }
 
-
+.diary-m img{
+	width: 100%;
+}
+button{
+  background:#003458;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#003458;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003458;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
 
 </style>
@@ -104,7 +142,7 @@ html, body, header, .view {
 
 </head>
 
-<body style="    background-color: #e9e9e9e9;" >
+<body style="background-color: #e9e9e9e9;" >
 
  <jsp:include page="header.jsp"></jsp:include> 
 
@@ -141,7 +179,7 @@ html, body, header, .view {
 -moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);margin-top: 20px;">
    
-            <div class="diary-m">
+            <div class="diary-m" style="    width: 870px;">
          <div class="diary-cont">
             <p class="diary-title"><%=diarylist.get(i).getTitle() %></p>
             <span class="diary-date" style="color:#555"><%=diarylist.get(i).getTday().substring(0,11) %></span>

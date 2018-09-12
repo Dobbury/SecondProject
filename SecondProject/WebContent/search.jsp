@@ -187,6 +187,8 @@ transition: all 40s;
 				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
+													<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+						
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -284,6 +286,8 @@ transition: all 40s;
    
    
   <!-- SCRIPTS -->
+  
+  
   <script type="text/javascript">
   $(function(){
 	 $("#stext").val('<%=stext%>'); 
@@ -292,12 +296,15 @@ transition: all 40s;
 	 $('html, body').animate( { scrollTop : scmove }, 400 );
   });
   
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
+
   
   </script>
-  
+    		<script type="text/javascript">
+  			function gocal() {  		
+  				location.href= "CalendarWrite.jsp";	
+			}
+
+ 		 </script>
   <script>
 
 	

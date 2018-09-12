@@ -366,7 +366,6 @@ public class DiaryServlet extends HttpServlet {
 
          int seq = Integer.parseInt(req.getParameter("seq"));
 
-
          resp.sendRedirect("DiaryServlet?command=journalDetail&seq=" + seq);
 
       } else if (command.equals("search")) {
