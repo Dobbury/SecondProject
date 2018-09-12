@@ -546,7 +546,7 @@ button:hover:before,button:hover:after{
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn btn-primary" value="취소" id="CalendarWrite.jsp">
+                <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
              </td>
           </tr>
        </table>

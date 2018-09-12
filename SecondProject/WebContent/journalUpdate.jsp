@@ -135,6 +135,9 @@ button:hover:before,button:hover:after{
 
 
 </style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 </head>
 
 <body style="    background-color: #e9e9e9e9;" >
@@ -203,7 +206,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);">
 	<div align="center">
 		<button id="jourCancleBtn" ><font size="4">journal cancle</font></button>
 	</div>
-	
+	<br>	
    </main>
 
 
