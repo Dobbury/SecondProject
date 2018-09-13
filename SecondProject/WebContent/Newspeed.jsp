@@ -220,9 +220,7 @@ transition: all 40s;
 			
 			%>
 			
-			
-			
-			
+				
 			<div class="paging-box">
 				<!-- paging -->
 				<div>

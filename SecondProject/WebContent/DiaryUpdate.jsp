@@ -636,9 +636,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>
                                         
                                      </div>
@@ -659,9 +659,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>
                                      </div>
                                      <input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'>
@@ -681,9 +681,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>                                    
                                      </div>
                                      <input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'>
@@ -980,7 +980,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                                     +$("#addpinname").val()
                                     +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                                     +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x' ></div>");
@@ -996,7 +996,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#restoPinArr").append("<div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
@@ -1011,7 +1011,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#tourPinArr").append("<div style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");

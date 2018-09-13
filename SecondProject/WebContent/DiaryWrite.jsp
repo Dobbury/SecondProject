@@ -744,9 +744,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
+               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
                $("#hotelSel").html("");
@@ -761,9 +761,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
+               $("#restoPinArr").append("<div style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
                $("#restoSel").html("");
@@ -777,9 +777,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;' >"
+               $("#tourPinArr").append("<div style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;' >"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
 
