@@ -283,7 +283,6 @@ html, body, header, .view {
     position: relative;
     width: 100%;
 
-
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
