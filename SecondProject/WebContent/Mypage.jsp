@@ -188,6 +188,31 @@ body {
    ;
 }
 }
+
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}	
 </style>
 </head>
 
@@ -265,7 +290,7 @@ body {
                      <%
                         if (p != 1 && pagecount != 0) {
                      %>
-                     <a href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
+                     <a class="pagingNext" href="./DiaryServlet?command=MypagePaging&page=<%=p - 1%>">&lt;</a>
                      <%
                         }
                      %>
@@ -274,11 +299,11 @@ body {
                         for (int i = startPage; i < pagecount; i++) {
                            if (i + 1 != p) {
                      %>
-                     <a href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
+                     <a class="pagingNum" href="./DiaryServlet?command=MypagePaging&page=<%=i + 1%>"><%=i + 1%></a>
                      <%
                         } else {
                      %>
-                     <strong><%=p%></strong>
+                     <strong class="pagingSelNum"><%=p%></strong>
                      <%
                         }
                            if (i + 1 == endPage) {
@@ -288,7 +313,7 @@ body {
 
                         if (p != pagecount && pagecount != 0) {
                      %>
-                     <a href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
+                     <a class="pagingNext" href="./DiaryServlet?command=MypagePaging&page=<%=p + 1%>">&gt;</a>
                      <%
                         }
                      %>

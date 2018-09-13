@@ -81,6 +81,30 @@ transition: all 40s;
 	animation-name: fadeInUp;
 }
 
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}
 
 @-webkit-keyframes fadeInUp {
 	0% {
@@ -142,10 +166,6 @@ transition: all 40s;
  		    font-size: 14px;
 }
  	
- 	.paging-box strong {
-
-    color: red;
- 	}
  </style>
   
 </head>
@@ -234,7 +254,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
+					<a class="pagingNext" href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -244,11 +264,11 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
+				<a class="pagingNum" href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
-					<strong><%=paging %></strong>
+					<strong class="pagingSelNum"><%=paging %></strong>
 					<%
 				}
 				if(i+1 == endPage){
@@ -259,7 +279,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
+			<a class="pagingNext" href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>

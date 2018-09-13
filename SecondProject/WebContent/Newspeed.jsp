@@ -48,108 +48,175 @@ if(paging < 6){
   <title>site</title>
 
  <style type="text/css">
- .scene {display: block; position: relative; width: 100%; 
-	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
- .searchbg {
-width:100%;height: 100%;padding-top: 280px;background-image: url('img/b5.jpg');background-size: 100% 100%;
-background-position: center center ;
-transition: all 40s;
-	
- }
+.scene {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.searchbg {
+	width: 100%;
+	height: 100%;
+	padding-top: 280px;
+	background-image: url('img/b5.jpg');
+	background-size: 100% 100%;
+	background-position: center center;
+	transition: all 40s;
+}
 /*  .searchbg:hover{
  	background-size: 150% 150%;
  } */
- .searchbtn{
- 	height: 40px;
-    margin-left: -4px;
-    background-color: #aaa;
-    display: inline-block;
-    width: 45px;
-    vertical-align: top;
-    font-size: 12px;
-    padding-top: 6px;
-    border-bottom-right-radius: 7px;
-    border-top-right-radius: 7px;
- 	}
- 	.searchbtn:hover{
- 		background-color: #999;
- 	}
- 	
- 	
+.searchbtn {
+	height: 40px;
+	margin-left: -4px;
+	background-color: #aaa;
+	display: inline-block;
+	width: 45px;
+	vertical-align: top;
+	font-size: 12px;
+	padding-top: 6px;
+	border-bottom-right-radius: 7px;
+	border-top-right-radius: 7px;
+}
+
+.searchbtn:hover {
+	background-color: #999;
+}
+
 .fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
 
-
-
-@-webkit-keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		transform: translateY(40px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
 }
 
-@keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		-ms-transform: translateY(40px);
-		transform: translateY(40px);
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		-ms-transform: translateY(0);
-	}
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
 }
 
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}	
+
+@
+-webkit-keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translateY(40px);
+	transform: translateY(40px);
+}
+
+100%
+{
+opacity
+:
+ 
+1;
+-webkit-transform
+:
+ 
+translateY
+(0);
+
+		
+transform
+:
+ 
+translateY
+(0);
+
+	
+}
+}
+@
+keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translateY(40px);
+	-ms-transform: translateY(40px);
+	transform: translateY(40px);
+}
+
+100%
+{
+opacity
+:
+ 
+1;
+-webkit-transform
+:
+ 
+translateY
+(0);
+
+		
+-ms-transform
+:
+ 
+translateY
+(0);
+
+	
+}
+}
 .animate {
 	-webkit-animation-duration: 3s;
 	animation-duration: 3s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
- 	.searchbtn{
-	height: 40px;
-    margin-left: -4px;
-    border: none;
-    margin-top: 1px;
-    background-image: url(img/searchicon.png);
-   background-size: 80% 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: bottom;
-    cursor: pointer;
-}
- 	.paging-box{
- 		width: 100%;display: table;
- 		    padding-top: 80px;
- 	}
- 	.paging-box a,strong {
- 		margin: 3px;
- 		color: #555;
- 		    font-size: 14px;
-}
- 	
- 	.paging-box strong {
- 		
 
-    color: red;
- 	}
- 	
- 	/* .diary-title {
+.searchbtn {
+	height: 40px;
+	margin-left: -4px;
+	border: none;
+	margin-top: 1px;
+	background-image: url(img/searchicon.png);
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+	vertical-align: bottom;
+	cursor: pointer;
+}
+
+.paging-box {
+	width: 100%;
+	display: table;
+	padding-top: 80px;
+}
+
+.paging-box a, strong {
+	margin: 3px;
+	color: #555;
+	font-size: 14px;
+}
+
+.paging-box strong {
+	color: white;
+}
+
+/* .diary-title {
  		margin-left: 0 !important;
  		margin-right: 0 !important;
  	} */
- </style>
+</style>
   
 </head>
 
@@ -228,7 +295,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
+					<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
@@ -236,11 +303,11 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
+				<a class="pagingNum" href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
-					<strong><%=paging %></strong>
+					<strong class="pagingSelNum"><%=paging %></strong>
 					<%
 				}
 				if(i+1 == endPage){
@@ -250,7 +317,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
+			<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
 			<%
 			}
 			%>
