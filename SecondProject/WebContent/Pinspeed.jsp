@@ -79,7 +79,6 @@
 .starR2.on {
 	background-position: -15px 0;
 }
-
 .pagingNum {
 	color:black;
 	background-color: white;
@@ -104,6 +103,11 @@
 	border: 2px black solid;
 	font-weight: bold;
 }
+
+
+.diary:hover{
+ 		border: 1px solid #222;
+ 	}
 
 .scene {
 	display: block;

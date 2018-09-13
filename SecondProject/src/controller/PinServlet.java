@@ -172,7 +172,7 @@ public class PinServlet extends HttpServlet {
 			   int pagecount = 0;
 			   if (jcount != 0) {
 				   pagecount = jcount / 9;
-				   if (pagecount % jcount > 0) {
+				   if (jcount%9 > 0) {
 					   pagecount++;
 				   }
 			   }

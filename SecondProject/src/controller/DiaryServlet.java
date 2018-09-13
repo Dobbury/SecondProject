@@ -381,7 +381,7 @@ public class DiaryServlet extends HttpServlet {
 
          int pagecount = jcount / 9;
          if (jcount != 0) {
-            if (pagecount % jcount > 0) {
+            if (jcount % 9 > 0) {
                pagecount++;
             }
          }

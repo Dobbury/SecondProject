@@ -91,6 +91,9 @@ if(paging < 6){
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
+.diary:hover {
+	border: 1px solid #222;
+}
 
 .pagingNum {
 	color:black;
