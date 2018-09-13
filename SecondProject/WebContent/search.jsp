@@ -169,10 +169,6 @@ transition: all 40s;
  	.diary:hover{
  		border: 1px solid #222;
  	}
- 	.paging-box strong {
-
-    color: red;
- 	}
  </style>
   
 </head>
