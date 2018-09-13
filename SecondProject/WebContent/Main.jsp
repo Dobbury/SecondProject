@@ -152,7 +152,7 @@
     background: darkmagenta;
     color: #fff;
     
-	/* asdasasdasdasdasdsa */
+    
 	/* .scene {display: block; position: relative; width: 100%; 
 	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}  */
    

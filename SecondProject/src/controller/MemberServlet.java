@@ -36,8 +36,9 @@ public class MemberServlet extends HttpServlet {
 		System.out.println("do Process success");
 		
 		
-		resp.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html; charset=utf-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
 
 		MemberImpl dao = MemberDao.getInstance();
 
@@ -94,6 +95,7 @@ public class MemberServlet extends HttpServlet {
 			String nick = req.getParameter("nick");
 			System.out.println(id+pw+name+nick);
 			
+			System.out.println(name);
 			int sign = dao.dosignup(id, pw, name, nick);
 			
 			if(sign == 1) {
