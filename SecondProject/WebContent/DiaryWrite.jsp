@@ -186,7 +186,10 @@ html, body, header, .view {
     display: block;
     position: relative;
     width: 100%;
+<<<<<<< HEAD
     height: 216vh;
+=======
+>>>>>>> 742717003c0296aa53d7e083240108846c0a664e
 
 
     background-repeat: no-repeat;
@@ -619,7 +622,7 @@ html, body, header, .view {
 
 <!-- Pin_Info Modal -->
 <div class="modal fade" id="Pin_Info_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="top:5%">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Pin 정보</h4>

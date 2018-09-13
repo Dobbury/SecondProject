@@ -282,7 +282,10 @@ html, body, header, .view {
     display: block;
     position: relative;
     width: 100%;
+<<<<<<< HEAD
     height: 216vh;
+=======
+>>>>>>> 742717003c0296aa53d7e083240108846c0a664e
 
 
     background-repeat: no-repeat;

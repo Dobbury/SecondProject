@@ -182,7 +182,11 @@ transition: all 40s;
 		<div style="display: table;width: 96%;">
 		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
 
+<<<<<<< HEAD
 			<button class="btn btn-outline-black" style="float: right;height: 40px;margin-top: 25px; padding-top:8px" onclick="gocal()">글쓰기</button>
+=======
+			<button style="float: right;height: 40px;margin-top: 25px;" onclick="gocal()">글쓰기</button>
+>>>>>>> 742717003c0296aa53d7e083240108846c0a664e
 		</div>
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
