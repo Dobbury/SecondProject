@@ -81,6 +81,30 @@ transition: all 40s;
 	animation-name: fadeInUp;
 }
 
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}
 
 @-webkit-keyframes fadeInUp {
 	0% {
@@ -141,7 +165,10 @@ transition: all 40s;
  		color: #555;
  		    font-size: 14px;
 }
- 	
+
+ 	.diary:hover{
+ 		border: 1px solid #222;
+ 	}
  	.paging-box strong {
 
     color: red;
@@ -177,7 +204,12 @@ transition: all 40s;
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
+		<div style="display: table;width: 96%;">
+		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
+
+			<button class="btn btn-outline-black" style="float: right;height: 40px;margin-top: 25px; padding-top:8px" onclick="gocal()">글쓰기</button>
+
+		</div>
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
     margin-top: 10px;">
@@ -225,7 +257,7 @@ transition: all 40s;
 			%>
 			
 			
-			
+			<br>
 			<div class="paging-box">
 			<div >
 				<!-- paging -->
@@ -234,7 +266,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
+					<a class="pagingNext" href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -244,11 +276,11 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
+				<a class="pagingNum" href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
-					<strong><%=paging %></strong>
+					<strong class="pagingSelNum"><%=paging %></strong>
 					<%
 				}
 				if(i+1 == endPage){
@@ -259,7 +291,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
+			<a class="pagingNext" href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -270,7 +302,6 @@ transition: all 40s;
 			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>

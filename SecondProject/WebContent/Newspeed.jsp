@@ -40,16 +40,13 @@ if(paging < 6){
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+  <title>site</title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<head>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
-<title>site</title>
-
-<style type="text/css">
+ <style type="text/css">
 .scene {
 	display: block;
 	position: relative;
@@ -93,6 +90,36 @@ if(paging < 6){
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
+
+
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+.diary:hover {
+	border: 1px solid #222;
+
+}
+
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}	
 
 @
 -webkit-keyframes fadeInUp { 0% {
@@ -186,7 +213,7 @@ translateY
 }
 
 .paging-box strong {
-	color: red;
+	color: white;
 }
 
 /* .diary-title {
@@ -271,25 +298,27 @@ translateY
 
 
 			<div class="paging-box">
+				<br>
 				<!-- paging -->
 				<div>
 					<%
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
+					<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
 					<%
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
-				%>
-					<a href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
-					<%
+				%>				
+				<a class="pagingNum" href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
+				<%
+
 				}else{
 					%>
-					<strong><%=paging %></strong>
+					<strong class="pagingSelNum"><%=paging %></strong>
 					<%
 				}
 				if(i+1 == endPage){
@@ -299,8 +328,10 @@ translateY
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-					<a href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
-					<%
+
+			<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
+			<%
+
 			}
 			%>
 				</div>

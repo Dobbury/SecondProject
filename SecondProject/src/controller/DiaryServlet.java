@@ -141,7 +141,7 @@ public class DiaryServlet extends HttpServlet {
          int pagecount = 0;
          if (jcount != 0) {
             pagecount = jcount / 9;
-            if (pagecount % jcount > 0) {
+            if (jcount %9 > 0) {
                pagecount++;
             }
          }
@@ -381,7 +381,7 @@ public class DiaryServlet extends HttpServlet {
 
          int pagecount = jcount / 9;
          if (jcount != 0) {
-            if (pagecount % jcount > 0) {
+            if (jcount % 9 > 0) {
                pagecount++;
             }
          }
@@ -474,7 +474,7 @@ public class DiaryServlet extends HttpServlet {
          int pagecount = 0;
          if (jcount != 0) {
             pagecount = jcount / 9;
-            if (pagecount % jcount > 0) {
+            if (jcount % 9 > 0) {
                pagecount++;
             }
          }
@@ -491,7 +491,8 @@ public class DiaryServlet extends HttpServlet {
 
          int pagecount = jcount / 6;
          if (jcount != 0) {
-            if (pagecount % jcount > 0) {
+            if (jcount % 6 > 0) {
+
                pagecount++;
             }
          }
@@ -507,8 +508,9 @@ public class DiaryServlet extends HttpServlet {
          List<JournalDto> jlist = dao.myJournalList(dto.getId(), page);
          int pagecount = 0;
          if (jcount != 0) {
-            pagecount = jcount / 9;
-            if (pagecount % jcount > 0) {
+            pagecount = jcount / 6;
+            if (jcount % 6 > 0) {
+
                pagecount++;
             }
          }
