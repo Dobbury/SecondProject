@@ -186,7 +186,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                
                
                </div>
-               <div class="commant-content" style="width: 99%;word-break: break-all;text-align: left;  color:#555"><%=list.get(i).getPcomment() %></div>
+               <div class="commant-content" style="width: 99%;word-break: break-all;text-align: left;  color:#000000"><%=list.get(i).getPcomment() %></div>
               
                <div class="starRev" style="margin-top: 10px;">
 						<%

@@ -428,8 +428,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
     font-size: 30px;">
       <%=journalDto.getTitle() %>
       </h1>
-       <span class="journal-id">  <%=journalDto.getId() %></span>
-      <span class="journal-date"><%=journalDto.getWdate().substring(0,16) %></span>
+       <span class="journal-id" style="color: white">  <%=journalDto.getId() %></span>
+      <span class="journal-date" style="color: white"><%=journalDto.getWdate().substring(0,16) %></span>
      <hr style="    border-top: 4px solid #ddd;
     width: 870px;">
    </div>
