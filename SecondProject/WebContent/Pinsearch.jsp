@@ -312,7 +312,7 @@ transition: all 40s;
 				<!-- // paging -->
 			</div>
 			</div>
-			
+
 	</div>
 
    </div>

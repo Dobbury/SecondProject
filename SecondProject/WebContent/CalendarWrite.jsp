@@ -118,6 +118,7 @@ request.setCharacterEncoding("utf-8");
      color: #000;
   }
 
+
   .style_prevu_kit
 {
     display:inline-block;
@@ -150,13 +151,14 @@ request.setCharacterEncoding("utf-8");
     transform: scale(1);
 }
   main{
-   background-image: url('img/Lankbg2.png');
+   background-image: url('img/bgSample09.jpg');
     background-size: 100% 100%;
     background-position: center center;
     display: block;
     position: relative;
     width: 100%;
     height: 140vh;
+
 
 
     background-repeat: no-repeat;
@@ -177,6 +179,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 .inserbtn:hover{
 	background-color: #fff;
 }
+
 
   </style>
   
@@ -530,7 +533,11 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
       <button type="button" data-toggle="modal" data-target="#jourAdd" class="insertbtn" >일정 추가하기</button>
      </div>
 
-
+     </div>
+     	<br>
+     
+    
+	
          <!-- Modal -->
          <div class="modal fade" id="jourAdd" role="dialog">
             <div class="modal-dialog">
@@ -681,22 +688,14 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
 
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-default"
+                     <button type="button" class="btn btn-outline-dark"
                         data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="jourAddBtn">Add</button>
+                     <button type="button" class="btn btn-outline-primary" id="jourAddBtn">Add</button>
                   </div>
                </div>
 
             </div>
          </div>
-
-
-         <!-- <button type="button" onclick="myfunc()" > 취소 </button> -->
-       <script type="text/javascript">
-       function myfunc() {
-          location.href = "Newspeed.jsp";
-       }  
-      </script> 
 
 
    

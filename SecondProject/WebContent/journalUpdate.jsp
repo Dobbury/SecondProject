@@ -41,6 +41,21 @@ html, body, header, .view {
    height: 100%;
 }
 
+ main{
+   background-image: url('img/bgSample13.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 .container {
    display: table;
 }
@@ -94,6 +109,7 @@ html, body, header, .view {
    font-size: 28px;
    margin-right: 5px;
 }
+
 .diary-m img{
 	width: 100%;
 }
@@ -135,14 +151,13 @@ button:hover:before,button:hover:after{
 }
 
 
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 </head>
 
-<body style="    background-color: #e9e9e9e9;" >
+<body style="background-color: #e9e9e9e9;" >
 
  <jsp:include page="header.jsp"></jsp:include> 
 
@@ -205,7 +220,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);margin-top: 20px;">
      
 	<br>
 	<div align="center">
-		<button id="jourCancleBtn" ><font size="4">journal cancle</font></button>
+		<button class="btn btn-outline-dark" id="jourCancleBtn" ><font size="4">journal cancle</font></button>
 	</div>
 	<br>	
    </main>

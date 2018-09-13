@@ -274,43 +274,22 @@ html, body, header, .view {
        padding-left: 20px;
     padding-right: 20px;
 }
+  main{
+   background-image: url('img/bgSample09.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
 
-button{
-  background:#003458;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#003458;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #003458;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
+
 
 .diary-cont{
  padding: 40px;margin-top:20px;
@@ -332,9 +311,11 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
     height: 370px;
 }
 
+
 .diary-m img{
 	width: 100%;
 }
+
 
 
 </style>
@@ -617,7 +598,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div class="diary-b">
          <div class="diary-commant">
           <h4>댓글</h4>
-            <div class="diary-commant"style="padding: 30px; text-align: center; background: rgb(238, 241, 246) !important;">
+            <div class="diary-commant"style="padding: 30px; text-align: center; background-color: rgba(0,0,0,0.2); !important;">
             
             <%
                for(int i=0; i<commentview.size(); i++ ){
@@ -659,8 +640,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
                   <form action="DiaryServlet" method="get" >
                      <input type="hidden" name="command" value="commentwrite">
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
+
                      <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;resize: none;"></textarea>
-                      <input type="submit" value="댓글달기"style="vertical-align: text-bottom; height: 70px;">
+                      <input type="submit" value="댓글"style="vertical-align: text-bottom; height: 70px; font-size: 12pt;" class="btn btn-default">
+						<br><br>
 
                   </form>
                </div>
@@ -712,8 +695,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <form action="DiaryServlet?command=commentdelet" method="post">
       <div class="modal-body" style="text-align: center;">
       <p>댓글을 삭제하시겠습니까?</p>
-      <input type="button" class="btn btn-primary" value="예" onclick="deletefucsend()">
-        <input type="button" class="btn btn-red" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
+      <input type="button" class="btn btn-outline-dark" value="예" onclick="deletefucsend()">
+        <input type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close" value="아니요" style="float: none">
       </div>
      
       </form>
