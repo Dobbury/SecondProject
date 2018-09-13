@@ -448,7 +448,7 @@ html, body, header, .view {
       </div>
         <div>
         <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="hotelMapSearch"  
-        class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
+        class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">숙소 추가</button>
         </div>
      
      </div>
@@ -465,7 +465,7 @@ html, body, header, .view {
       </div>
         <div>
                     <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="restoMapSearch"  
-                    class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
+                    class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">식당 추가</button>
 
         </div>
      
@@ -483,7 +483,7 @@ html, body, header, .view {
       </div>
         <div>
                     <button type="button" style="width: 200px; margin-left: 20px; margin-right: 20px" id="tourMapSearch" 
-                     class="btn btn-primary btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
+                     class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#placeModal">관광지 추가</button>
 
         </div>
      
@@ -530,11 +530,11 @@ html, body, header, .view {
           <tr>
           <tr style="height: 30px" align="center">
              <td colspan="2">
-                <input type="button" class="btn btn-primary" value="완료" id="diarySavebtn">
+                <input type="button" class="btn btn-outline-dark" value="완료" id="diarySavebtn">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
+                <input type="button" class="btn btn-outline-dark" value="취소" onclick="location.href='CalendarWrite.jsp'">
              </td>
           </tr>
        </table>
