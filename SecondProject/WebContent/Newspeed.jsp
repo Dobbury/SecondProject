@@ -289,6 +289,7 @@ translateY
 			
 				
 			<div class="paging-box">
+				<br>
 				<!-- paging -->
 				<div>
 				<%

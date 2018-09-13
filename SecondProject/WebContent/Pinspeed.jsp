@@ -315,8 +315,7 @@
 
 
 		</div>
-		
-		
+		<br>
 		<div class="paging-box" style="text-align: center;padding: 30px 0 40px;">
 			<!-- paging -->
 			<div>

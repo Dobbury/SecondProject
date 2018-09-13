@@ -176,7 +176,21 @@ html, body, header, .view {
     z-index: 10;        
 }
 
+ main{
+   background-image: url('img/bgSample13.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
 
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 
 .selectbox{
    margin-right: 60px;
@@ -741,18 +755,18 @@ html, body, header, .view {
                 <textarea style="height: 600px; width: 1096px" name="ir1" id="ir1"></textarea>      
              </td>
           </tr>
-          <tr style="height: 30px" align="center">
-             <td colspan="2">
-                <input type="button"  class="btn btn-primary"value="완료" id="diarySavebtn">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
-             </td>
-          </tr>
+          
        </table>
-      
-      
+       <div>
+	      <div align="center">
+	           <input type="button"  class="btn btn-primary"value="완료" id="diarySavebtn">
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
+	             
+	      </div>
+      </div>
     </div>
     
  

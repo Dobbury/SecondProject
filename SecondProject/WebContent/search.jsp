@@ -197,7 +197,12 @@ transition: all 40s;
    <div class="container">
       
 		
-		<h3 style="margin-left: 35px;font-weight: 700;">여행후기</h3>
+		<div style="display: table;width: 96%;">
+		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
+
+			<button class="btn btn-outline-black" style="float: right;height: 40px;margin-top: 25px; padding-top:8px" onclick="gocal()">글쓰기</button>
+
+		</div>
 		<hr style="width: 1037px;
     border-top: 2px solid #eee;
     margin-top: 10px;">
@@ -245,7 +250,7 @@ transition: all 40s;
 			%>
 			
 			
-			
+			<br>
 			<div class="paging-box">
 			<div >
 				<!-- paging -->
@@ -290,7 +295,6 @@ transition: all 40s;
 			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>
