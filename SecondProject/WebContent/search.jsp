@@ -141,7 +141,9 @@ transition: all 40s;
  		color: #555;
  		    font-size: 14px;
 }
- 	
+ 	.diary:hover{
+ 		border: 1px solid #222;
+ 	}
  	.paging-box strong {
 
     color: red;
