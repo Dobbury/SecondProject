@@ -26,7 +26,9 @@
     .view {
       height: 100%;
     }
-
+	.container {
+    	display: table;
+    }
     .navbar-menu{
     margin-bottom: 0;
     }
@@ -37,6 +39,36 @@
     	list-style: none;
     	display: inline-block;
     	
+    }
+    .diary-t {
+    	display: table;
+    	margin-top: 40px;
+    }
+    .diary-t div {
+    	width: 50%;display: table;
+    }
+     .diary-t div img {
+    	width: 100%;
+    }
+    .diary-t .map {
+    	float: left;
+    }
+    .diary-t .calendar {
+    	float: right;
+    }
+    .diary-cont .diary-title{
+    	display: inline-block;
+    	font-size: 28px;
+    	margin-right: 5px;
+    }
+    
+     .diary-b{
+     	margin-top: 40px;
+     }
+     .diary-b .diary-title{
+    	display: inline-block;
+    	font-size: 28px;
+    	margin-right: 5px;
     }
 
     @media (min-width: 800px) and (max-width: 850px) {
@@ -77,8 +109,66 @@
 <main style="padding-top:80px;">
 	<div class="container">
 		
-		<h1>여기서 작업하시면 돼요</h1>
-      	<div>안녕하세요</div>
+		<div class="diary-t">
+		<!-- 지도영역 -->
+			<div class="map">
+			<p>지도</p>
+			<img alt="" src="img/005.jpg">
+			</div>
+		<!-- 달력영역 -->
+			<div class="calendar">
+			<p>달력</p>
+			<img alt="" src="img/lt04014209.png">
+			</div>
+		</div>
+		
+		<div class="diary-m">
+			<div class="diary-cont">
+				<p class="diary-title">즐거운 제주도여행ㅋ</p>
+				<span class="diary-date">2018-11-08</span>
+				
+				<div class="diary-content">
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+					여기에 작성된 글 데이터를 끌어오면 될것같습니다요<br>
+				</div>
+			
+			</div>
+		</div>
+		
+		<div class="diary-b">
+		
+			<p class="diary-title">댓글</p>
+			
+			
+			<div class="diary-commant">
+			<div class="commant-view" style="height: 100px; background-color:#acacac">
+			
+			
+			</div>
+			
+			<div class="commant-write">
+			
+			<form action="PdsServlet">
+			<textarea rows="2" cols="20" name="commant"></textarea>
+			<input type="submit" value="댓글달기">
+			
+			</form>
+			</div>
+			
+			
+			</div>
+		
+		</div>
 
 
     </div>

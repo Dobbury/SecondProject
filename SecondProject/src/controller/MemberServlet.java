@@ -48,14 +48,48 @@ public class MemberServlet extends HttpServlet {
 
 				out.println("<script>");
 
-				out.println("alert('아이디와 비밀번호가 틀렸습니다.');");
+				out.println("alert('�븘�씠�뵒�� 鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎.');");
 
 				out.println("history.back();");
 
 				out.println("</script>");
 
 			}
+			
+			// 아이디 중복체크
+		}else if(command.equals("idcheck")) {
+			String id = req.getParameter("id");
+			System.out.println(id);
+			
+			boolean check = dao.idcheck(id);
+			
+			if(check == false) {
+				System.out.println("가입가능");
+			}else {
+				System.out.println("가입ㄴㄴ");
+			}
+			
+			
 		}
+		
+			// 회원가입
+		else if(command.equals("signup")) {
+			String id = req.getParameter("id");
+			String pw = req.getParameter("pw");
+			String name = req.getParameter("name");
+			String nick = req.getParameter("nick");
+			System.out.println(id+pw+name+nick);
+			
+			int sign = dao.dosignup(id, pw, name, nick);
+			
+			if(sign == 1) {
+				System.out.println("가입완료");
+			}else {
+				
+			}
+			
+		}
+		
 	}
 
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)

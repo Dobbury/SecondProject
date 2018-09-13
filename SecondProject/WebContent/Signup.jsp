@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
+   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
@@ -16,7 +17,7 @@
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="Design/css/style.min.css" rel="stylesheet">
-  
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
 
   <style type="text/css">
     /* Necessary for full page carousel*/
@@ -54,7 +55,7 @@
   	margin: 5px 0 5px 0;
   	
   }
-  .signup-box input[type=text] {
+  .signup-box input[type=text],input[type=password] {
     width: 330px;
     height: 32px;
     padding-right: 25px;
@@ -94,49 +95,174 @@
   
 <!-- ----------------------------------------html----------------------------------------- -->
   <!--여기서 하시면 됩니다-->
-<main style="padding-top:80px;">
+<main style="padding-top:10%;">
 	<div class="container">
 		
 		
 		<div class="signup-box">
-			<form action="">
+		
+			<!-- <form action="MemberServlet?command=idcheck" method="post">
 			<div>
 				<p>아이디</p>
-				<input type="text" name="id">
+				<input type="text" name="id" style="width: 245px;">
+				<input type="submit" value="중복확인"></button>
 			</div>
+			</form>  -->
 			
+			<form action="MemberServlet?command=signup" method="post" id="frm">
+			<div>
+				<p>아이디</p>
+				<input type="text" name="id" style="width: 245px;" id="id">
+				 <input type="submit" value="중복확인"></button>
+				<div id="id-ck-box">
+			</div>
 			<div>
 				<p>비밀번호</p>
-				<input type="text" name="pw">
+				<input type="password" name="pw" id="pw" >
+				<div id="pw-ck-box1">
+			</div>
+			<div>
+				<p>비밀번호확인</p>
+				<input type="password" name="pw-ck" id="pw-ck">
+			</div>
+			<div id="pw-ck-box2">
 			</div>
 			<div>
 				<p>이름</p>
-				<input type="text" name="nick">
+				<input type="text" name="name" id="name">
+				<div id="name-ck-box">
 			</div>
 			<div>
 				<p>닉네임</p>
-				<input type="text" name="name">
+				<input type="text" name="nick" id="nick">
+				<div id="nick-ck-box">
 			</div>			
 			
 			<div class="text-center" style="margin-top:20px;">
-				<input type="submit" value="회원가입">
+				<input type="button" onclick="memsubmit()" value="회원가입"> 
 				<input type="button" value="돌아가기">
 			</div>
 			
 		</form>
 		</div>
-
-
+		
     </div>
+
 </main>
+
+
+     
+
 <!-- --------------------------------------------------------------------------------- -->
 
+ <!-- 스크립트 -->
+ <script type="text/javascript">
+ 
+ var pwcheak = false;
 
-  <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+	 
+	 
+ $(function(){
+
+	 
+	   $(document).ready(function() {
+
+           $('#pw').keyup(function() {
+               $('#pw-ck-box2').text(''); 
+           });
+
+
+           $('#pw-ck').keyup(function() {
+               if ($('#pw').val() != $('#pw-ck').val()) {
+                   $('#pw-ck-box2').text(''); 
+                   $('#pw-ck-box2').html("<b style='color:red'>암호가 틀립니다.</b>"); 
+                   pwcheak = false;
+               }	
+               else {
+                   $('#pw-ck-box2').text(''); 
+                   $('#pw-ck-box2').html("<b style='color:blue'>암호가 맞습니다.</b>");
+                   pwcheak = true;
+
+               }
+
+           });
+           $("#id").keyup(function () {
+        	   $('#id-ck-box').text(''); 
+		});
+           $("#pw").keyup(function () {
+        	   $('#pw-ck-box1').text(''); 
+		});
+           $("#name").keyup(function () {
+        	   $('#name-ck-box').text(''); 
+		});
+           $("#nick").keyup(function () {
+        	   $('#nick-ck-box').text(''); 
+		});
+		});
+
+
+
+	});
+ 
+ 
+ function memsubmit() { 
+	 	
+
+	 
+	 	var id = document.getElementById('id').value;
+	 	var pw = document.getElementById('pw').value;
+	 	var name = document.getElementById('name').value;
+	 	var nick = document.getElementById('nick').value;
+	 	var errortext = "<b style='color:red'>필수 정보입니다.</b>";
+	 	
+	 	
+	 	 if(id != "" && pw != "" && name != "" && nick != ""){
+	 		
+	 		
+	 		  if(pwcheak == true){
+	  			document.getElementById('frm').submit();
+	  			
+	  			}else if(pwcheak == false){
+	  				document.getElementById("pw-ck-box2").innerHTML = "<b style='color:red'>암호가 틀립니다.</b>";
+
+	  			}  
+	  			
+	 		
+	 		
+	 	}else{
+		 	if(id == "" && pw == "" && name == "" && nick == ""){
+		 		document.getElementById("id-ck-box").innerHTML = errortext;
+		 		document.getElementById("pw-ck-box1").innerHTML = errortext;
+		 		document.getElementById("name-ck-box").innerHTML = errortext;
+		 		document.getElementById("nick-ck-box").innerHTML = errortext;
+
+		 	}else if(id == ""){
+		 		document.getElementById("id-ck-box").innerHTML = errortext;
+		 	}else if(pw == ""){
+		 		document.getElementById("pw-ck-box1").innerHTML = errortext;
+		 	}
+		 	else if(name == ""){
+		 		document.getElementById("name-ck-box").innerHTML = errortext;
+		 	}else if(nick == ""){
+		 		document.getElementById("nick-ck-box").innerHTML = errortext;
+		 	}
+		 	
+	 	}
+		 
+	 	
+		
+		
+	 };
+ 
+ 
+ </script>
+
+<!-- 
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn" >
 
  
-    <hr class="my-4">
+    <hr class="my-4" style="margin: 0;">
 
     <div class="pb-4">
       <a href="https://www.facebook.com/mdbootstrap" target="_blank">
@@ -172,21 +298,22 @@
       </a>
     </div>
 
-    <!--Copyright-->
+    Copyright
     <div class="footer-copyright py-3">
       © 2018 Copyright:
       <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
     </div>
-    <!--/.Copyright-->
+    /.Copyright
 
   </footer>
-  <!--/.Footer-->
+   -->
+  
+ 
 
 
 
-  <!-- SCRIPTS -->
+
   <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="Design/js/popper.min.js"></script>
   <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Design/js/mdb.min.js"></script> 
