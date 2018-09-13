@@ -12,17 +12,10 @@
 request.setCharacterEncoding("utf-8");
 DiaryImpl dao = DiaryDao.getInstance();
 
-int paging = Integer.parseInt(request.getParameter("page"));
 String stext = request.getParameter("stext");
-int jcount = dao.getSearchCountJournal(stext);
-
-List<JournalDto> journallist = dao.getSearchJournalList(stext, paging);
-int pagecount = jcount/9;
-if(jcount!=0){
-	if(pagecount%jcount>0){
-		pagecount++;
-	}
-}
+int paging = Integer.parseInt(request.getParameter("page"));
+int pagecount = (int)request.getAttribute("pagecount");
+List<JournalDto> journallist = (List<JournalDto>)request.getAttribute("journallist");
 
 int startPage = 0;
 int endPage = 0;
@@ -53,7 +46,7 @@ if(paging < 6){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>site</title>
-
+<script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
  <style type="text/css">
  
  
@@ -101,6 +94,9 @@ transition: all 40s;
 		transform: translateY(0);
 	}
 }
+
+
+
 
 @keyframes fadeInUp {
 	0% {
@@ -166,7 +162,7 @@ transition: all 40s;
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-          <form action="search.jsp" method="post">
+          <form action="DiaryServlet" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
 			<input type="text" id="stext" name="stext" value="<%=stext %>" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
@@ -191,6 +187,8 @@ transition: all 40s;
 				<div class="diary">
 					<a href="DiaryServlet?command=diaryDetail&seq=<%=journallist.get(i).getSeq()%>">
 						<div class="Dimage" style="">
+													<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
+						
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -233,7 +231,7 @@ transition: all 40s;
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./search.jsp?page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
+					<a href="./search.jsp?command=search&page=<%=paging-1%>&stext=<%=stext%>">&lt;</a>
 					<%
 				}
 				%>
@@ -243,7 +241,7 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./search.jsp?page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
+				<a href="./search.jsp?command=search&page=<%=i+1%>&stext=<%=stext%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
@@ -258,7 +256,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./search.jsp?page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
+			<a href="./search.jsp?command=search&page=<%=paging+1%>&stext=<%=stext%>">&gt;</a>
 			<%
 			}
 			%>
@@ -269,7 +267,7 @@ transition: all 40s;
 			</div>
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
+		<button class="btn btn-outline-dark" style="float: right;" onclick="gocal()">글쓰기</button>
 	</div>
 
    </div>
@@ -288,6 +286,8 @@ transition: all 40s;
    
    
   <!-- SCRIPTS -->
+  
+  
   <script type="text/javascript">
   $(function(){
 	 $("#stext").val('<%=stext%>'); 
@@ -296,12 +296,15 @@ transition: all 40s;
 	 $('html, body').animate( { scrollTop : scmove }, 400 );
   });
   
-  function gocal() {
-	location.href= "CalendarServlet?command=gocal";	
-}
+
   
   </script>
-  
+    		<script type="text/javascript">
+  			function gocal() {  		
+  				location.href= "CalendarWrite.jsp";	
+			}
+
+ 		 </script>
   <script>
 
 	

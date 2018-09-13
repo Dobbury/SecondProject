@@ -90,6 +90,7 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -132,7 +133,7 @@ public class PinDao implements PinImpl {
 	@Override
 	public PinDto getPin(String pin_name) {
 		
-		String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
+String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
@@ -163,6 +164,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -192,6 +195,7 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -231,6 +235,8 @@ public class PinDao implements PinImpl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -302,42 +308,36 @@ public class PinDao implements PinImpl {
 		return list;
 	}
 
-	public List<PinDto> getAllPinList(int page) {
-		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
-				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
-				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+	public List<String[]> getAllPinList(int page) {
+		String sql = " SELECT B.RNUM, B.PINNAME, B.KINDS, B.GRADE_AVG "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.PINNAME, A.KINDS, A.GRADE_AVG "
+				+ " FROM (SELECT PINCOMMENT.PINNAME AS PINNAME,KINDS,AVG(GRADE) AS GRADE_AVG "
+				+ " FROM PINCOMMENT, PIN WHERE PINCOMMENT.PINNAME = PIN.PINNAME GROUP BY PINCOMMENT.PINNAME,KINDS) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
-		Connection conn =null;
+		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<PinDto> list = new ArrayList<>();
+		List<String[]> list = null;
+		
 		try {
+
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			
 			psmt.setInt(1, page*9);
 			psmt.setInt(2, page*9-8);
-			
-			
 			rs = psmt.executeQuery();
-			
+			list = new ArrayList<>();
 			while(rs.next()) {
-				list.add(new PinDto(
-						rs.getDouble(2),
-						rs.getDouble(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6)
-						));
-				
+				String arr[] = {rs.getString(2),rs.getString(3),String.format("%.2f", rs.getDouble(4))}; 
+				list.add(arr);
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
+		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
@@ -347,7 +347,7 @@ public class PinDao implements PinImpl {
 
 	@Override
 	public int getAllPinCount() {
-		String sql = " SELECT COUNT(*) FROM PIN ";
+		String sql = " SELECT COUNT(PINNAME) FROM (SELECT DISTINCT PINNAME FROM PINCOMMENT) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -376,18 +376,19 @@ public class PinDao implements PinImpl {
 	}
 
 	@Override
-	public List<PinDto> getSearchPinList(int page, String stext) {
-		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC "
-				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC "
-				+ " FROM (SELECT LATI, LONGI, PINNAME, KINDS, LOC "
-				+ " FROM PIN WHERE PINNAME LIKE('%" + stext + "%') A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
+	public List<String[]> getSearchPinList(int page, String stext) {
+
+		String sql = " SELECT B.RNUM, B.LATI, B.LONGI, B.PINNAME, B.KINDS, B.LOC, B.GRADE_AVG "
+				+ " FROM (SELECT ROWNUM AS RNUM, A.LATI, A.LONGI, A.PINNAME, A.KINDS, A.LOC, A.GRADE_AVG "
+				+ " FROM (SELECT LATI, LONGI, PINCOMMENT.PINNAME AS PINNAME, KINDS, LOC,AVG(GRADE) AS GRADE_AVG "
+				+ " FROM PINCOMMENT, PIN WHERE PINCOMMENT.PINNAME = PIN.PINNAME AND PINCOMMENT.PINNAME LIKE('%" + stext + "%') GROUP BY PINCOMMENT.PINNAME,KINDS,LATI,LONGI,LOC ) A WHERE ROWNUM <= ? ) B WHERE B.RNUM >= ? ";
 		
 		
 		Connection conn =null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<PinDto> list = new ArrayList<>();
+		List<String[]> list = new ArrayList<>();
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
@@ -398,22 +399,21 @@ public class PinDao implements PinImpl {
 			
 			rs = psmt.executeQuery();
 			
+			list = new ArrayList<>();
 			while(rs.next()) {
-				list.add(new PinDto(
-						rs.getDouble(2),
-						rs.getDouble(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6)
-						));
-				
+				String arr[] = {rs.getString(4),rs.getString(5),String.format("%.2f", rs.getDouble(7))}; 
+				list.add(arr);
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
+		} finally {
 			DBClose.close(psmt, conn, rs);
-		}
+		};
 		
 		return list;
 	}
@@ -447,4 +447,49 @@ public class PinDao implements PinImpl {
 		
 		return pcount;
 	}
+
+	@Override
+	public List<pinCommentDto> getPinCommentList(String pin_name) {
+		String sql = " SELECT GRADE,PCOMMENT,ID,PINNAME,SEQ FROM PINCOMMENT WHERE PINNAME = ? ";
+		
+		Connection conn =null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<pinCommentDto> list = new ArrayList<>();
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, pin_name);
+		
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				pinCommentDto Dto =new pinCommentDto(
+						rs.getDouble(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getInt(5)
+						);
+				list.add(Dto);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();	
+		}finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+		
+	}
+	
+	
+
 }

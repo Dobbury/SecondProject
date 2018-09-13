@@ -13,12 +13,12 @@
   <!-- Material Design Bootstrap -->
   <link href="Design/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="Design/css/style.min.css" rel="stylesheet">
+  <link href="Design/css/style.min.css" rel="stylesheet"> 
 
   
   
    <!-- JQuery -->
-   <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
+   <!-- <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script> -->
    <script type="text/javascript" src="Design/js/popper.min.js"></script>
    <script type="text/javascript" src="Design/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="Design/js/mdb.min.js"></script>
@@ -79,18 +79,20 @@
 
    .diary{
  	width: 300px;height: 300px;text-align: center;
-	vertical-align: top;float: left;margin: 60px 34px 0 33px; border: 1px solid #ccc;display: table;
+	vertical-align: top;float: left;margin: 40px 34px 0 33px; border: 1px solid #ccc;display: table;
  	}
  	.Dimage{
     	width: 300px;
     	height: 220px;
     	background-color: gray;
     	border:none;
-    }.diary-title{
+    }
+    .diary-title{
     margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;text-align: left;
     margin-left: 10px;white-space: nowrap;
     overflow: hidden;text-overflow: ellipsis;
-    width: 280px;
+    vertical-align: bottom;
+
     }
  	.diary-textbox{
  	text-align: left;margin-left: 10px;padding-right: 10px;    word-break: break-all;
@@ -100,6 +102,9 @@
  	}
  	.diary-date{
  	text-align: left;color: #888;font-size: 14px;
+ 	padding-bottom: 7px;
+    margin-left: 10px;
+        display: inline-block;
  	}
  	.diary-heartbox{
  	text-align: right; margin-left: -1px; padding-right: 10px; margin-top: 15px;
@@ -109,6 +114,10 @@
  		background-image: url('img/heart.png');width: 15px;height: 15px;display: inline-block;
    		background-size: 100% 100%;vertical-align: text-top; margin-right: 2px;
  	}
+ 	.diary-content p{
+ 		font-size: 14px;
+ 	}
+ 	
    </style>
 
 </head>
@@ -121,7 +130,7 @@
     <div class="container">
 
       <!-- logo -->
-      <a class="navbar-brand" href="Newspeed.jsp?page=1">
+      <a class="navbar-brand" href="DiaryServlet?command=goNewspeed">
        
       </a>
 
@@ -131,11 +140,11 @@
         <ul class="navbar-menu">
 
 
-          <li><a href="Newspeed.jsp?page=1">뉴스피드</a></li>
-          <li><a href="Pinspeed.jsp?page=1">장소정보</a></li>
-          <li><a href="Lanking.jsp">이달의 명소</a></li>
-
-          <li><a href="Mypage.jsp?page=1">마이페이지</a></li>
+          <li><a href="DiaryServlet?command=goNewspeed">뉴스피드</a></li>
+          <li><a href="PinServlet?command=goPinspeed">장소정보</a></li>
+          <li><a href="DiaryServlet?command=Lanking">이달의 명소</a></li>
+          <li><a href="DiaryServlet?command=goMyPage">마이페이지</a></li>
+          <li><a href="MemberServlet?command=logout">로그아웃</a></li>
 
         </ul>
 

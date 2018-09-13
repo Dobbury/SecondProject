@@ -25,12 +25,15 @@ public interface PinImpl {
 
 	public List<String[]> pinAVG();
 
-	public List<PinDto> getAllPinList(int page);
+	public List<String[]> getAllPinList(int page);
 	
 	public int getAllPinCount();
 	
-	public List<PinDto> getSearchPinList(int page, String stext);
-	
+	public List<String[]> getSearchPinList(int page, String stext);
+
 	public int getSearchPinCount(String stext); 
+
+
+	public List<pinCommentDto> getPinCommentList(String pin_name);
 
 }
