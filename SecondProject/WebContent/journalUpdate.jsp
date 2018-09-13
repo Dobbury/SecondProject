@@ -41,6 +41,21 @@ html, body, header, .view {
    height: 100%;
 }
 
+ main{
+   background-image: url('img/bgSample13.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    transition: all 40s;
+    display: block;
+    position: relative;
+    width: 100%;
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 .container {
    display: table;
 }
