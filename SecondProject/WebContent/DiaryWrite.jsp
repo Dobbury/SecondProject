@@ -47,6 +47,36 @@ request.setCharacterEncoding("utf-8");
 .starR1.on{background-position:0 0;}
 .starR2.on{background-position:-15px 0;}
 
+  .style_prevu_kit
+{
+    display:inline-block;
+    border:0;
+    position: relative;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+	cursor: pointer;
+}
+
+.style_prevu_kit:hover
+{
+    box-shadow: 0px 0px 30px #AAB9FF;
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+}
+
 /* Necessary for full page carousel*/
 html, body, header, .view {
    height: 100%;
@@ -527,17 +557,17 @@ html, body, header, .view {
                 <textarea style="height: 600px; width: 1096px" name="ir1" id="ir1" ></textarea>      
              </td>
           <tr>
-          <tr style="height: 30px" align="center">
-             <td colspan="2">
-                <input type="button" class="btn btn-primary" value="완료" id="diarySavebtn">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
-             </td>
-          </tr>
        </table>
-      
+      <div>
+	      <div align="center">
+	           <input type="button"  class="btn btn-primary"value="완료" id="diarySavebtn">
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
+	             
+	      </div>
+      </div>
     </div>
     
  
@@ -744,9 +774,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
+               $("#hotelPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
                $("#hotelSel").html("");
@@ -761,9 +791,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;'>"
+               $("#restoPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;'>"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
                $("#restoSel").html("");
@@ -777,9 +807,9 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:#ddd;padding: 2px; margin-right:4px;' >"
+               $("#tourPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;padding: 2px; margin-right:4px;' >"
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
-                     +"<div class='pin_info'>"
+                     +"<div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"</div><input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
 

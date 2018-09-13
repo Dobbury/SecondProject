@@ -124,7 +124,7 @@
 	
 	
 	#section0{
-		background-image: url('img/main_bg02.png');
+		background-image: url('img/AA.jpg');
 		background-size: 100% 100%;
 	}#section1{
 		background-image: url('img/main_bg03.png');

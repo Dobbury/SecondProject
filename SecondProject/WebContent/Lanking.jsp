@@ -111,7 +111,7 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     background-attachment: fixed;
     background-size: cover;
 
-} 
+}  
 .diary{
    float:none !important;
     display: inline-block !important;

@@ -79,9 +79,36 @@
 .starR2.on {
 	background-position: -15px 0;
 }
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}
+
+
 .diary:hover{
  		border: 1px solid #222;
  	}
+
 .scene {
 	display: block;
 	position: relative;
@@ -194,11 +221,6 @@
  		    font-size: 14px;
 }
  	
- 	.paging-box strong {
- 		
-
-    color: red;
- 	}
 </style>
 
 </head>
@@ -297,8 +319,7 @@
 
 
 		</div>
-		
-		
+		<br>
 		<div class="paging-box" style="text-align: center;padding: 30px 0 40px;">
 			<!-- paging -->
 			<div>
@@ -306,7 +327,7 @@
 					if (paging == 1 || pagecount == 0) {
 					} else {
 				%>
-				<a href="./PinServlet?command=pinPaging&page=<%=paging - 1%>">&lt;</a>
+				<a class="pagingNext" href="./PinServlet?command=pinPaging&page=<%=paging - 1%>">&lt;</a>
 				<%
 					}
 				%>
@@ -314,11 +335,11 @@
 					for (int i = startPage; i < pagecount; i++) {
 						if (i + 1 != paging) {
 				%>
-				<a href="./PinServlet?command=pinPaging&page=<%=i + 1%>"><%=i + 1%></a>
+				<a class="pagingNum" href="./PinServlet?command=pinPaging&page=<%=i + 1%>"><%=i + 1%></a>
 				<%
 					} else {
 				%>
-				<strong><%=paging%></strong>
+				<strong class="pagingSelNum"><%=paging%></strong>
 				<%
 					}
 						if (i + 1 == endPage) {
@@ -328,7 +349,7 @@
 					if (paging == pagecount || pagecount == 0) {
 					} else {
 				%>
-				<a href="./PinServlet?command=pinPaging&page=<%=paging + 1%>">&gt;</a>
+				<a class="pagingNext" href="./PinServlet?command=pinPaging&page=<%=paging + 1%>">&gt;</a>
 				<%
 					}
 				%>
