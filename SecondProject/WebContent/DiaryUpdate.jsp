@@ -58,6 +58,36 @@
 .starR1.on{background-position:0 0;}
 .starR2.on{background-position:-15px 0;}
 
+  .style_prevu_kit
+{
+    display:inline-block;
+    border:0;
+    position: relative;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+	cursor: pointer;
+}
+
+.style_prevu_kit:hover
+{
+    box-shadow: 0px 0px 30px #AAB9FF;
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+}
+
 /* Necessary for full page carousel*/
 html, body, header, .view {
    height: 100%;
@@ -636,9 +666,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div class="style_prevu_kit" style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>
                                         
                                      </div>
@@ -659,9 +689,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div class="style_prevu_kit" style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>
                                      </div>
                                      <input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'>
@@ -681,9 +711,9 @@ html, body, header, .view {
                             for(pinCommentDto pCDto : pCommentlist){
                                if(pCDto.getPinname().equals(pDto.getPin_name())){
                                %>
-                                  <div style='display:inline-block; background-color:gray;  margin-right:4px;'>
+                                  <div class="style_prevu_kit" style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'>
                                      <input class='pin_info_val' type='hidden' value='<%=pCDto.getPinname() %>'>
-                                     <div class='pin_info'>
+                                     <div class='pin_info' style='color:white; padding-left:8px;'>
                                         <%=pCDto.getPinname() %>                                    
                                      </div>
                                      <input type='button' style='background-color: rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'>
@@ -980,7 +1010,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#hotelPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#hotelPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                                     +$("#addpinname").val()
                                     +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                                     +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x' ></div>");
@@ -996,7 +1026,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#restoPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#restoPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
@@ -1011,7 +1041,7 @@ html, body, header, .view {
                }
                var location=new google.maps.LatLng(basic_lat,basic_lng);
                addMarker(location);
-               $("#tourPinArr").append("<div style='display:inline-block; background-color:gray;  margin-right:4px;'><div class='pin_info'>"
+               $("#tourPinArr").append("<div class='style_prevu_kit' style='display:inline-block; background-color:#96A5FF;  margin-right:4px;'><div class='pin_info' style='color:white; padding-left:8px;'>"
                      +$("#addpinname").val()
                      +"<input class='pin_info_val' type='hidden' value='"+$("#addpinname").val()+"'>"
                      +"</div><input type='button' style='background-color:rgba(0, 0, 0, 0); border:0; outline:0;' class='delete_pin_info' value='x'></div>");
