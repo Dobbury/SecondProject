@@ -107,8 +107,6 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     position: relative;
     width: 100%;
     height: 235vh;
-
-
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
