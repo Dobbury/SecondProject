@@ -99,17 +99,14 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     text-align: center;
     display: inline-block;
 }
-  main{
+   main{
    background-image: url('img/bgSample12.jpg');
     background-size: 100% 100%;
     background-position: center center;
-    transition: all 40s;
     display: block;
     position: relative;
     width: 100%;
-    height: 216vh;
-
-
+    height: 235vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
