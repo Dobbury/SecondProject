@@ -35,9 +35,11 @@ public class MemberServlet extends HttpServlet {
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("do Process success");
 
+
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
+
 
 		MemberImpl dao = MemberDao.getInstance();
 

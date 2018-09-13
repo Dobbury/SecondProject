@@ -9,6 +9,7 @@
 	request.setCharacterEncoding("utf-8");
 	List<String> list =  (List<String>)request.getAttribute("idck");
 
+
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>

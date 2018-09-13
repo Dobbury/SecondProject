@@ -492,6 +492,7 @@ public class DiaryServlet extends HttpServlet {
          int pagecount = jcount / 6;
          if (jcount != 0) {
             if (jcount % 6 > 0) {
+
                pagecount++;
             }
          }
@@ -509,6 +510,7 @@ public class DiaryServlet extends HttpServlet {
          if (jcount != 0) {
             pagecount = jcount / 6;
             if (jcount % 6 > 0) {
+
                pagecount++;
             }
          }

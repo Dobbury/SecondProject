@@ -104,7 +104,6 @@
 	font-weight: bold;
 }
 
-
 .diary:hover{
  		border: 1px solid #222;
  	}
