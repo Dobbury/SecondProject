@@ -282,8 +282,6 @@ html, body, header, .view {
     display: block;
     position: relative;
     width: 100%;
-    height: 216vh;
-
 
     background-repeat: no-repeat;
     background-attachment: fixed;
