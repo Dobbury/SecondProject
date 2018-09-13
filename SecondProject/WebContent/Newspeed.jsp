@@ -99,6 +99,10 @@ if(paging < 6){
 	border-radius: 7px;
 	border: 2px black solid;
 }
+.diary:hover {
+	border: 1px solid #222;
+
+}
 
 .pagingSelNum {
 	background-color: black;

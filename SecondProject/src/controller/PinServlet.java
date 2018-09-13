@@ -113,6 +113,7 @@ public class PinServlet extends HttpServlet {
 				if (pcount != 0) {
 					pagecount = pcount / 9;
 					if (pcount % 9 > 0) {
+
 						pagecount++;
 					}
 				}
@@ -130,6 +131,7 @@ public class PinServlet extends HttpServlet {
 				if (jcount != 0) {
 					pagecount = jcount / 9;
 					if (jcount % 9 > 0) {
+
 						pagecount++;
 					}
 				}
@@ -153,6 +155,7 @@ public class PinServlet extends HttpServlet {
 			   pagecount = pcount/9;
 			   if(pcount != 0){
 				   if(pcount % 9 >0){
+
 					   pagecount++;
 				   }
 			   }
@@ -172,7 +175,7 @@ public class PinServlet extends HttpServlet {
 			   int pagecount = 0;
 			   if (jcount != 0) {
 				   pagecount = jcount / 9;
-				   if (pagecount % jcount > 0) {
+				   if (jcount%9 > 0) {
 					   pagecount++;
 				   }
 			   }
