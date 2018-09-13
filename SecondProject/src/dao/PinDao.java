@@ -347,7 +347,7 @@ String sql = "SELECT LATI,LONGI,PINNAME,KINDS,LOC FROM PIN WHERE PINNAME=?";
 
 	@Override
 	public int getAllPinCount() {
-		String sql = " SELECT COUNT(*) FROM PIN ";
+		String sql = " SELECT COUNT(PINNAME) FROM (SELECT DISTINCT PINNAME FROM PINCOMMENT) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
