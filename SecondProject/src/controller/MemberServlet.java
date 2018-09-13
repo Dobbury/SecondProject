@@ -35,7 +35,7 @@ public class MemberServlet extends HttpServlet {
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("do Process success");
 		
-		
+		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
 
