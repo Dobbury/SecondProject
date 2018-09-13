@@ -5,8 +5,8 @@
 <html>
 <head>
 <%
-request.setCharacterEncoding("utf-8");
-	 List<String> list =  (List<String>)request.getAttribute("idck");
+	request.setCharacterEncoding("utf-8");
+	List<String> list =  (List<String>)request.getAttribute("idck");
 
 %>
 

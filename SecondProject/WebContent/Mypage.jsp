@@ -231,7 +231,6 @@ body {
                      for (int i = 0; i < jlist.size(); i++) {
                   %>
                   <div class="diary">
-
                      <a href="DiaryServlet?command=journalDetail&seq=<%=jlist.get(i).getSeq()%>">
                         <div class="Dimage" style="">
                            <img alt="" onerror="this.src='img/img_is_not.png'"

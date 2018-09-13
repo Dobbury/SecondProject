@@ -36,7 +36,6 @@ public class MemberServlet extends HttpServlet {
 		System.out.println("do Process success");
 		
 		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
 
 		MemberImpl dao = MemberDao.getInstance();
