@@ -18,7 +18,7 @@ public class DBConnection {
 		Connection conn = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.60:1521:xe", "hr", "hr");
 
 
 
