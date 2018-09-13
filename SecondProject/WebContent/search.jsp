@@ -173,6 +173,7 @@ transition: all 40s;
 
     color: red;
  	}
+
  </style>
   
 </head>
@@ -204,6 +205,7 @@ transition: all 40s;
    <div class="container">
       
 		
+
 		<div style="display: table;width: 96%;">
 		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
 
