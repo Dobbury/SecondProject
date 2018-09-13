@@ -268,7 +268,7 @@ html, body, header, .view {
     font-size: 14px;
     color: #555;
     display: inline-block;
-    margin-right: 630px;
+    margin-right: 600px;
 }
 .commant-write{
        padding-left: 20px;
@@ -570,8 +570,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 	<div style="    border-top: 2px solid #ddd;
     border-bottom: 2px solid #ddd;
-    padding: 10px;
-    padding: 10px 20px 15px 20px;
+        padding: 10px 20px 15px 40px;
     margin-top: 15px;
     background-color: rgb(255,255,255,0.5);">
 
@@ -594,10 +593,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
    
    </div>
 
-      <div class="diary-b">
+      <div class="diary-b" style="margin-top: 10px;">
          <div class="diary-commant">
-          <h4>댓글</h4>
-            <div class="diary-commant"style="padding: 30px; text-align: center; background-color: rgba(0,0,0,0.2); !important;">
+         <!--  <h4>댓글</h4> -->
+            <div class="diary-commant"style="padding: 30px; text-align: center; background-color:rgb(255,255,255,0.5); !important;">
             
             <%
                for(int i=0; i<commentview.size(); i++ ){
@@ -641,7 +640,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                      <input type="hidden" name="seq" value="<%=journalDto.getSeq() %>">
 
                      <textarea rows="2" cols="20" name="dcomment" style="width: 89%; height: 70px; vertical-align: text-bottom;resize: none;"></textarea>
-                      <input type="submit" value="댓글"style="vertical-align: text-bottom; height: 70px; font-size: 12pt;" class="btn btn-default">
+                      <input type="submit" value="댓글"style="vertical-align: text-bottom;     margin-bottom: 2px;height: 70px; font-size: 12pt;" class="btn btn-default">
 						<br><br>
 
                   </form>

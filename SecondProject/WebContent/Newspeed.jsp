@@ -80,7 +80,9 @@ transition: all 40s;
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
-
+.diary:hover {
+	border: 1px solid #222;
+}
 
 
 @-webkit-keyframes fadeInUp {

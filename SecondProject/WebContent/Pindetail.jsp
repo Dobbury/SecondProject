@@ -172,7 +172,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</table>
 		
 		<p class="title">댓글</p>
-		<div class="pincomment"">
+		<div class="pincomment" style="    background-color: rgb(255,255,255,0.5) !important;">
 		<%
 		for(int i = 0; i < list.size();i++){
 			
