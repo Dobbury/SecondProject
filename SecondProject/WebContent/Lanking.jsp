@@ -188,14 +188,14 @@ List<String[]> tourlist = (List<String[]>)request.getAttribute("tourlist");
     ">
     
     
-       <h2 style="margin: 50px; color: #fff; font-weight: 700;font-size: 50px;text-align: center;">Lanking</h2>
+       <h2 style="margin: 50px; color: #fff; font-weight: 700;font-size: 50px;text-align: center;">Ranking</h2>
     
     <div style="width: 820px;    text-align: center;
     margin: 0 auto;">
 
 
    <div class="lankbox">
-      <div class="lankbox_title">장소</div>
+      <div class="lankbox_title">관광지</div>
        <ul style="display: table;">
       <%
       for(int i = 0; i < tourlist.size();i++){

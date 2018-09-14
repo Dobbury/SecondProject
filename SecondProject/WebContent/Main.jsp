@@ -339,40 +339,6 @@ input {
    
 </div>
 
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document" style="max-width: 330px;    top: 15%;">
-    <div class="modal-content">
-      <div class="modal-header" style="border-bottom: none">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="MemberServlet" method="post">
-      <input type="hidden" name="command" value="login">
-      <input type="hidden" name="page" value="1">
-      <div class="modal-body" style="text-align: center;padding-bottom: 20px;">
-	<div>
-		<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;text-align: left;">아이디</p>
-      <input type="text" name="id"  style="width: 240px;height: 30px;">
-    </div>
-    <div>
-    	<p style="font-size: 14px;font-weight: 700;margin-bottom: 0;margin-left: 28px;margin-top: 10px;text-align: left;">비밀번호</p>
-        <input type="password" name="pw" style="width: 240px;height: 30px;"> 
-    </div>
-      <div style="margin: 10px 0 10px 0">
-      <input type="submit" class="btn btn-primary" value="로그인" style="width: 240px;display: block;margin: 0 auto;margin-top: 20px;">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="signup"style=";width: 240px;display: block;margin: 0 auto;margin-top:5px">회원가입</button>
-        </div>
-        </div>
-        
-      </form>
-      
-    </div>
-  </div>
-</div>	 -->
-
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" style="max-width: 330px;    top: 10%;">
     <div class="modal-content" style="    background: #f8d348;">
