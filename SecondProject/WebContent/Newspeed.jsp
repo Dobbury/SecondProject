@@ -10,23 +10,11 @@
 
 <%
 request.setCharacterEncoding("utf-8");
-DiaryImpl dao = DiaryDao.getInstance();
 
 
-int paging = Integer.parseInt(request.getParameter("page"));
-int jcount = dao.getCountJournal();
-
-
-System.out.println(jcount);
-List<JournalDto> journallist = dao.getJournalList(paging);
-int pagecount = 0;
-if(jcount != 0){
-	pagecount = jcount/9;
-	if(pagecount%jcount>0){
-		pagecount++;
-	}
-
-}
+int paging = (int)request.getAttribute("page");
+int pagecount = (int)request.getAttribute("pagecount");
+List<JournalDto> journallist = (List<JournalDto>)request.getAttribute("journallist");
 
 int startPage = 0;
 int endPage = 0;
@@ -56,107 +44,186 @@ if(paging < 6){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="Design/js/jquery-3.3.1.min.js"></script>
   <title>site</title>
 
  <style type="text/css">
- 
- 
- .scene {display: block; position: relative; width: 100%; 
-	height: 100vh; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;}
- .searchbg {
-width:100%;height: 100%;padding-top: 280px;background-image: url('img/b5.jpg');background-size: 100% 100%;
-background-position: center center ;
-transition: all 40s;
-	
- }
+.scene {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.searchbg {
+	width: 100%;
+	height: 100%;
+	padding-top: 280px;
+	background-image: url('img/b5.jpg');
+	background-size: 100% 100%;
+	background-position: center center;
+	transition: all 40s;
+}
 /*  .searchbg:hover{
  	background-size: 150% 150%;
  } */
- .searchbtn{
- 	height: 40px;
-    margin-left: -4px;
-    background-color: #aaa;
-    display: inline-block;
-    width: 45px;
-    vertical-align: top;
-    font-size: 12px;
-    padding-top: 6px;
-    border-bottom-right-radius: 7px;
-    border-top-right-radius: 7px;
- 	}
- 	.searchbtn:hover{
- 		background-color: #999;
- 	}
- 	
- 	
+.searchbtn {
+	height: 40px;
+	margin-left: -4px;
+	background-color: #aaa;
+	display: inline-block;
+	width: 45px;
+	vertical-align: top;
+	font-size: 12px;
+	padding-top: 6px;
+	border-bottom-right-radius: 7px;
+	border-top-right-radius: 7px;
+}
+
+.searchbtn:hover {
+	background-color: #999;
+}
+
 .fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
-
-
-@-webkit-keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		transform: translateY(40px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
+.diary:hover {
+	border: 1px solid #222;
 }
 
-@keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(40px);
-		-ms-transform: translateY(40px);
-		transform: translateY(40px);
-	}
+.pagingNum {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+}
+.diary:hover {
+	border: 1px solid #222;
 
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		-ms-transform: translateY(0);
-	}
 }
 
+.pagingSelNum {
+	background-color: black;
+	color: white; padding : 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	padding: 8px 12px 8px 13px;
+}
+
+.pagingNext {
+	color:black;
+	background-color: white;
+	padding: 8px 12px 8px 13px;
+	border-radius: 7px;
+	border: 2px black solid;
+	font-weight: bold;
+}	
+
+@
+-webkit-keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translateY(40px);
+	transform: translateY(40px);
+}
+
+100%
+{
+opacity
+:
+ 
+1;
+-webkit-transform
+:
+ 
+translateY
+(0);
+
+		
+transform
+:
+ 
+translateY
+(0);
+
+	
+}
+}
+@
+keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translateY(40px);
+	-ms-transform: translateY(40px);
+	transform: translateY(40px);
+}
+
+100%
+{
+opacity
+:
+ 
+1;
+-webkit-transform
+:
+ 
+translateY
+(0);
+
+		
+-ms-transform
+:
+ 
+translateY
+(0);
+
+	
+}
+}
 .animate {
 	-webkit-animation-duration: 3s;
 	animation-duration: 3s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
- 	.searchbtn{
-	height: 40px;
-    margin-left: -4px;
-    border: none;
-    margin-top: 1px;
-    background-image: url(img/searchicon.png);
-   background-size: 80% 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: bottom;
-    cursor: pointer;
-}
- 	.paging-box{
- 		width: 100%;display: table;
- 		    padding-top: 80px;
- 	}
- 	.paging-box a,strong {
- 		margin: 3px;
- 		color: #555;
- 		    font-size: 14px;
-}
- 	
- 	.paging-box strong {
- 		
 
-    color: red;
- 	}
- </style>
+.searchbtn {
+	height: 40px;
+	margin-left: -4px;
+	border: none;
+	margin-top: 1px;
+	background-image: url(img/searchicon.png);
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+	vertical-align: bottom;
+	cursor: pointer;
+}
+
+.paging-box {
+	width: 100%;
+	display: table;
+	padding-top: 80px;
+}
+
+.paging-box a, strong {
+	margin: 3px;
+	color: #555;
+	font-size: 14px;
+}
+
+.paging-box strong {
+	color: white;
+}
+
+/* .diary-title {
+ 		margin-left: 0 !important;
+ 		margin-right: 0 !important;
+ 	} */
+</style>
   
 </head>
 
@@ -172,7 +239,7 @@ transition: all 40s;
           <div class="scene searchbg" >
           <h1 style="text-align: center;color:#fff">검색어를 입력해주세요</h1>
           <div style="margin-top: 60px; text-align: center;">
-          <form action="search.jsp" method="post">
+          <form action="DiaryServlet" method="post">
           	<input type="hidden" name="command" value="search">
           	<input type="hidden" name="page" value="1">
 			<input type="text" name="stext" style="width: 550px;height: 40px;opacity: 0.8;border-top-left-radius: 7px;border-bottom-left-radius: 7px;
@@ -186,8 +253,15 @@ transition: all 40s;
 <main style="padding-top:80px;">
    <div class="container">
       
-		
-		<h3 style="margin-left: 35px;font-weight: 700;margin-bottom: 0s">여행후기</h3>
+		<div style="display: table;width: 96%;">
+		<h3 style="margin-left: 35px;font-weight: 700;float: left;margin-bottom: 0;margin-top: 25px;">여행후기</h3>
+
+			<button class="btn btn-outline-black" style="float: right;height: 40px;margin-top: 25px; padding-top:8px" onclick="gocal()">글쓰기</button>
+
+		</div>
+		<hr style="width: 1037px;
+    border-top: 2px solid #eee;
+    margin-top: 10px;">
 			<div style="width:100%;text-align: center;  padding: 0 0 20px 0;display: table;">
 	
 			 <% 
@@ -196,7 +270,8 @@ transition: all 40s;
 			%>
 				<div class="diary">
 					<a href="DiaryServlet?command=journalDetail&seq=<%=journallist.get(i).getSeq()%>">
-						<div class="Dimage" style="">
+						<div class="Dimage">
+							<img alt="" onerror="this.src='img/img_is_not.png'"  src="<%=journallist.get(i).getFisrt_Img() %>" style="width: 100%; height: 100%;">
 						</div>
 						<p class="diary-title"><%=journallist.get(i).getTitle() %></p>
 					</a>
@@ -219,17 +294,16 @@ transition: all 40s;
 			
 			%>
 			
-			
-			
-			
+				
 			<div class="paging-box">
+				<br>
 				<!-- paging -->
 				<div>
 				<%
 				if(paging == 1 || pagecount == 0){
 				}else{
 					%>
-					<a href="./Newspeed.jsp?page=<%=paging-1%>">&lt;</a>
+					<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging-1%>">&lt;</a>
 					<%
 				}
 				%>
@@ -237,11 +311,11 @@ transition: all 40s;
 			for(int i = startPage; i < pagecount; i++){
 				if(i+1 != paging){
 				%>				
-				<a href="./Newspeed.jsp?page=<%=i+1%>"><%=i+1 %></a>
+				<a class="pagingNum" href="./DiaryServlet?command=Newspaging&page=<%=i+1%>"><%=i+1 %></a>
 				<%
 				}else{
 					%>
-					<strong><%=paging %></strong>
+					<strong class="pagingSelNum"><%=paging %></strong>
 					<%
 				}
 				if(i+1 == endPage){
@@ -251,7 +325,7 @@ transition: all 40s;
 			if(paging == pagecount || pagecount == 0){
 			}else{
 			%>
-			<a href="./Newspeed.jsp?page=<%=paging+1%>">&gt;</a>
+			<a class="pagingNext" href="./DiaryServlet?command=Newspaging&page=<%=paging+1%>">&gt;</a>
 			<%
 			}
 			%>
@@ -262,7 +336,9 @@ transition: all 40s;
 			
 			
 			<div style="display: table;clear: both;width: 100%;padding: 20px 0 20px 0;">
-		<button style="float: right;" onclick="gocal()">글쓰기</button>
+
+		
+
 		<!-- SCRIPTS -->
   		<script type="text/javascript">
   			function gocal() {  		
@@ -308,45 +384,6 @@ transition: all 40s;
 		});
 	  
   </script>
-  <!-- 
-<script type="text/javascript">
-
-$(function(){
-	$(".page").click(function () {
-		$.ajax({
-			url : "DiaryServlet",
-			type : "GET",
-			data : {
-				command : "paging",
-				page : $(this).html()
-			},
-			datatype : "json",
-			success : function(data) {
-				journallist = JSON.parse(data);
-				
-				var o = "";
-				for (i = 0; i < journallist.length; i++) {
-					o += "<div class='diary' style='width: 300px;height: 300px;text-align: center; vertical-align: top;float: left;margin: 30px 34px 0 33px; border:none;'>"
-					+"<a href='DiaryServlet?command=diaryDetail&seq="+journallist[i].seq+"'>"
-						+"<div class='Dimage' style='border:none'>"
-						+"</div>"
-						+"<p style='margin-top: 10px;margin-bottom: 5px;color: #111;font-weight: 700;'>"+journallist[i].title+"</p>"
-					+"</a>"
-					+"<span style='text-align: right;color: #888;font-size: 14px;'>" + journallist[i].readcount + "</span>"
-					+"<span style='text-align: left;color: #888;font-size: 14px;'>"+journallist[i].wdate.substring(0,10)+"</span>"	
-				+"</div>";
-				}
-				$("#tourSel").append(o);
-			},
-			error : function() {
-			}
-		});
-		
-	});
-});
-
-
-</script>
--->
+ 
 </body>
 </html>

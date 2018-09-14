@@ -34,10 +34,12 @@ public class MemberServlet extends HttpServlet {
 
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("do Process success");
-		
-		
-		resp.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html; charset=utf-8");
+
+
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
+
 
 		MemberImpl dao = MemberDao.getInstance();
 
@@ -52,20 +54,25 @@ public class MemberServlet extends HttpServlet {
 			memberDto dto = dao.doLogin(id, pw);
 			
 			if (dto != null) {
-				/*DiaryImpl diaryDao = DiaryDao.getInstance();
-				int jcount = diaryDao.getCountJournal();
-				List<JournalDto> journallist = diaryDao.getJournalList(Integer.parseInt(page));
-				int pagecount = jcount/9; 
-				if(jcount%9 > 0){
-					pagecount++;
-				}*/
+				DiaryImpl diaryDao = DiaryDao.getInstance();
 				
+				int paging = 1;
+				int jcount = diaryDao.getCountJournal();
+
+				List<JournalDto> journallist = diaryDao.getJournalList(paging);
+				int pagecount = 0;
+				if(jcount != 0){
+					pagecount = jcount/9;
+					if(pagecount%jcount>0){
+						pagecount++;
+					}
+				}
 				
 				req.getSession().setAttribute("user", dto);
-				/*req.setAttribute("jcount", jcount);
+				req.setAttribute("page", paging);
+				req.setAttribute("pagecount", pagecount);
 				req.setAttribute("journallist", journallist);
-				req.setAttribute("pagecount", pagecount);*/
-				dispatch("Newspeed.jsp?page=1", req, resp);
+				dispatch("Newspeed.jsp", req, resp);
 			}else {
 				PrintWriter out = resp.getWriter();
 
@@ -89,6 +96,7 @@ public class MemberServlet extends HttpServlet {
 			String nick = req.getParameter("nick");
 			System.out.println(id+pw+name+nick);
 			
+			System.out.println(name);
 			int sign = dao.dosignup(id, pw, name, nick);
 			
 			if(sign == 1) {
@@ -116,7 +124,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		else if(command.equals("update")) {
 	         String id = req.getParameter("id");
-	         String pwd = req.getParameter("pwd");
+	         String pwd = req.getParameter("pw");
 	         String name = req.getParameter("name");
 	         String nick = req.getParameter("nick");
 
@@ -129,7 +137,15 @@ public class MemberServlet extends HttpServlet {
 	         boolean isS = dao.editMember(dto);
 	         PrintWriter pw = resp.getWriter();
 	         
-	         pw.print(isS);
+	         pw.print("수정성공!!");
+         
+//				if(isS == true) {
+//					resp.sendRedirect("Main.jsp");
+//				}
+	      }else if(command.equals("logout")) {
+	    	  req.getSession().removeAttribute("user");
+	    	  
+	    	  resp.sendRedirect("Main.jsp");
 	      }
 		
 	}
