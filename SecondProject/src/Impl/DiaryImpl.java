@@ -13,9 +13,13 @@ public interface DiaryImpl {
 	public boolean addJournal(JournalDto dto);
 	
 	public int getCountJournal();
+	
 	public boolean addDiary(DiaryDto dto);
+	
 	public List<JournalDto> getJournalList(int page);
-
+	
+	public boolean delDiary(int seq);
+	
 	public DiaryDto getDiary(int seq); 
 	
 	public boolean updateDiary(DiaryDto dto);

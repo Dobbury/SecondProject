@@ -899,4 +899,29 @@ public class DiaryDao implements DiaryImpl {
 		return list;
 	}
 
+	@Override
+	public boolean delDiary(int seq) {
+		String sql = "DELETE FROM DIARY WHERE SEQ=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+	
+		int count = 0;
+		try {
+			conn = DBConnection.makeConnection();
+			
+			psmt= conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			
+			count = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return count>0 ? true:false;
+	}
+
 }

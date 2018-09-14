@@ -750,10 +750,8 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);
          $(".day").click(function () {
             //diary 클래스를 가지고 잇는 요소가 있는지 없는지 판단.
             if($(this).children('.diary').length){
-               alert($(this).children('.diary').children('input').val());
                location.href = $(this).children('.diary').children('input').val();
             }else{
-               //alert($(this).children('input').val());
                location.href = $(this).children('input').val();
                
             }
