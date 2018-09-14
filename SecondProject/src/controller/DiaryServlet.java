@@ -73,7 +73,7 @@ public class DiaryServlet extends HttpServlet {
             fisrt_img = firstImageURL[1];
 
          }
-
+         
          // 핀 코멘트 저장하고 핀네임 diary 테이블에 저장할 수 있게 , 사용해서 나열한 string 만들기
          String PinObj = req.getParameter("PinObj");
 
@@ -133,7 +133,16 @@ public class DiaryServlet extends HttpServlet {
          PrintWriter pw = resp.getWriter();
          pw.print(b);
 
-      } else if (command.equals("Newspaging")) {
+      }else if(command.equals("diarydel")) {
+    	  int seq = Integer.parseInt(req.getParameter("seq"));
+    	  
+    	  boolean b=dao.delDiary(seq);
+    	  
+    	  PrintWriter pw = resp.getWriter();
+    	  
+    	  pw.print(b);
+    	  
+      }else if (command.equals("Newspaging")) {
          int page = Integer.parseInt(req.getParameter("page"));
          int jcount = dao.getCountJournal();
 

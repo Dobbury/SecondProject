@@ -301,7 +301,6 @@ html, body, header, .view {
    var modal_Marker= [];
    var address = '';
    var tday =  '<%=diary.getTday() %>';
-   alert(tday);
    var id = '<%=dto.getId()%>';
    var map;
    var modal_map;
@@ -764,7 +763,10 @@ html, body, header, .view {
 	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	           <input type="button" class="btn btn-primary" value="취소" onclick="location.href='CalendarWrite.jsp'">
-	             
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	           <input type="button" class="btn btn-danger" value="삭제" id="diaryDelbtn">
 	      </div>
       </div>
     </div>
@@ -923,8 +925,37 @@ html, body, header, .view {
       var restolist = [];
       var tourlist = [];
       
+      
+      
       $(function() {
-         $("#diarySavebtn").click(function () {
+          $("#diaryDelbtn").click(function () {
+			var c = confirm("정말 삭제 하시겠습니까?");
+			if(c == true){
+				$.ajax({
+					url: "DiaryServlet",
+					data:{
+						'command': "diarydel",
+						'seq' : <%=diary.getSeq()%>
+					},
+					type:"POST",
+					success:function(data){
+						if(data == 'true'){
+							alert("삭제 되었습니다.");
+							location.href="CalendarWrite.jsp";
+						}else{
+							alert("삭제할 수 없습니다.");
+						}
+					},
+					error:function(){
+						
+					}
+				});
+				
+			}else{
+				return;
+			}
+		});
+    	  $("#diarySavebtn").click(function () {
             if($("#title").val() == ""){
                alert("제목을 입력해 주세요");
                return;
@@ -1289,7 +1320,6 @@ html, body, header, .view {
 
       function showHTML() {
          var sHTML = oEditors.getById["ir1"].getIR();
-         alert(sHTML);
       }
 
       function submitContents(elClickedObj) {

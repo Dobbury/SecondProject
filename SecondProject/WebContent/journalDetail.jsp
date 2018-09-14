@@ -312,7 +312,7 @@ box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.13);3
 
 
 .diary-m img{
-	width: 100%;
+	max-width: 100%;
 }
 
 

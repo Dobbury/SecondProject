@@ -414,7 +414,6 @@ body {
                   nick : $("#nickname").val()
                },
                success : function(data) {
-                  alert(data);
                   location.href = "DiaryServlet?command=goMyPage";
                },
                error : function() {
